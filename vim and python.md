@@ -179,42 +179,264 @@ Vim有多个扩展管理器，但是我们强烈推荐[Vundle](https://github.co
 
 换句话说, 按`Ctrl`+Vim的标准移动键，就可以切换到指定窗口。
 
-> 等等，`nnoremap`是什么意思？——简单来说，`nnoremap`将一个组合快捷键映射为另一个快捷键。`no`部门，指的是在Vim的正常模式下重新映射，而不是可视模式下。
+> 等等，`nnoremap`是什么意思？——简单来说，`nnoremap`将一个组合快捷键映射为另一个快捷键。`no`部分，指的是在Vim的正常模式（Normal Mode）下，而不是可视模式下重新映射。基本上，`nnoremap <C-J> <C-W><C-j>`就是说，当我在正常模式按下<C-J>时，进行<C-W><C-j>操作。更多信息请看[这里](http://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping)。 
 
-### Buffers
 
-### Code Folding
+### 缓冲区（Buffers）
+虽然Vim支持tab操作，仍有很多人更喜欢缓冲区和分割布局。你可以把缓冲区想象成最近打开的一个文件。Vim提供了方便访问近期缓冲区的方式，只需要输入`:b <buffer name or number>`，就可以切换到一个已经开启的缓冲区（此处也可使用自动补全功能）。你还可以通过`ls`命令查看所有的缓冲区。
 
-### Python Identation
+**专业贴士**: 在`:ls`命令输出的最后，Vim会提示“敲击Enter继续查看”，这时你可以直接输入`:b <buffer name>`，立即选择缓冲区。这样可以省掉一个按键操作，也不必去记忆缓冲区的名字。
+
+### 代码折叠（Code Folding）
+大多数“现代”集成开发环境（IDE）都提供折叠方法（methods）或类（classes）的手段，只显示类或方法的定义部分，而不是全部的代码。
+
+你可以在`.vimrc`中添加下面的语句开启该功能：
+
+	:::shell
+	" Enable folding
+	set foldmethod=indent
+	set foldlevel=99
+
+这样就可以实现，但是你必须手动输入`za`来折叠（和取消折叠）。使用空格键会是更好的选择。所以在你的配置文件中加上这一行命令吧：
+
+	:::shell
+	" Enable folding with the spacebar
+	nnoremap <space> za
+	
+现在你可以轻松地隐藏掉那些当前工作时不需要关注的代码了。
+
+第一个命令，`set foldmethod=ident`会根据每行的缩进开启折叠。但是这样做会出现超过你所希望的折叠数目。但是别怕，有几个扩展就是专门解决这个问题的。在这里，我们推荐SimplyFold。在`.vimrc`中加入下面这行代码，通过Vundle进行安装：
+
+	:::shell
+	Plugin 'tmhedberg/SimpylFold'
+
+> 不要忘记执行安装命令：`:PluginInstall`
+
+**专业贴士**: 希望看到折叠代码的文档字符串？
+
+	:::shell
+	let g:SimpylFold_docstring_preview=1
+	
+
+### Python代码缩进
+当然，想要代码折叠功能根据缩进情况正常工作，那么你就会希望自己的缩进是正确的。这里，Vim的自带功能无法满足，因为它实现不了定义函数之后的自动缩进。我们希望Vim中的缩进能做到以下两点：
+
+- 首先，缩进要符合PEP8标准。
+- 其次，更好地处理自动缩进。
+
+**PEP8**
+要支持PEP8风格的缩进，请在`.vimrc`文件中添加下面的代码：
+
+	:::shell
+	au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+这些设置将让Vim中的Tab键就相当于4个标准的空格符，确保每行代码长度不超过80个字符，并且会以unix格式储存文件，避免在推送到Github或分享给其他用户时出现文件转换问题。
+
+另外，对于全栈开发，你可以设置针对每种文件类型设置`au`命令：
+
+	:::shell
+	au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+**自动缩进**
+
+自动缩进有用，但是在某些情况下（比如函数定义有多行的时候），并不总是会达到你想要的效果，尤其是在符合PEP8标准方面。我们可以利用indentpython.vim插件，来解决这个问题：
+
+	:::shell
+	Plugin 'vim-scripts/indentpython.vim'
 
 ### 标示不必要的空白字符
+我们希望避免出现多余的空白字符。可以让Vim帮我们标示出来，使其很容易发现并删除。
+
+	:::shell
+	au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+这会将多余的空白字符标示出来，很可能会将它们变成红色突出。
 
 ### 支持UTF-8编码
+大部分情况下，进行Python开发时你应该使用UTF-8编码，尤其是使用Python 3的时候。确保Vim设置文件中有下面的命令：
 
+	:::shell
+	set encoding=utf-8
+
+
+
+For the most part, you should be using UTF8 when working with Python, especially if you’re working with Python 3. Make sure VIM knows that with the following line:
 ### 自动补全
+支持Python自动补全的最好插件是YouCompleteMe。我们再次使用Vundle安装：
+
+	:::shell
+	Bundle 'Valloric/YouCompleteMe'
+
+YouCompleteMe插件其实底层使用了一些不同的自动补全组件（包括针对Python开发的Jedi），另外要安装一些C库才能正常工作。插件官方文档提高了很好的[安装指南](https://github.com/Valloric/YouCompleteMe#mac-os-x-super-quick-installation)，我就不在这里重复了。切记跟随文档的步骤进行安装。
+
+安装完成后，插件自带的设置效果就很好，但是我们还可以进行一些小的调整：
+
+	:::shell
+	let g:ycm_autoclose_preview_window_after_completion=1
+	map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+上面的第一行确保了在你完成操作之后，自动补全窗口不会消息，第二行则定义了“转到定义”的快捷方式。
 
 ### 支持Virtualenv虚拟环境
+上面“转到定义”的一个问题，就是默认情况下Vim不知道virtualenv虚拟环境的情况，所以你必须在配置文件中添加下面的代码，使得Vim和YouCompleteMe能够发现你的虚拟环境：
+
+	:::shell
+	"python with virtualenv support
+	py << EOF
+	import os
+	import sys
+	if 'VIRTUAL_ENV' in os.environ:
+	  project_base_dir = os.environ['VIRTUAL_ENV']
+	  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	  execfile(activate_this, dict(__file__=activate_this))
+	EOF
+
+这段代码会判断你目前是否在虚拟环境中编辑，然后切换到相应的虚拟环境，并设置好你的系统路径，确保YouCompleteMe能够找到相应的site packages文件夹。
 
 ### 语法检查/高亮
+通过安装[syntastic](https://github.com/scrooloose/syntastic)插件，每次保存文件时Vim都会检查代码的语法：
+
+	:::shell
+	Plugin 'scrooloose/syntastic'
+
+还可以通过这个小巧的插件，添加PEP8代码风格检查：
+
+	:::shell
+	Plugin 'nvie/vim-flake8'
+
+最后，让你的代码变得更漂亮：
+
+	:::shell
+	let python_highlight_all=1
+	syntax on
 
 ### 配色方案
+配色方案可以和你正在使用的基础配色共同使用。GUI模式可以尝试[solarized方案](https://github.com/altercation/vim-colors-solarized), 终端模式可以尝试[Zenburn方案](https://github.com/jnurmine/Zenburn)：
+
+	:::shell
+	Plugin 'jnurmine/Zenburn'
+	Plugin 'altercation/vim-colors-solarized'
+
+接下来，只需要添加一点逻辑判断，确定什么模式下使用何种方案就可以了：
+	
+	:::shell
+	if has('gui_running')
+	  set background=dark
+	  colorscheme solarized
+	else
+	  colorscheme Zenburn
+	endif
+
+Solarized方案同时提供了暗色调和轻色调两种主题。要支持切换主题功能（按F5）也非常简单，只需添加：
+
+	:::shell
+	call togglebg#map("<F5>")
 
 ### 文件浏览
+如果你想要一个不错的文件树形结构，那么NERDTree是不二之选。
+
+	:::shell
+	Plugin 'scrooloose/nerdtree'
+	
+如果你想用tab键，可以利用vim-nerdtree-tabs插件实现：
+	
+	Plugin 'jistr/vim-nerdtree-tabs'
+
+还想隐藏.pyc文件？那么再添加下面这行代码吧：
+
+	let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 ### 超级搜索
+想要在Vim中搜索任何文件？试试ctrlP插件吧：
+
+	Plugin 'kien/ctrlp.vim'
+
+正如插件名，按Ctrl+P就可以进行搜索。如果你的检索词与想要查找的文件相匹配的话，这个插件就会帮你找到它。哦，对了——它不仅仅可以搜索文件，还能检索标签！更多信息，可以观看这个Youtube视频。	
+As expected, press Ctrl-P to enable the search and then just start typing. If your search matches anything close to the file you’re looking for, it will find it. Oh – and it’s not just files; it will find tags as well! For more, check out this [YouTube video](http://www.youtube.com/watch?v=9XrHk3xjYsw).
+
 
 ### 显示行号
+开启显示行号：
+
+	set nu
 
 ### Git集成
+想要在Vim中执行基本的Git命令？vim-fugitive插件则是不二之选。
 
+	Plugin 'tpope/vim-fugitive'
+
+![git integration in vim](https://realpython.com/images/blog_images/vim/fugitive.png)
+
+请看Vimcasts的[这部视频](http://vimcasts.org/episodes/fugitive-vim---a-complement-to-command-line-git/)，了解更多情况。
 ### Powerline状态栏
+Powerline是一个状态栏插件，可以显示当前的虚拟环境、Git分支、正在编辑的文件等信息。
 
+这个插件是用Python编写的，支持诸如zsh、bash、tmux和IPython等多种环境。
+
+	Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+请查阅插件的官方文档，了解配置选项。
 ### 系统剪贴板
+通常Vim会忽视系统剪贴板，而使用自带的剪贴板。但是有时候你想从Vim之外的程序中剪切、复制、粘贴文本。在OS X平台上，你可以通过这行代码访问你的系统剪贴板：
+
+	set clipboard=unnamed
 
 ### Shell开启Vim编辑模式
+最后，当你熟练掌握了Vim和它的键盘快捷方式之后，你会发现自己经常因为shell中缺乏相同的快捷键而懊恼。没关系，大部分的shell程序都有Vi模式。在当前shell中开启Vi模式，你只需要在`~/.inputrc`文件中添加这行代码：
 
+	set editing-mode vi
+
+现在，你不仅可以在shell中使用Vim组合快捷键，还可以在Python解释器以及任何利用GNU Readline程序的工具（例如，大多数的数据库shell）中使用。现在，你在什么地方都可以使用Vim啦！
 ## 结语
+Vim的设置到这里就差不多了（至少对于Python开发来说是这样的）。当然，开源世界里还有大量你可以使用的其他扩展，以及本文中所提到插件的替代品。你最喜爱的扩展是什么？你又是如何将Vim设置符合你喜好的？
 
+这是我本人的[Vim配置文件链接](https://github.com/j1z0/vim-config/blob/master/vimrc)。你有没有自己的设置代码？请与我们分享！
+
+谢谢！
 ## 资源
+1. [Vim Tutor](http://linuxcommand.org/man_pages/vimtutor1.html)是Vim自带的程序，安装结束之后，只要在命令行输入`vimtutor`即可，程序将会用Vim编辑器教你如何使用Vim。
+2. [Vimcasts](http://vimcasts.org/)是一系列的高阶视频教程，内容涉及许多Vim的功能。
+3. [Vim官方文档](http://www.vim.org/docs.php)
+4. [Open Vim](http://www.openvim.com/)
+5. [笨办法学Vimscript](http://learnvimscriptthehardway.stevelosh.com/)是学习vimscript的极好材料。
 
+全文结束
 
+## 网友评论精选
+> 译者也按照本文的步骤，在Vagrant虚拟机上尝试了Vim设置，但是可惜在YouCompleteMe插件那遇到了些问题，没有继续配置下去。在原文页，我也发现一些网友留言，说根据本文的建议进行了设置，但是碰到了问题。最后，译者从中摘取了部分，供大家参考。
+
+**Wei-Hao Lin** 
+
+The commands in "Python Indentation" keep throwing "e518: unknown option: set", so i altered it and it works fine as following:
+
+	au BufNewFile,BufRead *.py
+	    \ set tabstop=4 |
+	    \ set softtabstop=4 |
+	    \ set shiftwidth=4 |
+	    \ set textwidth=79 |
+	    \ set expandtab |
+	    \ set autoindent |
+	    \ set fileformat=unix |
+	
+	au BufNewFile,BufRead *.js,*.html,*.css
+	    \ set tabstop=2 |
+	    \ set softtabstop=2 |
+	    \ set shiftwidth=2 |
+
+**Konstantin Gagarin **
+
+change powerline to airlineand add powerline fonts.
+
+**Ruslan Kiianchuk **
+
+It seems like the hack with Python virtualenv can be solved with plugin without the need to pollute vimrc with Python code: https://github.com/jmcantrell/vim-virtualenv
