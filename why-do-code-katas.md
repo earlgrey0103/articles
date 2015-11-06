@@ -1,6 +1,6 @@
 #为什么要练习编码套路(Code Kata)？
 
-![code kata image](http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/01/Fotolia_45160850_Subscription_XXL-300x286.jpg)
+![code kata image](http://www.codingpy.com/static/thumbnails/students-and-laptops.jpg)
 
 ## 背景
 
