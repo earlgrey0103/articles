@@ -1,4 +1,4 @@
-# Vim与Python真乃天作之和
+# Vim与Python真乃天作之合
 > 本文由编程派-EarlGrey翻译，原文出自[realpython](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/)，是Vim的爱好者专门针对[利用Sublime Text 3设置Python IDE](https://realpython.com/blog/python/setting-up-sublime-text-3-for-full-stack-python-development/)一文所写。译者本人也是依照Sublime Text那篇文章配置的开发环境，但一直对Vim作为神器的美名非常仰慕，又看到了一篇这么全面的配置文章，觉得有必要翻译过来与大家分享，想必可以省却很多自己研究如何配置的时间。
 
 我注意到，有人在realpython.com宣扬[Sublime Text 3](https://realpython.com/blog/python/setting-up-sublime-text-3-for-full-stack-python-development/)。作为公司的资深开发人员（呃，也就是老古董），我觉得有义务介绍一个**真正**的Python开发环境给大家——我要推荐的当然就是Vim了。不错，Vim编辑器无处不在，速度快，从来不会崩溃。并且，它能做任何事情！
