@@ -1,6 +1,6 @@
 # 学习Python：做数据科学还是网站开发？
 
-> 本文的英文原文地址是：[Python for Data Science vs Python for Web Development](http://www.dezyre.com/article/python-for-data-science-vs-python-for-web-development/177)，发布时间是10月29日。译者一开始在Python日报上看到推荐，初步看看了，觉得对于决定学习Python的方向有一定参考价值。不过，在翻译过程中，越来越觉得这其实就是一篇搞Python数据科学培训的公司写的软文，里面写的内容还是比较浅的，适合向我这样的初学者了解大致情况。当然，文章提到了Python作为网络开发技能的市场需求并不是很高，这点感觉并不是没有根据。作为一篇软文，它成功地激起了我学习数据科学的兴趣，而原因嘛，自然就是**做数据科学工作的工资比一般开发工作，高很多**（按文章中信息图的数据，比一般岗位的年薪高5万美刀！！！）！
+> 本文的英文原文地址是：[Python for Data Science vs Python for Web Development](http://www.dezyre.com/article/python-for-data-science-vs-python-for-web-development/177)，发布时间是10月29日。译者一开始在Python日报上看到推荐，初步看看了，觉得对于决定学习Python的方向有一定参考价值。不过，在翻译过程中，越来越觉得这其实就是一篇搞Python数据科学培训的公司写的软文，里面写的内容还是比较浅的，只适合像我这样的初学者了解大致情况。当然，文章提到了Python作为网络开发技能的市场需求并不是很高，这点感觉并不是没有根据。作为一篇软文，它成功地激起了我学习数据科学的兴趣，而原因嘛，自然就是**做数据科学工作的工资比一般开发工作，高很多**（按文章中信息图的数据，比一般岗位的年薪高5万美刀！！！）！
 > 译者注：-- <cite>EarlGrey@codingpy</cite>
 
 Python编程语言拥有诸多用于网络应用开发、图形用户界面、数据分析、数据可视化等工作的框架和特性。Python可能不是网络应用开发的理想选择，但是正被很多机构广泛用于评估大型数据集（dataset）、数据可视化、进行数据分析或制作原型。在数据科学领域，Python编程语言正不断获得用户的亲睐，而作为网络开发语言，Python显得有点过时了。本篇博文，就是要对这两种截然不同的Python使用方式，进行详细的对比，并且帮助大家明白一点：如果要利用Python做数据科学工作，并没有必要了解它用于网络开发的部分。
@@ -9,7 +9,7 @@ Python编程语言拥有诸多用于网络应用开发、图形用户界面、�
 
 ## 面向数据科学的Python
 
-从顶级金融机构到最小的大数据创业公司，各行各业、各种规模的机构都在使用Python编程语言支撑业务运作。Python作为数据科学编程语言，不仅是受顶级大数据公司欢迎，还受众多技术创业企业拥泵。它还位列2015推荐学习的前10种编程语言。
+从顶级金融机构到最小的大数据创业公司，各行各业、各种规模的机构都在使用Python编程语言支撑业务运作。Python作为数据科学编程语言，不仅受顶级大数据公司欢迎，还有众多技术创业企业拥泵。它还位列2015推荐学习的前10种编程语言。
 
 > 世上只有两种编程语言：一种是总是被人骂的，一种是从来没人用的。
 > -- <cite>Bjarne Stroustrup</cite>
@@ -26,30 +26,30 @@ Python是一个有着23年历史的强大动态编程语言，语言表现力很
 
 ### Django
 
-Django是专为有截止期限的完美主义者的Python网络开发框架（译者注：原文是Django is the python web development framework for perfectionists with deadlines。这也是Django官网上对该框架的描述）。使用Django进行网络开发，最适合的场景是开发那些依靠数据库驱动，同时也具备类似自动化后台管理界面和模板系统等炫酷功能的应用。对于不需要太多功能的网络开发项目来说，Django可能是大材小用，主要是它的文件系统容易让人搞混，而且文件目录结构要求严格。使用Django进行Python网络开发的公司有纽约时报、Instagram和Pinterest（译者注：Pinterest联合创始人Paul Sciarra在Quora上的回答提到了使用Django，[Quora地址](https://www.quora.com/What-is-the-technology-stack-behind-Pinterest-1)）。
+Django是帮助完美主义者按时完成工作的Python网络开发框架（译者注：原文是Django is the python web development framework for perfectionists with deadlines。这也是Django官网上对该框架的描述）。使用Django进行网络开发，最适合的场景是开发那些依靠数据库驱动，同时也具备类似自动化后台管理界面和模板系统等炫酷功能的应用。对于不需要太多功能的网络开发项目来说，Django可能是大材小用，主要是它的文件系统容易让人搞混，而且文件目录结构要求严格。使用Django进行Python网络开发的公司有纽约时报、Instagram和Pinterest（译者注：Pinterest联合创始人Paul Sciarra在Quora上的回答提到了使用Django，[Quora地址](https://www.quora.com/What-is-the-technology-stack-behind-Pinterest-1)）。
 
 ### Flask
 
-Flask是针对初学者的框架，它简单，轻量，初学者很快就可以上手开发单页网络应用。这个框架并不支持验证，没有数据抽象层和其他许多框架所包括的组件。它不是一个全栈开发框架，也只用与小型网站的开发。（译者注：其实Pinterest也使用了Flask，只是没用在整站开发上，而是用来开发API，具体见[链接](https://www.quora.com/What-challenges-has-Pinterest-encountered-with-Flask)。
+Flask是针对初学者的框架，它简单，轻量，初学者很快就可以上手开发单页网络应用。这个框架并不支持验证，没有数据抽象层和其他许多框架所包括的组件。它不是一个全栈开发框架，也只用于小型网站的开发。（译者注：其实Pinterest也使用了Flask，只是没用在整站开发上，而是用来开发API，具体见[链接](https://www.quora.com/What-challenges-has-Pinterest-encountered-with-Flask)。）
 
 ### CherryPy
 
 CherryPy框架强调要符合Python语言规范，做到程序员像进行面向对象编程一样开发网络应用。它还是诸如TurboGears和Web2py等流行全栈框架的基础模板引擎。
 
-还有很多其他框架，包括Pyramid、Bottle和Pylons等，但是无人Python开发者使用哪一种框架，他/她都要花精力仔细地研究教程和文档。
+还有很多其他框架，包括Pyramid、Bottle和Pylons等，但是无论Python开发者使用哪一种框架，他/她都要花精力仔细地研究教程和文档。
 
 ### 为什么使用Python进行网络开发不现实？
 
 Python作为网络开发语言，很可能是一个不太现实的选择：
 
 - 面向网络开发的Python需要非标准化、昂贵的主机服务，尤其是程序员使用流行的Python网络框架开发网站时。由于利用PHP进行网络编程如此的便捷，大部分的用户没有兴趣在Python上投入太多的精力。
-- 面向网络开发的Python与诸如PHP、Java或Ruby on Rails等语言不同，不是一个经常需要的技能。但是面向数据科学的Python却越来越受欢迎，而且由于它更多地被用于机器学习和其他数据科学程序，Python更是招聘数据科学家的公司所最需要的技能。
+- 面向网络开发的Python与诸如PHP、Java或Ruby on Rails等语言不同，不是一个经常需要的技能。但是面向数据科学的Python却越来越受欢迎，而且由于它更多地被用于机器学习和其他数据科学程序，Python更是招聘数据科学家的公司所最看重的技能。
 - 面向网络开发的Python已经经历了较长的发展，但是它的学习曲线并没有像PHP这样的网络编程语言那么高。
 
 
 ## 为什么将Python用于数据科学是最好的选择？
 
-Python编程是驱动大数据、金融、统计和数字运算的核心科技，而它的语法却像英语一样易懂。近来，由于拥有多个针对机器学习、自然语言处理、数据视觉化、数据探索、数据分析和数据挖掘的插件，丰富的Python数据科学生态体系得到了较大的发展，甚至有将数据科学社区Python化的趋势。今天，面向数据科学的Python已经具备了清洗、转换和处理大数据的所有工具。对于数据分析师岗位来说，掌握Python也是最受欢迎的技能。一名具备Python编程能力的数据科学家，可以在纽约挣到平均年薪14万美元的工资。
+Python编程是驱动大数据、金融、统计和数字运算的核心科技，而**它的语法却像英语一样易懂**。近来，由于拥有多个针对机器学习、自然语言处理、数据视觉化、数据探索、数据分析和数据挖掘的插件，丰富的Python数据科学生态体系得到了较大的发展，甚至有将数据科学社区Python化的趋势。今天，面向数据科学的Python已经具备了清洗、转换和处理大数据的所有工具。对于数据分析师岗位来说，掌握Python也是最受欢迎的技能。一名具备Python编程能力的数据科学家，可以在纽约挣到平均年薪14万美元的工资。
 
 ## 为什么数据科学家喜欢使用Python语言？
 
