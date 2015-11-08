@@ -170,7 +170,7 @@ Vim有多个扩展管理器，但是我们强烈推荐[Vundle](https://github.co
 
 换句话说, 按`Ctrl`+Vim的标准移动键，就可以切换到指定窗口。
 
-> 等等，`nnoremap`是什么意思？——简单来说，`nnoremap`将一个组合快捷键映射为另一个快捷键。`no`部分，指的是在Vim的正常模式（Normal Mode）下，而不是可视模式下重新映射。基本上，`nnoremap <C-J> <C-W><C-j>`就是说，当我在正常模式按下<C-J>时，进行<C-W><C-j>操作。更多信息请看[这里](http://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping)。 
+> 等等，`nnoremap`是什么意思？——简单来说，`nnoremap`将一个组合快捷键映射为另一个快捷键。一开始的`n`，指的是在Vim的正常模式（Normal Mode）下，而不是可视模式下重新映射。基本上，`nnoremap <C-J> <C-W><C-j>`就是说，当我在正常模式按下<C-J>时，进行<C-W><C-j>操作。更多信息请看[这里](http://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping)。 
 
 
 ### 缓冲区（Buffers）
@@ -251,9 +251,6 @@ Vim有多个扩展管理器，但是我们强烈推荐[Vundle](https://github.co
 
 	set encoding=utf-8
 
-
-
-For the most part, you should be using UTF8 when working with Python, especially if you’re working with Python 3. Make sure VIM knows that with the following line:
 ### 自动补全
 支持Python自动补全的最好插件是YouCompleteMe。我们再次使用Vundle安装：
 
@@ -334,9 +331,7 @@ Solarized方案同时提供了暗色调和轻色调两种主题。要支持切�
 
 	Plugin 'kien/ctrlp.vim'
 
-正如插件名，按Ctrl+P就可以进行搜索。如果你的检索词与想要查找的文件相匹配的话，这个插件就会帮你找到它。哦，对了——它不仅仅可以搜索文件，还能检索标签！更多信息，可以观看这个Youtube视频。	
-As expected, press Ctrl-P to enable the search and then just start typing. If your search matches anything close to the file you’re looking for, it will find it. Oh – and it’s not just files; it will find tags as well! For more, check out this [YouTube video](http://www.youtube.com/watch?v=9XrHk3xjYsw).
-
+正如插件名，按Ctrl+P就可以进行搜索。如果你的检索词与想要查找的文件相匹配的话，这个插件就会帮你找到它。哦，对了——它不仅仅可以搜索文件，还能检索标签！更多信息，可以观看这个[Youtube视频](http://www.youtube.com/watch?v=9XrHk3xjYsw)。
 
 ### 显示行号
 开启显示行号：
