@@ -1,3 +1,4 @@
+
 How Python Properties Help With Refactoring
 
 Originally published in the Advanced Python Newsletter
