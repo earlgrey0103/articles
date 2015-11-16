@@ -363,3 +363,247 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
     (my_project_venv)$ which pip
     /home/mir/my_project_venv/bin/pip
 
+`virtualenv`所做的，就是拷贝了一份Python可执行文件，然后创建了一些功能脚本以及你在项目开发期间用于安装、升级、删除相关包的地方。它还施展了一些包检索路径/PYTHONPATH魔法，确保：1. 在你安装第三方包时，它们被安装在了当前激活的虚拟环境，而不是系统环境中；2. 当在代码中引用第三方包时，当前激活的虚拟环境中的包将优先于系统环境中的包。
+
+这里有很重要的一点要注意：系统Python环境中安装的所有包，默认是可以在虚拟环境中调用的。这意味着，如果你在系统环境中安装了`simplejson`包，那么所有的虚拟环境将自动获得这个包的地址。你可以在创建虚拟环境时，通过添加`--no-site-packages`提示符，取消这个行为，就像这样：
+
+    $ virtualenv my_project_venv --no-site-packages
+
+### virtualenvwrapper
+
+`virtualenvwrapper`是`virtualenv`的封装器（wrapper），提供了一些非常好的功能，便捷了创建、激活、管理和销毁虚拟环境的操作，否则将会是件琐事。你可以运行如下命令安装`virtualenvwrapper`：
+
+    $ sudo pip install virtualenvwrapper
+
+安装结束之后，你需要进行一些配置。下面是我的配置：
+
+    if [ `id -u` != '0' ]; then
+      export VIRTUALENV_USE_DISTRIBUTE=1        # <-- Always use pip/distribute
+      export WORKON_HOME=$HOME/.virtualenvs       # <-- Where all virtualenvs will be stored
+      source /usr/local/bin/virtualenvwrapper.sh
+      export PIP_VIRTUALENV_BASE=$WORKON_HOME
+      export PIP_RESPECT_VIRTUALENV=true
+    
+
+这些配置中，唯一必须的是`WORKON_HOME`与`source /usr/local/bin/virtualenvwrapper.sh`。其他的配置则是根据我的个人偏好进行的。
+
+将上面的配置添加到`~/.bashrc`文件的最后，然后在你当前打开的终端界面中运行下面的命令：
+
+    $ source ~/.bashrc
+
+关掉所有打开的终端窗口和Tab窗口，也能取得同样地效果。当你再次打开终端窗口或Tab窗口时，`~/.bashrc`将会被程序执行，自动设置好你的`virtualenvwrapper`。
+
+现在如果想创建、激活、关闭或是删除虚拟环境，你可以运行下面的代码：
+
+    $ mkvirtualenv my_project_venv
+    $ workon my_project_venv
+    $ deactivate
+    $ rmvirtualenv my_project_venv
+
+*virtualenvwrapper还支持tab自动补全功能。*
+
+你可以前往[virtualenvwrapper项目主页](http://www.doughellmann.com/projects/virtualenvwrapper/)查看更多命令和配置选项。
+
+### 通过pip和virtualenv进行基本的依赖包管理
+
+`pip`与`virtualenv`结合使用，可以为项目提供基本的依赖包管理功能。
+
+你可以使用`pip freeze`导出目前安装的包列表。例如，下面就是我用来开发这个博客网站所用的Python包：
+
+    $ pip freeze -l 
+    Jinja2==2.6
+    PyYAML==3.10
+    Pygments==1.4
+    distribute==0.6.19
+    markdown2==1.0.1.19
+
+注意，我使用了-l提示符。它告诉`pip`只导出当前激活的虚拟环境中安装的包，忽略全局安装的包。
+
+你可以将导出的列表保存至文件，并把文件添加到版本控制系统（VCS）。
+
+    $ pip freeze -l  > requirements.txt
+
+通过`pip`，我们可以从写入了`pip freeze`命令结果的文件中，安装响应的包。
+
+
+## 其他重要工具
+
+前面我们介绍了有关Python版本、虚拟机和包管理的基础知识，但是日常工作中还有其他任务需要使用专门的工具来完成。虽然我无法详细介绍每一个工具，我会尽量做一个大概的介绍。
+
+*提前说声对不起，因为下面介绍的大部分工具都是与网络应用开发相关的。*
+
+### 编辑器
+
+提供在Python中进行编程的优秀编辑器有很多。我个人倾向于Vim，但是我不想引发一场*编辑器优劣大战*。
+
+对Python编程支持较好地编辑器和集成开发环境（IDEs）包括Vim/GVim， Emacs, GNOME主题下的GEdit, Komodo Edit, Wing IDE, [PyCharm](http://codingpy.com/article/jetbrains-releases-pycharm5/)等。还有其他编辑器，但是上面列举的这些应该是最受欢迎的。选择最适合你的工具。
+
+### Pyflakes：源码检查
+
+Pyflakes是一个简单的程序，通过分析文件的文本，检查Python源文件中的错误。它可以检查语法和部分逻辑错误，被引用但没有使用的模块，以及只使用了一次的变量，等等。
+
+你可以通过`pip`安装：
+
+    $ pip install pyflakes
+
+然后像下面那样，在命令行调用pyflakes，传入Python源文件作为参数：
+
+    $ pyflakes filename.py
+
+Pyflakes还可以嵌入到你的编辑器中。下面这张图显示的是嵌入了Vim之后的情况。注意出现了红色的波浪线。
+
+![pyflakes in vim](http://mirnazim.org/media/img/content/vim-pyflakes.png)
+
+你可以在Stack Overflow上咨询如何在你使用的编辑器重添加Pyflakes支持。
+
+### Requests：为人类开发的HTTP库
+
+Requests库让你轻轻松松使用HTTP协议。
+
+首先通过`pip`安装：
+
+    $ pip install requests
+
+下面是一个简单的使用示例：
+
+    ```
+    >>> import requests
+    >>> r = requests.get('https://api.github.com', auth=('user', 'pass'))
+    >>> r.status_code
+    204
+    >>> r.headers['content-type']
+    'application/json'
+    >>> r.content
+    ...
+    ```
+
+更多详情，请查看[Requests的文档](http://docs.python-requests.org/en/latest/index.html)。
+
+### Flask：网络开发微框架
+
+Flask是一个基于Werkzeug与Jinja2这两个库的Python微框架。
+
+首先通过`pip`安装：
+
+    $ pip install Flask
+
+下面是一个简单的使用示例：
+
+    from flask import Flask
+    app = Flask(__name__)
+
+    @app.route("/")
+    def hello():
+        return "Hello World!"
+
+    if __name__ == "__main__":
+        app.run()
+
+这样运行Flask应用：
+
+    $ python hello.py
+     * Running on http://localhost:5000/
+
+[Flask官网](http://flask.pocoo.org/)
+
+### Django：面向网络开发的全栈框架
+
+Django是一个全栈网络框架。它提供了ORM、HTTP库、表格处理、XSS过滤、模板引擎以及其他功能。
+
+这样通过`pip`安装：
+
+    $ pip install Django
+
+前往[Django官网](http://djangoproject.com/)，跟着教程学习即可。非常简单。
+
+### Fabric：简化使用SSH部署网站和执行系统管理任务的方式
+
+Fabric是一个命令行工具，可以简化使用SSH进行网站部署或执行系统管理任务的过程。
+
+它提供了一套基本的操作，可以执行本地或远程命令行命令，上传/下载文件，以及提示用户进行输入或者取消执行等辅助性功能。
+
+你可以通过`pip`安装：
+
+    $ pip install fabric
+
+下面是用Fabric写的一个简单任务：
+
+    from fabric.api import run
+
+    def host_type():
+        run('uname -s
+
+接下来，你可以在一个或多个服务器上执行该任务：
+
+    $ fab -H localhost host_type
+    [localhost] run: uname -s
+    [localhost] out: Linux
+
+    Done.
+    Disconnecting from localhost... done.
+
+[Fabric官网](http://fabfile.org/)
+
+### SciPy：Python中的科学计算工具
+
+如果你的工作涉及科学计算或数学计算，那么SciPy就是必不可少的工具。
+
+SciPy官网是这样介绍的：
+
+> SciPy (pronounced "Sigh Pie") is open-source software for mathematics, science, and engineering. It is also the name of a very popular conference on scientific programming with Python. The SciPy library depends on NumPy, which provides convenient and fast N-dimensional array manipulation. The SciPy library is built to work with NumPy arrays, and provides many user-friendly and efficient numerical routines such as routines for numerical integration and optimization. Together, they run on all popular operating systems, are quick to install, and are free of charge. NumPy and SciPy are easy to use, but powerful enough to be depended upon by some of the world's leading scientists and engineers. If you need to manipulate numbers on a computer and display or publish the results, give SciPy a try!
+
+
+前往[SciPy官网]，获取详细的下载/安装说明以及文档。
+
+### PEP 8：Python风格指南
+
+虽然其本身不是一个工具，PEP 8是Python领域一个非常重要的文件。
+
+PEP 8这个文件中，定义了主流Python发行版本中标准库的编码规范。文件的唯一目的，就是确保其他的Python代码都能遵守同样地代码结构以及变量、类和函数命名规律。确保你充分了解并遵循该风格指南。
+
+[PEP 8链接](http://www.python.org/dev/peps/pep-0008/)
+
+### 强大的Python标准库
+
+Python的标准库内容非常丰富，提供了大量的功能。标准库中包含了众多内建模块（built-in modules，用C语言编写的），可以访问类似文件读/写（I/O）这样的系统功能，还包括了用Python编写的模块，提供了日常编程中许多问题的标准解决方案。其中一些模块的设计思路很明显，就是要鼓励和增强Python程序的可移植性，因此将平台相关的细节抽象为了不依赖于平台的API接口。
+
+查看[标准库的官方文档](http://docs.python.org/library/)。
+
+## 推荐阅读
+
+David Goodger的《如何像Python高手一样编程》一文，深入介绍了许多Python的惯用法和技巧，可以立刻为你增添许多有用的工具。
+
+Doug Hellmann的系列文章[Python Module of the Week](http://www.doughellmann.com/PyMOTW/contents.html)。这个系列的焦点，是为Python标准库中模块编写示例代码。
+
+## 结语
+
+我在本文中所介绍的内容，触及的还只是Python生态系统的表面。Python世界中，几乎针对每一个你能想象到的任务，都存在相关的工具、库和软件。这些明显无法在一篇文章中尽述。你必须要自己慢慢探索。
+
+Python有伟大的社区，社区中的人很聪明，也很有耐心，乐于帮助Python语言的初学者。所以，你可以选择一个最喜欢的开源项目，去它的IRC频道找人聊天；关注邮件列表，并积极提问；和有丰富Python系统实施经验的人交谈。慢慢地，随着你的经验和知识逐步积累，你也会成为他们之中的一员。
+
+最后，我为大家推荐**Python之禅**。反复回味、思考这几段话，你一定会有所启发！
+
+    ```
+    >>> import this
+    The Zen of Python, by Tim Peters
+
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!
+    ```
