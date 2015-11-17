@@ -2,18 +2,18 @@
 
 > 原文链接：http://mirnazim.org/writings/python-ecosystem-introduction/
 > 
-> 译者按：欢迎各位Pytonistas补充。
+> 译者按：原文写于2011年末，虽然文中关于Python 3的一些说法可以说已经不成立了，但是作为一篇面向从其他语言转型到Python的程序员来说，本文对Python的生态系统还是做了较为全面的介绍。文中提到了一些第三方库，但是Python社区中强大的第三方库并不止这些，欢迎各位Pytonistas补充。
 
 
-开发者从PHP、Ruby或其他语言转到Python开发时，他们最常碰到的第一个障碍，就是缺乏对Python生态系统的全面了解。开发者精彩希望能有一个教程或是资源，可以向他们介绍如何以大致符合标准的方式，完成大部分的任务。
+开发者从PHP、Ruby或其他语言转到Python时，最常碰到的第一个障碍，就是缺乏对Python生态系统的全面了解。开发者经常希望能有一个教程或是资源，向他们介绍如何以大致标准的方式完成大部分的任务。
 
-本文中的内容，是对我所在公司内部维基百科上的摘录，记录了面向网络应用开发的Python生态系统基础知识，目标受众则是公司实习生、培训师以及从其他语言转型到Python的资深开发者。
+本文中的内容，是对我所在公司内部维基百科的摘录，记录了面向网络应用开发的Python生态系统基础知识，目标受众则是公司实习生、培训人员以及从其他语言转型到Python的资深开发者。
 
-*文中所列的内容或资源是不完整的。我也打算把它当成一项**一直在进行中的工作**（work in perpetual progress）。希望经过不断的增补，本文会成为Python生态系统方面的一篇详尽教程。*
+*文中所列的内容或资源是不完整的。我也打算把它当成一项**一直在进行中的工作**（work in perpetual progress）。希望经过不断的增补修订，本文会成为Python生态系统方面的一篇详尽教程。*
 
-## 目标受众（Intended Audience）
+## 目标受众
 
-本文的目的不是教大家Python编程语言。读完这篇教程，你也不会瞬间变成一名Python高手。我假设大家已经有一定的Python基础。如果你是初学者，那么别再继续读下去了。先去看看Zed Shaw所写的[《笨办法学Python》](http://learnpythonthehardway.org/)，这是本质量很高的免费电子书，看完之后再回头阅读这篇教程吧。
+本文的目的，不是教大家Python编程语言。读完这篇教程，你也不会瞬间变成一名Python高手。我假设大家已经有一定的Python基础。如果你是初学者，那么别再继续读下去了。先去看看Zed Shaw所写的[《笨办法学Python》](http://learnpythonthehardway.org/)，这是本质量很高的免费电子书，看完之后再回头阅读这篇教程吧。
 
 我假设你们使用的是Linux（最好是Ubuntu/Debian）或是类Linux操作系统。为什么？因为这是我最熟悉的系统。我在Windows平台或Mac OS X平台上，没有专业的编程经验，只是测试过不同浏览器的兼容性。如果你用的是这两个平台，那么请参考下面的资料安装Python。
 
@@ -23,31 +23,29 @@
 
 你还可使用搜索引擎，查找你使用的操作系统中安装Python的最好方法。如果你有什么疑问，我强烈建议你去[Stack Overflow](http://www.stackoverflow.com/)平台上提问。
 
-## 该使用哪个版本？
+## 该选择哪个版本？
 
 Python 2.x是目前的主流；Python 3是崭新的未来。如果你不关心这个问题，可以直接跳到下面的**Python安装**部分。（译者注：原文作者写这篇文章时是2011年，当时Python 3才发展没几年。）
 
 刚接触Python的话，安装3.x版本看上去是很自然的第一步，但是这可能并不是你想要的。
 
-目前有两个积极开发中的Python版本——2.7.x与3.x（也被称为Python 3， Py3K和Python 3000）。Python 3是一个不同于Python 2的语言。二者在语义、语法上，既存在细微的区别，也有着截然不同的一面。截至今天，Python2.6/2.7是按照数量和使用度最高的版本。许多主流的Python库、框架、工具都没有做到100%兼容Python 3。
-
-Therefore, the safest choice would be to use 2.x (2.7.x to be more specific). Choose Python 3 only if you need it and/or fully understand the implications.
+目前有两个积极开发中的Python版本——2.7.x与3.x（也被称为Python 3， Py3K和Python 3000）。Python 3是一个不同于Python 2的语言。二者在语义、语法上，既存在细微的区别，又有着截然不同的一面。截至今天，Python2.6/2.7是安装数量和使用度最高的版本。许多主流的Python库、框架、工具都没有做到100%兼容Python 3。
 
 因此，最稳妥的选择就是使用2.x版（更准确的说，即2.7.x）。务必只在你需要或者完全了解情况的前提下，才选择Python 3。
 
 Python 3 Wall of Shame网站记录了Python 3对各种库的兼容情况。在使用Python 3之前，仔细查阅下这个网站的内容。
 
-> 译者注：主流第三方库和框架对Python 3的支持现在已经很高。具体的支持情况，可以查看这个网站。
+> 译者注：现在，主流第三方库和框架对Python 3的支持度已经很高。根据py3readiness网站的统计，360个最受欢迎的Python包中已经有315个支持Python 3。具体的支持情况，可以查看[这个网站](http://py3readiness.org/)。一定程度上说，Python 3已经成为新的主流。
 
-## 使用哪种虚拟机（Which VM to use）
+## 使用哪种虚拟机
 
-Python的解释器，又叫做Python虚拟机，有多种不同的实现。其中，主流实现方式是CPython，装机量也最高，同时也是其他虚拟机的参考实现。
+Python的解释器，又叫做Python虚拟机，它有多种不同的实现。其中，主流实现方式是CPython，装机量也最高，同时也是其他虚拟机的参考实现。
 
 PyPy是利用Python语言实现的Python；Jython则使用Java实现，并运行在Java虚拟机之上；IronPython是用.NET CLR实现的Python。
 
 除非真的有重大理由，否则应该选择CPython版本的实现，避免出现意外情况。
 
-如果这些有关版本和虚拟机的唠叨话让你读了头疼，那你只需要使用CPython 2.7.x即可。相信我。
+如果这些有关版本和虚拟机的唠叨话让你读了头疼，那你只需要使用CPython 2.7.x即可。
 
 ## Python安装
 
@@ -71,21 +69,22 @@ Fedora/Red Hat及类似系统
 
 首先你需要了解的是，Python没有默认的包管理工具。事实上，Python语言中包的概念，也是十分松散的。
 
-你可以也知道，Python代码按照模块（module）划分。一个模块，可以是只有一个函数的单个文件，也可以是包含一个或多个子模块的文件夹。包与模块之间的区别非常小，每个模块同时也可以视作一个包。
+你可能也知道，Python代码按照模块（module）划分。一个模块，可以是只有一个函数的单个文件，也可以是包含一个或多个子模块的文件夹。包与模块之间的区别非常小，每个模块同时也可以视作一个包。
 
 那么模块与包之间，到底有什么区别？要想解答这个问题，你首先要了解Python是如何查找模块的。
 
-与其他编程环境类似，Python中也有一些函数和类（比如`str`，`len`和`Exception`）是存在于全局作用域（global scope，在Python中被称为builtin scope）的,其他的函数和类，则需要通过`import`语句进行引用。例如：
+与其他编程环境类似，Python中也有一些函数和类（比如`str`，`len`和`Exception`）是存在于全局作用域（global scope，在Python中被称为builtin scope）的，其他的函数和类则需要通过`import`语句进行引用。例如：
 
-    ```
+
     >>> import os
     >>> from os.path import basename, dirname
-    ```
-这些包就在你的文件系统中的某处，所以可以被`import`语句发现。那么Python是怎么知道这些模块的地址的呢？原来，在你安装Python虚拟机的时候，就自动设置了这些地址，当然平台不同，这些地址也就不一样。
 
-你可以通过`sys.path`查看系统中的包路径。这是我的笔记本运行该表达式之后的输出结果，系统是Ubuntu 11.10 Oneric Ocelot。
 
-    ```
+这些包就在你的文件系统中的某处，所以能被`import`语句发现。那么Python是怎么知道这些模块的地址？原来，在你安装Python虚拟机的时候，就自动设置了这些地址。当然平台不同，这些地址也就不一样。
+
+你可以通过`sys.path`查看系统中的包路径。这是我的笔记本运行该命令之后的输出结果，系统是Ubuntu 11.10 Oneric Ocelot。
+
+
     >>> import sys
     >>> print sys.path
     ['',
@@ -106,15 +105,15 @@ Fedora/Red Hat及类似系统
      '/usr/lib/python2.7/dist-packages/ubuntuone-couch',
      '/usr/lib/python2.7/dist-packages/ubuntuone-installer',
      '/usr/lib/python2.7/dist-packages/ubuntuone-storage-protocol']
-     ```
 
-这行代码会告诉你Python搜索制定包的所有路径，这个路径则存储在一个Python列表数据类型中。它会先从第一个路径开始，一直往下检索，直到找到匹配的路径名。这意味着，如果两个不同的文件夹中包含了两个同名的包，那么包检索将会返回其遇到的第一个绝对匹配巨鲸，不会再继续检索下去。
 
-你现在可能也猜到了，我们可以轻松地修改（hack）包搜索路径，做到你的包第一个被发现。你只需要运行下面的代码：
+这行代码会告诉你Python搜索指定包的所有路径，这个路径就存储在一个Python列表数据类型中。它会先从第一个路径开始，一直往下检索，直到找到匹配的路径名。这意味着，如果两个不同的文件夹中包含了两个同名的包，那么包检索将会返回其遇到的第一个绝对匹配地址，不会再继续检索下去。
 
-    ```
+你现在可能也猜到了，我们可以轻松地修改（hack）包检索路径，做到你指定的包第一个被发现。你只需要运行下面的代码：
+
+
     >>> sys.path.insert(0, '/path/to/my/packages')
-    ```
+
 
 尽管这种做法在很多情况下十分有用，但是你必须牢记`sys.path`很容易被滥用。**务必在必要时才使用这种方法，并且不要滥用。**
 
@@ -126,14 +125,14 @@ Fedora/Red Hat及类似系统
 
     export PYTHONPATH=/path/to/some/directory:/path/to/another/directory:/path/to/yet/another/directory
 
-在某些情况下，你不用覆盖已有的`PYTHONPATH`,只需要在开头或结尾加上新的路径即可。
+在某些情况下，你不用覆盖已有的`PYTHONPATH`，只需要在开头或结尾加上新的路径即可。
 
     export PYTHONPATH=$PYTHONPATH:/path/to/some/directory    # Append
     export PYTHONPATH=/path/to/some/directory:$PYTHONPATH    # Prepend
 
-**`PYTHONPATH、`sys.path.insert`和其他类似技巧，都是hack小技巧，一般情况下最好不要使用。如果它们能够解决本地开发环境出现的问题，可以使用，但是你的开发环境中不应该依赖这些技巧。要取得同样的效果，我们还可以找到更加优雅的方法，稍后我会详细介绍。 **
+**`PYTHONPATH、`sys.path.insert`和其他类似的方法，都是hack小技巧，一般情况下最好不要使用。如果它们能够解决本地开发环境出现的问题，可以使用，但是你的生产环境中不应该依赖这些技巧。要取得同样的效果，我们还可以找到更加优雅的方法，稍后我会详细介绍。 **
 
-现在你明白了Python如何查找已安装的包，我们就可以回到一开始的那个问题了。Python中，模块和包的区别到底是什么？包就是一个或多个模块/子模块的集合，一般都是以经过压缩的tarball文件传输，这个文件中包含了：1. 依赖情况（如果有的话）；2.将文件复制到标准的包检索路径的说明；3. 编译说明——如果文件中包含了必须要经过编译才能安装的代码。就是这点区别。
+现在你明白了Python如何查找已安装的包，我们就可以回到一开始的那个问题了。Python中，模块和包的区别到底是什么？包就是一个或多个模块/子模块的集合，一般都是以经过压缩的tarball文件形式传输，这个文件中包含了：1. 依赖情况（如果有的话）；2.将文件复制到标准的包检索路径的说明；3. 编译说明——如果文件中包含了必须要经过编译才能安装的代码。就是这点区别。
 
 ## 第三方包（Third Party packages）
 
@@ -145,9 +144,9 @@ Fedora/Red Hat及类似系统
 2. 通过社区开发的类似`pip`, `easy_install`等多种工具
 3. 从源文件安装
 
-这三种方法几乎做的是同一件事情，即安装依赖包，视情况编译代码，然后把包中包含的模块复制到标准包检索路径。
+这三种方法做的几乎是同一件事情，即安装依赖包，视情况编译代码，然后把包中模块复制到标准包检索路径。
 
-尽管第二种和第三种方法在所有操作系统中的实现都一致，我还是要再次建议你查阅Stack Overflow网站的问答，找到你所使用系统中的其他安装第三方包的方法。
+尽管第二种和第三种方法在所有操作系统中的实现都一致，我还是要再次建议你查阅Stack Overflow网站的问答，找到你所使用系统中其他安装第三方包的方法。
 
 ### 去哪找第三方包？
 
@@ -159,23 +158,23 @@ Fedora/Red Hat及类似系统
 
 ### 通过系统自带的包管理器安装
 
-使用系统再带的包管理器安装，只需要在命令行输入相应命令，或是使用你用来安装其他应用的GUI应用即可。举个例子，要在Ubuntu系统上安装`simplejson`（一个JSON解析工具），你可以输入下面的命令：
+使用系统自带的包管理器安装，只需要在命令行输入相应命令，或是使用你用来安装其他应用的GUI应用即可。举个例子，要在Ubuntu系统上安装`simplejson`（一个JSON解析工具），你可以输入下面的命令：
 
     $ sudo apt-get install python-simplejson
 
 ### 通过pip安装
 
-*`easy_install`已经不太受开发者欢迎。本文将重点介绍`easy_install`的替代品——`pip`。*
+*`easy_install`已经不太受开发者欢迎。本文将重点介绍`easy_install`的替代者——`pip`。*
 
 `pip`是一个用来安装和管理Python包的工具。它并不是一个Python虚拟机自带的模块，所以我们需要先安装。在Linux系统中，我一般会这样操作：
 
     $ sudo apt-get install python-pip
 
-在安装其他包之前，我总是会将`pip`升级到PyPIp中的最新版本，因为Ubuntu默认源中的版本比PyPIp的低。我利用`pip`自身进行升级。
+在安装其他包之前，我总是会把`pip`升级到PyPI中的最新版本，因为Ubuntu默认源中的版本比PyPI的低。我这样升级`pip`。
 
     $ sudo pip install pip --upgrade
 
-现在，你可以通过运行`run pip install package-name`的方式，安装任何Python包。所以，要安装`simplejson`的话，你可以运行以下命令：
+现在，你可以通过运行`run pip install package-name`，安装任何Python包。所以，要安装`simplejson`的话，你可以运行以下命令：
 
     $ sudo pip install simplejson
 
@@ -192,7 +191,7 @@ Fedora/Red Hat及类似系统
     $ sudo pip install simplejson --upgrade         # Upgrade a package to the latest version from PyPI
     $ sudo pip install simplejson==2.2.1 --upgrade  # Upgrade/downgrade a package to a given version
 
-接下来，假设你想安装某个包的开发版本，但是代码没有在PyPI上，而是在版本控制仓库中，你改怎么办？`pip`也可以满足这个需求，但是在此之前，你需要在系统上安装相应的版本控制系统。在Ubuntu平台，你可以输入下面的命令：
+接下来，假设你想安装某个包的开发版本，但是代码没有放在PyPI上，而是在版本控制仓库中，你该怎么办？`pip`也可以满足这个需求，但是在此之前，你需要在系统上安装相应的版本控制系统（VCS）。在Ubuntu平台，你可以输入下面的命令：
 
     $ sudo apt-get install git-core mercurial subversion
 
@@ -206,11 +205,11 @@ Fedora/Red Hat及类似系统
 
     $ sudo pip install git+file:///path/to/local/repository
 
-通过`git`协议安装时，请注意：你要像下面这样使用`git+git`前缀：
+通过`git`协议安装时，请注意，你要像下面这样使用`git+git`前缀：
 
     $ sudo pip install git+git://hostname_or_ip/path/to/git-repo#egg=packagename
 
-现在，你可能在纳闷这些命令中的`eggs`是什么东西？目前你只需要知道，一个`egg`就是经zip压缩之后的Python包，其中包含了包的源代码和一些元数据。`pip`在安装包之前，会构建相关的egg信息。你可以打开代码仓库中的`setup.py`文件，查看egg的名字（几乎都会注明）。找到`setup`部分，然后看看有没有一行类似`name="something"`的代码。你找到的代码可能会和下面这行类似（来自simplejson包中的`setup.py`文件）。
+现在，你可能在纳闷这些命令中的`eggs`是什么东西？目前你只需要知道，一个`egg`就是经zip压缩之后的Python包，其中包含了包的源代码和一些元数据。`pip`在安装某个包之前，会构建相关的egg信息。你可以打开代码仓库中的`setup.py`文件，查看egg的名字（几乎都会注明）。找到`setup`部分，然后看看有没有一行类似`name="something"`的代码。你找到的代码可能会和下面这段代码类似（来自simplejson包中的`setup.py`文件）。
 
     setup(
         name="simplejson", # <--- This is your egg name
@@ -228,9 +227,9 @@ Fedora/Red Hat及类似系统
 
 假如没有`setup.py`文件呢？你该怎么查找egg的名字？答案是，你根本不用去找。只要把包的源代码拷贝到你的项目文件夹，之后就可以和你自己写的代码一样引用和使用啦。
 
-#### --user 切换标识
+#### --user参数
 
-以上所有的例子，都会在系统级别安装指定的包。如果你使用`pip install`时，加上`--user`的标识，这些包将会安装在该用户的'~/.local`文件夹之下。例如，在我的机器上，运行效果是这样的：
+以上所有的例子，都是在系统层面安装指定的包。如果你使用`pip install`时，加上`--user`这个参数，这些包将会安装在该用户的'~/.local`文件夹之下。例如，在我的机器上，运行效果是这样的：
 
     $ pip install --user markdown2
     Downloading/unpacking markdown2
@@ -251,7 +250,7 @@ Fedora/Red Hat及类似系统
 
 *注意markdown2这个Python包的安装路径（`/home/mir/.local/bin/markdown2`）*
 
-不在系统级别安装所有的Python包有很多理由。稍后在介绍如何为每个项目设置单独、孤立的Python环境时，我会具体说明。
+不在系统层面安装所有的Python包有很多理由。稍后在介绍如何为每个项目设置单独、孤立的Python环境时，我会具体说明。
 
 ### 从源文件安装
 
@@ -260,21 +259,21 @@ Fedora/Red Hat及类似系统
     cd /path/to/package/directory
     python setup.py install
 
-尽管你使用这种方法安装与其他的方法没什么区别，但是要记住：`pip`永远是安装Python包的推荐方法，因为`pip`可以让你轻松升级/降级,不需要额外手动下载、解压和安装。从源文件安装时如果其他方法都行不通时，你的最后选择（一般不会存在这种情况）。
+尽管这种安装方法与其他的方法没什么区别，但是要记住：`pip`永远是安装Python包的推荐方法，因为`pip`可以让你轻松升级/降级，不需要额外手动下载、解压和安装。从源文件安装时如果其他方法都行不通时，你的最后选择（一般不会存在这种情况）。
 
 ### 安装需要编译的包
 
-虽然我们已经介绍了大部分与包安装相关的内容，仍有一点我们没有涉及：含有C/C++代码的Python包在安装、使用之前，需要先编译。这类包最明显的例子就是数据库适配器（database adapters）、图像处理库等。
+虽然我们已经介绍了大部分与包安装相关的内容，仍有一点我们没有涉及：含有C/C++代码的Python包在安装、使用之前，需要先编译。最明显的例子就是数据库适配器（database adapters）、图像处理库等。
 
 尽管`pip`可以管理源文件的编译，我个人更喜欢通过系统自带的包管理器安装这类包。这样安装的就是预编译好的二进制文件。
 
 如果你仍想（或需要）通过`pip`安装，在Ubuntu系统下你需要执行下面的操作。
 
-编译器及相关工具：
+安装编译器及相关工具：
 
     $ sudo apt-get install build-essential
 
-Python开发文件（头文件等）：
+安装Python开发文件（头文件等）：
 
     $ sudo aptitude install python-dev-all
 
@@ -296,9 +295,9 @@ Python开发文件（头文件等）：
 
 ### virtualenv
 
-Python社区中设置开发环境的最受欢迎的方法，是通过**virtualenv**包。Virtualenv是一个创建孤立Python环境的工具。那么现在问题来了：为什么我们需要孤立的Python环境？要回答这个问题，请允许我引用virtualenv的官方文档。
+Python社区中设置开发环境的最受欢迎的方法，是通过**virtualenv**。Virtualenv是一个用于创建孤立Python环境的工具。那么现在问题来了：为什么我们需要孤立的Python环境？要回答这个问题，请允许我引用virtualenv的官方文档。
 
-> The basic problem being addressed is one of dependencies and versions, and indirectly permissions. Imagine you have an application that needs version 1 of LibFoo, but another application requires version 2. How can you use both these applications? If you install everything into /usr/lib/python2.7/site-packages (or whatever your platform's standard location is), it's easy to end up in a situation where you unintentionally upgrade an application that shouldn't be upgraded.
+> 我们要解决的问题之一，就是依赖包和版本的管理问题，以及间接地解决权限问题。假设你有一个应用需要使用LibFoo V1，但是另一个应用需要V2。那么你如何使用两个应用呢？如果你把需要的包都安装在`/usr/lib/python2.7/site-packages`（或是你的系统默认路径），很容易就出现你不小心更新了不应该更新的应用。
 
 简单来说，你的每一个项目都可以拥有一个单独的、孤立的Python环境；你可以把所需的包安装到各自孤立的环境中。
 
@@ -315,9 +314,9 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
     Installing distribute.............................................done.
     Installing pip.....................done.
 
-那么这行代码都做了些什么呢？你创建了一个名叫`my_project_venv`的文件夹，用于存储新的Python环境。`--distribute`标识符告诉virtualenv使用基于`distribute`包开发的新的、更好的打包系统，而不是基于`setuptools`的旧系统。你现在只需要知道，`--distribute`选项将会自动在虚拟环境中安装`pip`，免去了手动安装的麻烦。随着你的Python编程经验和知识增加，你会慢慢明白这个过程下面的具体细节。
+那么这行代码都做了些什么呢？你创建了一个名叫`my_project_venv`的文件夹，用于存储新的Python环境。`--distribute`参数告诉virtualenv使用基于`distribute`包开发的新的、更好的打包系统，而不是基于`setuptools`的旧系统。你现在只需要知道，`--distribute`参数将会自动在虚拟环境中安装`pip`，免去了手动安装的麻烦。随着你的Python编程经验和知识增加，你会慢慢明白这个过程的具体细节。
 
-现在查看`my_project_venv`文件夹中的内容，你会看来类似下面的文件夹结构：
+现在查看`my_project_venv`文件夹中的内容，你会看到类似下面的文件夹结构：
 
     # Showing only files/directories relevant to the discussion at hand
     .
@@ -345,7 +344,7 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
     :::bash 
     (my_project_venv)$ deactivate
 
-当你在系统级别安装virtualenv时（如果激活了虚拟环境，请先关闭），可以运行下面的命令帮助自己理解。
+当你在系统层面安装virtualenv时（如果激活了虚拟环境，请先关闭），可以运行下面的命令帮助自己理解。
 
 首先，我们来看看如果我们在终端输入`python`或者`pip`，系统会使用哪个执行文件。
 
@@ -363,9 +362,9 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
     (my_project_venv)$ which pip
     /home/mir/my_project_venv/bin/pip
 
-`virtualenv`所做的，就是拷贝了一份Python可执行文件，然后创建了一些功能脚本以及你在项目开发期间用于安装、升级、删除相关包的地方。它还施展了一些包检索路径/PYTHONPATH魔法，确保：1. 在你安装第三方包时，它们被安装在了当前激活的虚拟环境，而不是系统环境中；2. 当在代码中引用第三方包时，当前激活的虚拟环境中的包将优先于系统环境中的包。
+`virtualenv`所做的，就是拷贝了一份Python可执行文件，然后创建了一些功能脚本以及你在项目开发期间用于安装、升级、删除相关包的文件夹路径。它还施展了一些包检索路径/PYTHONPATH魔法，确保实现以下几点：1. 在你安装第三方包时，它们被安装在了当前激活的虚拟环境，而不是系统环境中；2. 当在代码中引用第三方包时，当前激活的虚拟环境中的包将优先于系统环境中的包。
 
-这里有很重要的一点要注意：系统Python环境中安装的所有包，默认是可以在虚拟环境中调用的。这意味着，如果你在系统环境中安装了`simplejson`包，那么所有的虚拟环境将自动获得这个包的地址。你可以在创建虚拟环境时，通过添加`--no-site-packages`提示符，取消这个行为，就像这样：
+这里有很重要的一点要注意：系统Python环境中安装的所有包，默认是可以在虚拟环境中调用的。这意味着，如果你在系统环境中安装了`simplejson`包，那么所有的虚拟环境将自动获得这个包的地址。你可以在创建虚拟环境时，通过添加`--no-site-packages`选项，取消这个行为，就像这样：
 
     $ virtualenv my_project_venv --no-site-packages
 
@@ -391,7 +390,7 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
 
     $ source ~/.bashrc
 
-关掉所有打开的终端窗口和Tab窗口，也能取得同样地效果。当你再次打开终端窗口或Tab窗口时，`~/.bashrc`将会被程序执行，自动设置好你的`virtualenvwrapper`。
+关掉所有打开的终端窗口和Tab窗口，也能取得同样地效果。当你再次打开终端窗口或Tab窗口时，`~/.bashrc`将会被执行，自动设置好你的`virtualenvwrapper`。
 
 现在如果想创建、激活、关闭或是删除虚拟环境，你可以运行下面的代码：
 
@@ -417,13 +416,13 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
     distribute==0.6.19
     markdown2==1.0.1.19
 
-注意，我使用了-l提示符。它告诉`pip`只导出当前激活的虚拟环境中安装的包，忽略全局安装的包。
+注意，我使用了-l选项。它告诉`pip`只导出当前激活的虚拟环境中安装的包，忽略全局安装的包。
 
 你可以将导出的列表保存至文件，并把文件添加到版本控制系统（VCS）。
 
     $ pip freeze -l  > requirements.txt
 
-通过`pip`，我们可以从写入了`pip freeze`命令结果的文件中，安装响应的包。
+通过`pip`，我们可以从写入了`pip freeze`命令结果的文件中，安装相应的包。
 
 
 ## 其他重要工具
@@ -436,11 +435,11 @@ Python社区中设置开发环境的最受欢迎的方法，是通过**virtualen
 
 提供在Python中进行编程的优秀编辑器有很多。我个人倾向于Vim，但是我不想引发一场*编辑器优劣大战*。
 
-对Python编程支持较好地编辑器和集成开发环境（IDEs）包括Vim/GVim， Emacs, GNOME主题下的GEdit, Komodo Edit, Wing IDE, [PyCharm](http://codingpy.com/article/jetbrains-releases-pycharm5/)等。还有其他编辑器，但是上面列举的这些应该是最受欢迎的。选择最适合你的工具。
+对Python编程支持较好地编辑器和集成开发环境（IDEs），主要有Vim/GVim， Emacs, GNOME主题下的GEdit, Komodo Edit, Wing IDE, [PyCharm](http://codingpy.com/article/jetbrains-releases-pycharm5/)等。还有其他编辑器，但是上面列举的这些应该是最受欢迎的。你应该选择最适合自己的工具。
 
 ### Pyflakes：源码检查
 
-Pyflakes是一个简单的程序，通过分析文件的文本，检查Python源文件中的错误。它可以检查语法和部分逻辑错误，被引用但没有使用的模块，以及只使用了一次的变量，等等。
+Pyflakes是一个简单的程序，通过分析文件的文本内容，检查Python源文件中的错误。它可以检查语法和部分逻辑错误，识别被引用但没有使用的模块，以及只使用了一次的变量，等等。
 
 你可以通过`pip`安装：
 
@@ -548,16 +547,13 @@ Fabric是一个命令行工具，可以简化使用SSH进行网站部署或执�
 
 如果你的工作涉及科学计算或数学计算，那么SciPy就是必不可少的工具。
 
-SciPy官网是这样介绍的：
+SciPy (pronounced "Sigh Pie") 是一个开源的数学、科学和工程计算包。SciPy包含的模块有最优化、线性代数、积分、插值、特殊函数、快速傅里叶变换、信号处理和图像处理、常微分方程求解和其他科学与工程中常用的计算。与其功能相类似的软件还有MATLAB、GNU Octave和Scilab。SciPy目前在BSD许可证下发布。它的开发由Enthought资助
 
-> SciPy (pronounced "Sigh Pie") is open-source software for mathematics, science, and engineering. It is also the name of a very popular conference on scientific programming with Python. The SciPy library depends on NumPy, which provides convenient and fast N-dimensional array manipulation. The SciPy library is built to work with NumPy arrays, and provides many user-friendly and efficient numerical routines such as routines for numerical integration and optimization. Together, they run on all popular operating systems, are quick to install, and are free of charge. NumPy and SciPy are easy to use, but powerful enough to be depended upon by some of the world's leading scientists and engineers. If you need to manipulate numbers on a computer and display or publish the results, give SciPy a try!
-
-
-前往[SciPy官网]，获取详细的下载/安装说明以及文档。
+前往[SciPy官网](http://www.scipy.org)，获取详细的下载/安装说明以及文档。
 
 ### PEP 8：Python风格指南
 
-虽然其本身不是一个工具，PEP 8是Python领域一个非常重要的文件。
+虽然PEP 8本身不是一个工具，但毋庸置疑的是，它是Python开发方面一个非常重要的文件。
 
 PEP 8这个文件中，定义了主流Python发行版本中标准库的编码规范。文件的唯一目的，就是确保其他的Python代码都能遵守同样地代码结构以及变量、类和函数命名规律。确保你充分了解并遵循该风格指南。
 
@@ -583,7 +579,7 @@ Python有伟大的社区，社区中的人很聪明，也很有耐心，乐于�
 
 最后，我为大家推荐**Python之禅**。反复回味、思考这几段话，你一定会有所启发！
 
-    ```
+
     >>> import this
     The Zen of Python, by Tim Peters
 
@@ -606,4 +602,3 @@ Python有伟大的社区，社区中的人很聪明，也很有耐心，乐于�
     If the implementation is hard to explain, it's a bad idea.
     If the implementation is easy to explain, it may be a good idea.
     Namespaces are one honking great idea -- let's do more of those!
-    ```
