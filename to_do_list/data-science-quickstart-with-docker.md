@@ -1,175 +1,105 @@
-Configuring a data science environment can be a pain. Dealing with inconsistent package versions, having to dive through obscure error messages, and having to wait hours for packages to compile can be frustrating. This makes it hard to get started with data science in the first place, and is a completely arbitrary barrier to entry.
+> Docker今年应该算是很热门的技术了，之前一直没怎么真正地去了解、接触。通过翻译这篇简单的教程，我同时也对Dcoker有了入门的了解。Docker和我目前使用的Vagrant有些类似之处，都是通过类似镜像的文件创建孤立的系统环境。只是Docker容器中已经安装了所需的包，而我目前所了解的Vagrant box还没有这个功能。当然，应该是我使用程度不深的原因。不管怎么说，Docker确实是跨平台开发的利器。
+> 译文如果有什么不准确的地方，请大家指正。
 
-配置数据科学开发环境让人头疼。包版本不一致，陌生的错误信息和等待编译的漫长时间等问题很容易让人垂头丧气。这使得迈入数据科学的这第一步十分艰难，而且也是一个完全不常见的准入门槛。
+数据科学开发环境配置起来让人头疼，会碰到包版本不一致、错误信息不熟悉和编译时间漫长等问题。这很容易让人垂头丧气，也使得迈入数据科学的这第一步十分艰难。而且这也是一个完全不常见的准入门槛。
 
-The past few years have seen the rise of technologies that help with this by creating isolated environments. We’ll be exploring one in particular, Docker. Docker makes it fast and easy to create new data science environments, and use tools such as Jupyter notebooks to explore your data.
+还好，过去几年中出现了能够通过搭建孤立的环境来解决这个问题的技术。本文中我们就要介绍的这种技术名叫[Docker](https://www.docker.com/)。Docker能让开发者简单、快速地搭建数据科学开发环境，并支持使用例如[Jupyter](https://jupyter.org/) notebooks等工具进行数据探索。
 
-还好，过去几年中出现了能够通过搭建孤立的环境，解决这个问题的技术。本文中我们就要介绍其中的一种，Docker。Docker能让开发者简单、快速地搭建数据科学开发环境，并支持使用例如Jupyter notebooks等工具进行数据探索。
+要使用Docker，我们要先下载含有相关包（package）和数据科学工具的镜像文件。之后，我们可以通过该镜像，在数秒之内就启动一个数据科学开发环境，免去了手动安装包的麻烦。这个环境，也被成为Docker容器（container）。容器解除了配置的问题——当你启动一个Docker容器后，它就已经处于了良好的状态，所有的包都是可以正常运转的。
 
-With Docker, we can download an image file that contains a set of packages and data science tools. We can then boot up a data science environment using this image within seconds, without the need to manually install packages or wait around. This environment is called a Docker container. Containers eliminate configuration problems – when you start a Docker container, it has a known good state, and all the packages work properly.
-
-要使用Docker，我们要先下载一个包括了一系列包和数据科学工具的镜像文件。之后，我们可以通过该镜像在数秒之内就启动一个数据科学开发环境，免去了手动安装包。这个环境，也被成为Docker容器。容器消除了配置的问题——当你启动一个Docker容器后，它就已经处于了良好的状态，所有的包都是可以正常运转的。
-
-The Docker whale is here to help
-
-Docker的出现是为了帮助你
-
-In addition to lowering the barriers to getting started with data science, Docker also makes it possible to quickly create isolated environments with different Python and package versions without having to wait for packages to install in virtual environments.
-
-除了降低进入数据科学的门槛之外，Docker还可以让我们快速搭建拥有不同Python版本和安装了不同包的孤立环境，不用等待在虚拟环境中安装包。
-
-In this post, we’ll cover the basics of Docker, how to install it, and how to leverage Docker containers to quickly get started with data science on your own machine.
-
-在本文中，我们将介绍Docker的基础知识，如何安装Docker以及如何利用Docker容器快速地在自己的机器上搭建数据科学环境。
-
-Virtual machines
-虚拟机
-
-Software that creates virtual machines has existed for decades. Virtual machines allow you to emulate other computing environments on your computer. For example, you could run Linux in a virtual machine, even if your computer runs Windows. This would let you use Linux without having to actually install it on your machine – it would be running virtually, so you would be able to access it from within Windows. You’d be able to essentially click a program, and a Linux desktop would pop up in a window. Virtual machines use images to boot up – you have to start a virtual machine with an image that corresponds to the operating system you want to use. If you want to use Linux, you’d use an image that contains all of the necessary files to create a Linux environment.
-
-能够创建虚拟机的软件已经问世数十年。虚拟机可以让你在自己的电脑上模拟其他的计算环境。举个例子，即使你的电脑运行的是Windows操作系统，你仍可以通过虚拟机运行Linux系统。这可以让你在不重装系统的前提下，使用Linux——也就是说，Linux系统可以虚拟化运行，所以你可以从Windows系统访问虚拟机。基本上，你可以在点击一个程序之后，看到弹出一个Linux桌面的窗口。虚拟机需要镜像来启动——你必须先拥有一个期待使用的系统的镜像，才能启动相应的虚拟机。如果你想使用Linux，你就得使用一个包含了创建Linux环境必须的所有文件的镜像。
+![Docker的出现是为了帮助你](https://www.dataquest.io/blog/images/docker_ds/docker.png)
 
 
-An example of using Windows in a virtual machine on a mac
+除了降低进入数据科学的门槛之外，Docker还可以让我们快速搭建拥有不同Python版本和安装了不同包的孤立环境，不像[虚拟环境](http://docs.python-guide.org/en/latest/dev/virtualenvs/)（virtualenv）那样还要重新安装包。
 
-示例：在Mac上通过虚拟机使用Windows
 
-Containers
-容器
+在本文中，我们将介绍Docker的基础知识，如何安装Docker以及如何利用Docker容器快速地在本地机器上搭建数据科学环境。
 
-Although virtual machines enable Linux development to take place on Windows, for example, they have some downsides. Virtual machines take a long time to boot up, they require significant system resources, and it’s hard to create a virtual machine from an image, install some packages, and then create another image. Linux containers solve this problem by enabling multiple isolated environments to run on a single machine. Think of containers as a faster, easier way to get started with virtual machines.
+## 虚拟机
 
-尽管虚拟机有诸多好处，例如能够让在Windows平台进行Linux开发成为现实，但是也有着自身的缺陷。虚拟机的启动时间很长，要消耗大量的系统资源，而且利用镜像创建虚拟机，安装所需要的包，再创建另一个镜像是很困难的。Linux容器通过让多个孤立环境在同一台机器上运行，解决了这个问题。你可以把容器看作是使用虚拟机的一种更快、更简单的方法。
+能够创建虚拟机的软件已经问世数十年，可以让你在本地电脑上模拟其他的系统环境。举个例子，即使你的电脑运行的是Windows操作系统，你仍可以通过虚拟机运行Linux系统。这可以让你在不重装系统的前提下，使用Linux——也就是说，Linux系统是虚拟化运行的，所以你可以从Windows系统访问虚拟机。基本上，你可以在点击该软件的程序图标之后，看到弹出的窗口中乃是一个Linux系统桌面。而虚拟机需要镜像来启动，也就是你必须先拥有一个目标系统的镜像，才能启动相应的虚拟机。如果你想使用Linux，你使用的镜像就得包含创建Linux环境所必须的全部文件。
 
-Unfortunately, containers are a bit tricky to use, and it’s not easy to manage and distribute container images. We want these features so we can quickly download and start data science environments with specific package and tool configurations. For instance, you might want to be able to quickly start a container that has Jupyter notebook, spark, and pandas already installed.
 
-但是，容器的使用却有点麻烦，而且管理和发布容器镜像也不容易。作为开发人员，我们希望能够快速下载，并且启动一个拥有指定包和工具配置的数据科学环境。例如，你会希望能快速启动一个案子了Jupyter notebook、spark和pandas的容器。
+![示例：在Mac上通过虚拟机使用Windows](https://www.dataquest.io/blog/images/docker_ds/windows_mac.png)
 
-Docker
-容器
+## 容器
 
-Docker containers are a layer over Linux containers that makes them easier to manage and distribute. Docker makes it easy to download images that correspond to a specific set of packages, and start them quickly. Docker is cross-platform, and works on Mac, Windows, and Linux.
+尽管虚拟机有诸多好处，例如能够使在Windows平台进行Linux开发成为现实，但是也有着自身的缺陷。首先，虚拟机的启动时间很长，要消耗大量的系统资源。另外，在利用镜像创建完虚拟机中，很难在安装完所需要的包后，再将这个镜像保存，创建为新的镜像。而Docker提供的Linux容器，则通过让多个孤立环境在同一台机器上运行，解决了这个问题。你可以把容器看作是一种更快、更简单地使用虚拟机的方法。
 
-Docker容器是Linux容器的一层外围容易，可以支持更简单地对容器进行管理和发布。使用Docker，可以很容易地下载具备相应包的镜像，并且快速启动。另外，Docker是跨平台的，支持包括Mac、Windows和Linux等系统。
+但是，容器的使用却有一点麻烦，而且管理和发布容器镜像也不容易。作为开发人员，我们希望能够快速下载并启动一个拥有指定包和工具配置的数据科学环境。例如，你肯定会希望能快速启动一个安装了Jupyter notebook、spark和pandas的容器。
 
-These same advantages also apply to virtual environments, a way to create isolated Python environments. The primary advantages of Docker over virtual environments are:
+## Docker
 
-这些优势也适用于虚拟环境（virtual environment）——创建孤立Python环境的一种方式。Docker相较于虚拟环境的主要优势有：
+Docker容器的里层包裹的是Linux容器（a layer over Linux containers），可以支持更简单地对容器进行管理和发布。使用Docker，可以很容易地下载具备相应包的镜像，并且快速启动。另外，Docker是跨平台的，支持包括Mac、Windows和Linux等系统。
 
-Ability to quickly get started. You don’t need to wait for packages to install when you just want to jump in and start doing analysis.
-Known good configuration. Many times, Python packages will require system packages and configuration to be setup. This can cause mysterious errors. With Docker, the packages are already setup and ready to go.
-Consistently cross platform. Python packages are cross-platform, but some behave differently on Windows vs Linux, and some have dependencies that can’t be installed on Windows. Docker containers always run in a Linux environment, so they’re consistent.
-Ability to checkpoint and restore. You can install packages into a Docker image, then create a new image of that checkpoint. This will give you the ability to quickly undo changes or rollback configurations.
-Running a Docker image creates a Docker container. For our purposes, we can run Jupyter notebook inside this container, and use a web browser to work with our data.
+作为创建孤立Python环境的另一种方式，虚拟环境（virtual environment）也有这些优势。但是Docker相较于虚拟环境的主要优势有：
 
-- 能够快速启动。如果你想马上就开始进行数据分析，那就免去了你等待各种包进行安装的时间。
-- 配置测试无误。很多时候，Python包会需要提前安装某些系统包，并进行相应设置才能正常使用。如果设置不当，会引起一些很奇怪的错误。但是使用Docker后，这些包就已经配置好了，可以立即使用。
+- 能够快速启动。如果你想马上就开始进行数据分析，使用Docker就免去了你等待各种包进行安装的时间。
+- 配置测试无误。很多时候，要正常安装Python包会，需要以安装某些系统包为前提，并只有在进行相应设置后才能正常使用。如果设置不当，会引起一些很奇怪的错误。但是使用Docker后，这些包就已经配置好了，可以立即使用。
 - 跨平台一致性。Python中的包是可以跨平台使用的，但是在Windows和Linux平台下有些不同，而且还有部分依赖包无法在Windows中安装。但是由于Docker容器运行的都是Linux环境，所以它们是高度一致的。
-- 能够设置checkpoint并且进行恢复。你可以往Docker镜像中安装包，然后将那个checkpoint下的环境创建成一个新的镜像。这让你能够快速撤销该表或者回滚配置。
+- 能够设置checkpoint并且进行恢复。你可以往Docker镜像中安装包，然后将那个checkpoint下的环境创建成一个新的镜像。这让你能够快速撤销或者回滚配置。
 
-运行一个Docker镜像，就创建了一个Docker容器。在本文中，我们在容器中运行一个Jupyter notebook，然后通过网络浏览器来处理数据。
+运行一个Docker镜像，就相当于创建了一个Docker容器。在本文中，我们在容器中运行一个Jupyter notebook，然后通过浏览器界面来处理数据。
 
-Installing Docker
-
-安装Docker
-
-The first step is installing Docker. There’s a graphical installer for Windows and Mac that makes this easy. Here are the instructions for each OS:
+## 安装Docker
 
 第一步就是安装Docker。Docker官方为Windows和Mac用户提供了一个简便安装过程的图形界面安装器。下面是每个操作系统的安装指南。
 
-Mac OS
-Linux
-Windows
+- [Mac OS](http://docs.docker.com/mac/step_one/)
+- [Linux](http://docs.docker.com/linux/step_one/)
+- [Windows](http://docs.docker.com/windows/step_one/)
 
-As part of this installation process, you’ll need to use a shell prompt. The shell prompt, also called the terminal or the command line, is a way to run commands on your machine from a text interface instead of graphically. For example, you can launch a text editor by double clicking on notepad in Windows, or by typing nano in a Linux shell session. There’s a special version of the shell that comes pre-configured for using Docker commands. Here’s how to open it:
+在安装时，你需要使用shell命令提示符（shell prompt）。shell命令提示符（shell prompt）也被称为终端或命令行，是在你的机器上通过文本界面而非图形界面运行命令的一种方式。例如，你可以在Windows系统中双击记事本就可以打开一个文本编辑器，也可以在Linux终端中输入nano达到这个目的。Docker提供了一个预先配置好的shell，可以用来运行Docker命令。请按照下面的方法操作：
 
-在安装时，你需要使用shell prompt。shell prompt也被称为终端或命令行，是在你的机器上通过文本界面而非图形界面运行命令的一种方式。例如，你可以在Windows系统中双击记事本就可以打开一个文本编辑器，也可以在Linux终端中输入nano实现这个效果。Docker提供了一个预先配置好的终端，可以用来运行Docker命令。请按照下面的方法打开：
+Mac OS —— 从Launchpad中打开Docker Quickstart Terminal程序。[详情见本篇文章](https://docs.docker.com/v1.8/installation/mac/#from-the-docker-quickstart-terminal)。
 
-Mac OS – launch the Docker Quickstart Terminal application from Launchpad. There’s more detail here.
-Mac OS —— 从Launchpad中打开Docker Quickstart Terminal程序。详情见本篇文章。
+Linux —— 打开任意bash终端，就可以使用docker命令。
+Windows —— 双击桌面上的Docker QuickstartTerminal程序的图标。[详情见本篇文章](https://docs.docker.com/v1.8/installation/windows/#from-the-docker-quickstart-terminal)。
 
-Linux – Launch any bash shell prompt, and docker will already be available.
-Linux —— 打开任意bash终端，就可以使用docker。
-Windows – click the Docker Quickstart Terminal icon on your desktop. There’s more detail here.
-Windows —— 双击桌面上的Docker QuickstartTerminal程序的图标。详情见本篇文章。
+下文在提到需要运行Docker命令或输入某个命令时，你都需要使用这个shell命令提示符。
 
-You’ll need to use this same shell prompt whenever the rest of this post mentions having to run a Docker command or type a specific command.
+## 下载镜像
 
-下文在提到需要运行Docker命令或输入某个命令时，你都需要使用这个特别的终端程序。
+下一步是下载你需要的镜像。下面是我们网站(dataquestio)目前提供的数据科学开发专用镜像：
 
-Downloading the image
-下载镜像
+`dataquestio/python3-starter` —— 这个镜像已经安装好了Python 3, Jupyter notebook和许多其他流行的数据科学库，包括numpy，pandas，scipy，scikit-learn和nltk。
 
-The next step is to download the image you want. Here are our currently available data science images:
-下一步是下载你需要的镜像。下面是我们网站目前提供的数据科学开发专用镜像：
+`dataquestio/python2-starter` —— 这个镜像已经安装好了Python 2, Jupyter notebook和许多其他流行的数据科学库，包括numpy，pandas，scipy，scikit-learn和nltk。
 
-dataquestio/python3-starter – This contains a python 3 installation, jupyter notebook, and many popular data science libraries such as numpy, pandas, scipy, scikit-learn, and nltk.
+你可以通过输入`docker pull IMAGE_NAME`命令，下载相应的镜像。如果你想下载`dataquestio/python3-starter`这个镜像，那么你需要在终端输入`docker pull dataquestio/python3-starter`命令。输入这段命令后，程序会自动从Docker Hub下载镜像。Docker Hub与Github类似，不过却是Docker镜像的一个中枢。它会将相应的镜像文件下载至你的本地机器，这样你才能利用该镜像创建容器。
 
-dataquestio/python3-starter —— 这个镜像已经安装好了Python 3, Jupyter notebook和许多其他流行的数据科学库，包括numpy，pandas，scipy，scikit-learn和nltk。
+## 新建一个文件夹
 
-dataquestio/python2-starter – This contains a python 2 installation, jupyter notebook, and many popular data science libraries such as numpy, pandas, scrapy, scipy, scikit-learn, and nltk.
+在本地创建一个文件夹，用于存放notebooks。这个文件夹中将储存你所有的工作文件，并会持续存在于你的机器中，即使是你销毁了docker容器。在这里，我们将创建下面这个文件夹，`/home/vik/notebooks`。
 
-dataquestio/python2-starter —— 这个镜像已经安装好了Python 2, Jupyter notebook和许多其他流行的数据科学库，包括numpy，pandas，scipy，scikit-learn和nltk。
+## 运行镜像
 
-You can download the images by typing docker pull IMAGE_NAME. If you wanted to pull dataquestio/python3-starter, you’d type docker pull dataquestio/python3-starter into a shell prompt. This will download the images from Docker Hub, which is like Github, but for Docker images. It will download the image files onto your machine, so you can start a container with the image.
+镜像下载完成后，你可以通过`docker run`运行该镜像。我们还需要传入一些选项，确保镜像配置正确。
 
-你可以通过输入`docker pull IMAGE_NAME`下载相应的镜像。如果你想下载dataquestio/python3-starter这个镜像，你需要在终端输入`docker pull dataquestio/python3-starter`命令。输入这段命令后，程序会自动从Docker Hub下载镜像，Docker Hub与Github类似，不过确实Docker镜像的一个中枢。它会将相应的镜像文件下载至你的本地机器，这样你才能利用该镜像创建容器。
+-p 选项用于设置虚拟机的端口，让我们可以在本地访问Jupyter notebook服务器。
 
-Make a folder
-新建一个文件夹
-
-Make a folder on your local machine that will correspond to where you want the notebooks stored. This folder will contain all of your work, and will persist on your local machine, even if you terminate the docker container. For this example, we’ll make this folder at /home/vik/notebooks.
-
-在本地创建一个文件夹，用于存放notebooks。这个文件夹中将储存你所有的工作文件，并会持续存在于你的机器中，即使是你销毁了docker容器。在这里，我们将床建下面这个文件夹，/home/vik/notebooks。
-
-Running the image
-Once you download the image, you can run it using docker run. We need to pass in a few options to ensure that it’s configured properly.
-
-运行镜像
-镜像下载完成后，你可以通过`docker run`运行该镜像。我们需要传入一些选项，确保镜像配置正确。
-
-The -p flag sets the ports so that we can access the Jupyter notebook server from our machine.
-
--p 选项设置虚拟机的端口，让我们可以在本地访问Jupyter notebook服务器。
-
-The -d flag runs the container in detached mode, as a background process.
-
--d 选项以detached模式运行容器，也就是作为背景进程运行。
-
-The -v flag lets us specify which directory on the local machine to store our notebooks in.
+-d 选项用于以detached模式运行容器，也就是作为背景进程运行。
 
 -v 选项让我们指定在本地机器中使用哪个文件夹存储notebook。
 
-The full command looks like docker run -d -p 8888:8888 -v /home/vik/notebooks:/home/ds/notebooks dataquestio/python3-starter.
-
 完整的运行命令是类似这样的：`docker run -d -p 8888:8888 -v /home/vik/notebooks:/home/ds/notebooks dataquestio/python3-starter`。
-
-You should change /home/vik/notebooks to whatever folder you created to store your notebooks in. You should change dataquestio/python3-starter to your preferred docker image.
 
 你应该将`/home/vik/notebooks`更改为你用于存储文件的地址。另外，应该把`dataquestio/python3-starter`更改为自己喜欢的docker镜像。
 
-Executing docker run will create a Docker container. This is isolated from your local machine, and it may be helpful to think of it as a separate computer. Inside this container, Jupyter notebook will be running, and we’ll be able to access many data science packages.
+执行`docker run`命令将会创建一个Docker容器。这是与你的本地机器相隔绝的，也可以把它看作是一台单独的电脑。在容器内部，会运行一个Jupyter notebook服务器，并可以让我们使用许多数据科学工具包。
 
-执行`docker run`命令将会创建一个Docker容器。这是与你的本地机器相隔绝的，也可以把它看作是一台单独的电脑。在容器内部，会运行一个Jupyter notebook服务器，我们也可以使用许多数据科学工具包。
+另外，`docker run`命令也会在终端打印出容器的编码（container id ），在通过其他docker容器对该容器进行修改时，就必须要使用这个编码。在下文中我们称该编码为容器编码。
 
-The docker run command will print a long string. This is the unique id of your container, and is used when modifying the container with other docker containers. We’ll refer to it as the container id from now on.
+## 查看notebook服务器
 
-另外，`docker run`命令也会在终端打印出一段长字符串。这是你的容器的独有ID，在通过其他docker容器对该容器进行修改时，就必须要使用这个ID。在下文中我们称该ID为容器ID。
-
-Viewing the notebook server
-查看notebook服务器
-
-If you’re running Linux, the next step is easy – just go to localhost:8888, and you should see the notebook running. If you’re on Windows or OSX, and you followed the Docker installation instructions earlier, you used docker-machine in your docker installation process. The name of your local machine is default, and running docker-machine ip default will tell you the ip of the docker container. If you used a different name, like dev, just swap it for default in the command. Then, you just visit CONTAINER_IP:8888 to see the notebook (replace CONTAINER_IP with the ip of your container).
-
-如果你的系统是Linux，那么下一步非常简单——只需要在浏览器中打开localhost:8888，之后应该就能看到运行中的notebook。如果你使用的是Windows或OSX，之前也按照Docker官方安装指南进行了操作，那在安装过程中应该就使用了docker-machine。你的本地机器的名称是默认的（default），运行`docker-machine ip default`命令就可以得知docker容器的ip。如果使用了其他的名字，例如dev，那在命令中将default替换为dev即可。接下来，在浏览器中访问`CONTAINER_IP:8888`就可以看到notebook（将CONTAINER_IP替换为你的容器的ID）。
+如果你的系统是Linux，那么下一步非常简单——只需要在浏览器中打开localhost:8888，之后应该就能看到运行中的notebook。如果你使用的是Windows或OSX，之前也按照Docker官方安装指南进行了操作，并且安装过程中使用了docker-machine，那么本地机器的名称是default，运行`docker-machine ip default`命令就可以得知docker容器的ip。如果使用了其他的名字，例如dev，那在命令中将default替换为dev即可。接下来，在浏览器中访问`CONTAINER_IP:8888`就可以看到notebook（将CONTAINER_IP替换为你的容器编码）。
 
 
-This is what you should see
-下面就是你应该看到的样子。
+![下面就是你应该看到的样子](https://www.dataquest.io/blog/images/docker_ds/jupyter.png)
 
+## 创建一个notebook
 
-Making a notebook
-At this point, you can make a new Jupyter notebook to test how things are working. Try running a scikit-learn example from here:
+到了这一步，你可以创建一个新的Jupyter notebook测试下这个孤立的开发环境。试试输入下面这个scikit-learn的[例子](http://scikit-learn.org/stable/auto_examples/plot_cv_predict.html)：
 
 	from sklearn import datasets
 	from sklearn.cross_validation import cross_val_predict
@@ -190,37 +120,43 @@ At this point, you can make a new Jupyter notebook to test how things are workin
 	ax.set_ylabel('Predicted')
 	plt.show()
 
-Adding in data files
-If you want to add data files into your environment, you have three options. The first is to place them in the folder you created earlier to use for notebooks. Any files you place in there will automatically be accessible from inside your Jupyter notebooks.
+## 添加数据文件
 
-The second way is to use the docker cp command. Docker cp can copy files from your machine to the container, and vice versa. Let’s say you want to copy a file at /home/vik/data.csv to a container with id 4greg24134. You would type docker cp /home/vik/data.csv 4greg24134:/home/ds/notebooks. This will copy the data.csv file into the notebooks directory in the container. You can place files anywhere you want, but putting them in the notebooks directory makes them easily accessible from Jupyter notebook.
+如果你想往开发环境中添加数据文件，你有三个选择。第一个选择，就是将文件放在你之前创建用来存放notebook的文件夹中。你放那里的任何文件将可以自动通过Jupyter notebook中访问。
 
-The third way is to use the upload button at the top right of the Jupyter notebook main page. This will let you select a file and upload it to the notebooks directory in the container.
+第二种选择就是使用`docker cp`命令。`docker cp`可以从本地机器复制文件至容器中，反之亦然。假设你想拷贝`/hom/vik/data.csv`文件至一个id为4greg24134的容器中，你可以输入下面的命令：`docker cp /home/vik/data.csv 4greg24134:/home/ds/notebooks`。这会将`data.csv`文件拷贝到容器中用于存放notebook的文件夹中。当然，你可以选择将文件放到容器中的任何地方，但是把它们放在存放notebook的文件夹忠厚，你就可以轻松地通过Jupyter notebook访问这些文件了。
 
-Regardless of which method you choose, here’s how you would load the file inside a Jupyter notebook:
+第三个选择就是使用Jupyter notebook首页右上方的`upload`按钮。这可以让你选择一个文件，并上传到容器中用于存放notebook的文件夹中。
 
-import pandas
-data = pandas.read_csv("data.csv")
-Copying data files from the container
-You may also want to get files from the container onto your local machine. The easiest way is to place the files in the /home/ds/notebooks folder, where they will be automatically mirrored into your local machine.
+不管你使用哪种方法，要想在Jupyter notebook中加载文件，需要按照类似下面的方式进行：
 
-Another way is to again use docker cp. Let’s say you want to copy a file at /home/ds/notebooks/data.csv from a container with id 4greg24134 to the folder /home/vik/ on your machine. You would type docker cp 4greg24134:/home/ds/notebooks/data.csv /home/vik/data.csv.
+	import pandas
+	data = pandas.read_csv("data.csv")
 
-A final way is to use the download options in the Jupyter interface. Clicking on a non-notebook file in the browser view will download it to your local machine. If you’re working on a notebook, clicking “File”, then “download as” will download it to your machine.
+## 复制容器中的数据文件
 
-Installing more packages
-If you want to install your own packages inside the container, you can get into it and run any normal bash shell commands. In order to get into a container, you’ll need to run docker exec. Docker exec takes a specific container id, and a command to run. For instance, typing docker exec -it 4greg24134 /bin/bash will open a shell prompt in the container with id 4greg24134. The -it flags ensure that we keep an input session open with the container, and can enter commands.
+你可能会需要从容器中拷贝文件至本地机器。最容易的办法就是把文件放置在`/home/ds/notebooks`文件夹中，这样的话这些文件就会自动映像到本地机器。
 
-After running docker exec, you’ll be put into a shell prompt inside the container. The container is running python in a virtual environment called ds, which should already be activated.
+另一种方法也就是利用`docker cp`命令。假设你想从id为4greg24314的容器中，把`/home/ds/notebooks/data.csv`文件拷贝至本地机器的`/home/vik/`文件夹中，你可以输入下面的命令：`cp 4greg24134:/home/ds/notebooks/data.csv /home/vik/data.csv`。
 
-To install packages, just type pip install PACKAGE_NAME. You could install requests with pip install requests.
+最后一种方法就是使用Jupyter界面中的download选项。在网页模式下点击一个不是notebook的文件，将会将其下载至本地。如果你已经打开了一个notebook，那么可以先点击`File`，然后选中`download as`就可以下载至本地。
 
-When you want to exit the container shell prompt, just type exit.
+## 安装更多的工具包
 
-Shutting down your docker container
-When you’re done exploring your data, you can shut down the docker container. Use docker rm -f CONTAINER_ID to stop the container. You should have your container id from earlier. If you don’t, you can find it by running docker ps. Your notebooks will still be available on your local machine, in the folder you created, even after you shut down the container.
+如果你想在容器中安装更多的工具包，你可以通过正常的bash命令行命令就可以实现。要想在容器中执行这些命令，你需要运行`docker exec`命令。这个命令接受容器的id作为参数，以及一个期望运行的命令。例如输入`docker exec -it 4greg24134 /bin/bash`将会在编码为4greg24134的容器中开启一个shell命令提示符（shell prompt）。`-it`选项确保我们在容器中打开了一个输入会话，并且可以输入命令。
 
-Building on this
-Docker images are created from Dockerfiles. Dockerfiles specify which packages and tools should be installed in an image. By modifying Dockerfiles, you can change which packages and tools come with the image by default.
+在运行`docker exec`命令之后，你就会看到容器中的shell命令提示符（shell prompt）出现。容器此时正通过一个名为`ds`的虚拟环境运行Python程序，这个虚拟环境已经是处于激活状态的。
 
-If you want to build on the images we’ve discussed in this post, you can contribute to our Github repository here, which contains the Dockerfiles. We welcome improvements to our current images, or the addition of new images focusing on tools other than Python.
+接下来，只需要输入`pip install PACKAGE_NAME`就可以安装其他的工具包。例如，你可以使用`pip install requests`来安装requests。
+
+当你希望退出容器的shell终端时，只需要输入`exit`即可。
+
+## 关闭docker容器
+
+在完成数据处理工作之后，你就可以通过`docker rm -f CONTAINER_ID`来停止docker容器。你应该输入之前获得的容器编码。如果你忘了，你可以运行`docker ps`查看。容器停止运行之后，notebooks会继续存放在你本地用于存放的文件夹中。
+
+## 更进一步
+
+Docker镜像是通过[Dockerfile](https://docs.docker.com/v1.8/reference/builder/)创建的。Dockerfile指定了镜像中应该安装的包和工具。通过修改Dockerfile，你就可以改变镜像默认按照的包和工具。
+
+如果你想在本文中所使用的镜像基础上做一定修改，可以向我们的[Github仓库](https://github.com/dataquestio/ds-containers)提交PR，这个仓库中包含了镜像的Dockerfile。我们欢迎大家参与改善当前的镜像，或是添加其他安装了非Python包和工具的镜像。
