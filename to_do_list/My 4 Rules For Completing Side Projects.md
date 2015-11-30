@@ -27,38 +27,26 @@ Gmail的发明者Paul Buchheit在《The Two Paths to Sucess》一文中这样说
 
 要允许自己犯错。副项目的一大自由就是你又可以成为一名初学者。你不会有预期。你可以犯错误，全心全意地去学习。只有当你犯了错误之后，你才会深刻地知道下次不应该做什么。
 
-根据Bloom的学习分类法，通过阅读和倾听所学到的内容中，你只会记住20%，而你真正实践过的事情则会记住90%。更高的参与程度以及错误-反馈循环可以让你真正地发现一个问题的要害。
+根据Bloom的学习分类法，通过阅读和倾听所学到的内容中，你只会记住20%，而你真正实践过的事情则会记住90%。更高的参与程度以及错误-反馈循环可以让你真正地发现一个问题的要害。再详细的描述，都无法完整地向你说明副项目中哪怕是最简单的那一部分。只有安静地坐下来，仔细地思考每一个小决定，你才能真正地学会问题的真实解决方案。
 
-According to Bloom's Taxonomy of learning, you only retain 20% of what you read/hear but 90% of what you do. The higher level of engagement and the mistake feedback loop allows you to truly flesh out the problem's nooks for yourself. No description can be detailed enough to explain every single aspect of completing even the simplest of side projects. Only by sitting down and navigating the maze of micro-decisions will you actually learn the real texture of the problem.
+## 不要让它变得无聊
 
-Kill the Boring Bits
-Working on your side project should be as fun as possible. What annoys you while working on your side project? Build environment sucks? Editor highlighting hurts your eyes? Deploying is a tedious and painful? Automate it!
+副项目应该尽量做到有趣。做副项目工作的时候，什么事情会让你恼怒？构建环境太差？编辑器高亮伤眼睛？部署起来麻烦痛苦？让它自动化吧！
 
-A specific examples from my own life.
+我自己碰到的一些例子：
 
-I randomly come up with ideas for my projects during my commute or waiting in line. Usually the idea ends up a reciept or a random post-it with the best of intentions. Due to my lack of organization, these bits of paper just end up disappearing or chewed up by our washing machine. Fed up with the situation, I decided to setup a little daemon that watches my email inbox. When I come up with a new idea, I email it to myself and the daemon transfers it into my organization/todo system automatically every night. Not only did my pain get solved, I learned a lot about the Emacs.
+> 通勤的时候或是排队的时候，我会突然冒出一些项目的想法。通常我会马上记在贴纸上，想着尽快去实施。但是由于我没有好好整理，这些贴纸总是不断地消失，或是莫名其妙地出现在洗衣机里。实在是受不了这种情况，我才决定配置一个观察我电子邮件收件箱的程序。每当我有了一个想法之后，我会记下来发给自己，这个程序就会每天晚上自动把邮件归类到计划事项当中。这样，不仅解决了让我头疼的问题，我还学了很多关于Emacs的知识。
 
-If worst comes to worst, just give up and don't do that bit unless absolutely essential. Anything that feels like pulling teeth will kill your motivation. Do it consistently and you won't want to work on the side project anymore. You must keep it fun.
+如果碰到最坏的情况，那就放弃。除非决定必要，否则就别这么做。任何事情如果做起来让自己咬牙切齿的不爽，那你就没有了做事的动力。长期持续做一件事，你以后再也不会再向做副项目了。你必须要让副项目有趣。
 
-Go Big or Not
-Gmail is a great example of a side project that went huge. That was by choice. My computer is a graveyard of half baked ideas and empty directories, all created in moments of inspiration. It's up to you. You're in full control. If you want to get big, go for it. If you want to keep it small and run it for friends and family, go for it. You are a omnipotent deity. Being in charge gives you confidence in your own judgement.
+## 要不要做大
 
-If you're starting to feel restless or don't want to work on that project anymore, archive it, write a blog post, put it on github or just give a major fist pump and declare victory because you learned what you wanted.
+Gmail是副项目做大的典型代表。当然那也是有选择的。我的电脑里存储了大量的想法，以及很多空文件夹，这些都是我突发灵感的时候创建的。要不要做的，选择在于你。如果你想把项目做大，那就去做。如果你想保持小规模，只提供给家人和朋友，那也没问题。在这件事上，你就是无所不能的神。
 
-You are the captain of your own ship and the master of your own destiny.
+如果哪一天你开始感到骄躁，或是不想继续做副项目了，那就把它归档，写一篇博文记录下来，把相关文件放到Github上，抑或是朝空中挥拳宣告项目胜利，因为你已经完成了学习的目标。
 
-“When you’re working on a side project, you have the time and the choice to invest in learning new things ... You can also be choosier about the feedback you take.
- When you do take it, it’s because you truly want to get better at something.”
-- Tobias van Schneider
-Tutorials, books and lectures are great when you're starting out because they give you a mental framework to hang your hat on. After that, side projects become much much more efficient.
+你是你自己命运的主宰。
 
-Side Project Rules To Live By
-Remember these rules when you're working on your projects.
+> 当你做副项目时，你有充足的时间选择是否要学习新东西......你也可以对是否接受别人的反馈更加挑剔。但是如果你真的接受了人家的意见，那是因为你真的希望把这件事情做的更好。—— Tobias van Schneider
 
-1) Learn From Mistakes
-2) Kill The Boring Bits
-3) Go Big Or Not
-4) Have Fun!
-Because why would you waste your extremely limited and valuable time on anything else?
-
-If you're looking for good side project ideas, just take a look at Python Practice Projects for Python specific projects or Karan's Side Project Ideas for language agnostic ones.
+刚开始的时候，你可以从别人的教程、相关数据和讲座中学到很多，它们可以给你提供一个初期的框架。之后，副项目就会进行地越来越顺畅。
