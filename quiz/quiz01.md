@@ -1,69 +1,75 @@
-Practice Question: What is a correct term for the following piece of Python syntax: 3 + 4
-An expression. 1
-A closure.
-A lambda.
-A suite.
-A statement.
+What is a correct term for the following piece of Python syntax: 3 + 4
+下面这个Python代码的正确术语是什么：3 + 4
+- 表达式（expression）  1
+- 闭包（closure）
+- lambda
+- 代码块（suite）
+- 语句（statement）
 
 
-What does PEP stand for?
-Particularly Egregious Practices
-Python Echoes Python
-Python Enhancement Proposal
-Python Engagement Pattern
+PEP的全称是什么？
+- Particularly Egregious Practices
+- Python Echoes Python
+- Python Enhancement Proposal
+- Python Engagement Pattern
 
 
-What will typing the following at the Python interpreter produce?
+下面这行Python代码在解释器中的输出结果是什么？
 lang = list('Python') ; lang[:-4]
-['t', 'h', 'o', 'n']
-['P', 'y', 't', 'h']
-['o', 'n']
-['P', 'y'] 1
 
-Which of the following is not an interface for a web server to communicate with a Python program?
-fcgi
-wsgi
-cgi
-webcat 1
+- ['t', 'h', 'o', 'n']
+- ['P', 'y', 't', 'h']
+- ['o', 'n']
+- ['P', 'y'] 1
+
+下面哪一项不是网络服务器与Python程序之间的交互接口？
+- fcgi
+- wsgi
+- cgi
+- webcat 1
 
 
-In what way can Python interoperate with C code?
-Python C/API
-ctypes
-All of these
-Cython
+Python可以通过哪种方式与C语言代码进行交互？
+- Python C/API
+- ctypes
+- 全部选项 1
+- Cython
 
 What will an octal number and hexadecimal number start with?
-Any digit
-There are no octal numbers in Python.
-0 (zero) 1
-sign (plus or minus)
+Python中八进制和十六进制数字以什么开头？
+- 任意数字
+- Python中没有八进制数字
+- 0  1
+- 标识（+或-）
 
-What is 3/2?
-1
-It depends on the Python version
-1.5
+3/2的结果是什么？
+- 1
+- 要看使用哪个版本的Python
+- 1.5
 
 
 Is it possible to check for more than one error in one except line?
-Yes, if the exception types are enclosed in curly braces.
-Yes, if the exception types are enclosed in square brackets.
-No, it is not possible.
-Yes, if the exception types are enclosed in parentheses. 1
+一个except语句中能否检查多个错误？
+- 可以，但是异常类型要包含在花括号中
+- 可以，但是异常类型要包含在方括号中
+- 不可以
+- 可以，但是异常类型要包含在括号中 1
 
 In a Python 2 new-style class declared as "Child(Base)", what is the correct way for a method "foo()" to call its base implementation?
-super(Child).frob()
-Child.frob(self)
-super(Base, self).foo()
-super(Child, self).foo() 1
-Child.frob(super)
+在Python 2中，我们按照新的 要求声明了一个“Child(Base)”类，下列哪种是调用父类中“foo()”方法的正确方式？
+- super(Child).frob()
+- Child.frob(self)
+- super(Base, self).foo()
+- super(Child, self).foo() 1
+- Child.frob(super)
 
 What type of error does "type('1') is int" return?
-SyntaxError
-NameError
-None; it returns False 1
-None; it returns True
-TypeError
+“type('1') is int”会返回什么类型的错误？
+- SyntaxError
+- NameError
+- None; 返回结果为False 1
+- None; 返回结果为True
+- TypeError
 
 
 Is it possible to link a Python program to code written in C?
