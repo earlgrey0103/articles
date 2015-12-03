@@ -1,0 +1,26 @@
+如果你紧跟最新的编程语言和框架，那就太棒了：你已经掌握了写出良好代码的技术能力。但是要想在岗位上真正脱颖而出，你还必须具备一些特质。下面就是成为一名优秀程序员所必须具备的10个特质。（我们知道这个列表并不全面，所以读者可以在评论区给出自己心中优秀程序员的特质。）
+
+1. 发展全面。深入了解一门技术虽然很好，但是现实世界中的问题从来都无法仅靠一种技术就能够解决。即使别人雇佣你为专业技术人员，你仍然需要明白你所掌握的技术如何与组成应用生态系统的其他软件、硬件和网络进行交互。你还需要以多种不同的方式为项目作出贡献，只要需要更多支持的时候就给以帮助。
+
+2. 享受解决难题的过程。开发应用并不是一蹴而就的。在开发过程中，要搞清楚代码无法编译的原因、故障为什么发生以及学会如何解决生产中的问题，这些都需要解决问题的能力，以及坚信可以找到解决办法，坚持不懈不放弃的信念。如果你能在压力之下解决难题，那就更好不过了——当系统瘫痪的时候，你可以想象管理层可是会在你解决问题的时候，一直死盯着你的。
+
+3. 热爱学习。技术在不断的演进。你今天所使用的工具和语言并不一定会是你明年使用的工具，更不用说十年之后了。因此，你需要不断地学习新技能，这样才能参加未来的项目。你的老板可能会提供持续的培训，但是最优秀的程序员会自己花时间自学。
+
+4. 善于沟通。程序员的工作并不仅仅是和技术打交道。程序员还需要和商业用户交流，理解他们对应用的需求。他们还经常需要输出技术文档，因此写作清晰也是很重要的——即使只是输出一份进度报告。
+
+5. 自信。开发一个系统并不只有一种方法。不管你的想法多么的出色，如果你藏在心里，那么这些想法也是毫无价值。最优秀的程序员对自己的想法非常自信，在设计讨论阶段敢于说出自己的意见，这样甚至可以左右应用的架构设计。要增强自己的信息，可以先提一些小建议，而不是一开始就提议重新设计整个应用。
+
+6. 对商业的好奇心。公司通过技术解决商业问题。你对公司的业务了解的更深，你就能越容易地理解公司想要解决的问题，更顺利地开发出帮助公司发展的解决方案。你应该充分利用与商业用户交流的机会，询问他们在工作中所面临的困难。如果你真正对商业感兴趣，你可以参加一些课程，甚至试着获得一些商业领域的资格认证。
+
+7. 注重团队合作。电影里通常会美化某一个程序员的作用，计算机专业的学生也是常常自己一个人完成作业，但是现实世界中的项目都是需要团队实现的。因此，一名程序员能否与同事融洽相处也很重要。你需要能够与不同能力水平的人打交道，尊重他们的不同意见。如果可能的话，尽量了解你的队友，把他们当作你的朋友，而不是技术人员。时常聊一聊项目之外的事情，也会增进同事之间的关系，工作上的合作也会更容易。
+
+8. 明白截止日期的重要性。最优秀的项目经理在安排项目截止日期时，会考虑项目开发人员的意见，尽管有时候外部因素会缩短项目日程。不管怎样，只要你同意完成一项任务，你就要全力以赴，在截止日期之前完成工作，即使这意味着你要加班。当然，你没有必要为了公司和工作放弃自己的个人生活，但是你所展示出的对完成项目的决心和努力会给同事留下积极的印象。
+
+9. 适应性强。
+
+Be adaptable. Projects and priorities change for many reasons, and developers need to be able to context-switch to focus on what’s most important right now. The changes may be small and temporary or major and permanent. If they’re temporary, make sure you have good notes that will help you get back to your regular work when things settle down. If the changes are permanent, allow time to understand what the new situation is and how you fit into it. It may present new opportunities to help you achieve your goals. In any case, it’s important to respond professionally and not lash out in frustration.
+
+10. 把自己当成产品的主人。
+Own your product. Technically, your job may be done once you’ve written code that compiles cleanly and passes its test cases. Stand out by following it through the rest of its lifecycle—be willing to help with testing, deployment, training users, and solving production problems. While this helps your business, it actually helps you more, because you see and understand the real-world effectiveness of the code you wrote. Then take that understanding and let it help you make your next application even better.
+
+> 原文链接：http://www.codingdojo.com/blog/trait-of-great-programmers/
