@@ -16,11 +16,9 @@
 
 8. 明白截止日期的重要性。最优秀的项目经理在安排项目截止日期时，会考虑项目开发人员的意见，尽管有时候外部因素会缩短项目日程。不管怎样，只要你同意完成一项任务，你就要全力以赴，在截止日期之前完成工作，即使这意味着你要加班。当然，你没有必要为了公司和工作放弃自己的个人生活，但是你所展示出的对完成项目的决心和努力会给同事留下积极的印象。
 
-9. 适应性强。
+9. 适应性强。项目和优先级会因为多种原因不断变化，因此程序员需要能够随时转变，专注在当前最重要的事情上面。这些可能细微、暂时的更改，也有可能是重大且长期的变化。如果是暂时的，那请务必做好记录，好在事情稳定下来之后可以回归到正常的开发中。如果是长期的，就要花时间去理解新的场景，研究如何融入进去。这也可能会提供帮助你达成目标的新机遇。不管发生什么情况，要时刻保持专业的水准，不要面对困境就自我沉沦。
 
-Be adaptable. Projects and priorities change for many reasons, and developers need to be able to context-switch to focus on what’s most important right now. The changes may be small and temporary or major and permanent. If they’re temporary, make sure you have good notes that will help you get back to your regular work when things settle down. If the changes are permanent, allow time to understand what the new situation is and how you fit into it. It may present new opportunities to help you achieve your goals. In any case, it’s important to respond professionally and not lash out in frustration.
+10. 把自己当成产品的主人。严格来说，你编写完成可以顺利编译、通过测试用例的代码之后，你的工作就结束了。如果你能够继续参与产品生命周期的其他阶段，那你就十分出众了——这意味着，你要愿意协助测试、开发、培训用户和解决开发中的问题。尽管这些工作对你的工作更有好处，但实际上你获得的却更多，因为你亲自看到了并体验了你写的代码在实际生产时的效率和作用。接下来，你就需要巩固这份心得，让自己的下一个应用变得更棒！
 
-10. 把自己当成产品的主人。
-Own your product. Technically, your job may be done once you’ve written code that compiles cleanly and passes its test cases. Stand out by following it through the rest of its lifecycle—be willing to help with testing, deployment, training users, and solving production problems. While this helps your business, it actually helps you more, because you see and understand the real-world effectiveness of the code you wrote. Then take that understanding and let it help you make your next application even better.
-
+> 译者：EarlGrey@[编程派](http://codingpy.com)
 > 原文链接：http://www.codingdojo.com/blog/trait-of-great-programmers/
