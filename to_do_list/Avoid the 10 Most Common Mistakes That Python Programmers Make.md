@@ -1,42 +1,60 @@
 > http://www.toptal.com/python/top-10-mistakes-that-python-programmers-make
 
 Common Mistake #1: Misusing expressions as defaults for function arguments
+## 常见错误1：错误地将表达式作为函数的默认参数
 
 Python allows you to specify that a function argument is optional by providing a default value for it. While this is a great feature of the language, it can lead to some confusion when the default value is mutable. For example, consider this Python function definition:
 
->>> def foo(bar=[]):        # bar is optional and defaults to [] if not specified
-...    bar.append("baz")    # but this line could be problematic, as we'll see...
-...    return bar
+在Python中，我们可以通过提供一个默认值，使得某个函数的参数成为可选项。虽然这是Python语言中很好地一个特性，但是当默认值是可变类型时，也会导致一些令人困惑的情况发生。例如，下面这个Python函数的定义就存在这个问题：
+
+	>>> def foo(bar=[]):        # bar是可选参数，如果没有提供则默认为[]，
+	...    bar.append("baz")    # 但是稍后我们会看到这行代码会出现问题。
+	...    return bar
+
 A common mistake is to think that the optional argument will be set to the specified default expression each time the function is called without supplying a value for the optional argument. In the above code, for example, one might expect that calling foo() repeatedly (i.e., without specifying a bar argument) would always return 'baz', since the assumption would be that each time foo() is called (without a bar argument specified) bar is set to [] (i.e., a new empty list).
+
+Python程序员常犯的一个错误，就是想当然地认为在每次调用函数时，如果没有为可选参数提供值，那么这个可选参数就会被设置为指定的默认值。在上面的代码中，你们可能觉得重复调用foo()函数应该会一直返回'baz'，因为你们默认每次foo()函数调用时（没有指定`bar`变量的值），`bar`变量都被设置为[]（也就是，一个新的空列表）。
 
 But let’s look at what actually happens when you do this:
 
->>> foo()
-["baz"]
->>> foo()
-["baz", "baz"]
->>> foo()
-["baz", "baz", "baz"]
+但是，重复调用这段代码的实际输出结果却是这样的：
+
+	>>> foo()
+	["baz"]
+	>>> foo()
+	["baz", "baz"]
+	>>> foo()
+	["baz", "baz", "baz"]
+
 Huh? Why did it keep appending the default value of "baz" to an existing list each time foo() was called, rather than creating a new list each time?
+
+很奇怪吧？为什么每次调用`foo()`函数时，都会把"baz"这个默认值添加到已有的列表中，而不是重新创建一个新列表呢？
 
 The more advanced Python programming answer is that the default value for a function argument is only evaluated once, at the time that the function is defined. Thus, the bar argument is initialized to its default (i.e., an empty list) only when foo() is first defined, but then calls to foo() (i.e., without a bar argument specified) will continue to use the same list to which bar was originally initialized.
 
+答案就是，函数参数的默认值在Python中只会被执行一次，也就是定义该函数的时候。因此，只有当`foo()`函数被定义时，`bar`参数才被初始化为其默认值（也就是，一个空列表），但是之后的`foo()`函数调用时，都会继续使用`bar`参数原先初始化的那个列表。
+
 FYI, a common workaround for this is as follows:
 
->>> def foo(bar=None):
-...    if bar is None:		# or if not bar:
-...        bar = []
-...    bar.append("baz")
-...    return bar
-...
->>> foo()
-["baz"]
->>> foo()
-["baz"]
->>> foo()
-["baz"]
+当然，一个常见的解决办法就是：
+
+	>>> def foo(bar=None):
+	...    if bar is None:		# or if not bar:
+	...        bar = []
+	...    bar.append("baz")
+	...    return bar
+	...
+	>>> foo()
+	["baz"]
+	>>> foo()
+	["baz"]
+	>>> foo()
+	["baz"]
+
+## 常见问题2：错误地使用类变量
 Common Mistake #2: Using class variables incorrectly
 
+我们来看下面这个例子：
 Consider the following example:
 
 >>> class A(object):
