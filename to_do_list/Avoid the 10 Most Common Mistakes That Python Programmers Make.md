@@ -57,111 +57,150 @@ Common Mistake #2: Using class variables incorrectly
 我们来看下面这个例子：
 Consider the following example:
 
->>> class A(object):
-...     x = 1
-...
->>> class B(A):
-...     pass
-...
->>> class C(A):
-...     pass
-...
->>> print A.x, B.x, C.x
-1 1 1
+  >>> class A(object):
+  ...     x = 1
+  ...
+  >>> class B(A):
+  ...     pass
+  ...
+  >>> class C(A):
+  ...     pass
+  ...
+  >>> print A.x, B.x, C.x
+  1 1 1
+
+这个结果很正常。
 Makes sense.
 
->>> B.x = 2
->>> print A.x, B.x, C.x
-1 2 1
+  >>> B.x = 2
+  >>> print A.x, B.x, C.x
+  1 2 1
+
+嗯，这次也没有问题。
 Yup, again as expected.
 
->>> A.x = 3
->>> print A.x, B.x, C.x
-3 2 3
+  >>> A.x = 3
+  >>> print A.x, B.x, C.x
+  3 2 3
+
+到底怎么回事？我们改变的只是`A.x`，为什么`C.x`值却跟着变了？
+
 What the $%#!&?? We only changed A.x. Why did C.x change too?
+
+在Python语言中，类变量是作为字典来处理的，并且遵循Method Resolution Order(MRO)。因此，在上面的代码中，由于类C中并没有`x`这个属性，解释器将会查找它的基类（base class，尽管Python支持多重继承，但是在这个例子中，C的基类只有A）。换句话说，C并不没有独立于A、属于自己的`x`属性。所以，引用`C.x`实际上就是引用`A.x`。这也导致了Python代码中出现的这个问题。
 
 In Python, class variables are internally handled as dictionaries and follow what is often referred to as Method Resolution Order (MRO). So in the above code, since the attribute x is not found in class C, it will be looked up in its base classes (only A in the above example, although Python supports multiple inheritance). In other words, C doesn’t have its own x property, independent of A. Thus, references to C.x are in fact references to A.x. This causes a Python problem unless it’s handled properly. Learn more aout class attributes in Python.
 
+## 常见错误3：错误地制定异常代码块（exception block）的参数
 Common Mistake #3: Specifying parameters incorrectly for an exception block
 
+假设你写了下面这段代码：
 Suppose you have the following code:
 
->>> try:
-...     l = ["a", "b"]
-...     int(l[2])
-... except ValueError, IndexError:  # To catch both exceptions, right?
-...     pass
-...
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-IndexError: list index out of range
+  >>> try:
+  ...     l = ["a", "b"]
+  ...     int(l[2])
+  ... except ValueError, IndexError:  # To catch both exceptions, right?
+  ...     pass
+  ...
+  Traceback (most recent call last):
+    File "<stdin>", line 3, in <module>
+  IndexError: list index out of range
+
+这段代码的问题在于，`except`语句并不支持以这种方式指定异常。而在Python 2.x中，需要使用`e`将异常绑定值可选的第二个参数中，才能进一步查看异常的情况。因此，在上述代码中，`except`语句并没有捕获IndexError异常；相反出现的异常被绑定到了一个名为`IndexError`的参数中。
+
 The problem here is that the except statement does not take a list of exceptions specified in this manner. Rather, In Python 2.x, the syntax except Exception, e is used to bind the exception to the optional second parameter specified (in this case e), in order to make it available for further inspection. As a result, in the above code, the IndexError exception is not being caught by the except statement; rather, the exception instead ends up being bound to a parameter named IndexError.
+
+在`except`语句中正确捕获多个异常的正确方法，则是将第一个参数指定为元组，然后在元组中写下希望捕获的异常类型。另外，为了提高可移植性，请使用`as`关键词，Python 2和Python 3均支持这种用法。
 
 The proper way to catch multiple exceptions in an except statement is to specify the first parameter as a tuple containing all exceptions to be caught. Also, for maximum portability, use the as keyword, since that syntax is supported by both Python 2 and Python 3:
 
->>> try:
-...     l = ["a", "b"]
-...     int(l[2])
-... except (ValueError, IndexError) as e:  
-...     pass
-...
->>>
+  >>> try:
+  ...     l = ["a", "b"]
+  ...     int(l[2])
+  ... except (ValueError, IndexError) as e:  
+  ...     pass
+  ...
+  >>>
+
+## 常见错误4：错误理解Python中的作用域规则
 Common Mistake #4: Misunderstanding Python scope rules
+
+Python中作用域的生效顺序基于所谓的`LEGD`原则，也就是“本地、外围、全局、内建”（Local，Enclosing，Global，Builtin）。看上去是不是很简单？不过，事实上这个原则的生效方式还是有着一些特殊之处，说到这点，我们就不得不提下面这个常见的Python难题。假设有下面这段代码：
 
 Python scope resolution is based on what is known as the LEGB rule, which is shorthand for Local, Enclosing, Global, Built-in. Seems straightforward enough, right? Well, actually, there are some subtleties to the way this works in Python, which brings us to the common more advanced Python programming problem below. Consider the following:
 
->>> x = 10
->>> def foo():
-...     x += 1
-...     print x
-...
->>> foo()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "<stdin>", line 2, in foo
-UnboundLocalError: local variable 'x' referenced before assignment
+  >>> x = 10
+  >>> def foo():
+  ...     x += 1
+  ...     print x
+  ...
+  >>> foo()
+  Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    File "<stdin>", line 2, in foo
+  UnboundLocalError: local variable 'x' referenced before assignment
+
+出了什么问题？
 What’s the problem?
+
+上述错误的出现，原因在于当你在某个作用域内为变量赋值时，该变量被Python解释器自动认为是该作用域的本地变量，并会取代任何外部作用域中相同名称的变量。
 
 The above error occurs because, when you make an assignment to a variable in a scope, that variable is automatically considered by Python to be local to that scope and shadows any similarly named variable in any outer scope.
 
+正是因为这样，才会出现一开始好好的代码，在某个函数内部添加了一个赋值语句之后却出现了`UnboundLocalError`，难怪会让许多人吃惊。
+
 Many are thereby surprised to get an UnboundLocalError in previously working code when it is modified by adding an assignment statement somewhere in the body of a function. (You can read more about this here.)
 
-It is particularly common for this to trip up developers when using lists. Consider the following example:
+在使用列表时，Python程序员尤其容易陷入这个圈套。
 
->>> lst = [1, 2, 3]
->>> def foo1():
-...     lst.append(5)   # This works ok...
-...
->>> foo1()
->>> lst
-[1, 2, 3, 5]
+It is particularly common for this to trip up developers when using lists. 
 
->>> lst = [1, 2, 3]
->>> def foo2():
-...     lst += [5]      # ... but this bombs!
-...
->>> foo2()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "<stdin>", line 2, in foo
-UnboundLocalError: local variable 'lst' referenced before assignment
+请看下面这个代码示例：
+Consider the following example:
+
+  >>> lst = [1, 2, 3]
+  >>> def foo1():
+  ...     lst.append(5)   # This works ok...
+  ...
+  >>> foo1()
+  >>> lst
+  [1, 2, 3, 5]
+
+  >>> lst = [1, 2, 3]
+  >>> def foo2():
+  ...     lst += [5]      # ... but this bombs!
+  ...
+  >>> foo2()
+  Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    File "<stdin>", line 2, in foo
+  UnboundLocalError: local variable 'lst' referenced before assignment
+
+呃？为什么函数`foo1`运行正常，`foo2`却出现了错误？
+
 Huh? Why did foo2 bomb while foo1 ran fine?
+
+答案与上一个示例相同，但是却更加难捉摸清楚。`foo1`函数并没有为`lst`变量进行赋值，但是`foo2`却有赋值。我们知道，`lst += [5]`只是`lst = lst + [5]`的简写，从中我们就可以看出，`foo2`函数在尝试为`lst`赋值（因此，被Python解释器认为是函数本地作用域的变量）。但是，我们希望为`lst`赋的值却又是基于`lst`变量本身（这时，也被认为是函数本地作用域内的变量），也就是说该变量还没有被定义。这才出现了错误。
 
 The answer is the same as in the prior example problem, but is admittedly more subtle. foo1 is not making an assignment to lst, whereas foo2 is. Remembering that lst += [5] is really just shorthand for lst = lst + [5], we see that we are attempting to assign a value to lst (therefore presumed by Python to be in the local scope). However, the value we are looking to assign to lst is based on lst itself (again, now presumed to be in the local scope), which has not yet been defined. Boom.
 
+## 常见错误5：在遍历列表时更改列表
 Common Mistake #5: Modifying a list while iterating over it
 
+下面这段代码的问题应该算是十分明显：
 The problem with the following code should be fairly obvious:
 
->>> odd = lambda x : bool(x % 2)
->>> numbers = [n for n in range(10)]
->>> for i in range(len(numbers)):
-...     if odd(numbers[i]):
-...         del numbers[i]  # BAD: Deleting item from a list while iterating over it
-...
-Traceback (most recent call last):
-  	  File "<stdin>", line 2, in <module>
-IndexError: list index out of range
+  >>> odd = lambda x : bool(x % 2)
+  >>> numbers = [n for n in range(10)]
+  >>> for i in range(len(numbers)):
+  ...     if odd(numbers[i]):
+  ...         del numbers[i]  # BAD: Deleting item from a list while iterating over it
+  ...
+  Traceback (most recent call last):
+    	  File "<stdin>", line 2, in <module>
+  IndexError: list index out of range
+
 Deleting an item from a list or array while iterating over it is a Python problem that is well known to any experienced software developer. But while the example above may be fairly obvious, even advanced developers can be unintentionally bitten by this in code that is much more complex.
 
 Fortunately, Python incorporates a number of elegant programming paradigms which, when used properly, can result in significantly simplified and streamlined code. A side benefit of this is that simpler code is less likely to be bitten by the accidental-deletion-of-a-list-item-while-iterating-over-it bug. One such paradigm is that of list comprehensions. Moreover, list comprehensions are particularly useful for avoiding this specific problem, as shown by this alternate implementation of the above code which works perfectly:
