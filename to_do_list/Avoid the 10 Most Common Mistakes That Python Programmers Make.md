@@ -227,6 +227,7 @@ You might expect the following output:
 4
 6
 8
+
 But you actually get:
 
 8
