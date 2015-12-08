@@ -201,83 +201,107 @@ The problem with the following code should be fairly obvious:
     	  File "<stdin>", line 2, in <module>
   IndexError: list index out of range
 
+在遍历列表或数组的同时从中删除元素，是任何经验丰富的Python开发人员都会注意的问题。但是尽管上面的示例十分明显，资深开发人员在编写更为复杂代码的时候，也很可能会无意之下犯同样的错误。
+
 Deleting an item from a list or array while iterating over it is a Python problem that is well known to any experienced software developer. But while the example above may be fairly obvious, even advanced developers can be unintentionally bitten by this in code that is much more complex.
+
+幸运的是，Python语言融合了许多优雅的编程范式，如果使用得当，可以极大地简化代码。简化代码还有一个好处，就是不容易出现在遍历列表时删除元素这个错误。能够做到这点的一个编程范式就是列表解析式。而且，列表解析式在避免这个问题方面尤其有用，下面用列表解析式重新实现上面代码的功能：
 
 Fortunately, Python incorporates a number of elegant programming paradigms which, when used properly, can result in significantly simplified and streamlined code. A side benefit of this is that simpler code is less likely to be bitten by the accidental-deletion-of-a-list-item-while-iterating-over-it bug. One such paradigm is that of list comprehensions. Moreover, list comprehensions are particularly useful for avoiding this specific problem, as shown by this alternate implementation of the above code which works perfectly:
 
->>> odd = lambda x : bool(x % 2)
->>> numbers = [n for n in range(10)]
->>> numbers[:] = [n for n in numbers if not odd(n)]  # ahh, the beauty of it all
->>> numbers
-[0, 2, 4, 6, 8]
+  >>> odd = lambda x : bool(x % 2)
+  >>> numbers = [n for n in range(10)]
+  >>> numbers[:] = [n for n in numbers if not odd(n)]  # ahh, the beauty of it all
+  >>> numbers
+  [0, 2, 4, 6, 8]
+
+## 常见错误6：不理解在闭包中Python如何绑定变量
 
 Common Mistake #6: Confusing how Python binds variables in closures
 
+请看下面这段代码：
 Considering the following example:
 
->>> def create_multipliers():
-...     return [lambda x : i * x for i in range(5)]
->>> for multiplier in create_multipliers():
-...     print multiplier(2)
-...
+  >>> def create_multipliers():
+  ...     return [lambda x : i * x for i in range(5)]
+  >>> for multiplier in create_multipliers():
+  ...     print multiplier(2)
+  ...
+
+你可能觉得输出结果应该是这样的：
 You might expect the following output:
 
-0
-2
-4
-6
-8
+  0
+  2
+  4
+  6
+  8
 
+但是，实际的输出结果却是：
 But you actually get:
 
-8
-8
-8
-8
-8
+  8
+  8
+  8
+  8
+  8
+
+吓了一跳吧！
 Surprise!
+
+这个结果的出现，主要是因为Python中的迟绑定（late binding ），即闭包中变量的值只有在内部函数被调用时才会进行查询。因此，在上面的代码中，无人什么时候调用`create_multipliers()`所返回的函数，变量i的值都只有在它被调用时才会查询（而到那时，循环已经结束，所以变量i最后被赋予的值为4）。
 
 This happens due to Python’s late binding behavior which says that the values of variables used in closures are looked up at the time the inner function is called. So in the above code, whenever any of the returned functions are called, the value of i is looked up in the surrounding scope at the time it is called (and by then, the loop has completed, so i has already been assigned its final value of 4).
 
+解决这个常见Python问题的方法中，要使用一些技巧：
 The solution to this common Python problem is a bit of a hack:
 
->>> def create_multipliers():
-...     return [lambda x, i=i : i * x for i in range(5)]
-...
->>> for multiplier in create_multipliers():
-...     print multiplier(2)
-...
-0
-2
-4
-6
-8
+  >>> def create_multipliers():
+  ...     return [lambda x, i=i : i * x for i in range(5)]
+  ...
+  >>> for multiplier in create_multipliers():
+  ...     print multiplier(2)
+  ...
+  0
+  2
+  4
+  6
+  8
+
+请注意！我们在这里利用了默认参数来实现这个匿名函数。有人可能认为这样做很优雅，有人会觉得这是个精妙的方法，还有人会不喜欢。但是，如果你是一名Python程序员，无论什么原因你了解其中的原理都是很重要的。
+
 Voilà! We are taking advantage of default arguments here to generate anonymous functions in order to achieve the desired behavior. Some would call this elegant. Some would call it subtle. Some hate it. But if you’re a Python developer, it’s important to understand in any case.
 
+## 常见错误7：模块文件中出现循环引用
 Common Mistake #7: Creating circular module dependencies
 
+假设你有两个文件，分别是`a.py`和`b.py`，二者相互引用，如下所示：
 Let’s say you have two files, a.py and b.py, each of which imports the other, as follows:
 
-In a.py:
+`a.py`文件中的代码:
 
-import b
+  import b
 
-def f():
-    return b.x
-	
-print f()
-And in b.py:
+  def f():
+      return b.x
+  	
+  print f()
 
-import a
+`b.py`文件中的代码：
 
-x = 1
+  import a
 
-def g():
-    print a.f()
+  x = 1
+
+  def g():
+      print a.f()
+
+
 First, let’s try importing a.py:
 
->>> import a
-1
+  >>> import a
+  1
+
 Worked just fine. Perhaps that surprises you. After all, we do have a circular import here which presumably should be a problem, shouldn’t it?
 
 The answer is that the mere presence of a circular import is not in and of itself a problem in Python. If a module has already been imported, Python is smart enough not to try to re-import it. However, depending on the point at which each module is attempting to access functions or variables defined in the other, you may indeed run into problems.

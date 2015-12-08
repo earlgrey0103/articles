@@ -19,7 +19,7 @@
 
 ## 技巧3
 
-a = [1,2,3]
+`a = [1,2,3]`
 
 将上述列表中的三个值分别存储在3个新变量中。
 
@@ -34,7 +34,7 @@ a = [1,2,3]
 
 ## 技巧4
 
-a = ["Code", "mentor", "Python", "Developer"] 
+`a = ["Code", "mentor", "Python", "Developer"] `
 
 利用上述列表中的所有元素，创建一个字符串。
 
@@ -43,12 +43,15 @@ a = ["Code", "mentor", "Python", "Developer"]
 
 ## 技巧5
 
+```
 list1 = ['a', 'b', 'c', 'd']
 
 list2 = ['p', 'q', 'r', 's']
+```
 
 编写可以打印出下面结果的代码
 
+```
 ap
 
 bq
@@ -56,6 +59,7 @@ bq
 cr
 
 ds
+```
 
 	>>> for x, y in zip(list1,list2):
 	...    print x, y
@@ -86,11 +90,11 @@ ds
 
 ## 技巧8
 
-a = [[1, 2], [3, 4], [5, 6]]
+`a = [[1, 2], [3, 4], [5, 6]]`
 
 不使用任何循环，将上面的嵌套列表转换成单一列表（即组成元素不是列表）
 
-输出结果应为:- [1, 2, 3, 4, 5, 6]
+输出结果应为: [1, 2, 3, 4, 5, 6]
 
 	>>> import itertools 
 	>>> list(itertools.chain.from_iterable(a))
