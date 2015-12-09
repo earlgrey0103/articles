@@ -302,163 +302,219 @@ First, let’s try importing a.py:
   >>> import a
   1
 
+代码运行正常。也许这出乎了你的意料。毕竟，我们这里存在循环引用这个问题，想必应该是会出现问题的，难道不是吗？
 
 Worked just fine. Perhaps that surprises you. After all, we do have a circular import here which presumably should be a problem, shouldn’t it?
 
+答案是，仅仅存在循环引用的情况本身并不会导致问题。如果一个模块已经被引用了，Python可以做到不再次进行引用。但是如果每个模块试图访问其他模块定义的函数或变量的时机不对，那么你就很可能陷入困境。
+
 The answer is that the mere presence of a circular import is not in and of itself a problem in Python. If a module has already been imported, Python is smart enough not to try to re-import it. However, depending on the point at which each module is attempting to access functions or variables defined in the other, you may indeed run into problems.
+
+那么回到我们的示例，当我们引用`a.py`模块时，它在引用`b.py`模块时是不会出现问题的，因为`b.py`模块在被引用时，并不需要访问在`a.py`模块中定义的任何变量或函数。`b.py`模块中对a模块唯一的引用，就是调用了a模块的`foo()`函数。但是那个函数调用发生在`g()`函数当中，而`a.py`或`b.py`模块中都没有调用`g()`函数。所以，不会出现问题。
 
 So returning to our example, when we imported a.py, it had no problem importing b.py, since b.py does not require anything from a.py to be defined at the time it is imported. The only reference in b.py to a is the call to a.f(). But that call is in g() and nothing in a.py or b.py invokes g(). So life is good.
 
+但是，如果我们试着引用`b.py`模块呢（即之前没有引用`a.py`模块的前提下）：
 But what happens if we attempt to import b.py (without having previously imported a.py, that is):
 
->>> import b
-Traceback (most recent call last):
-  	  File "<stdin>", line 1, in <module>
-  	  File "b.py", line 1, in <module>
-    import a
-  	  File "a.py", line 6, in <module>
-	print f()
-  	  File "a.py", line 4, in f
-	return b.x
-AttributeError: 'module' object has no attribute 'x'
+  >>> import b
+  Traceback (most recent call last):
+    	  File "<stdin>", line 1, in <module>
+    	  File "b.py", line 1, in <module>
+      import a
+    	  File "a.py", line 6, in <module>
+  	print f()
+    	  File "a.py", line 4, in f
+  	return b.x
+  AttributeError: 'module' object has no attribute 'x'
+
+糟糕。情况不太妙！这里的问题是，在引用`b.py`的过程中，它试图引用`a.py`模块，而`a.py`模块接着又要调用`foo()`函数，这个`foo()`函数接着又试图去访问`b.x`变量。但是这个时候，`b.x`变量还没有被定义，所以才出现了AttributeError异常。
+
 Uh-oh. That’s not good! The problem here is that, in the process of importing b.py, it attempts to import a.py, which in turn calls f(), which attempts to access b.x. But b.x has not yet been defined. Hence the AttributeError exception.
+
+解决这个问题有一种非常简单的方法，就是简单地修改下`b.py`模块，在`g()`函数内部才引用`a.py`：
 
 At least one solution to this is quite trivial. Simply modify b.py to import a.py within g():
 
-x = 1
+  x = 1
 
-def g():
-    import a	# This will be evaluated only when g() is called
-    print a.f()
+  def g():
+      import a	# This will be evaluated only when g() is called
+      print a.f()
+
+现在我们再引用`b.py`模块的话，就不会出现任何问题了：
 No when we import it, everything is fine:
 
->>> import b
->>> b.g()
-1	# Printed a first time since module 'a' calls 'print f()' at the end
-1	# Printed a second time, this one is our call to 'g'
+  >>> import b
+  >>> b.g()
+  1	# Printed a first time since module 'a' calls 'print f()' at the end
+  1	# Printed a second time, this one is our call to 'g'
+
+## 常见错误8：命名与Python标准库模块名冲突
+
 Common Mistake #8: Name clashing with Python Standard Library modules
+
+Python语言的一大优势，就是其本身自带的强大标准库。但是，正因为如此，如果你不去刻意注意的话，你也是有可能为自己的模块取一个和Python自带标准库模块相同的名字（例如，如果你的代码中有一个模块叫`email.py`，那么这就会与Python标准库中同名的模块相冲突。）
 
 One of the beauties of Python is the wealth of library modules that it comes with “out of the box”. But as a result, if you’re not consciously avoiding it, it’s not that difficult to run into a name clash between the name of one of your modules and a module with the same name in the standard library that ships with Python (for example, you might have a module named email.py in your code, which would be in conflict with the standard library module of the same name).
 
+这很可能会给你带来难缠的问题。举个例子，在引用模块A的时候，假如该模块A试图引用Python标准库中的模块B，但却因为你已经有了一个同名模块B，模块A会错误地引用你自己代码中的模块B，而不是Python标准库中的模块B。这也是导致一些严重错误的原因。
+
 This can lead to gnarly problems, such as importing another library which in turns tries to import the Python Standard Library version of a module but, since you have a module with the same name, the other package mistakenly imports your version instead of the one within the Python Standard Library. This is where bad Python errors happen.
+
+因此，程序员要格外注意，避免使用与Python标准库模块相同的名称。毕竟，修改自己模块的名称比提出PEP提议修改上游模块名称且让提议通过，要来得容易的多。
 
 Care should therefore be exercised to avoid using the same names as those in the Python Standard Library modules. It’s way easier for you to change the name of a module within your package than it is to file a Python Enhancement Proposal (PEP) to request a name change upstream and to try and get that approved.
 
+## 常见错误9：未能处理Python 2与Python 3之间的区别
+
 Common Mistake #9: Failing to address differences between Python 2 and Python 3
 
+假设有下面这段代码：
 Consider the following file foo.py:
 
-import sys
+  import sys
 
-def bar(i):
-    if i == 1:
-        raise KeyError(1)
-    if i == 2:
-        raise ValueError(2)
+  def bar(i):
+      if i == 1:
+          raise KeyError(1)
+      if i == 2:
+          raise ValueError(2)
 
-def bad():
-    e = None
-    try:
-        bar(int(sys.argv[1]))
-    except KeyError as e:
-        print('key error')
-    except ValueError as e:
-        print('value error')
-    print(e)
+  def bad():
+      e = None
+      try:
+          bar(int(sys.argv[1]))
+      except KeyError as e:
+          print('key error')
+      except ValueError as e:
+          print('value error')
+      print(e)
 
-bad()
+  bad()
+
+如果是Python 2，那么代码运行正常：
 On Python 2, this runs fine:
 
-$ python foo.py 1
-key error
-1
-$ python foo.py 2
-value error
-2
+  $ python foo.py 1
+  key error
+  1
+  $ python foo.py 2
+  value error
+  2
+
+但是现在，我们换成Python 3再运行一遍：
+
 But now let’s give it a whirl on Python 3:
 
-$ python3 foo.py 1
-key error
-Traceback (most recent call last):
-  File "foo.py", line 19, in <module>
-    bad()
-  File "foo.py", line 17, in bad
-    print(e)
-UnboundLocalError: local variable 'e' referenced before assignment
+  $ python3 foo.py 1
+  key error
+  Traceback (most recent call last):
+    File "foo.py", line 19, in <module>
+      bad()
+    File "foo.py", line 17, in bad
+      print(e)
+  UnboundLocalError: local variable 'e' referenced before assignment
+
+这到底是怎么回事？这里的“问题”是，在Python 3中，异常对象在`except`代码块作用域之外是无法访问的。（这么设计的原因在于，如果不这样的话，堆栈帧中就会一直保留它的引用循环，知道垃圾回收器运行，将引用从内存中清楚。）
+
 What has just happened here? The “problem” is that, in Python 3, the exception object is not accessible beyond the scope of the except block. (The reason for this is that, otherwise, it would keep a reference cycle with the stack frame in memory until the garbage collector runs and purges the references from memory. More technical detail about this is available here).
+
+避免这个问题的一种方法，就是在`except`代码块的作用域之外，维持一个对异常对象的引用（reference），这样异常对象就可以访问了。下面这段代码就使用了这种方法，因此在Python 2和Python 3中的输出结果是一致的：
 
 One way to avoid this issue is to maintain a reference to the exception object outside the scope of the except block so that it remains accessible. Here’s a version of the previous example that uses this technique, thereby yielding code that is both Python 2 and Python 3 friendly:
 
-import sys
+  import sys
 
-def bar(i):
-    if i == 1:
-        raise KeyError(1)
-    if i == 2:
-        raise ValueError(2)
+  def bar(i):
+      if i == 1:
+          raise KeyError(1)
+      if i == 2:
+          raise ValueError(2)
 
-def good():
-    exception = None
-    try:
-        bar(int(sys.argv[1]))
-    except KeyError as e:
-        exception = e
-        print('key error')
-    except ValueError as e:
-        exception = e
-        print('value error')
-    print(exception)
+  def good():
+      exception = None
+      try:
+          bar(int(sys.argv[1]))
+      except KeyError as e:
+          exception = e
+          print('key error')
+      except ValueError as e:
+          exception = e
+          print('value error')
+      print(exception)
 
-good()
+  good()
+
+在Python 3下运行代码：
+
 Running this on Py3k:
 
-$ python3 foo.py 1
-key error
-1
-$ python3 foo.py 2
-value error
-2
+  $ python3 foo.py 1
+  key error
+  1
+  $ python3 foo.py 2
+  value error
+  2
+
+太棒了！
 Yippee!
 
-(Incidentally, our Python Hiring Guide discusses a number of other important differences to be aware of when migrating code from Python 2 to Python 3.)
-
+## 常见错误10：错误使用__del__方法
 Common Mistake #10: Misusing the __del__ method
 
+假设你在`mod.py`的文件中编写了下面的代码：
 Let’s say you had this in a file called mod.py:
 
-import foo
+  import foo
 
-class Bar(object):
-   	    ...
-    def __del__(self):
-        foo.cleanup(self.myhandle)
+  class Bar(object):
+     	    ...
+      def __del__(self):
+          foo.cleanup(self.myhandle)
+
+之后，你在`another_mod.py`文件中进行如下操作：
 And you then tried to do this from another_mod.py:
 
-import mod
-mybar = mod.Bar()
-You’d get an ugly AttributeError exception.
+  import mod
+  mybar = mod.Bar()
+
+如果你运行`another_mod.py`模块的话，将会出现AttributeError异常。
+
+为什么？因为当解释器结束运行的时候，该模块的全局变量都会被设置为`None`。因此，在上述示例中，当`__del__`方法被调用之前，`foo`已经被设置成了`None`。
 
 Why? Because, as reported here, when the interpreter shuts down, the module’s global variables are all set to None. As a result, in the above example, at the point that __del__ is invoked, the name foo has already been set to None.
 
+要想解决这个有点棘手的Python编程问题，一个办法就是使用`atexit.register()`方法。这样的话，当你的程序执行完成之后（即正常退出程序的情况下），你所注册的处理程序就会在解释器关闭之前运行。
+
 A solution to this somewhat more advanced Python programming problem would be to use atexit.register() instead. That way, when your program is finished executing (when exiting normally, that is), your registered handlers are kicked off before the interpreter is shut down.
 
+理解了上面这种方法，修改后的`mod.py`文件可能会是这样子的：
 With that understanding, a fix for the above mod.py code might then look something like this:
 
-import foo
-import atexit
+  import foo
+  import atexit
 
-def cleanup(handle):
-    foo.cleanup(handle)
+  def cleanup(handle):
+      foo.cleanup(handle)
 
 
-class Bar(object):
-    def __init__(self):
-        ...
-        atexit.register(cleanup, self.myhandle)
+  class Bar(object):
+      def __init__(self):
+          ...
+          atexit.register(cleanup, self.myhandle)
+
+这种实现支持在程序正常终止时干净利落地调用任何必须的清理功能。很明显，上述示例中将会由`foo.cleanup`函数来决定如何处理`self.myhandle`所绑定的对象。
+
 This implementation provides a clean and reliable way of calling any needed cleanup functionality upon normal program termination. Obviously, it’s up to foo.cleanup to decide what to do with the object bound to the name self.myhandle, but you get the idea.
 
+## 综述
 Wrap-up
 
+Python是一门强大而又灵活的编程语言，提供的许多编程机制和范式可以极大地提高工作效率。但是与任何软件工具或语言一样，如果对该语言的能力理解有限或无法欣赏，那么有时候自己反而会被阻碍，而不是受益了。正如一句谚语所说，“自以为知道够多，但实则会给自己或别人带来危险”（knowing enough to be dangerous）。(译者注:意思是自以为已经了解足够了,可以做某事了,但其实不是)
+
 Python is a powerful and flexible language with many mechanisms and paradigms that can greatly improve productivity. As with any software tool or language, though, having a limited understanding or appreciation of its capabilities can sometimes be more of an impediment than a benefit, leaving one in the proverbial state of “knowing enough to be dangerous”.
+
+不断地熟悉Python语言的一些细微之处将会帮助你有效地使用这门语言，同时也能避免犯一些比较常见的错误。
 
 Familiarizing oneself with the key nuances of Python, such as (but by no means limited to) the moderately advanced programming problems raised in this article, will help optimize use of the language while avoiding some of its more common errors.
