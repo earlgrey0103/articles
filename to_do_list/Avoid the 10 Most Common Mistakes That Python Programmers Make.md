@@ -296,11 +296,12 @@ Let’s say you have two files, a.py and b.py, each of which imports the other, 
   def g():
       print a.f()
 
-
+首先，我们尝试引用（import）`a.py`：
 First, let’s try importing a.py:
 
   >>> import a
   1
+
 
 Worked just fine. Perhaps that surprises you. After all, we do have a circular import here which presumably should be a problem, shouldn’t it?
 
