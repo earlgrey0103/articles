@@ -1,8 +1,8 @@
-# 小Printf的故事：我们为什么编程？
+# 程序员Printf的故事：我们为什么编程？
 
 I've been lucky enough to have been born before computers and video games were ubiquitous. I had the luck to play outdoors with friends and my brother, and of inventing our own games.
 
-我十分幸运，在电脑和电子游戏普及之前出生。我还可以和朋友和哥哥在室外玩耍，可以发明自己的游戏。
+我十分幸运，出生在电脑、电子游戏普及之前。我的童年，是在与朋友和哥哥在室外玩耍中度过的，我们还可以自己发明游戏。
 
 We could be our own heroes, use a twig that would instantly become a bow, a gun, a sword, or a telescope. It could be anything, except maybe a boomerang because once you throw the stick away, you have to go fetch it back.
 
