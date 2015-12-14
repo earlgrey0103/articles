@@ -1,5 +1,6 @@
-> 原文链接：[https://www.airpair.com/python/posts/python-tips-and-traps][1]
-> 译文链接：
+> 原文链接：[https://www.airpair.com/python/posts/python-tips-and-traps](https://www.airpair.com/python/posts/python-tips-and-traps)
+> 译文链接：[http://codingpy.com/article/python-tips-and-traps/](http://codingpy.com/article/python-tips-and-traps/)
+
 ## 1. 引言
 
 Python语言博大精深，用途广泛，已被大量应用于系统自动化、网络应用、大数据、统计分析和安全软件等领域。本文旨在介绍一些不太为人所知的技巧，帮助你实现更快地开发，更简单地调试，并且保持工作的乐趣。

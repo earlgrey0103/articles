@@ -1,3 +1,6 @@
+> 原文链接：[http://ruslanspivak.com/lsbaws-part1/](http://ruslanspivak.com/lsbaws-part1/)
+> 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-one/](http://codingpy.com/article/build-a-simple-web-server-part-one/)
+
 Let’s Build A Web Server. Part 1.
 
 Out for a walk one day, a woman came across a construction site and saw three men working. She asked the first man, “What are you doing?” Annoyed by the question, the first man barked, “Can’t you see that I’m laying bricks?” Not satisfied with the answer, she asked the second man what he was doing. The second man answered, “I’m building a brick wall.” Then, turning his attention to the first man, he said, “Hey, you just passed the end of the wall. You need to take off that last brick.” Again not satisfied with the answer, she asked the third man what he was doing. And the man said to her while looking up in the sky, “I am building the biggest cathedral this world has ever known.” While he was standing there and looking up in the sky the other two men started arguing about the errant brick. The man turned to the first two men and said, “Hey guys, don’t worry about that brick. It’s an inside wall, it will get plastered over and no one will ever see that brick. Just move on to another layer.”1
