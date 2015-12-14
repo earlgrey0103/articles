@@ -1,168 +1,194 @@
 > 原文链接：[https://realpython.com/blog/python/emacs-the-best-python-editor/](https://realpython.com/blog/python/emacs-the-best-python-editor/)
 
-Installation and Basics
-Installation
-Installation of Emacs is a topic that does not need to be covered in yet another blog post. This Guide, provided by ErgoEmacs, will get you up and running with a basic Emacs installation on Linux, Mac, or Windows. Once installed, start the application and you will be greeted with the default configured Emacs:
+## 安装与基础
 
-emacs fresh launch
-Basic Emacs
-Another topic that does not need to be covered again is the basics of using Emacs. The easiest way to learn Emacs is to follow the built-in tutorial. The topics covered in this post do not require that you know how to use Emacs yet; instead, each topic highlights what you can do after learning the basics.
+### 安装
+Emacs安装不是本文的重点，因此，这里推荐大家参考[ErgoEmacs](http://ergoemacs.org/)网站提供的[安装指南](http://ergoemacs.org/emacs/which_emacs.html)，完成在Linux、Mac或Windows平台的基本安装。安装完成之后，打开应用，你就会看到默认设置下地Emacs界面。
 
-To enter the tutorial, use your arrow keys to position the cursor over the words “Emacs Tutorial” and press Enter. You will then be greeted with the following passage:
+![Emacs编辑器默认页面](https://realpython.com/images/blog_images/emacs/emacs-fresh-launch.png)
 
-Emacs commands generally involve the CONTROL key (sometimes labeled
-CTRL or CTL) or the META key (sometimes labeled EDIT or ALT).  Rather than
-write that in full each time, we'll use the following abbreviations:
+### Emacs基础
+同样，本文也不会过多介绍Emacs使用的基础知识。学习Emacs最容易的方法，就是通过其自带的教程。本文介绍的内容并不要求你知道如何使用Emacs；相反，本文的每一部分讲述的都是你学习基础知识后可以使用的。
 
- C-<chr>  means hold the CONTROL key while typing the character <chr>
-    Thus, C-f would be: hold the CONTROL key and type f.
- M-<chr>  means hold the META or EDIT or ALT key down while typing <chr>.
-    If there is no META, EDIT or ALT key, instead press and release the
-    ESC key and then type <chr>.  We write <ESC> for the ESC key.
-So, key entries/commands like C-x C-s (which is used to save) will be shown throughout the remainder of the post. This command indicates that the CONTROL and X key are pressed at the same time, and then the CONTROL and S key. This is the basic form of interacting with Emacs. Please follow the built-in tutorial as well as the Guided Tour of Emacs to learn more.
+你可以使用方向键将光标移动到标有“Emacs Tutorial”字样的地方，然后按回车键，就可以打开自带教程。然后，你将会看到下面这段话：
 
-Configuration and Packages
-One of the great benefits of Emacs is the simplicity and power of configuration. The core of Emacs configuration is the Initialization File, init.el.
+    Emacs commands generally involve the CONTROL key (sometimes labeled
+    CTRL or CTL) or the META key (sometimes labeled EDIT or ALT).  Rather than
+    write that in full each time, we'll use the following abbreviations:
 
-In a UNIX environment this file should be placed in $HOME/.emacs.d/init.el:
+     C-<chr>  means hold the CONTROL key while typing the character <chr>
+        Thus, C-f would be: hold the CONTROL key and type f.
+     M-<chr>  means hold the META or EDIT or ALT key down while typing <chr>.
+        If there is no META, EDIT or ALT key, instead press and release the
+        ESC key and then type <chr>.  We write <ESC> for the ESC key.
 
-$ touch ~/.emacs.d/init.el
-Meanwhile, in Windows, if the HOME environment variable is not set, this file should reside in C:/.emacs.d/init.el. See GNU Emacs FAQ for MS Windows > Where do I put my init file? for more info.
+接下来，本文还会继续出现类似`C-x C-s`等按键命令。这些命令表示，要同时按下Control键和x键，然后再同时按下Control和s键。这正是使用Emacs编辑器的基本形式。了解更多基础知识，你可以学习自带教程或者GNU网站提供的这个教程[Guided Tour of Emacs](http://www.gnu.org/software/emacs/tour/)。
 
-Configuration snippets will be presented throughout the post. So, create the init file now if you want to follow along. Otherwise you can find the complete file in the Conclusion.
-Packages are used to customize Emacs, which are sourced from a number of repositories. The primary Emacs package repository is MELPA. All of the packages presented in this post will be installed from this repository.
+### 配置与插件包（packages）
 
-Styling (Themes & More)
-To begin, the following configuration snippet provides package installation and installs a theme package:
+Emacs的好处之一，就是配置简单。Emacs配置的核心则是初始化文件（Initialization File）—— `init.el`。
 
-;; init.el --- Emacs configuration
+在Unix环境下，这个文件应该放置在`$HOME/.emacs.d/init.el`路径。
 
-;; INSTALL PACKAGES
-;; --------------------------------------
+    $ touch ~/.emacs.d/init.el
 
-(require 'package)
+同时，在Windows平台，如果没有设置`HOME`环境变量，该文件应该放置在`C:/.emacs.d/init.el`路径。
 
-(add-to-list 'package-archives
-       '("melpa" . "http://melpa.org/packages/") t)
+> 本文将会与大家分享许多配置示例。那么如果你想继续跟随本文进行配置的话，请先创建init文件。如果不想的话，可以在结语部分直接查看最终的完整init文件。
 
-(package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents))
+插件包（packages）可以对Emacs进行自定义，需要从不同的代码仓库获取。其中，最主要的Emacs插件包仓库是`MELPA`仓库。本文中提到的所有插件包都将从该仓库获取并安装。
 
-(defvar myPackages
-  '(better-defaults
-    material-theme))
+### 样式（主题&更多）
 
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      myPackages)
+首先，下面是一个插件包安装示例代码，其中安装了一个主题插件。
 
-;; BASIC CUSTOMIZATION
-;; --------------------------------------
+    ;; init.el --- Emacs configuration
 
-(setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
-(global-linum-mode t) ;; enable line numbers globally
+    ;; INSTALL PACKAGES
+    ;; --------------------------------------
 
-;; init.el ends here
-The first section of the configuration snippet, ;; INSTALL PACKAGES, installs two packages called better-defaults and material-theme. The better-defaults package is a collection of minor changes to the Emacs defaults that makes a great base to begin customizing from. The material-theme package provides a customized set of styles.
+    (require 'package)
 
-My preferred theme is material-theme, so we’ll be using that for the rest of the post.
-The second section ;; BASIC CUSTOMIZATION:
+    (add-to-list 'package-archives
+           '("melpa" . "http://melpa.org/packages/") t)
 
-Disables the startup message (this is the screen with all the tutorial information). You may want to leave this out until you are more comfortable with Emacs.
-Loads the material theme.
-Enables line numbers globally.
-Enabling something globally means that it will apply to all buffers (open items) in Emacs. So if you open a Python, markdown, and/or text file, they will all have line numbers shown. You can also enable things per mode – e.g., python-mode, markdown-mode, text-mode. This will be shown later when setting up Python.
+    (package-initialize)
+    (when (not package-archive-contents)
+      (package-refresh-contents))
 
-Now that we have a complete basic configuration file we can restart Emacs and see the changes. If you placed the init.el file in the correct default location it will automatically be picked up.
+    (defvar myPackages
+      '(better-defaults
+        material-theme))
 
-As an alternative, you can start Emacs from the command-line with emacs -q --load <path to init.el>. When loaded, our initial Emacs window looks a bit nicer:
+    (mapc #'(lambda (package)
+        (unless (package-installed-p package)
+          (package-install package)))
+          myPackages)
 
-emacs themed
-The following image shows some other basic features that come with Emacs out of the box – including simple file searching and split layouts:
+    ;; BASIC CUSTOMIZATION
+    ;; --------------------------------------
 
-emacs simple features
-One of my favorite simple features of Emacs is being able to do a quick recursive-grep search – M-x rgrep For example, say you want to find all instances of the word python in any .md (markdown) in a given directory:
+    (setq inhibit-startup-message t) ;; hide the startup message
+    (load-theme 'material t) ;; load material theme
+    (global-linum-mode t) ;; enable line numbers globally
 
+    ;; init.el ends here
 
-emacs rgrep
+配置示例代码的第一部分是`;; INSTALL PACKAGES`，安装了`better-defaults`和`material-theme`共两个插件包。`better-defaults`插件集合了一系列对Emacs默认配置的修改，为我们开始进一步自定义奠定了良好的基础。`material-theme`插件则提供了一组自定义的样式。
 
-With this basic configuration complete we can begin to dive into configuring the environment for Python development!
+> 主题插件中，我个人更喜欢的就是这个`material-theme`插件，所以本文中我们将一直使用这个插件。
 
-Elpy – Python Development
-Emacs is distributed with a python-mode (python.el) that provides indentation and syntax highlighting. However, to compete with Python-specific IDE’s (Integrated Development Environments), we’ll certainly want more. The elpy (Emacs Lisp Python Environment) package provides us with a near complete set of Python IDE features, including:
+第二部分则是`;; BASIC CUSTOMIZATION`（基本自定义）。
 
-Automatic Indentation,
-Syntax Highlighting,
-Auto-Completion,
-Syntax Checking,
-Python REPL Integration,
-Virtual Environment Support, and
-Much more!
-To install and enable elpy we need to add a bit of configuration and install flake8 and jedi using your preferred method for installing Python packages (pip or conda, for example).
+1. 禁用启动消息（即显示所有教程信息的页面）。在你更熟悉Emacs之前，你可以不禁用。
+2. 加载`material`主题。
+3. 启用全局显示行号
 
-The following will install the elpy package:
+全局启用意味着这个功能对于Emacs打开的所有缓冲区（buffers）都适用。所以，如果你打开了Python文件、markdown文件或者是纯文本文件，它们都将显示行号。你还可以根据不同的模式（mode）启用不同的功能，——例如，python模式、markdown模式和纯文本模式。稍后我们将Emacs配置为Python IDE时还会讲到。
 
-(defvar myPackages
-  '(better-defaults
-    elpy ;; add the elpy package
-    material-theme))
-Now just enable it:
+现在我们已经有了一个完整的基础配置文件，可以重启Emacs，观察变化。如果你将`init.el`文件放在了正确地路径中，Emacs将会自动加载该文件。
 
-(elpy-enable)
-With the new configuration, we can restart Emacs and open up a Python file to see the new mode in action:
+另外，你也可以在命令行输入`emacs -q --load <path to init.el>`命令，启动Emacs。配置文件加载完成后，我们之前见到的Emacs窗口会变得更好看：
 
-emacs elpy basic
-Shown in this image are the following features:
+![完成基础配置的Emacs界面](https://realpython.com/images/blog_images/emacs/emacs-themed.png)
 
-Automatic Indentation (as you type and hit RET lines are auto-indented)
-Syntax Highlighting
-Syntax Checking (error indicators at line 3)
-Auto-Completion (list methods on line 9+)
-In addition, let’s say we want to run this script. In something like IDLE or Sublime Text you’ll have a button/command to run the current script. Emacs is no different, we just type C-c C-c in our Python buffer and…
+下面这张图展示了一些Emacs本身自带的基础功能——包括简单的文件检索和Split Layouts。
 
-emacs elpy execute
-Often we’ll want to be running a virtual environment and executing our code using the packages installed there. To use a virtual environment in Emacs, we type M-x pyvenv-activate and follow the prompts. You can deactivate a virtualenv with M-x pyvenv-deactivate. Elpy provides an interface for debugging the environment and any issues you may encounter with elpy itself. By typing M-x elpy-config we get the following dialog, which provides valuable debugging information:
+![Emacs基本功能：文件检索和Split Layout](https://realpython.com/images/blog_images/emacs/emacs-simple-features.png)
 
-emacs elpy config
-With that, all of the basics of a Python IDE in Emacs have been covered. Now let’s put some icing on this cake!
+我最喜欢的一个Emacs基础功能，就是可以进行快速的递归文本检索（recursive grep search）—— `M-x rgrep`。举个例子，假如你想在某个文件夹下以`.md`为扩展名的文件中，查找所有出现过`python`一词的段落：
 
-Additional Python Features
-In addition to all the basic IDE features described above, Emacs provides some additional features for Python. While this is not an exhaustive list, PEP8 compliance (with autopep8) and integration with IPython/Jupyter will be covered. However, before that let’s cover a quick syntax checking preference.
+![Emacs Grep检索](https://realpython.com/images/blog_images/emacs/emacs-rgrep.gif)
 
-Better Syntax Checking (Flycheck v. Flymake)
-By default Emacs+elpy comes with a package called Flymake to support syntax checking. However, another Emacs package, Flycheck, is available and supports realtime syntax checking. Luckily switching out for Flycheck is simple:
+完成基础配置之后，我们可以开始将Emacs配置为Python开发环境啦！
 
-(defvar myPackages
-  '(better-defaults
-    elpy
-    flycheck ;; add the flycheck package
-    material-theme))
-and
+## Elpy ——Python开发
 
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-Now we get realtime feedback when editing Python code:
+Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。但是如果要与专门针对Python设计的IDE竞争的话，我们肯定还需要添加更多的功能。`elpy`（Emacs Lisp Python Environment）插件可以说为我们提供了Python开发环境所需要的几乎全部功能，包括：
 
-emacs elpy flycheck
-PEP8 Compliance (Autopep8)
-Love it or hate it, PEP8 is here to stay. If you want to follow all or some of the standards, you’ll probably want an automated way to do so. The autopep8 tool is the solution. It integrates with Emacs so that when you save – C-x C-s – autopep8 will automatically format and correct any PEP8 errors (excluding any you wish to).
+- 自动缩进
+- 语法高亮
+- 自动补全
+- 语法检查
+- REPL集成
+- 虚拟环境支持，以及
+- 更多其他功能
 
-First, you will need to install the Python package autopep8 using your preferred method, then add the following Emacs configuration:
+要想安装并启用`elpy`插件，我们需要进行一些配置，并使用你自己喜欢的方式（例如，`pip`或`conda`）安装`flake8`和`jedi`这两个Python工具包。
 
-(defvar myPackages
-  '(better-defaults
-    elpy
-    flycheck
-    material-theme
-    py-autopep8)) ;; add the autopep8 package
-and
+下面的配置可以安装`elpy`插件包：
 
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+    (defvar myPackages
+      '(better-defaults
+        elpy ;; add the elpy package
+        material-theme))
+
+现在我们这样启用这个插件：
+
+    (elpy-enable)
+
+完成上面的配置之后，我们可以重启Emacs，并打开一个Python文件，就可以查看新的配置是否生效。
+
+![安装并启用了elpy插件的Emacs](https://realpython.com/images/blog_images/emacs/emacs-elpy-basic.png)
+
+上面这幅图中显示了以下几种功能：
+
+- 自动缩进
+- 语法高亮
+- 语法检查（第三行的错误提示）
+- 自动补全（第九行显示的列表方法）
+
+另外，假设我们想要运行这个脚本。在Python自带的IDLE或Sublime Text中，你可以点击一个运行当前脚本的按钮。Emacs编辑器也是一样，不过我们只需要Python缓冲区按下`C-c C-c`即可。
+
+![Emacs elpy执行Python脚本](https://realpython.com/images/blog_images/emacs/emacs-elpy-execute.png)
+
+通常，我们会希望运行一个虚拟环境，然后再使用虚拟环境中安装的工具包来执行代码。要想在Emacs中使用虚拟环境，我们需要输入`M-x pyvenv-activate`，然后根据提示操作。输入`M-x pyvenv-deactivate`就可以关闭虚拟环境。Elpy插件还提供了调试虚拟环境、处理elpy插件可能出现的问题的接口。输入`M-x elpy-config`，就会出现下面的信息，其中包含了有价值的调试信息。
+
+![emacs elpy配置](https://realpython.com/images/blog_images/emacs/emacs-elpy-config.png)
+
+到这里，我们已经介绍完在Emacs中实现Python IDE基础功能的方法。接下来，我们来进一步完善Emacs的配置。
+
+## 额外的Python功能
+
+除了上面介绍的基本IDE功能之外，Emacs还针对Python语言提供了一些额外的功能。在这一部分，我们无法介绍全部的额外功能，但是肯定会涉及PEP8、IPython/Jupyter集成。不过在此之前，我们要快速梳理一下语法检查配置。
+
+### 更好的语法检查（Flycheck v. Flymake）
+
+默认情况下，安装了Elpy插件的Emacs提供一个名叫`Flymake`的语法检查插件。但是，我们还可以选择另外一个名叫`Flycheck`的插件，后者支持实时语法检查。幸运地是，从`Flymake`切换至`Flycheck`非常简单：
+
+    (defvar myPackages
+      '(better-defaults
+        elpy
+        flycheck ;; add the flycheck package
+        material-theme))
+
+以及
+
+    (when (require 'flycheck nil t)
+      (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+      (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+现在，我们就可以在编辑Python代码的同时，获得实时代码检查反馈了：
+
+![emacs flycheck实时代码检查](https://realpython.com/images/blog_images/emacs/emacs-elpy-flycheck.gif)
+
+### PEP8
+
+不管你喜不喜欢，PEP8都不会消失。如果你想遵循PEP8标准的全部或部分规范，你大概希望能够实现自动化合规。`autopep8`插件就是解决之道。这个插件与Emacs无缝集成，因此当你保存文件时——`C-x C-s`——autopep8插件就会自动格式化代码，并纠正所有不符合PEP8标准的错误（排除你不希望检查的错误）。
+
+首先，你需要通过你喜欢的方式安装`autopep8`这个Python工具包，然后添加下面的Emacs配置代码：
+
+    (defvar myPackages
+      '(better-defaults
+        elpy
+        flycheck
+        material-theme
+        py-autopep8)) ;; add the autopep8 package
+以及
+
+    (require 'py-autopep8)
+    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+    
 Now (after forcing some pep8 errors) when we save our demo Python file, the errors will automatically be corrected:
 
 emacs elpy autopep8
