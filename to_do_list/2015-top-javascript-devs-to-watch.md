@@ -1,31 +1,72 @@
 2015's Top JavaScript Devs To Follow
 
-> -原文链接：[http://blog.bithound.io/2015-top-js-devs/](http://blog.bithound.io/2015-top-js-devs/)
+2015年对于Node.js和JavaScript语言来说，无疑都是十分重要的。就在这一年，发生了许多重大事件：Node.js与io.js合并，ESlint 1.0版发布，ES6标准正式发布，以及许多其他激动人心的事件。
 
-The past year was undoubtedly a big year for Node.js and JavaScript across the board.
+在bitHound公司看来，有20位顶尖的JS开发者在上述事件中发挥了关键的作用，促成了JavaScript和Node在2015年的成功。接下来，编程派就来为大家揭开这20名高手的面纱吧。
 
-2015 saw the coming-together of Node.js and io.js, the introduction of ESLint 1.0 and and the adoption of ES6, among many other exciting things.
-
-As part of our yearly tradition at bitHound, we are back again with some new and some familiar faces for our Top 20 JS Devs to Follow list for 2015. The folks mentioned on this list have played a pivotal role, in one way or another, to the success and momentum of JavaScript and Node in 2015. So get ready, these are the individuals that you will want to keep an eye on for 2016!
-
-排名不分先后。
+排名不分先后。(同时提供高手的Twitter账号链接，供大家关注。)
 
 1. Eric Elliott
-2015 has been a busy year for the infamous Eric Elliott. Eric has spent the past year contributing to software experiences for the best of the best as well as creating video, text and interactive exercises for developers, new and experienced. Whether you've seen him talk or worked with his teaching materials first-hand, you'll know that Eric is not only just helping others learn JavaScript but also, how to change the world.
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/eric-1.jpeg" alt="Eric Elliott的头像"></div>
+
+过去一年，[Eric Elliott](https://twitter.com/_ericelliott)非常忙碌。除了为软件开发贡献力量之外，他还为新老程序员制作视频、撰写教程并编写交互式练习。不管你是否听过他的演讲或是读过他的教学资料，你都应该知道：他不仅是在帮助他人学习JavaScript语言，还是在帮助他们学习如何改变世界。
+
+举个例子，Eric通过KickStarter众筹了[一门课程](https://www.kickstarter.com/projects/ericelliott/learn-javascript)，名字叫Learn JavaScript with Eric Elliott & Fight Poverty with Code。另外，他还是《Programming JavaScript Applications》一书的作者。
+
+怎么关注：
+
+Twitter：[https://twitter.com/_ericelliott](https://twitter.com/_ericelliott)
+Github：[https://github.com/ericelliott](https://github.com/ericelliott)
+Blog：[https://ericelliottjs.com/](https://ericelliottjs.com/)
+Medium：[https://medium.com/@_ericelliott](https://medium.com/@_ericelliott)
 
 2. Emma Jane
-Emma Jane is the brilliant mind behind Git For Teams– an ever-growing resource aimed to support teams as they learn to work together, efficiently . Beyond creating content to inspire and help teams, Emma Jane has been quite the jetsetter this year delivering inspiring talks at OSCON and DrupalCon.
+
+<div><img src="http://blog.bithound.io/content/images/2015/12/Djnof8gw-1.jpg" alt="Emma Jane"></div>
+
+[Emma Jane](https://twitter.com/emmajanehw)是《[Git For Teams](http://www.gitforteams.com/)》一书的作者，这本书收集了许多团队使用Git的技巧，可以快速提高团队工作效率。除了创作优质的内容之外，Emma Jane还积极参加社区活动，在OSCON和DrupalCon等会议上演讲，分享心得。
+
+Twitter：[https://twitter.com/emmajanehw](https://twitter.com/emmajanehw)
+Github：[https://github.com/emmajane](https://github.com/emmajane)
+Blog：[http://emmajane.net/](http://emmajane.net/)
+Medium：[https://medium.com/@emmajane](https://medium.com/@emmajane)
 
 3. Wes Bos
-Writer, speaker and lead instructor at HackerYou, 2015 has been a fantastic year for Wes Bos. A pioneer and proponent of full-stack development and design, Wes has offered fresh new perspectives and techniques for developers as it pertains to JavaScript, CSS3, HTML5 and open source web technologies.
+
+<div><img src="http://blog.bithound.io/content/images/2015/12/LUJ4qL8n-1.jpg" alt="Wes Bos的照片"></div>
+
+[Wes Bos](https://twitter.com/wesbos)是HackerYou网站的技术带头人，2015年对他来说是不平凡的一年。作为全栈开发与设计的支持者，Wes在JavaScript、CSS3、HTML5和开源网络技术方面，为开发人员提供了全新的视角，并研发了崭新的技术。
+
+Twitter：[https://twitter.com/wesbos](https://twitter.com/wesbos)
+Github：[https://github.com/wesbos](https://github.com/wesbos)
+Blog：[http://wesbos.com/](http://wesbos.com/)
+Medium：[https://medium.com/@wesbos](https://medium.com/@wesbos)
 
 4. Aria Stewart
-For Aria Stewart, this year has been nothing short of amazing. Having contributed to the PayPal software experience in internationalization localization, Aria has become a familiar face in the Node community speaking at many conferences addressing the question of how do we really "read" code. Aria has since joined the team at npm where there is no doubt that her skills will continue to shine. Aria continues to be an advocate for open-source and works on a variety of projects including Camping at the Mailbox, the kraken.js framework, and several others.
+
+<div><img src="http://blog.bithound.io/content/images/2015/12/aria-1.jpg" alt="Aria Stewart的照片"></div>
+
+对Aria Stewart来说，这一年充满了神奇的经历。自从参与PayPal软件的本地化工作之后，Aria就成为了Node社区的常客，经常在论坛上演讲，分享如何做到真正地“阅读”代码。后来，Aria加入了npm的开发团队，但是自身的才华继续闪耀。Aria是开源运动的积极支持者，并且已参与过Camping at the Mailbox项目，kraken.js框架的开发以及其他项目的开发。
+
+Twitter：[https://twitter.com/aredridel](https://twitter.com/aredridel)
+Github：[https://github.com/aredridel](https://github.com/aredridel)
+Blog：[http://dinhe.net/~aredridel/](http://dinhe.net/~aredridel/)
+Medium：[https://medium.com/@aredridel](https://medium.com/@aredridel)
 
 5. Mikeal Rogers
-The name Mikeal Rogers is never far behind any mentions of "Node.js". Mikeal is one of the primary proponents, champions and promoters of The Node Foundation and all that it has to offer. Mikeal played a pivotal role in bringing Node.js developers and organizations together this year at NodeSummit and NodeInteractive and continues to curate and organize fantastic experiences for both NodeConf & JSFest.
+
+<div><img src="http://blog.bithound.io/content/images/2015/12/mikeal-1.png" alt="Mikeal Rogers的头像"></div>
+
+[Mikeal Rogers](https://twitter.com/mikeal)这个名字在几乎任何提到Node.js的文章中都不会少。他就是The Node Foundation基金会的支持者和倡导者之一。他还未今年的NodeSummit和NodeInteractive大会的成功召开起到了关键作用，召集了众多Node.js开发者和机构。同时，他还持续为NodeConf和JSFest收集整理精彩文章。
+
+Twitter：[https://twitter.com/mikeal](https://twitter.com/mikeal)
+Github：[https://github.com/mikeal](https://github.com/mikeal)
+Blog：[http://mikealrogers.com/](http://mikealrogers.com/)
 
 6. Kassandra Perch
+
+
 If you have an affinity for clothing adorned with perfectly coordinated and programmed LED lights, you're going to want to find Kassandra Perch at the next conference you are at. Kassandra made a significant impact on the conference circuit this year, speaking and presenting at conferences like Nodevember, JSConf and JavaScript Summit. Her passion for all things embedded with JavaScript really comes through in her new book which is perfect for anyone who has worked with Arduino before or is new to electronics and would like to try writing sketches in JavaScript.
 
 7. Chris Williams and Laura Williams
