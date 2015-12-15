@@ -1,4 +1,8 @@
-> 原文链接：[https://realpython.com/blog/python/emacs-the-best-python-editor/](https://realpython.com/blog/python/emacs-the-best-python-editor/)
+# Emacs：最好的Python编辑器？
+
+> 本文是[realpython.com](https://realpython.com/blog/python/emacs-the-best-python-editor/)继《将Sublime Text 3打造为Python全栈开发环境及》和[《Vim与Python真乃天作之合》](http://codingpy.com/article/vim-and-python-match-in-heaven/)，又一篇关于如何配置Python IDE的文章。这一次，主角变成了与Vim同样享有神器之称的Emacs编辑器。译者之前没有接触过Emacs，但是看完这篇文章之后，觉得与Vim和Sublime Text 3相比，最出彩的一个地方就是可以和IPython与Jupyter Notebook进行集成。按照本文的介绍配置完之后，确实会让Emacs成为一个异常强大的Python IDE。
+
+> 本文作者是Kyle Purdon​，是Bitly公司的一名应用开发工程师。译文链接：[http://codingpy.com/article/emacs-the-best-python-editor/](http://codingpy.com/article/emacs-the-best-python-editor/)。译文如存在问题，可以通过网站评论区或微信公众号“编程派”指出，谢谢支持！
 
 ## 安装与基础
 
@@ -172,7 +176,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 ![emacs flycheck实时代码检查](https://realpython.com/images/blog_images/emacs/emacs-elpy-flycheck.gif)
 
-### PEP8
+### 遵循PEP8规范
 
 不管你喜不喜欢，PEP8都不会消失。如果你想遵循PEP8标准的全部或部分规范，你大概希望能够实现自动化合规。`autopep8`插件就是解决之道。这个插件与Emacs无缝集成，因此当你保存文件时——`C-x C-s`——autopep8插件就会自动格式化代码，并纠正所有不符合PEP8标准的错误（排除你不希望检查的错误）。
 
@@ -188,109 +192,123 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
     (require 'py-autopep8)
     (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-    
-Now (after forcing some pep8 errors) when we save our demo Python file, the errors will automatically be corrected:
 
-emacs elpy autopep8
-IPython/Jupyter Integration
-Next up is a really cool feature: Emacs integration with the IPython REPL and Jupyter Notebooks. First, let’s look at swapping the standard Python REPL integration for the IPython version:
+现在我们保存Python示例文件，Autopep8插件就会自动纠正出现的错误：
 
-(elpy-use-ipython)
-Now when we run our Python code with C-c C-c we will be presented with the IPython REPL:
+![emacs elpy autopep8自动纠正错误](https://realpython.com/images/blog_images/emacs/emacs-elpy-autopep8.gif)
 
-emacs elpy ipython
-While this is pretty useful on its own, the real magic is the notebook integration. We’ll assume that you already know how to launch a Jupyter Notebook server (if not check this out). Again we just need to add a bit of configuration:
+### IPython/Jupyter集成
 
-(defvar myPackages
-  '(better-defaults
-    ein ;; add the ein package (Emacs ipython notebook)
-    elpy
-    flycheck
-    material-theme
-    py-autopep8))
-The standard Jupyter web interface for notebooks is nice but requires us to leave Emacs to use:
+接下来这个功能尤其强大：将Emacs与IPython REPL和Jupyter Notebooks集成。首先，我们将Emacs中标准的Python REPL集成替换为IPython版本:
 
-jupyter web
-However, we can complete the exact same task by connecting to and interacting with the notebook server directly in Emacs.
+    (elpy-use-ipython)
 
-emacs elpy jupyter
-Additional Emacs Features
-Now that all of the basic Python IDE features (and some really awesome extras) have been covered, there are a few other things that an IDE should be able to handle. First up is git integration…
+现在如果我们按下`C-c C-c`再次运行Python代码，我们使用的将是IPython REPL：
 
-Git Integration (Magit)
-Magit is the most popular non-utility package on MELPA and is used by nearly every Emacs user who uses git. It’s incredibly powerful and far more comprehensive than we can cover in this post. Luckily Mastering Emacs has a great post covering Magit here. The following image is from the Mastering Emacs post and gives you a taste for what the git integration looks like in Emacs:
+![emacs elpy ipython repl集成](https://realpython.com/images/blog_images/emacs/emacs-elpy-ipython.png)
 
-mastering emacs magit
-Other Modes
-One of the major benefits of using Emacs over a Python-specific IDE is that you get compatibility with much more than just Python. In a single day I often work with Python, Golang, JavaScript, Markdown, JSON, and more. Never leaving Emacs and having complex support for all of these languages in a single editor is very efficient. You can check out my personal Emacs configuration here. It includes support for:
+尽管做到目前这样已经非常有用了，但是真正的神奇之处还在Emacs与Jupyter notebook之间的集成。这里，我们假设你已经知道如何启动Jupyter Notebook服务器。要实现前面提到的集成，我们只需要再添加一些配置即可：
 
-Python
-Golang
-Ruby
-Puppet
-Markdown
-Dockerfile
-YAML
-Web (HTML/JS/CSS)
-SASS
-NginX Config
-SQL
-In addition to lots of other Emacs configuration goodies.
+    (defvar myPackages
+      '(better-defaults
+        ein ;; add the ein package (Emacs ipython notebook)
+        elpy
+        flycheck
+        material-theme
+        py-autopep8))
 
-Emacs In The Terminal
-After learning Emacs you’ll want Emacs keybindings everywhere. This is as simple as typing set -o emacs at your bash prompt. However, one of the powers of Emacs is that you can run Emacs itself in headless mode in your terminal. This is my default environment. To do so, just start Emacs by typing emacs -nw at your bash prompt and you’ll be running a headless Emacs.
+Jupyter提供的notebook网络接口很好，但是要求我们离开Emacs编辑器才能使用：
 
-Conclusion
-As you can see, Emacs is clearly the best editor… To be fair, there are a lot of great options out there for Python IDEs, but I would absolutely recommend learning either Vim or Emacs as they are by far the most versatile development environments possible. I said I’d leave you with the complete Emacs configuration, so here it is:
+![jupter web界面](https://realpython.com/images/blog_images/emacs/jupyter-web.png)
 
-;; init.el --- Emacs configuration
+不过，我们可以通过在Emacs中直接连接notebook服务器，并与服务器进行直接交互的方式，就可以完成网络接口所提供的功能。
 
-;; INSTALL PACKAGES
-;; --------------------------------------
+![emacs jupter界面](https://realpython.com/images/blog_images/emacs/emacs-elpy-jupyter.gif)
 
-(require 'package)
+## 其他Emacs功能
 
-(add-to-list 'package-archives
-       '("melpa" . "http://melpa.org/packages/") t)
+前面我们已经介绍了所有Python IDE应具备的基础功能（以及一些非常棒的额外功能），但是还有一些功能也是IDE需要支持的。首先就是git集成。
 
-(package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents))
+### Git集成（Magit）
 
-(defvar myPackages
-  '(better-defaults
-    ein
-    elpy
-    flycheck
-    material-theme
-    py-autopep8))
+[Magit](http://magit.vc/)是MELPA仓库中非常受欢迎的一个插件包，几乎每一个使用Git的Emacs用户都会安装这个插件。这个插件极其强大，功能也特别全面，超出了本文的范围。不过还好[Mastering Emacs网站](https://www.masteringemacs.org/)上有[一篇介绍Magit的好文](https://www.masteringemacs.org/article/introduction-magit-emacs-mode-git)。下面这张图就摘自Mastering Emacs网站的那篇文章，展示了Emacs中git集成的效果：
 
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      myPackages)
+![mastering emacs magit插件演示](https://realpython.com/images/blog_images/emacs/masteringemacs-magit.png)
 
-;; BASIC CUSTOMIZATION
-;; --------------------------------------
+### 其他Emacs模式
 
-(setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
-(global-linum-mode t) ;; enable line numbers globally
+与使用只针对Python的IDE相比，使用Emacs的一大好处就是它还能够支持除Python外的其他语言。工作的时候，我通常要使用Python、Golang、JavaScript、Markdown、JSON以及其他语言。因此，只使用Emacs编辑器并且完美支持所有这些语言将会大大提高工作效率。Emacs编辑器支持以下语言：
 
-;; PYTHON CONFIGURATION
-;; --------------------------------------
+- Python
+- Golang
+- Ruby
+- Puppet
+- Markdown
+- Dockerfile
+- YAML
+- Web (HTML/JS/CSS)
+- SASS
+- NginX Config
+- SQL
 
-(elpy-enable)
-(elpy-use-ipython)
+### 在终端使用Emacs按键组合
 
-;; use flycheck not flymake with elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
+学会使用Emacs之后，你会希望在其他地方也能够使用Emacs按键组合。只需要在bash提示符之后输入`set -o emacs`即可实现。但是，Emacs的一个强大之处就是你可以在终端下以headless模式运行Emacs编辑器。这也是我本人的默认终端环境。要开启headless模式，只需要输入`emacs -nw`即可。
 
-;; enable autopep8 formatting on save
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+## 结语
 
-;; init.el ends here
-Hopefully this configuration will spark your Emacs journey!
+正如你所见，Emacs明显是最好的编辑器。老实说，市面上还有其他很好的Python IDE可供选择，但是我会毫不犹豫地推荐你学习Vim或Emacs，因为基于这两个编辑器配置的开发环境无疑是功能最为多样化的。最后，为大家提供本文中完整的Emacs配置：
+
+    ;; init.el --- Emacs configuration
+
+    ;; INSTALL PACKAGES
+    ;; --------------------------------------
+
+    (require 'package)
+
+    (add-to-list 'package-archives
+           '("melpa" . "http://melpa.org/packages/") t)
+
+    (package-initialize)
+    (when (not package-archive-contents)
+      (package-refresh-contents))
+
+    (defvar myPackages
+      '(better-defaults
+        ein
+        elpy
+        flycheck
+        material-theme
+        py-autopep8))
+
+    (mapc #'(lambda (package)
+        (unless (package-installed-p package)
+          (package-install package)))
+          myPackages)
+
+    ;; BASIC CUSTOMIZATION
+    ;; --------------------------------------
+
+    (setq inhibit-startup-message t) ;; hide the startup message
+    (load-theme 'material t) ;; load material theme
+    (global-linum-mode t) ;; enable line numbers globally
+
+    ;; PYTHON CONFIGURATION
+    ;; --------------------------------------
+
+    (elpy-enable)
+    (elpy-use-ipython)
+
+    ;; use flycheck not flymake with elpy
+    (when (require 'flycheck nil t)
+      (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+      (add-hook 'elpy-mode-hook 'flycheck-mode))
+
+    ;; enable autopep8 formatting on save
+    (require 'py-autopep8)
+    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+    ;; init.el ends here
+
+希望这些配置能够激起你学习并使用Emacs的热情！
+
