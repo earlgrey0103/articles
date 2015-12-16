@@ -1,4 +1,6 @@
-2015's Top JavaScript Devs To Follow
+# 2015年值得关注10位顶尖JS程序员
+
+> Python是一门可以实现全栈开发的语言，要做到这点，只学习Python是不可能的。我们还需要学习JavaScript语言。而学习语言的一种方式，就是找到厉害的老师。本文中介绍的10位JS程序员，是bitHound网站评选出来的，标准则是2015年对JS发展所做的贡献。
 
 2015年对于Node.js和JavaScript语言来说，无疑都是十分重要的。就在这一年，发生了许多重大事件：Node.js与io.js合并，ESlint 1.0版发布，ES6标准正式发布，以及许多其他激动人心的事件。
 
@@ -6,7 +8,7 @@
 
 排名不分先后。(同时提供这些程序员在国外知名平台的链接。)
 
-1. Eric Elliott
+## 1. Eric Elliott
 
 <div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/eric-1.jpeg" alt="Eric Elliott的头像"></div>
 
@@ -14,72 +16,136 @@
 
 举个例子，Eric通过KickStarter众筹了[一门课程](https://www.kickstarter.com/projects/ericelliott/learn-javascript)，名字叫Learn JavaScript with Eric Elliott & Fight Poverty with Code。另外，他还是《Programming JavaScript Applications》一书的作者。
 
-怎么关注：
+**如何关注**：
 
-Twitter：[https://twitter.com/_ericelliott](https://twitter.com/_ericelliott)
-Github：[https://github.com/ericelliott](https://github.com/ericelliott)
-Blog：[https://ericelliottjs.com/](https://ericelliottjs.com/)
-Medium：[https://medium.com/@_ericelliott](https://medium.com/@_ericelliott)
+- Twitter：[https://twitter.com/_ericelliott](https://twitter.com/_ericelliott)
+- Github：[https://github.com/ericelliott](https://github.com/ericelliott)
+- Blog：[https://ericelliottjs.com/](https://ericelliottjs.com/)
+- Medium：[https://medium.com/@_ericelliott](https://medium.com/@_ericelliott)
 
-2. Emma Jane
+## 2. Emma Jane
 
-<div><img src="http://blog.bithound.io/content/images/2015/12/Djnof8gw-1.jpg" alt="Emma Jane"></div>
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/Djnof8gw-1.jpg" alt="Emma Jane"></div>
 
 [Emma Jane](https://twitter.com/emmajanehw)是《[Git For Teams](http://www.gitforteams.com/)》一书的作者，这本书收集了许多团队使用Git的技巧，可以快速提高团队工作效率。除了创作优质的内容之外，Emma Jane还积极参加社区活动，在OSCON和DrupalCon等会议上演讲，分享心得。
 
-Twitter：[https://twitter.com/emmajanehw](https://twitter.com/emmajanehw)
-Github：[https://github.com/emmajane](https://github.com/emmajane)
-Blog：[http://emmajane.net/](http://emmajane.net/)
-Medium：[https://medium.com/@emmajane](https://medium.com/@emmajane)
+**如何关注**：
 
-3. Wes Bos
+- Twitter：[https://twitter.com/emmajanehw](https://twitter.com/emmajanehw)
+- Github：[https://github.com/emmajane](https://github.com/emmajane)
+- Blog：[http://emmajane.net/](http://emmajane.net/)
+- Medium：[https://medium.com/@emmajane](https://medium.com/@emmajane)
 
-<div><img src="http://blog.bithound.io/content/images/2015/12/LUJ4qL8n-1.jpg" alt="Wes Bos的照片"></div>
+## 3. Wes Bos
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/LUJ4qL8n-1.jpg" alt="Wes Bos的照片"></div>
 
 [Wes Bos](https://twitter.com/wesbos)是HackerYou网站的技术带头人，2015年对他来说是不平凡的一年。作为全栈开发与设计的支持者，Wes在JavaScript、CSS3、HTML5和开源网络技术方面，为开发人员提供了全新的视角，并研发了崭新的技术。
 
-Twitter：[https://twitter.com/wesbos](https://twitter.com/wesbos)
-Github：[https://github.com/wesbos](https://github.com/wesbos)
-Blog：[http://wesbos.com/](http://wesbos.com/)
-Medium：[https://medium.com/@wesbos](https://medium.com/@wesbos)
+**如何关注**：
 
-4. Aria Stewart
+- Twitter：[https://twitter.com/wesbos](https://twitter.com/wesbos)
+- Github：[https://github.com/wesbos](https://github.com/wesbos)
+- Blog：[http://wesbos.com/](http://wesbos.com/)
+- Medium：[https://medium.com/@wesbos](https://medium.com/@wesbos)
 
-<div><img src="http://blog.bithound.io/content/images/2015/12/aria-1.jpg" alt="Aria Stewart的照片"></div>
+## 4. Aria Stewart
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/aria-1.jpg" alt="Aria Stewart的照片"></div>
 
 对Aria Stewart来说，这一年充满了神奇的经历。自从参与PayPal软件的本地化工作之后，Aria就成为了Node社区的常客，经常在论坛上演讲，分享如何做到真正地“阅读”代码。后来，Aria加入了npm的开发团队，但是自身的才华继续闪耀。Aria是开源运动的积极支持者，并且已参与过Camping at the Mailbox项目，kraken.js框架的开发以及其他项目的开发。
 
-Twitter：[https://twitter.com/aredridel](https://twitter.com/aredridel)
-Github：[https://github.com/aredridel](https://github.com/aredridel)
-Blog：[http://dinhe.net/~aredridel/](http://dinhe.net/~aredridel/)
-Medium：[https://medium.com/@aredridel](https://medium.com/@aredridel)
+**如何关注**：
 
-5. Mikeal Rogers
+- Twitter：[https://twitter.com/aredridel](https://twitter.com/aredridel)
+- Github：[https://github.com/aredridel](https://github.com/aredridel)
+- Blog：[http://dinhe.net/~aredridel/](http://dinhe.net/~aredridel/)
+- Medium：[https://medium.com/@aredridel](https://medium.com/@aredridel)
 
-<div><img src="http://blog.bithound.io/content/images/2015/12/mikeal-1.png" alt="Mikeal Rogers的头像"></div>
+## 5. Mikeal Rogers
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/mikeal-1.png" alt="Mikeal Rogers的头像"></div>
 
 [Mikeal Rogers](https://twitter.com/mikeal)这个名字在几乎任何提到Node.js的文章中都不会少。他就是The Node Foundation基金会的支持者和倡导者之一。他还未今年的NodeSummit和NodeInteractive大会的成功召开起到了关键作用，召集了众多Node.js开发者和机构。同时，他还持续为NodeConf和JSFest收集整理精彩文章。
 
-Twitter：[https://twitter.com/mikeal](https://twitter.com/mikeal)
-Github：[https://github.com/mikeal](https://github.com/mikeal)
-Blog：[http://mikealrogers.com/](http://mikealrogers.com/)
+**如何关注**：
 
-6. Kassandra Perch
+- Twitter：[https://twitter.com/mikeal](https://twitter.com/mikeal)
+- Github：[https://github.com/mikeal](https://github.com/mikeal)
+- Blog：[http://mikealrogers.com/](http://mikealrogers.com/)
+
+## 6. Kassandra Perch
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/m5ki022s-1.jpg" alt="Kassandra Perch"></div>
 
 
-If you have an affinity for clothing adorned with perfectly coordinated and programmed LED lights, you're going to want to find Kassandra Perch at the next conference you are at. Kassandra made a significant impact on the conference circuit this year, speaking and presenting at conferences like Nodevember, JSConf and JavaScript Summit. Her passion for all things embedded with JavaScript really comes through in her new book which is perfect for anyone who has worked with Arduino before or is new to electronics and would like to try writing sketches in JavaScript.
+如果你喜欢装饰有LED灯光的衣服的话，你肯定会希望参加有Kassandra Perch出席的大会。今年，Kassandra穿梭于各大技术峰会之间，在Nodevember、JSConf和JavaScript Summit等大会上均做过演讲和演示。她对JavaScript语言的热情更是体现在她写的[一本新书](http://www.amazon.ca/Learning-JavaScript-Robotics-Kassandra-Perch/dp/1785883348/ref=sr_1_2?ie=UTF8&qid=1449689356&sr=8-2&keywords=kassandra+perch)里，这本书对于希望用JavaScript来绘制Arduino电路图的人来说，是绝佳的参考资料。
 
-7. Chris Williams and Laura Williams
-The forces behind the magic that is JSConf, Chris Williams and Laura Williams ran not one, but two memorable JSConfs in 2015. Whether it's through robots, creating safe spaces or stepping outside of the standard conference playbook, Chris and Laura have shown us this year what can really be achieved when people that love the community and JS come together. Although they will no longer be organizing JSConf US– we can't wait to see what they will do next!
+**如何关注**：
 
-8. Pam Selle
-Software engineer at Comcast, published author, and public speaker; Pam Selle is a passionate community builder. Her blog, The Webivore, provides some great real-world examples to help developers on a variety of fronts and she has worked hard organizing Philadelphia's largest JavaScript user group as well as the 2014 and 2015 editions of LibertyJS– a regional JavaScript conference. Pam delighted many attendees with her recent talk on Streams at JSConf Last Call.
+- Twitter：[https://twitter.com/kassandra_perch](https://twitter.com/kassandra_perch)
+- Github：[https://github.com/nodebotanist](https://github.com/nodebotanist)
+- Blog：[http://nodebotani.st/](http://nodebotani.st/)
+- Medium：[https://medium.com/@kassandra_perch](https://medium.com/@kassandra_perch)
 
-9. Cody Lindley
-With a background of over 18 years delivering great HTML, CSS, JavaScript, and client-side performance techniques for the web, 2015 has been no exception for Cody Lindley. Working for Telerik as a Developer Advocate, Cody has built great momentum for KendoUI while bringing awareness to the effect of ES6 on development.
 
-10. Brian Leroux
-What can one say about Brian Leroux? Principal scientist and renegade amongst the JavaScript community, Brian has spent the majority of 2015 making tremendous strides for Adobe while still being able to provide thought-provoking presentations at GOTO Chicago and Extensible Web Summit. Brian also made it his mission to help establish an inclusive and inquisitive environment while MC'ing JSConf back in June.
+## 7. Chris Williams and Laura Williams
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/Screen-Shot-2015-12-10-at-1-49-05-PM.png" alt="Chris Williams and Laura Williams"></div>
+
+Chris Williams和Laura Williams是JSConf大会的组织者，而且在2015年就组织了两场令人难忘的JSConf大会。他们在会议组织方面并没有墨守陈规，而是打破了标准的会议方式，不断以全新地方式吸引等多的JS开发者。
+
+Chris:
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/voodootikigod](https://twitter.com/voodootikigod)
+- Github：[https://github.com/voodootikigod](https://github.com/voodootikigod)
+- Blog：[http://www.voodootikigod.com/](http://www.voodootikigod.com/)
+- Medium：[https://medium.com/@voodootikigod](https://medium.com/@voodootikigod)
+
+Laura:
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/lwilliams](https://twitter.com/lwilliams- - - )
+
+## 8. Pam Selle
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/7DLEFWis-1.jpeg" alt="Pam Selle"></div>
+Pam Selle是Comcast公司的一名软件工程师，出版过多本著作；她还是一名积极的社区倡导者。她在博客The Webivore中分享了许多优质的项目案例，还是费城最大的JavaScript用户组的组织者。此外，她还组织过LibertyJS的2014年和2015年大会。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/pamasaur](https://twitter.com/pamasaur)
+- Github：[https://github.com/pselle](https://github.com/pselle)
+- Blog：[http://thewebivore.com/](http://thewebivore.com/)
+- Medium：[https://medium.com/@pamasaur](https://medium.com/@pamasaur)
+
+## 9. Cody Lindley
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/tZdIhqS--1.png" alt="Cody Lindley"></div>
+
+Cody Lindley在网络开发领域有着长达18年的经验，精通HTML、CSS、JavaScript以及客户端性能提升技巧。2015年，Cody同样取得了不俗的成绩。他在Telerik公司担任开发人员倡导者（Developer Advocate），为[KendoUI](http://www.telerik.com/kendo-ui)的发展做了巨大的贡献，同时也让更多的人认识到了ES6对于网络开发的影响。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/codylindley](https://twitter.com/codylindley)
+- Github：[https://github.com/codylindley](https://github.com/codylindley)
+- Blog：[http://www.codylindley.com/](http://www.codylindley.com/)
+- Medium：[https://medium.com/@codylindley](https://medium.com/@codylindley)
+
+## 10. Brian Leroux
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/brian-1.jpeg" alt="Brian Leroux"></div>
+Brian Leroux是JavaScript社区的首席科学家。2015年，他的主要时间都放在Adobe公司的工作上，取得了很大的进展，但是同时，他也抽时间积极参加GOTO Chicago和Extensible Web Summit大会，给参会者做了非常具有启示意义的研究。在主持今年6月份的JSConf时，Brian就把打造一个包容的JavaScript社区视作自己的长远目标。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/brianleroux](https://twitter.com/brianleroux)
+- Github：[https://github.com/brianleroux](https://github.com/brianleroux)
+- Blog：[http://brian.io/](http://brian.io/)
+- Medium：[https://medium.com/@brianleroux_3184](https://medium.com/@brianleroux_3184)
 
 11. Dr. Axel Rauschmayer
 A familiar face to most, Dr. Axel Rauschmayer has made our list once again. If you've been paying attention at all to ECMScript-anything or reading JSWeekly, surely you will have come across his name. Dr. Axel continues to deliver fantastic content whether it's presenting at FluentConf or providing thought-leadership on Babel and ES via his blog.
