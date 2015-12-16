@@ -1,7 +1,7 @@
 # Emacs：最好的Python编辑器？
 
 > 本文是[realpython.com](https://realpython.com/blog/python/emacs-the-best-python-editor/)继《将Sublime Text 3打造为Python全栈开发环境及》和[《Vim与Python真乃天作之合》](http://codingpy.com/article/vim-and-python-match-in-heaven/)，又一篇关于如何配置Python IDE的文章。这一次，主角变成了与Vim同样享有神器之称的Emacs编辑器。译者之前没有接触过Emacs，但是看完这篇文章之后，觉得与Vim和Sublime Text 3相比，最出彩的一个地方就是可以和IPython与Jupyter Notebook进行集成。按照本文的介绍配置完之后，确实会让Emacs成为一个异常强大的Python IDE。
-
+>
 > 本文作者是Kyle Purdon​，是Bitly公司的一名应用开发工程师。译文链接：[http://codingpy.com/article/emacs-the-best-python-editor/](http://codingpy.com/article/emacs-the-best-python-editor/)。译文如存在问题，可以通过网站评论区或微信公众号“编程派”指出，谢谢支持！
 
 ## 安装与基础
@@ -16,6 +16,7 @@ Emacs安装不是本文的重点，因此，这里推荐大家参考[ErgoEmacs](
 
 你可以使用方向键将光标移动到标有“Emacs Tutorial”字样的地方，然后按回车键，就可以打开自带教程。然后，你将会看到下面这段话：
 
+    :::emacs
     Emacs commands generally involve the CONTROL key (sometimes labeled
     CTRL or CTL) or the META key (sometimes labeled EDIT or ALT).  Rather than
     write that in full each time, we'll use the following abbreviations:
@@ -34,6 +35,7 @@ Emacs的好处之一，就是配置简单。Emacs配置的核心则是初始化�
 
 在Unix环境下，这个文件应该放置在`$HOME/.emacs.d/init.el`路径。
 
+    :::emacs
     $ touch ~/.emacs.d/init.el
 
 同时，在Windows平台，如果没有设置`HOME`环境变量，该文件应该放置在`C:/.emacs.d/init.el`路径。
@@ -46,6 +48,7 @@ Emacs的好处之一，就是配置简单。Emacs配置的核心则是初始化�
 
 首先，下面是一个插件包安装示例代码，其中安装了一个主题插件。
 
+    :::emacs
     ;; init.el --- Emacs configuration
 
     ;; INSTALL PACKAGES
@@ -122,6 +125,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 下面的配置可以安装`elpy`插件包：
 
+    :::emacs
     (defvar myPackages
       '(better-defaults
         elpy ;; add the elpy package
@@ -160,6 +164,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 默认情况下，安装了Elpy插件的Emacs提供一个名叫`Flymake`的语法检查插件。但是，我们还可以选择另外一个名叫`Flycheck`的插件，后者支持实时语法检查。幸运地是，从`Flymake`切换至`Flycheck`非常简单：
 
+    :::emacs
     (defvar myPackages
       '(better-defaults
         elpy
@@ -168,6 +173,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 以及
 
+    :::emacs
     (when (require 'flycheck nil t)
       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
       (add-hook 'elpy-mode-hook 'flycheck-mode))
@@ -182,6 +188,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 首先，你需要通过你喜欢的方式安装`autopep8`这个Python工具包，然后添加下面的Emacs配置代码：
 
+    :::emacs
     (defvar myPackages
       '(better-defaults
         elpy
@@ -190,6 +197,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
         py-autopep8)) ;; add the autopep8 package
 以及
 
+    :::emacs
     (require 'py-autopep8)
     (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 
@@ -201,6 +209,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 接下来这个功能尤其强大：将Emacs与IPython REPL和Jupyter Notebooks集成。首先，我们将Emacs中标准的Python REPL集成替换为IPython版本:
 
+    :::emacs
     (elpy-use-ipython)
 
 现在如果我们按下`C-c C-c`再次运行Python代码，我们使用的将是IPython REPL：
@@ -209,6 +218,7 @@ Emacs自带的python模式（python.el）支持缩进和语法高亮功能。。
 
 尽管做到目前这样已经非常有用了，但是真正的神奇之处还在Emacs与Jupyter notebook之间的集成。这里，我们假设你已经知道如何启动Jupyter Notebook服务器。要实现前面提到的集成，我们只需要再添加一些配置即可：
 
+    :::emacs
     (defvar myPackages
       '(better-defaults
         ein ;; add the ein package (Emacs ipython notebook)
@@ -259,6 +269,7 @@ Jupyter提供的notebook网络接口很好，但是要求我们离开Emacs编辑
 
 正如你所见，Emacs明显是最好的编辑器。老实说，市面上还有其他很好的Python IDE可供选择，但是我会毫不犹豫地推荐你学习Vim或Emacs，因为基于这两个编辑器配置的开发环境无疑是功能最为多样化的。最后，为大家提供本文中完整的Emacs配置：
 
+    :::emacs
     ;; init.el --- Emacs configuration
 
     ;; INSTALL PACKAGES
