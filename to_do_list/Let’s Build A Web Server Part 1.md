@@ -37,7 +37,7 @@ Let’s Build A Web Server. Part 1.
 
 [HTTP请求/响应](http://ruslanspivak.com/lsbaws-part1/LSBAWS_HTTP_request_response.png)
 
-简而言之，它是物理服务器上搭建的一个网络连接服务器（networking server）
+简而言之，它是物理服务器上搭建的一个网络连接服务器（networking server），永久地等待客户端发送请求。当服务器收到请求之后，它会生成响应并返回至客户端。客户端与服务器之间的沟通，是以HTTP协议进行的。客户端可以是浏览器，也可以任何支持HTTP协议的软件。
 
 In a nutshell it’s a networking server that sits on a physical server (oops, a server on a server) and waits for a client to send a request. When it receives a request, it generates a response and sends it back to the client. The communication between a client and a server happens using HTTP protocol. A client can be your browser or any other software that speaks HTTP.
 
