@@ -132,7 +132,7 @@ Cody Lindley在网络开发领域有着长达18年的经验，精通HTML、CSS�
 
 - Twitter：[https://twitter.com/codylindley](https://twitter.com/codylindley)
 - Github：[https://github.com/codylindley](https://github.com/codylindley)
-- Blog：[http://www.codylindley.com/](http://www.codylindley.com/)
+- Blog：[http://www.codylindley.com /](http://www.codylindley.com/)
 - Medium：[https://medium.com/@codylindley](https://medium.com/@codylindley)
 
 ## 10. Brian Leroux
@@ -147,32 +147,125 @@ Brian Leroux是JavaScript社区的首席科学家。2015年，他的主要时间
 - Blog：[http://brian.io/](http://brian.io/)
 - Medium：[https://medium.com/@brianleroux_3184](https://medium.com/@brianleroux_3184)
 
-11. Dr. Axel Rauschmayer
-A familiar face to most, Dr. Axel Rauschmayer has made our list once again. If you've been paying attention at all to ECMScript-anything or reading JSWeekly, surely you will have come across his name. Dr. Axel continues to deliver fantastic content whether it's presenting at FluentConf or providing thought-leadership on Babel and ES via his blog.
+## 11. Dr. Axel Rauschmayer
 
-12. Rebecca Murphey
-A mentor for many developers, Rebeccca Murphey spent 2015 sharing her expertise and best practices for organizing, testing, refactoring, and maintaining JavaScript application code with many. With presentations at concat, Cascadia Fest and dot.js, Rebecca has encouraged all of her audiences to push the boundaries of how software can be made better.
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/axel-1.jpeg" alt="Axel Rauschmayer"></div>
+Axel Rauschmayer博士不是第一次入选这份名单了。如果你稍有关注ECMAScript或经常阅读JSWeely的话，你肯定有看见过他的名字。2015年，他给JS社区创作了许多很棒的内容，积极参加FluentConf并作分享，同时通过自己的博客分享有关Babel和ES的心得。
 
-13. Tim Pettersen
-Fans of Bitbucket and Atlassian know the name Tim Pettersen well. As Developer Provocateur, Tim has done a fantastic job exciting and helping developers and as such, has played a pivotal role in growing and advancing the Atlassian ecosystem.
+**如何关注**：
 
-14. Rob Dodson
-With everything that's happened on the library front this year, we would be remiss not to draw attention to the Polymer Project. One of the great minds behind Polymer is Rob Dodson. Throughout the course of the year, Rob has played a tremendous role in making it easier for developers to create fantastic components for the modern web. This is evident in the many talks he delivered at Chrome Dev Summit, Polymer Summit and QCon as well as in his infamous Polymer Polycasts.
+- Twitter：[https://twitter.com/rauschma](https://twitter.com/rauschma)
+- Github：[https://github.com/rauschma](https://github.com/rauschma)
+- Blog：[http://www.2ality.com/](http://www.2ality.com/)
+- Medium：[https://medium.com/@rauschma](https://medium.com/@rauschma)
 
-15. Mathias Bynens
-Globetrotter Mathias Bynens presented at over 15 events in 2015 including CSSConf, JSConf, JavaScript Summit and jQuery Developer Summit. Throughout the year he has offered fresh new perspectives on the topics of ES6 and continues to bring insight into the relationship between JavaScript and Unicode.
+## 12. Rebecca Murphey
 
-16. Elijah Manor
-In 2015, Elijah Manor not only taught us the art of eliminating JavaScript code smells but also about the more astute ways to work with React. As senior front-end web developer at Ramsey Solutions, he continues to challenge the boundaries of HTML, CSS and JavaScript. Elijah will be presenting at O'Reilly FluentConf in 2016 which is sure to be one of the top talks to attend.
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/6t-MUDgL-1.jpeg" alt="rebecca murphey"></div>
 
-17. Reginald Braithewaite
-Perhaps one of the most worthwhile and perceptive Twitter accounts out there, Reginald Braithewaite is someone you want to pay close attention to (if you aren't already). In addition to his tremendous work on GitHub, his site offers developers an array of technical and non-technical, relevant insights. We also want to mention Reginald's JavaScript Allongé that is a must read for anyone looking to connect the ever-elusive dots of JavaScript.
+Rebecca Murphey是许多程序员的导师。2015年，她不断地分享自己在测试、重构和维护JS应用代码方面的经验和最佳实践。在Cascadia Fest和dot.js等活动上，她也是持续鼓励大家突破软件构建的边界，把软件做的更好。
 
-18. Matthew Podwysocki
-Open-Sourcerer, Matthew Podwysocki is the community lead for the RX.js library. With a focus on reactive programming at all scales, the Internet of Things, and improving technical education for kids, Matthew has made amazing strides through his various involvements. With his most recent talk at JSConf, Change the World With the Peer Web and Thali, we can't wait to see what Matthew will do in 2016!
+**如何关注**：
 
-19. Jafar Husain
-As technical lead at Netflix, architect of @falcorjs and TC-39 Rep, Jafar Husain is someone to watch. Over the past year, Jafar has taught many about the Netflix philosophies surrounding asynchronous JS. His work with Falcor has helped many in the realms of efficient data fetching and has transformed general data access.
+- Twitter：[https://twitter.com/rmurphey](https://twitter.com/rmurphey)
+- Github：[https://github.com/rmurphey](https://github.com/rmurphey)
+- Blog：[http://rmurphey.com/](http://rmurphey.com/)
+- Medium：[https://medium.com/@rmurphey](https://medium.com/@rmurphey)
 
-20. Una Kravets
-Our last (but certainly not least) developer to follow is the inventive and effervescent Una Kravets. As Front-End Developer for IBM Design and Bluemix, podcast host of @toolsday and STEMinist, 2015 has been an unbelievable year for Una. From creative and pragmatic approaches to design to bringing awareness to the state of open source, Una has made a positive impact on the community at large. We can't wait to see what 2016 has in store for her!
+## 13. Tim Pettersen
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/uYoas6TO-1.png" alt="Tim Pettersen"></div>
+
+熟悉Bitbucket和Atlassian的朋友大概都听过Tim Pettersen这个名字。他就是Atlassian公司的Developer Provocateur（应该类似激励开发者工作的岗位），在Atlassian生态系统的发展方面起到了至关重要的作用。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/kannonboy](https://twitter.com/kannonboy)
+- Github：[https://github.com/kannonboy](https://github.com/kannonboy)
+- Blog：[http://kannonboy.com/](http://kannonboy.com/)
+
+## 14. Rob Dodson
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/736a167223708fbbb2e910da863541cc-1.jpeg" alt="Rob Dodson"></div>
+
+今年，在JS库领域发生了诸多大事，其中我们不得不提的就是[Polymer Project](https://www.polymer-project.org/1.0/)。这个项目背后的核心开发者之一就是Rob Dodson。过去一年中，Rob都在致力于让开发者更容易地开发现代网络组建。这些从他在Chrome Dev Summit、Polymer Summit和QCon等大会上的演讲中，就可以得到清晰体现。另外，他还独立运营这个一个名叫Polymer Polycasts的播客。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/rob_dodson](https://twitter.com/rob_dodson)
+- Github：[https://github.com/robdodson](https://github.com/robdodson)
+- Blog：[https://robdodson.me/](https://robdodson.me/)
+- Medium：[https://medium.com/@robdodson](https://medium.com/@robdodson)
+
+## 15. Mathias Bynens
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/mathias-1.jpg" alt="Mathias Bynens"></div>
+
+2015年，Mathias Bynens在超过15场开发者大会上作过分享，包括CSSConf、JSConf、JavaScript Summit和jQuery Developer Summit。在每次大会上，他都为参会者带来了有关ES6的全新视角。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/mathias](https://twitter.com/mathias)
+- Github：[https://github.com/mathiasbynens](https://github.com/mathiasbynens)
+- Blog：[https://mathiasbynens.be/](https://mathiasbynens.be/)
+
+## 16. Elijah Manor
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/FYwb--Sp-1.png" alt="Elijah Manor"></div>
+
+2015年，Elijah Manor与JS社区分享了自己在消除不好的代码方面的技巧，以及更严谨的React工作方式。作为Ramsey Solutions公司的资深前端工程师，他不断挑战HTML、CSS和JavaScript的极限。明年，他还将在O'Reilly主办的FluentConf上作精彩的分享。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/elijahmanor](https://twitter.com/elijahmanor)
+- Github：[https://github.com/elijahmanor](https://github.com/elijahmanor)
+- Blog：[http://elijahmanor.com/](http://elijahmanor.com/)
+- Medium：[https://medium.com/@elijahmanor](https://medium.com/@elijahmanor)
+
+## 17. Reginald Braithewaite
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/MvtI3PJj-1.png" alt="Reginald Braithewaite"></div>
+
+Reginald Braithewaite可能是Twitter上程序员最值得关注的账号了。除了他在Github贡献的大量代码之外，他还在自己的个人站点分享了一系列有关技术和非技术领域的思考。另外，我们还要推荐Reginald所写的[JavaScript Allongé](https://leanpub.com/javascriptallongesix)一书，这是任何想要深入理解JavaScript语言必须要读的一本书。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/raganwald](https://twitter.com/raganwald)
+- Github：[https://github.com/raganwald](https://github.com/raganwald)
+- Blog：[http://raganwald.com/](http://raganwald.com/)
+
+## 18. Matthew Podwysocki
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/matt-2.jpeg" alt="Matthew Podwysocki"></div>
+
+Matthew Podwysocki是RX.js库的社区带头人，同时也是一名开源运动的信仰者。他关注的领域包括Reactive Programming、物联网（IoT）以及儿童技术教育。他最近在JSConf上所做的分享吸引了很多人的关注，题目叫做《Change the World With the Peer Web and Thali》。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/mattpodwysocki](https://twitter.com/mattpodwysocki)
+- Github：[https://github.com/mattpodwysocki](https://github.com/mattpodwysocki)
+- Medium：[https://medium.com/@mattpodwysocki](https://medium.com/@mattpodwysocki)
+
+## 19. Jafar Husain
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/YskBOQeH--1-.jpeg" alt="Jafar Husain"></div>
+
+Jafar Husain是Netflix公司的技术带头人，[@falcorjs](https://twitter.com/falcorjs)的架构师。过去一年，Jafar传播了许多Netflix公司在异步JS方面的理念。他对[Falcor](http://netflix.github.io/falcor/)的贡献也促进了数据获取领域的发展，改变了以往获取数据的方式。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/jhusain](https://twitter.com/jhusain)
+- Github：[https://github.com/jhusain](https://github.com/jhusain)
+
+## 20. Una Kravets
+
+<div style="text-align:center"><img src="http://blog.bithound.io/content/images/2015/12/72SG04cm-1.jpg" alt="Una Kravets"></div>
+
+bitHound网站评选的最后一名程序员是Una Kravets。她是IBM Bluemix的前端工程师，还主持@toolsday、STEMinist两个播客节目。2015年，她不仅给设计领域带来了极具创新性的思路，还让更多的人了解了开源运动。仅这两点，就说明了她对开发者社区所做的积极贡献。
+
+**如何关注**：
+
+- Twitter：[https://twitter.com/Una](https://twitter.com/Una)
+- Github：[https://github.com/una](https://github.com/una)
+- Blog：[http://una.im/](http://una.im/)
+- Medium：[https://medium.com/@unakravets](https://medium.com/@unakravets)
