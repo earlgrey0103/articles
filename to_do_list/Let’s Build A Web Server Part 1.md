@@ -1,34 +1,43 @@
 > 原文链接：[http://ruslanspivak.com/lsbaws-part1/](http://ruslanspivak.com/lsbaws-part1/)
 > 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-one/](http://codingpy.com/article/build-a-simple-web-server-part-one/)
 
+# 从头开发一个网络服务器(一)
+
 Let’s Build A Web Server. Part 1.
 
-Out for a walk one day, a woman came across a construction site and saw three men working. She asked the first man, “What are you doing?” Annoyed by the question, the first man barked, “Can’t you see that I’m laying bricks?” Not satisfied with the answer, she asked the second man what he was doing. The second man answered, “I’m building a brick wall.” Then, turning his attention to the first man, he said, “Hey, you just passed the end of the wall. You need to take off that last brick.” Again not satisfied with the answer, she asked the third man what he was doing. And the man said to her while looking up in the sky, “I am building the biggest cathedral this world has ever known.” While he was standing there and looking up in the sky the other two men started arguing about the errant brick. The man turned to the first two men and said, “Hey guys, don’t worry about that brick. It’s an inside wall, it will get plastered over and no one will ever see that brick. Just move on to another layer.”1
+有一天，一位女士散步时经过一个工地，看见有三个工人在干活。她问第一个人，“你在做什么？”第一个人有点不高兴，吼道“难道你看不出来我在砌砖吗？”女士对这个答案并不满意，接着问第二个人他在做什么。第二个人回答道，“我正在建造一堵砖墙。”然后，他转向第一个人，说道：“嘿，你砌的砖已经超过墙高了。你得把最后一块砖拿下来。”女士对这个答案还是不满意，她接着问第三个人他在做什么。第三个人抬头看着天空，对她说：“我在建造这个世界上有史以来最大的教堂”。就在他望着天空出神的时候，另外两个人已经开始争吵多出的那块砖。他慢慢转向前两个人，说道：“兄弟们，别管那块砖了。这是一堵内墙,之后还会被刷上石灰的，没人会注意到这块砖。接着砌下层吧。”
 
-The moral of the story is that when you know the whole system and understand how different pieces fit together (bricks, walls, cathedral), you can identify and fix problems faster (errant brick).
+这个故事的寓意在于，当你掌握了整个系统的设计，明白不同的组件是以何种方式组合在一起的（砖块，墙，教堂）时候，你就能够更快地找到并解决问题（多出的砖块）。
 
-What does it have to do with creating your own Web server from scratch?
+但是，这个故事与从头开发一个网络服务器有什么关系呢？
 
-I believe to become a better developer you MUST get a better understanding of the underlying software systems you use on a daily basis and that includes programming languages, compilers and interpreters, databases and operating systems, web servers and web frameworks. And, to get a better and deeper understanding of those systems you MUST re-build them from scratch, brick by brick, wall by wall.
+在我看来，要成为一名更优秀的程序员，你**必须**更好地立即自己日常使用的软件系统，而这就包括了编程语言、编译器、解释器、数据库与操作系统、网络服务器和网络开发框架。而要想更好、更深刻地理解这些系统，你**必须**从头重新开发这些系统，一步一个脚印地重来一遍。
 
-Confucius put it this way:
+孔子曰：不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之。
 
-“I hear and I forget.”
-Hear
+> 不闻不若闻之
 
-“I see and I remember.”
-See
+[听别人说怎么做某事](http://ruslanspivak.com/lsbasi-part4/LSBAWS_confucius_hear.png)
 
-“I do and I understand.”
-Do
+> 闻之不若见之
 
-I hope at this point you’re convinced that it’s a good idea to start re-building different software systems to learn how they work.
+[看别人怎么做某事](http://ruslanspivak.com/lsbasi-part4/LSBAWS_confucius_see.png)
 
-In this three-part series I will show you how to build your own basic Web server. Let’s get started.
+> 见之不若知之，知之不若行之。
 
-First things first, what is a Web server?
+[自己亲自做某事](http://ruslanspivak.com/lsbasi-part4/LSBAWS_confucius_do.png)
 
-HTTP Request/Response
+> 译者注：上面孔子那段话在国外的翻译是：I hear and I forget, I see and I remember, I do and I understand。但在查找这句英文的出处时，查到[有篇博文](http://blog.sina.com.cn/s/blog_60ebcd1d0100f4tv.html)称这句话的中文实际出自荀子的《儒效篇》，经查确实如此。
+
+我希望，你读到这里的时候，已经相信通过重新开发不同软件系统的方式学习其原理的方式是正确的。
+
+《从头开发网络服务器》将会分为三个部分，将介绍如何自己开发一个基础的网络服务器。我们这就开始吧。
+
+首先，到底什么是网络服务器？
+
+[HTTP请求/响应](http://ruslanspivak.com/lsbaws-part1/LSBAWS_HTTP_request_response.png)
+
+简而言之，它是物理服务器上搭建的一个网络连接服务器（networking server）
 
 In a nutshell it’s a networking server that sits on a physical server (oops, a server on a server) and waits for a client to send a request. When it receives a request, it generates a response and sends it back to the client. The communication between a client and a server happens using HTTP protocol. A client can be your browser or any other software that speaks HTTP.
 
