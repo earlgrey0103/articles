@@ -94,15 +94,17 @@ Let’s Build A Web Server. Part 1.
 
 [服务器接受TCP连接的标准流程](http://ruslanspivak.com/lsbaws-part1/LSBAWS_socket.png)
 
-In the same telnet session type GET /hello HTTP/1.1 and hit Enter:
+在之前的那个`telnet`会话中，我们输入`GET /hello HTTP/1.1`，然后按下回车：
 
-$ telnet localhost 8888
-Trying 127.0.0.1 …
-Connected to localhost.
-GET /hello HTTP/1.1
+    $ telnet localhost 8888
+    Trying 127.0.0.1 …
+    Connected to localhost.
+    GET /hello HTTP/1.1
 
-HTTP/1.1 200 OK
-Hello, World!
+    HTTP/1.1 200 OK
+    Hello, World!
+
+
 You’ve just manually simulated your browser! You sent an HTTP request and got an HTTP response back. This is the basic structure of an HTTP request:
 
 HTTP Request Aanatomy
