@@ -39,9 +39,7 @@ Let’s Build A Web Server. Part 1.
 
 简而言之，它是物理服务器上搭建的一个网络连接服务器（networking server），永久地等待客户端发送请求。当服务器收到请求之后，它会生成响应并返回至客户端。客户端与服务器之间的沟通，是以HTTP协议进行的。客户端可以是浏览器，也可以任何支持HTTP协议的软件。
 
-In a nutshell it’s a networking server that sits on a physical server (oops, a server on a server) and waits for a client to send a request. When it receives a request, it generates a response and sends it back to the client. The communication between a client and a server happens using HTTP protocol. A client can be your browser or any other software that speaks HTTP.
-
-What would a very simple implementation of a Web server look like? Here is my take on it. The example is in Python but even if you don’t know Python (it’s a very easy language to pick up, try it!) you still should be able to understand concepts from the code and explanations below:
+那么，网络服务器的简单实现形式会是怎样的呢？下面是我对此的理解。示例代码使用Python语言实现，不过即使你不懂Python语言，你也应该可以从代码和下面的解释中理解相关的概念：
 
     :::python
     import socket
@@ -67,32 +65,34 @@ What would a very simple implementation of a Web server look like? Here is my ta
         client_connection.sendall(http_response)
         client_connection.close()
 
-Save the above code as webserver1.py or download it directly from GitHub and run it on the command line like this
+将上面的代码保存为`webserver1.py`，或者直接从我的[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part1/webserver1.py)下载，然后通过命令行运行该文件：
 
-$ python webserver1.py
-Serving HTTP on port 8888 …
-Now type in the following URL in your Web browser’s address bar http://localhost:8888/hello, hit Enter, and see magic in action. You should see “Hello, World!” displayed in your browser like this:
+    $ python webserver1.py
+    Serving HTTP on port 8888 …
 
-Browser "Hello, World!"
+接下来，在浏览器的地址栏输入这个链接：http://localhost:8888/hello,然后按下回车键，你就会看见神奇的一幕。在浏览器中，应该会出现“Hello, World!”这两个英文单词：
 
-Just do it, seriously. I will wait for you while you’re testing it.
+[浏览器返回“Hello World""](http://ruslanspivak.com/lsbaws-part1/browser_hello_world.png)
 
-Done? Great. Now let’s discuss how it all actually works.
+是不是很神奇？接下来，我们来分析背后的实现原理。
 
-First let’s start with the Web address you’ve entered. It’s called an URL and here is its basic structure:
+首先，我们来看你所输入的网络地址。它的名字叫URL（Uniform Resource Locator，统一资源定位符），其基本结构如下：
 
-URL Structure
+[URL的基本结构](http://ruslanspivak.com/lsbaws-part1/LSBAWS_URL_Web_address.png)
 
-This is how you tell your browser the address of the Web server it needs to find and connect to and the page (path) on the server to fetch for you. Before your browser can send a HTTP request though, it first needs to establish a TCP connection with the Web server. Then it sends an HTTP request over the TCP connection to the server and waits for the server to send an HTTP response back. And when your browser receives the response it displays it, in this case it displays “Hello, World!”
+通过URL，你告诉了浏览器它所需要发现并连接的网络服务器地址，以及获取服务器上的页面路径。不过在浏览器发送HTTP请求之前，它首先要与目标网络服务器建立TCP连接。然后，浏览器再通过TCP连接发送HTTP请求至服务器，并等待服务器返回HTTP响应。当浏览器收到响应的时候，就会在页面上显示响应的内容，而在上面的例子中浏览器显示的就是“Hello, World!”这句话。
 
-Let’s explore in more detail how the client and the server establish a TCP connection before sending HTTP requests and responses. To do that they both use so-called sockets. Instead of using a browser directly you are going to simulate your browser manually by using telnet on the command line.
+那么，在客户端发送请求、服务器返回响应之前，二者究竟是如何建立起TCP连接的呢？要建立起TCP连接，服务器和客户端都使用了所谓的套接字（socket）。接下来，我们不直接使用浏览器，而是在命令行使用`telnet`手动模拟浏览器。
 
-On the same computer you’re running the Web server fire up a telnet session on the command line specifying a host to connect to localhost and the port to connect to 8888 and then press Enter:
+在运行网络服务器的同一台电脑商，通过命令行开启一次`telnet`会话，将需要连接的主机设置为`localhost`，主机的连接断开设置为`8888`，然后按回车键：
 
-$ telnet localhost 8888
-Trying 127.0.0.1 …
-Connected to localhost.
-At this point you’ve established a TCP connection with the server running on your local host and ready to send and receive HTTP messages. In the picture below you can see a standard procedure a server has to go through to be able to accept new TCP connections. Socket accept
+    $ telnet localhost 8888
+    Trying 127.0.0.1 …
+    Connected to localhost.
+
+完成这些操作之后，你其实已经与本地运行的网络服务器建立了TCP连接，随时可以发送和接收HTTP信息。在下面这张图片里，展示的是服务器接受新的TCP连接所需要完成的标准流程。
+
+[服务器接受TCP连接的标准流程](http://ruslanspivak.com/lsbaws-part1/LSBAWS_socket.png)
 
 In the same telnet session type GET /hello HTTP/1.1 and hit Enter:
 
