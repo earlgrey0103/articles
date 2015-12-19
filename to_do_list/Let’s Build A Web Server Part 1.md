@@ -104,25 +104,28 @@ Let’s Build A Web Server. Part 1.
     HTTP/1.1 200 OK
     Hello, World!
 
+你成功地手动模拟了浏览器！你手动发送了一条HTTP请求，然后收到了HTTP响应。下面这幅图展示的是HTTP请求的基本结构：
 
-You’ve just manually simulated your browser! You sent an HTTP request and got an HTTP response back. This is the basic structure of an HTTP request:
+[HTTP请求的基本结构](http://ruslanspivak.com/lsbaws-part1/LSBAWS_HTTP_request_anatomy.png0)
 
-HTTP Request Aanatomy
+HTTP请求行包括了HTTP方法（这里使用的是`GET`方法，因为我们希望从服务器获取内容），服务器页面路径（`/hello`）以及HTTP协议的版本。
 
-The HTTP request consists of the line indicating the HTTP method (GET, because we are asking our server to return us something), the path /hello that indicates a “page” on the server we want and the protocol version.
+为了尽量简化，我们目前实现的网络服务器完全不会去解析上面的请求，你完全可以输入一些没有任何意义的代码，也一样可以收到"Hello, World!"响应。
 
-For simplicity’s sake our Web server at this point completely ignores the above request line. You could just as well type in any garbage instead of “GET /hello HTTP/1.1” and you would still get back a “Hello, World!” response.
+在你输入请求代码并按下回车键之后，客户端就将该请求发送至服务器了，服务则会解析你发送的请求，并返回相应的HTTP响应。
 
-Once you’ve typed the request line and hit Enter the client sends the request to the server, the server reads the request line, prints it and returns the proper HTTP response.
+下面这张图显示的是服务器返回至客户端的HTTP响应详情：
 
-Here is the HTTP response that the server sends back to your client (telnet in this case): HTTP Response Anatomy
+[HTTP响应解析](http://ruslanspivak.com/lsbaws-part1/LSBAWS_HTTP_response_anatomy.png)
 
-Let’s dissect it. The response consists of a status line HTTP/1.1 200 OK, followed by a required empty line, and then the HTTP response body.
+我们来分析一下。响应中包含了状态行`HTTP/1.1 200 OK`，之后是必须的空行，然后是HTTP响应的正文。
 
-The response status line HTTP/1.1 200 OK consists of the HTTP Version, the HTTP status code and the HTTP status code reason phrase OK. When the browser gets the response, it displays the body of the response and that’s why you see “Hello, World!” in your browser.
+响应的状态行`HTTP/1.1 200 OK`中，包含了HTTP版本、HTTP状态码以及状态码的相应原因短语（Reason Phrase）。浏览器收到响应之后，会显示响应的正文，这就是为什么你会在浏览器中看到“Hello, World!”这句话。
 
-And that’s the basic model of how a Web server works. To sum it up: The Web server creates a listening socket and starts accepting new connections in a loop. The client initiates a TCP connection and, after successfully establishing it, the client sends an HTTP request to the server and the server responds with an HTTP response that gets displayed to the user. To establish a TCP connection both clients and servers use sockets.
+这就是网络服务器基本的工作原理了。简单回顾一下：网络服务器首先创建一个侦听套接字（listening socket），并开启一个永续循环接收新连接；客户端启动一个与客户端的TCP连接，成功建立连接之后，向服务器发送HTTP请求，之后服务器返回HTTP响应。要建立TCP连接，客户端和服务器都使用了套接字。
 
-Now you have a very basic working Web server that you can test with your browser or some other HTTP client. As you’ve seen and hopefully tried, you can also be a human HTTP client too, by using telnet and typing HTTP requests manually.
+现在，你已经拥有了一个基本的可用网络服务器，你可以使用浏览器或其他HTTP客户端进行测试。正如上文所展示的，通过`telnet`命令并手动输入HTTP请求，你自己也可以成为一个HTTP客户端。
 
-Here’s a question for you: “How do you run a Django application, Flask application, and Pyramid application under your freshly minted Web server without making a single change to the server to accommodate all those different Web frameworks?”
+下面给你布置一道思考题：如何在不对本文实现的服务器作任何修改的情况下，通过该服务器运行Djando应用、Flask应用和Pyramid应用，同时满足这些不同网络框架的要求？
+
+答案将在《从头开发网络服务器》系列文章的第二部分揭晓。
