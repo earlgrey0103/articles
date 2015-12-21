@@ -4,113 +4,121 @@
 
 “We learn most when we have to invent” —Piaget
 
-In Part 2 you created a minimalistic WSGI server that could handle basic HTTP GET requests. And I asked you a question, “How can you make your server handle more than one request at a time?” In this article you will find the answer. So, buckle up and shift into high gear. You’re about to have a really fast ride. Have your Linux, Mac OS X (or any *nix system) and Python ready. All source code from the article is available on GitHub.
+在第二部分中，你开发了一个能够处理HTTPGET请求的简易WSGI服务器。在上一篇的最后，我问了你一个问题：“怎样让服务器一次处理多个请求？”读完本文，你就能够完美地回答这个问题。接下来，请你做好准备，因为本文的内容非常多，节奏也很快。文中的所有代码都可以在[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part3/)下载。
 
-First let’s remember what a very basic Web server looks like and what the server needs to do to service client requests. The server you created in Part 1 and Part 2 is an iterative server that handles one client request at a time. It cannot accept a new connection until after it has finished processing a current client request. Some clients might be unhappy with it because they will have to wait in line, and for busy servers the line might be too long.
+首先，我们简单回忆一下简易网络服务器是如何实现的，服务器要处理客户端的请求需要哪些条件。你在前面两部分文章中开发的服务器，是一个迭代式服务器（iterative server），还只能一次处理一个客户端请求。只有在处理完当前客户端请求之后，它才能接收新的客户端连接。这样，有些客户端就必须要等待自己的请求被处理了，而对于流量大的服务器来说，等待的时间就会特别长。
 
+[客户端逐个等待服务器响应](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it1.png)
 
+下面是迭代式服务器`webserver3a.py`的代码：
 
-Here is the code of the iterative server webserver3a.py:
+    :::python
+    #####################################################################
+    # Iterative server - webserver3a.py                                 #
+    #                                                                   #
+    # Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X  #
+    #####################################################################
+    import socket
 
-#####################################################################
-# Iterative server - webserver3a.py                                 #
-#                                                                   #
-# Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X  #
-#####################################################################
-import socket
-
-SERVER_ADDRESS = (HOST, PORT) = '', 8888
-REQUEST_QUEUE_SIZE = 5
-
-
-def handle_request(client_connection):
-    request = client_connection.recv(1024)
-    print(request.decode())
-    http_response = b"""\
-HTTP/1.1 200 OK
-
-Hello, World!
-"""
-    client_connection.sendall(http_response)
+    SERVER_ADDRESS = (HOST, PORT) = '', 8888
+    REQUEST_QUEUE_SIZE = 5
 
 
-def serve_forever():
-    listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    listen_socket.bind(SERVER_ADDRESS)
-    listen_socket.listen(REQUEST_QUEUE_SIZE)
-    print('Serving HTTP on port {port} ...'.format(port=PORT))
+    def handle_request(client_connection):
+        request = client_connection.recv(1024)
+        print(request.decode())
+        http_response = b"""\
+    HTTP/1.1 200 OK
 
-    while True:
-        client_connection, client_address = listen_socket.accept()
-        handle_request(client_connection)
-        client_connection.close()
-
-if __name__ == '__main__':
-    serve_forever()
-To observe your server handling only one client request at a time, modify the server a little bit and add a 60 second delay after sending a response to a client. The change is only one line to tell the server process to sleep for 60 seconds.
+    Hello, World!
+    """
+        client_connection.sendall(http_response)
 
 
+    def serve_forever():
+        listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        listen_socket.bind(SERVER_ADDRESS)
+        listen_socket.listen(REQUEST_QUEUE_SIZE)
+        print('Serving HTTP on port {port} ...'.format(port=PORT))
 
-And here is the code of the sleeping server webserver3b.py:
+        while True:
+            client_connection, client_address = listen_socket.accept()
+            handle_request(client_connection)
+            client_connection.close()
 
-#########################################################################
-# Iterative server - webserver3b.py                                     #
-#                                                                       #
-# Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X      #
-#                                                                       #
-# - Server sleeps for 60 seconds after sending a response to a client   #
-#########################################################################
-import socket
-import time
+    if __name__ == '__main__':
+        serve_forever()
 
-SERVER_ADDRESS = (HOST, PORT) = '', 8888
-REQUEST_QUEUE_SIZE = 5
+如果想确认这个服务器每次只能处理一个客户端的请求，我们对上述代码作简单修改，在向客户端返回响应之后，增加60秒的延迟处理时间。这个修改只有一行代码，即告诉服务器在返回响应之后睡眠60秒。
 
+[让服务器睡眠60秒](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it2.png)
 
-def handle_request(client_connection):
-    request = client_connection.recv(1024)
-    print(request.decode())
-    http_response = b"""\
-HTTP/1.1 200 OK
+下面就是修改之后的服务器代码：
 
-Hello, World!
-"""
-    client_connection.sendall(http_response)
-    time.sleep(60)  # sleep and block the process for 60 seconds
+    :::python
+    #########################################################################
+    # Iterative server - webserver3b.py                                     #
+    #                                                                       #
+    # Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X      #
+    #                                                                       #
+    # - Server sleeps for 60 seconds after sending a response to a client   #
+    #########################################################################
+    import socket
+    import time
 
-
-def serve_forever():
-    listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    listen_socket.bind(SERVER_ADDRESS)
-    listen_socket.listen(REQUEST_QUEUE_SIZE)
-    print('Serving HTTP on port {port} ...'.format(port=PORT))
-
-    while True:
-        client_connection, client_address = listen_socket.accept()
-        handle_request(client_connection)
-        client_connection.close()
-
-if __name__ == '__main__':
-    serve_forever()
-Start the server with:
-
-$ python webserver3b.py
-Now open up a new terminal window and run the curl command. You should instantly see the “Hello, World!” string printed on the screen:
-
-$ curl http://localhost:8888/hello
-Hello, World!
-And without delay open up a second terminal window and run the same curl command:
-
-$ curl http://localhost:8888/hello
-If you’ve done that within 60 seconds then the second curl should not produce any output right away and should just hang there. The server shouldn’t print a new request body on its standard output either. Here is how it looks like on my Mac (the window at the bottom right corner highlighted in yellow shows the second curl command hanging, waiting for the connection to be accepted by the server):
+    SERVER_ADDRESS = (HOST, PORT) = '', 8888
+    REQUEST_QUEUE_SIZE = 5
 
 
+    def handle_request(client_connection):
+        request = client_connection.recv(1024)
+        print(request.decode())
+        http_response = b"""\
+    HTTP/1.1 200 OK
 
-After you’ve waited long enough (more than 60 seconds) you should see the first curl terminate and the second curl print “Hello, World!” on the screen, then hang for 60 seconds, and then terminate:
+    Hello, World!
+    """
+        client_connection.sendall(http_response)
+        time.sleep(60)  # sleep and block the process for 60 seconds
 
 
+    def serve_forever():
+        listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        listen_socket.bind(SERVER_ADDRESS)
+        listen_socket.listen(REQUEST_QUEUE_SIZE)
+        print('Serving HTTP on port {port} ...'.format(port=PORT))
+
+        while True:
+            client_connection, client_address = listen_socket.accept()
+            handle_request(client_connection)
+            client_connection.close()
+
+    if __name__ == '__main__':
+        serve_forever()
+
+接下来，我们启动服务器：
+
+    $ python webserver3b.py
+
+现在，我们打开一个新的终端窗口，并运行`curl`命令。你会立刻看到屏幕上打印出了“Hello, World!”这句话：
+
+    $ curl http://localhost:8888/hello
+    Hello, World!
+
+接着我们立刻再打开一个终端窗口，并运行`curl`命令：
+
+
+    $ curl http://localhost:8888/hello
+
+如果你在60秒了完成了上面的操作，那么第二个`curl`命令应该不会立刻产生任何输出结果，而是处于挂死（hang）状态。服务器也不会在标准输出中打印这个新请求的正文。下面这张图就是我在自己的Mac上操作时的结果（右下角那个边缘高亮为黄色的窗口，显示的就是第二个`curl`命令挂死）：
+
+[Mac上操作时的结果](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it3.png)
+
+当然，你等了足够长时间之后（超过60秒），你会看到第一个`curl`命令结束，然后第二个`curl`命令会在屏幕上打印出“Hello, World!”，之后再挂死60秒，最后才结束：
+
+[curl命令演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it4.png)
 
 The way it works is that the server finishes servicing the first curl client request and then it starts handling the second request only after it sleeps for 60 seconds. It all happens sequentially, or iteratively, one step, or in our case one client request, at a time.
 

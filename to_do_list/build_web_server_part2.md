@@ -1,9 +1,9 @@
 > 原文链接：[http://ruslanspivak.com/lsbaws-part2/](http://ruslanspivak.com/lsbaws-part2/)
 > 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-two/](http://codingpy.com/article/build-a-simple-web-server-part-two/)
 
-# 从头开发一个网络服务器(二)
+# 自己动手开发网络服务器(二)
 
-在《从头开发一个网络服务器（一）》中，我给大家留了一个问题：如何在不对本文实现的服务器作任何修改的情况下，通过该服务器运行Djando应用、Flask应用和Pyramid应用，同时满足这些不同网络框架的要求？读完这篇文章，你就可以回答这个问题了。
+在《自己动手开发网络服务器（一）》中，我给大家留了一个问题：如何在不对本文实现的服务器作任何修改的情况下，通过该服务器运行Djando应用、Flask应用和Pyramid应用，同时满足这些不同网络框架的要求？读完这篇文章，你就可以回答这个问题了。
 
 以前，你选择的Python网络框架将会限制所能够使用的网络服务器，反之亦然。如果框架和服务器在设计时就是可以相互匹配的，那你就不会面临这个问题：
 
