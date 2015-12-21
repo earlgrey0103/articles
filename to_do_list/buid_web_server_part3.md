@@ -120,16 +120,17 @@
 
 [curl命令演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it4.png)
 
-The way it works is that the server finishes servicing the first curl client request and then it starts handling the second request only after it sleeps for 60 seconds. It all happens sequentially, or iteratively, one step, or in our case one client request, at a time.
+这背后的实现方式是，服务器处理完第一个`curl`客户端请求后睡眠60秒，才开始处理第二个请求。这些步骤是线性执行的，或者说迭代式一步一步执行的。在我们这个实例中，则是一次一个请求这样处理。
 
-Let’s talk about the communication between clients and servers for a bit. In order for two programs to communicate with each other over a network, they have to use sockets. And you saw sockets both in Part 1 and Part 2. But what is a socket?
+接下来，我们简单谈谈客户端与服务器之间的通信。为了让两个程序通过网络进行通信，二者均必须使用套接字。你在前两章中也看到过套接字，但到底什么是套接字？
 
+[什么是套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socket.png)
 
+套接字是通信端点（communication endpoint）的抽象形式，可以让一个程序通过文件描述符（file descriptor）与另一个程序进行通信。在本文中，我只讨论Linux/Mac OS X平台上的TCP/IP套接字。其中，尤为重要的一个概念就是TCP套接字对（socket pair）。
 
-A socket is an abstraction of a communication endpoint and it allows your program to communicate with another program using file descriptors. In this article I’ll be talking specifically about TCP/IP sockets on Linux/Mac OS X. An important notion to understand is the TCP socket pair.
+> TCP连接所使用的套接字对是一个4个元素元组，包括本地IP地址、本地端口、外部IP地址和外部端口。一个网络中的每一个TCP连接，都拥有独特的套接字对。IP地址和端口号通常被称为一个套接字，二者一起标识了一个网络端点。
 
-The socket pair for a TCP connection is a 4-tuple that identifies two endpoints of the TCP connection: the local IP address, local port, foreign IP address, and foreign port. A socket pair uniquely identifies every TCP connection on a network. The two values that identify each endpoint, an IP address and a port number, are often called a socket.1
-
+[套接字对合套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socketpair.png)
 
 So, the tuple {10.10.10.2:49152, 12.12.12.3:8888} is a socket pair that uniquely identifies two endpoints of the TCP connection on the client and the tuple {12.12.12.3:8888, 10.10.10.2:49152} is a socket pair that uniquely identifies the same two endpoints of the TCP connection on the server. The two values that identify the server endpoint of the TCP connection, the IP address 12.12.12.3 and the port 8888, are referred to as a socket in this case (the same applies to the client endpoint).
 
