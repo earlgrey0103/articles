@@ -213,132 +213,135 @@
     $ ps | grep webserver3b | grep -v grep 
     7182 ttys003    0:00.04 python webserver3b.py
 
-The ps command shows you that you have indeed run just one Python process webserver3b. When a process gets created the kernel assigns a process ID to it, PID. In UNIX, every user process also has a parent that, in turn, has its own process ID called parent process ID, or PPID for short. I assume that you run a BASH shell by default and when you start the server, a new process gets created with a PID and its parent PID is set to the PID of the BASH shell.
+从`ps`命令的结果，我们可以看出你的确只运行了一个Python进程`webserver3b`。进程创建的时候，内核会给它指定一个进程ID——PID。在UNIX系统下，每个用户进程都会有一个父进程（parent process），而这个父进程也有自己的进程ID，叫做父进程ID，简称PPID。在本文中，我默认大家使用的是BASH，因此当你启动服务器的时候，系统会创建服务器进程，指定一个PID，而服务器进程的父进程PID则是BASH shell进程的PID。
+
+![进程ID与父进程ID](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_ppid_pid.png)
+
+接下来请自己尝试操作一下。再次打开你的Python shell程序，这会创建一个新进程，然后我们通过`os.gepid()`和`os.getppid()`这两个方法，分别获得Python shell进程的PID及它的父进程PID（即BASH shell程序的PID）。接着，我们打开另一个终端窗口，运行`ps`命令，`grep`检索刚才所得到的PPID（父进程ID，本操作时的结果是3148）。在下面的截图中，你可以看到我在Mac OS X上的操作结果：
+
+![Mac OS X系统下进程ID与父进程ID演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_pid_ppid_screenshot.png)
+
+另一个需要掌握的重要概念就是文件描述符（file descriptor）。那么，到底什么是文件描述符？文件描述符指的就是当系统打开一个现有文件、创建一个新文件或是创建一个新的套接字之后，返回给进程的那个正整型数。系统内核通过文件描述符来追踪一个进程所打开的文件。当你需要读写文件时，你也通过文件描述符说明。Python语言中提供了用于处理文件（和套接字）的高层级对象，所以你不必直接使用文件描述符来指定文件，但是从底层实现来看，UNIX系统中就是通过它们的文件描述符来确定文件和套接字的。
+
+![文件描述符](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_process_descriptors.png)
+
+一般来说，UNIX shell会将文件描述符0指定给进程的标准输出，文件描述富1指定给进程的标准输出，文件描述符2指定给标准错误。
+
+![标准输入的文件描述符](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_default_descriptors.png)
+
+正如我前面提到的那样，即使Python语言提供了高层及的文件或类文件对象，你仍然可以对文件对象使用`fileno()`方法，来获取该文件相应的文件描述符。我们回到Python shell中来试验一下。
+
+    :::python
+    >>> import sys
+    >>> sys.stdin
+    <open file '<stdin>', mode 'r' at 0x102beb0c0>
+    >>> sys.stdin.fileno()
+    0
+    >>> sys.stdout.fileno()
+    1
+    >>> sys.stderr.fileno()
+    2
+
+在Python语言中处理文件和套接字时，你通常只需要使用高层及的文件/套接字对象即可，但是有些时候你也可能需要直接使用文件描述符。下面这个示例演示了你如何通过`write()`方法向标准输出中写入一个字符串，而这个`write`方法就接受文件描述符作为自己的参数：
+
+    :::python
+    >>> import sys
+    >>> import os
+    >>> res = os.write(sys.stdout.fileno(), 'hello\n')
+    hello
+
+还有一点挺有意思——如果你知道Unix系统下一切都是文件，那么你就不会觉得奇怪了。当你在Python中创建一个套接字后，你获得的是一个套接字对象，而不是一个正整型数，但是你还是可以和上面演示的一样，通过`fileno()`方法直接访问这个套接字的文件描述符。
+
+    >>> import socket
+    >>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    >>> sock.fileno()
+    3
+
+我还想再说一点：不知道大家有没有注意到，在迭代式服务器`webserver3b.py`的第二个示例中，我们的服务器在处理完请求后睡眠60秒，但是在睡眠期间，我们仍然可以通过`curl`命令与服务器建立连接？当然，`curl`命令并没有立刻输出结果，只是出于挂死状态，但是为什么服务器既然没有接受新的连接，客户端也没有立刻被拒绝，而是仍然继续连接至服务器呢？这个问题的答案在于套接字对象的`listen`方法，以及它使用的`BACKLOG`参数。在示例代码中，这个参数的值被我设置为`REQUEST_QUEQUE_SIZE`。`BACKLOG`参数决定了内核中外部连接请求的队列大小。当`webserver3b.py`服务器睡眠时，你运行的第二个`curl`命令之所以能够连接服务器，是因为连接请求队列仍有足够的位置。
+
+虽然提高`BACKLOG`参数的值并不会让你的服务器一次处理多个客户端请求，但是业务繁忙的服务器也应该设置一个较大的`BACKLOG`参数值，这样`accept`函数就可以直接从队列中获取新连接，立刻开始处理客户端请求，而不是还要花时间等待连接建立。
+
+呜呼！到目前为止，已经给大家介绍了很多知识。我们现在快速回顾一下之前的内容。
+
+> - 迭代式服务器
+> - 服务器套接字创建流程（socket, bind, listen, accept）
+> - 客户端套接字创建流程（socket, connect）
+> - 套接字对（Socket pair）
+> - 套接字
+> - 临时端口（Ephemeral port）与熟知端口（well-known port）
+> - 进程
+> - 进程ID（PID），父进程ID（PPID）以及父子关系
+> - 文件描述符（File descriptors）
+> - 套接字对象的`listen`方法中`BACKLOG`参数的意义
+
+现在，我可以开始回答第二部分留下的问题了：如何让服务器一次处理多个请求？换句话说，如何开发一个并发服务器？
+
+![并发服务器手绘演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc2_service_clients.png)
+
+在Unix系统中开发一个并发服务器的最简单方法，就是调用系统函数`fork()`。
+
+![fork()系统函数调用](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_fork.png)
+
+下面就是崭新的`webserver3c.py`并发服务器，能够同时处理多个客户端请求：
+
+    :::python
+    ###########################################################################
+    # Concurrent server - webserver3c.py                                      #
+    #                                                                         #
+    # Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X        #
+    #                                                                         #
+    # - Child process sleeps for 60 seconds after handling a client's request #
+    # - Parent and child processes close duplicate descriptors                #
+    #                                                                         #
+    ###########################################################################
+    import os
+    import socket
+    import time
+
+    SERVER_ADDRESS = (HOST, PORT) = '', 8888
+    REQUEST_QUEUE_SIZE = 5
 
 
-
-Try it out and see for yourself how it all works. Fire up your Python shell again, which will create a new process, and then get the PID of the Python shell process and the parent PID (the PID of your BASH shell) using os.getpid() and os.getppid() system calls. Then, in another terminal window run ps command and grep for the PPID (parent process ID, which in my case is 3148). In the screenshot below you can see an example of a parent-child relationship between my child Python shell process and the parent BASH shell process on my Mac OS X:
-
-
-
-Another important concept to know is that of a file descriptor. So what is a file descriptor? A file descriptor is a non-negative integer that the kernel returns to a process when it opens an existing file, creates a new file or when it creates a new socket. You’ve probably heard that in UNIX everything is a file. The kernel refers to the open files of a process by a file descriptor. When you need to read or write a file you identify it with the file descriptor. Python gives you high-level objects to deal with files (and sockets) and you don’t have to use file descriptors directly to identify a file but, under the hood, that’s how files and sockets are identified in UNIX: by their integer file descriptors.
-
-
-
-By default, UNIX shells assign file descriptor 0 to the standard input of a process, file descriptor 1 to the standard output of the process and file descriptor 2 to the standard error.
-
-
-
-As I mentioned before, even though Python gives you a high-level file or file-like object to work with, you can always use the fileno() method on the object to get the file descriptor associated with the file. Back to your Python shell to see how you can do that:
-
->>> import sys
->>> sys.stdin
-<open file '<stdin>', mode 'r' at 0x102beb0c0>
->>> sys.stdin.fileno()
-0
->>> sys.stdout.fileno()
-1
->>> sys.stderr.fileno()
-2
-And while working with files and sockets in Python, you’ll usually be using a high-level file/socket object, but there may be times where you need to use a file descriptor directly. Here is an example of how you can write a string to the standard output using a write system call that takes a file descriptor integer as a parameter:
-
->>> import sys
->>> import os
->>> res = os.write(sys.stdout.fileno(), 'hello\n')
-hello
-And here is an interesting part - which should not be surprising to you anymore because you already know that everything is a file in Unix - your socket also has a file descriptor associated with it. Again, when you create a socket in Python you get back an object and not a non-negative integer, but you can always get direct access to the integer file descriptor of the socket with the fileno() method that I mentioned earlier.
-
->>> import socket
->>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
->>> sock.fileno()
-3
-One more thing I wanted to mention: have you noticed that in the second example of the iterative server webserver3b.py, when the server process was sleeping for 60 seconds you could still connect to the server with the second curl command? Sure, the curl didn’t output anything right away and it was just hanging out there but how come the server was not accept ing a connection at the time and the client was not rejected right away, but instead was able to connect to the server? The answer to that is the listen method of a socket object and its BACKLOG argument, which I called REQUEST_QUEUE_SIZE in the code. The BACKLOG argument determines the size of a queue within the kernel for incoming connection requests. When the server webserver3b.py was sleeping, the second curl command that you ran was able to connect to the server because the kernel had enough space available in the incoming connection request queue for the server socket.
-
-While increasing the BACKLOG argument does not magically turn your server into a server that can handle multiple client requests at a time, it is important to have a fairly large backlog parameter for busy servers so that the accept call would not have to wait for a new connection to be established but could grab the new connection off the queue right away and start processing a client request without delay.
-
-Whoo-hoo! You’ve covered a lot of ground. Let’s quickly recap what you’ve learned (or refreshed if it’s all basics to you) so far.
-
-
-
-Iterative server
-Server socket creation sequence (socket, bind, listen, accept)
-Client connection creation sequence (socket, connect)
-Socket pair
-Socket
-Ephemeral port and well-known port
-Process
-Process ID (PID), parent process ID (PPID), and the parent-child relationship.
-File descriptors
-The meaning of the BACKLOG argument of the listen socket method
-
-Now I am ready to answer the question from Part 2: “How can you make your server handle more than one request at a time?” Or put another way, “How do you write a concurrent server?”
-
-
-
-The simplest way to write a concurrent server under Unix is to use a fork() system call.
-
-
-
-Here is the code of your new shiny concurrent server webserver3c.py that can handle multiple client requests at the same time (as in our iterative server example webserver3b.py, every child process sleeps for 60 secs):
-
-
-
-###########################################################################
-# Concurrent server - webserver3c.py                                      #
-#                                                                         #
-# Tested with Python 2.7.9 & Python 3.4 on Ubuntu 14.04 & Mac OS X        #
-#                                                                         #
-# - Child process sleeps for 60 seconds after handling a client's request #
-# - Parent and child processes close duplicate descriptors                #
-#                                                                         #
-###########################################################################
-import os
-import socket
-import time
-
-SERVER_ADDRESS = (HOST, PORT) = '', 8888
-REQUEST_QUEUE_SIZE = 5
-
-
-def handle_request(client_connection):
-    request = client_connection.recv(1024)
-    print(
-        'Child PID: {pid}. Parent PID {ppid}'.format(
-            pid=os.getpid(),
-            ppid=os.getppid(),
+    def handle_request(client_connection):
+        request = client_connection.recv(1024)
+        print(
+            'Child PID: {pid}. Parent PID {ppid}'.format(
+                pid=os.getpid(),
+                ppid=os.getppid(),
+            )
         )
-    )
-    print(request.decode())
-    http_response = b"""\
-HTTP/1.1 200 OK
+        print(request.decode())
+        http_response = b"""\
+    HTTP/1.1 200 OK
 
-Hello, World!
-"""
-    client_connection.sendall(http_response)
-    time.sleep(60)
+    Hello, World!
+    """
+        client_connection.sendall(http_response)
+        time.sleep(60)
 
 
-def serve_forever():
-    listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    listen_socket.bind(SERVER_ADDRESS)
-    listen_socket.listen(REQUEST_QUEUE_SIZE)
-    print('Serving HTTP on port {port} ...'.format(port=PORT))
-    print('Parent PID (PPID): {pid}\n'.format(pid=os.getpid()))
+    def serve_forever():
+        listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        listen_socket.bind(SERVER_ADDRESS)
+        listen_socket.listen(REQUEST_QUEUE_SIZE)
+        print('Serving HTTP on port {port} ...'.format(port=PORT))
+        print('Parent PID (PPID): {pid}\n'.format(pid=os.getpid()))
 
-    while True:
-        client_connection, client_address = listen_socket.accept()
-        pid = os.fork()
-        if pid == 0:  # child
-            listen_socket.close()  # close child copy
-            handle_request(client_connection)
-            client_connection.close()
-            os._exit(0)  # child exits here
-        else:  # parent
-            client_connection.close()  # close parent copy and loop over
+        while True:
+            client_connection, client_address = listen_socket.accept()
+            pid = os.fork()
+            if pid == 0:  # child
+                listen_socket.close()  # close child copy
+                handle_request(client_connection)
+                client_connection.close()
+                os._exit(0)  # child exits here
+            else:  # parent
+                client_connection.close()  # close parent copy and loop over
 
-if __name__ == '__main__':
-    serve_forever()
+    if __name__ == '__main__':
+        serve_forever()
+
 Before diving in and discussing how fork works, try it, and see for yourself that the server can indeed handle multiple client requests at the same time, unlike its iterative counterparts webserver3a.py and webserver3b.py. Start the server on the command line with:
 
 $ python webserver3c.py
