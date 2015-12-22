@@ -3,20 +3,15 @@
 Greenhouse gas emissions from freshwater higher than thought
 December 14, 2015 By Adam Hinterthuer
 
-Nick Gubbins, an undergraduate student who has worked in the Stanley lab, takes methane flux measurements in the field. 
-Nick Gubbins, an undergraduate student who has worked in the Stanley lab, takes methane flux measurements in the field. LUKE LOKEN, UW–MADISON CENTER FOR LIMNOLOGY
 
+千万不要小看了潺潺溪流。这些静静的流水也是有可能产生大量的温室气体的。
 
-Do not underestimate the babbling brook. When it comes to greenhouse gases, these bucolic water bodies have the potential to create a lot of hot air.
+根据Ecological Monographs杂志发布的一项最新研究，Wisconsin-Madison大学的研究人员发现全球各地的河流排放至大气中的甲烷气体比之前研究的预计要高出10倍。新研究同时还发现，人类活动看上去决定了哪些河流排放的甲烷气体最多。
 
-According to a new analysis in the journal Ecological Monographs, by researchers at the University of Wisconsin–Madison and colleagues, the world’s rivers and streams pump about 10 times more methane into our atmosphere than scientists estimated in previous studies. The new study also found that human activity seems to drive which streams are the biggest contributors.
+这份研究的主要作者是Wisconsin-Madison大学的Emily Stanley教授，她告诉我们：“科学家们已经确认，像湖泊和水库这样的内陆水体是甲烷气体的一大来源”。不过，目前想对这些来源排放的甲烷气体数量进行测量好还很困难。
 
-“Scientists know that inland waters, like lakes and reservoirs, are big sources of methane,” says Emily Stanley, a professor at the UW–Madison Center for Limnology and lead author of the paper. Yet accurately measuring emissions of methane from these sources has remained a challenge.
+和二氧化碳一样，甲烷也是一种可以将热量截留在地表的温室气体。虽然在大气中的占比不像二氧化碳那么高，但是产生的效果却更明显：一个甲烷分子的热量截留效果比一个二氧化碳分子的效果要大的多。因此，弄清楚到底有多少甲烷被排放至大气中，可以帮助科学家更准确地得出应对全球气候变暖所需的预算，从而采取更好地俄方式来缓解甲烷造成的影响。
 
-Like carbon dioxide, methane is a greenhouse gas that traps heat at the Earth’s surface. It is less prevalent than carbon dioxide in the atmosphere but also more potent: A molecule of methane results in more warming than a molecule of carbon dioxide. Understanding how much methane is emitted into the atmosphere from all sources helps scientists account for the full global greenhouse gas budget, and take measures to mitigate its impact.
-
-Emily Stanley
-Emily Stanley
 
 Rivers and streams haven’t received much attention in accounting for that budget, Stanley says, because they don’t take up much surface area on a global scale and, with respect to methane, didn’t seem to be all that gassy. But over the years, measurements taken by Stanley and her lab members seemed to indicate these sources may produce more methane than scientists had previously known.
 

@@ -210,7 +210,7 @@
 
 然后，我们在另一个终端窗口中，使用`ps`命令来获取上面那个服务器进程的信息：
 
-    $ ps | grep webserver3b | grep -v grep
+    $ ps | grep webserver3b | grep -v grep 
     7182 ttys003    0:00.04 python webserver3b.py
 
 The ps command shows you that you have indeed run just one Python process webserver3b. When a process gets created the kernel assigns a process ID to it, PID. In UNIX, every user process also has a parent that, in turn, has its own process ID called parent process ID, or PPID for short. I assume that you run a BASH shell by default and when you start the server, a new process gets created with a PID and its parent PID is set to the PID of the BASH shell.
