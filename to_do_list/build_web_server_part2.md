@@ -1,23 +1,20 @@
-> 原文链接：[http://ruslanspivak.com/lsbaws-part2/](http://ruslanspivak.com/lsbaws-part2/)
-> 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-two/](http://codingpy.com/article/build-a-simple-web-server-part-two/)
-
 # 自己动手开发网络服务器(二)
 
-在《自己动手开发网络服务器（一）》中，我给大家留了一个问题：如何在不对本文实现的服务器作任何修改的情况下，通过该服务器运行Djando应用、Flask应用和Pyramid应用，同时满足这些不同网络框架的要求？读完这篇文章，你就可以回答这个问题了。
+在《自己动手开发网络服务器（一）》中，我给大家留了一个问题：如何在不对服务器代码作任何修改的情况下，通过该服务器运行Djando应用、Flask应用和Pyramid应用，同时满足这些不同网络框架的要求？读完这篇文章，你就可以回答这个问题了。
 
 以前，你选择的Python网络框架将会限制所能够使用的网络服务器，反之亦然。如果框架和服务器在设计时就是可以相互匹配的，那你就不会面临这个问题：
 
-[服务器与框架是否匹配](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_before_wsgi.png)
+![服务器与框架是否匹配](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_before_wsgi.png)
 
 但是如果你试图将设计不相匹配的服务器与框架相结合，那么你肯定就会碰到下面这张图所展示的这个问题：
 
-[服务器与框架之间冲突](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_after_wsgi.png)
+![服务器与框架之间冲突](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_after_wsgi.png)
 
 这就意味着，你基本上只能使用能够正常运行的服务器与框架组合，而不能选择你希望使用的服务器或框架。
 
-那么，你怎样确保可以在不修改网络服务器代码或网络框架代码的前提下，使用自己选择的服务器，并且匹配多个不同的网络框架呢？为了解决这个问题，就出现了Python网络服务器网关接口（Python Web Server Gateway Interface，简称“WSGI”）。
+那么，你怎样确保可以在不修改网络服务器代码或网络框架代码的前提下，使用自己选择的服务器，并且匹配多个不同的网络框架呢？为了解决这个问题，就出现了Python Web服务器网关接口（Python Web Server Gateway Interface，简称“WSGI”）。
 
-[WSGI接口](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_wsgi_idea.png)
+![WSGI接口](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_wsgi_idea.png)
 
 [WSGI](https://www.python.org/dev/peps/pep-0333/)的出现，让开发者可以将网络框架与网络服务器的选择分隔开来，不再相互限制。现在，你可以真正地将不同的网络服务器与网络开发框架进行混合搭配，选择满足自己需求的组合。例如，你可以使用Gunicorn或Nginx/uWSGI或Waitress服务器来运行Django、Flask或Pyramid应用。正是由于服务器和框架均支持WSGI，才真正得以实现二者之间的自由混合搭配。
 
@@ -172,14 +169,14 @@
         print('WSGIServer: Serving HTTP on port {port} ...\n'.format(port=PORT))
         httpd.serve_forever()
 
-上面的代码比第一部分的服务器实现代码要长的多，但是这些代码实际也不算太长，只有不到150行，大家理解起来并不会太困难。上面代码实现的服务器的功能也更多——它可以运行你使用自己喜欢的框架所写出来的网络应用，无论你选择Pyramid、Flask、Django或是其他支持WSGI协议的框架。
+上面的代码比第一部分的服务器实现代码要长的多，但是这些代码实际也不算太长，只有不到150行，大家理解起来并不会太困难。上面这个服务器的功能也更多——它可以运行你使用自己喜欢的框架所写出来的网络应用，无论你选择Pyramid、Flask、Django或是其他支持WSGI协议的框架。
 
 你不信？你可以自己测试一下，看看结果如何。将上述代码保存为`webserver2.py`，或者直接从我的[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part2/webserver2.py)下载。如果你运行该文件时没有提供任何参数，那么程序就会报错并退出。
 
     $ python webserver2.py
     Provide a WSGI application object as module:callable
 
-上述程序设计的目的就是运行你开发的网络应用，但是还需要你满足一些它的要求。要运行服务器，你只需要安装Python即可。但是要运行使用Pyramid、Flask和Django等框架开发的网络应用，你还需要先安装这些框架。我们接下来安装这三种框架。我倾向于使用`virtualenv`安装。请按照下面的提示创建并激活一个虚拟环境，然后安装这三个网络框架。
+上述程序设计的目的，就是运行你开发的网络应用，但是你还需要满足一些它的要求。要运行服务器，你只需要安装Python即可。但是要运行使用Pyramid、Flask和Django等框架开发的网络应用，你还需要先安装这些框架。我们接下来安装这三种框架。我倾向于使用`virtualenv`安装。请按照下面的提示创建并激活一个虚拟环境，然后安装这三个网络框架。
 
     $ [sudo] pip install virtualenv
     $ mkdir ~/envs
@@ -210,14 +207,14 @@
     config.add_view(hello_world, route_name='hello')
     app = config.make_wsgi_app()
 
-现在，你可以通过自己开发的网络服务器来启用上面的Pyramid应用。
+现在，你可以通过自己开发的网络服务器来启动上面的Pyramid应用。
 
     (lsbaws) $ python webserver2.py pyramidapp:app
     WSGIServer: Serving HTTP on port 8888 ...
 
-在运行`webserver2.py`时，你告诉自己的服务器去加载`pyramidapp`模块中的`app`可调用对象。你的服务器现在可以接收HTTP请求，并将请求中转至你的Pyramid应用。应用目前只能处理一个路由（route）：/hello。在浏览器的地址栏输入`http://localhost:8888/hello`，按下回车键，观察会出现什么情况：
+在运行`webserver2.py`时，你告诉自己的服务器去加载`pyramidapp`模块中的`app`可调用对象（callable）。你的服务器现在可以接收HTTP请求，并将请求中转至你的Pyramid应用。应用目前只能处理一个路由（route）：/hello。在浏览器的地址栏输入`http://localhost:8888/hello`，按下回车键，观察会出现什么情况：
 
-[Pyramid应用运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_pyramid.png)
+![Pyramid应用运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_pyramid.png)
 
 你还可以在命令行使用`curl`命令，来测试服务器运行情况：
 
@@ -248,7 +245,7 @@
 
 然后在浏览器地址栏输入`http://localhost:8888/hello`，并按下回车：
 
-[Flask应用运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_flask.png)
+![Flask应用运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_flask.png)
 
 同样，在命令行使用`curl`命令，看看服务器是否会返回Flask应用生成的信息：
 
@@ -271,7 +268,7 @@
 
 同样，在浏览器中输入`http://localhost:8888/hello`，并按下回车键：
 
-[Django应用的运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_django.png)
+![Django应用的运行情况](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_django.png)
 
 接下来，和前面几次一样，你通过命令行使用`curl`命令进行测试，确认了这个Djando应用成功处理了你发出的请求：
 
@@ -315,11 +312,11 @@
 3. 框架/应用生成HTTP状态码以及HTTP响应报头（HTTP response headers），然后将二者传递至`start_response`，等待服务器保存。此外，框架/应用还将返回响应的正文。
 4. 服务器将状态码、响应报头和响应正文组合成HTTP响应，并返回给客户端（这一步并不属于WSGI协议）。
 
-下面这张图直观地呈现了WSGI接口的情况：
+下面这张图直观地说明了WSGI接口的情况：
 
-[WSGI接口](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_wsgi_interface.png)
+![WSGI接口](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_wsgi_interface.png)
 
-有一点要提醒大家，当你使用上述框架开发网络应用的时候，你处理的是更高层级的逻辑，并不会直接处理WSGI协议相关的要求，但是我很清楚，既然你正在看这篇文章，你一定对框架端的WSGI接口很感兴趣。所以，我们接下来在不使用Pyramid、Flask或Djando框架的前提下，自己开发一个极简的WSGI网络应用/网络框架，并使用服务器运行该应用：
+有一点要提醒大家，当你使用上述框架开发网络应用的时候，你处理的是更高层级的逻辑，并不会直接处理WSGI协议相关的要求，但是我很清楚，既然你正在看这篇文章，你一定对框架端的WSGI接口很感兴趣。所以，我们接下来在不使用Pyramid、Flask或Djando框架的前提下，自己开发一个极简的WSGI网络应用/网络框架，并使用WSGI服务器运行该应用：
 
     :::python
     def app(environ, start_response):
@@ -339,23 +336,23 @@
 
 在浏览器中输入下图中的地址，然后按回车键。结果应该是这样的：
 
-[简单的WSGI应用](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_simple_wsgi_app.png)
+![简单的WSGI应用](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_browser_simple_wsgi_app.png)
 
 你刚刚自己编写了一个极简的WSGI网络框架！太不可思议了。
 
 接下来，我们重新分析服务器返回给客户端的对象。下面这张图展示的是你通过HTTP客户端调用Pyramid应用后，服务器生成的HTTP响应：
 
-[HTTP响应对象](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_http_response.png)
+![HTTP响应对象](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_http_response.png)
 
 上图中的响应与你在第一篇中看到的有些类似，但是也有明显不同之处。举个例子，其中就出现了你之前没有看到过的4歌HTTP报头：Content-Type，Content-Length，Date和Server。这些事网络服务器返回的响应对象通常都会包含的报头。不过，这四个都不是必须的。报头的目的是传递有关HTTP请求/响应的额外信息。
 
 既然你已经对WSGI接口有了更深的理解，下面这张图对响应对象的内容进行了更详细的解释，说明了每条内容是如何产生的。
 
-[HTTP响应对象2](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_http_response_explanation.png)
+![HTTP响应对象2](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_http_response_explanation.png)
 
 到目前为止，我还没有介绍过`environ`字典的具体内容，但简单来说，它是一个必须包含着WSGI协议所指定的某些WSGI和CGI变量。服务器从HTTP请求中获取字典所需的值。下面这张图展示的是字典的详细内容：
 
-[Environ字典的详细内容](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_environ.png)
+![Environ字典的详细内容](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_environ.png)
 
 网络框架通过该字典提供的信息，根据指定的路由和请求方法等参数来决定使用哪个视图（views），从哪里读取请求正文，以及如何输出错误信息。
 
@@ -369,8 +366,11 @@
 - 然后，服务器根据调用`application`对象后返回的数据，以及`start_response`设置的状态码和响应标头，构建一个HTTP响应。
 - 最后，服务器将HTTP响应返回至客户端。
 
-[服务器工作原理梳理](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_server_summary.png)
+![服务器工作原理梳理](http://ruslanspivak.com/lsbaws-part2/lsbaws_part2_server_summary.png)
 
 以上就是第二部分的所有内容。你现在已经拥有了一个正常运行的WSGI服务器，可以支持通过遵守WSGI协议的网络框架所写的网络应用。最棒的是，这个服务器可以不需要作任何代码修改，就可以与多个网络框架配合使用。
 
 最后，我再给大家留一道思考题：怎样让服务器一次处理多个请求？
+
+> 原文链接：[http://ruslanspivak.com/lsbaws-part2/](http://ruslanspivak.com/lsbaws-part2/)
+> 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-two/](http://codingpy.com/article/build-a-simple-web-server-part-two/)

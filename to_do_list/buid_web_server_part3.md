@@ -8,7 +8,7 @@
 
 首先，我们简单回忆一下简易网络服务器是如何实现的，服务器要处理客户端的请求需要哪些条件。你在前面两部分文章中开发的服务器，是一个迭代式服务器（iterative server），还只能一次处理一个客户端请求。只有在处理完当前客户端请求之后，它才能接收新的客户端连接。这样，有些客户端就必须要等待自己的请求被处理了，而对于流量大的服务器来说，等待的时间就会特别长。
 
-[客户端逐个等待服务器响应](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it1.png)
+![客户端逐个等待服务器响应](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it1.png)
 
 下面是迭代式服务器`webserver3a.py`的代码：
 
@@ -52,7 +52,7 @@
 
 如果想确认这个服务器每次只能处理一个客户端的请求，我们对上述代码作简单修改，在向客户端返回响应之后，增加60秒的延迟处理时间。这个修改只有一行代码，即告诉服务器在返回响应之后睡眠60秒。
 
-[让服务器睡眠60秒](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it2.png)
+![让服务器睡眠60秒](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it2.png)
 
 下面就是修改之后的服务器代码：
 
@@ -114,94 +114,105 @@
 
 如果你在60秒了完成了上面的操作，那么第二个`curl`命令应该不会立刻产生任何输出结果，而是处于挂死（hang）状态。服务器也不会在标准输出中打印这个新请求的正文。下面这张图就是我在自己的Mac上操作时的结果（右下角那个边缘高亮为黄色的窗口，显示的就是第二个`curl`命令挂死）：
 
-[Mac上操作时的结果](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it3.png)
+![Mac上操作时的结果](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it3.png)
 
 当然，你等了足够长时间之后（超过60秒），你会看到第一个`curl`命令结束，然后第二个`curl`命令会在屏幕上打印出“Hello, World!”，之后再挂死60秒，最后才结束：
 
-[curl命令演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it4.png)
+![curl命令演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it4.png)
 
 这背后的实现方式是，服务器处理完第一个`curl`客户端请求后睡眠60秒，才开始处理第二个请求。这些步骤是线性执行的，或者说迭代式一步一步执行的。在我们这个实例中，则是一次一个请求这样处理。
 
 接下来，我们简单谈谈客户端与服务器之间的通信。为了让两个程序通过网络进行通信，二者均必须使用套接字。你在前两章中也看到过套接字，但到底什么是套接字？
 
-[什么是套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socket.png)
+![什么是套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socket.png)
 
 套接字是通信端点（communication endpoint）的抽象形式，可以让一个程序通过文件描述符（file descriptor）与另一个程序进行通信。在本文中，我只讨论Linux/Mac OS X平台上的TCP/IP套接字。其中，尤为重要的一个概念就是TCP套接字对（socket pair）。
 
-> TCP连接所使用的套接字对是一个4个元素元组，包括本地IP地址、本地端口、外部IP地址和外部端口。一个网络中的每一个TCP连接，都拥有独特的套接字对。IP地址和端口号通常被称为一个套接字，二者一起标识了一个网络端点。
+> TCP连接所使用的套接字对是一个4元组（4-tuple），包括本地IP地址、本地端口、外部IP地址和外部端口。一个网络中的每一个TCP连接，都拥有独特的套接字对。IP地址和端口号通常被称为一个套接字，二者一起标识了一个网络端点。
 
-[套接字对合套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socketpair.png)
+![套接字对合套接字](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_socketpair.png)
 
-So, the tuple {10.10.10.2:49152, 12.12.12.3:8888} is a socket pair that uniquely identifies two endpoints of the TCP connection on the client and the tuple {12.12.12.3:8888, 10.10.10.2:49152} is a socket pair that uniquely identifies the same two endpoints of the TCP connection on the server. The two values that identify the server endpoint of the TCP connection, the IP address 12.12.12.3 and the port 8888, are referred to as a socket in this case (the same applies to the client endpoint).
+因此，`{10.10.10.2:49152, 12.12.12.3:8888}`元组组成了一个套接字对，代表客户端侧TCP连接的两个唯一端点，`{12.12.12.3:8888, 10.10.10.2:49152}`元组组成另一个套接字对，代表服务器侧TCP连接的两个同样端点。构成TCP连接中服务器端点的两个值分别是IP地址`12.12.12.3`和端口号`8888`，它们在这里被称为一个套接字（同理，客户端端点的两个值也是一个套接字）。
 
-The standard sequence a server usually goes through to create a socket and start accepting client connections is the following:
+服务器创建套接字并开始接受客户端连接的标准流程如下：
 
+![服务器创建套接字并开始接受客户端连接的标准流程](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_server_socket_sequence.png)
 
+1. 服务器创建一个TCP/IP套接字。通过下面的Python语句实现：
 
-The server creates a TCP/IP socket. This is done with the following statement in Python:
+    listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-The server might set some socket options (this is optional, but you can see that the server code above does just that to be able to re-use the same address over and over again if you decide to kill and re-start the server right away).
+2. 服务器可以设置部分套接字选项（这是可选项，但你会发现上面那行服务器代码就可以确保你重启服务器之后，服务器会继续使用相同的地址）。
 
-listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-Then, the server binds the address. The bind function assigns a local protocol address to the socket. With TCP, calling bind lets you specify a port number, an IP address, both, or neither.1
+    listen_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-listen_socket.bind(SERVER_ADDRESS)
-Then, the server makes the socket a listening socket
+3. 然后，服务器绑定地址。绑定函数为套接字指定一个本地协议地址。调用绑定函数时，你可以单独指定端口号或IP地址，也可以同时指定两个参数，甚至不提供任何参数也没问题。
 
-listen_socket.listen(REQUEST_QUEUE_SIZE)
-The listen method is only called by servers. It tells the kernel that it should accept incoming connection requests for this socket.
+    listen_socket.bind(SERVER_ADDRESS)
 
-After that’s done, the server starts accepting client connections one connection at a time in a loop. When there is a connection available the accept call returns the connected client socket. Then, the server reads the request data from the connected client socket, prints the data on its standard output and sends a message back to the client. Then, the server closes the client connection and it is ready again to accept a new client connection.
+4. 接着，服务器将该套接字变成一个侦听套接字：
 
-Here is what a client needs to do to communicate with the server over TCP/IP:
+    listen_socket.listen(REQUEST_QUEUE_SIZE)
 
+`listen`方法只能由服务器调用，执行后会告知服务器应该接收针对该套接字的连接请求。
 
+完成上面四步之后，服务器会开启一个循环，开始接收客户端连接，不过一次只接收一个连接。当有连接请求时，`accept`方法会返回已连接的客户端套接字。然后，服务器从客户端套接字读取请求数据，在标准输出中打印数据，并向客户端返回消息。最后，服务器会关闭当前的客户端连接，这时服务器又可以接收新的客户端连接了。
 
-Here is the sample code for a client to connect to your server, send a request and print the response:
+要通过TCP/IP协议与服务器进行通信，客户端需要作如下操作：
 
- import socket
+![客户端与服务器进行通信所需要的操作](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_client_socket_sequence.png)
 
- # create a socket and connect to a server
- sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
- sock.connect(('localhost', 8888))
+下面这段示例代码，实现了客户端连接至服务器，发送请求，并打印响应内容的过程：
 
- # send and receive some data
- sock.sendall(b'test')
- data = sock.recv(1024)
- print(data.decode())
-After creating the socket, the client needs to connect to the server. This is done with the connect call:
+    :::python
+    import socket
 
-sock.connect(('localhost', 8888))
-The client only needs to provide the remote IP address or host name and the remote port number of a server to connect to.
+    # create a socket and connect to a server
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect(('localhost', 8888))
 
-You’ve probably noticed that the client doesn’t call bind and accept. The client doesn’t need to call bind because the client doesn’t care about the local IP address and the local port number. The TCP/IP stack within the kernel automatically assigns the local IP address and the local port when the client calls connect. The local port is called an ephemeral port, i.e. a short-lived port.
+    # send and receive some data
+    sock.sendall(b'test')
+    data = sock.recv(1024)
+    print(data.decode())
 
+在创建套接字之后，客户端需要与服务器进行连接，这可以通过调用`connect`方法实现：
 
+    sock.connect(('localhost', 8888))
 
-A port on a server that identifies a well-known service that a client connects to is called a well-known port (for example, 80 for HTTP and 22 for SSH). Fire up your Python shell and make a client connection to the server you run on localhost and see what ephemeral port the kernel assigns to the socket you’ve created (start the server webserver3a.py or webserver3b.py before trying the following example):
+客户端只需要提供远程IP地址或主机名，以及服务器的远程连接端口号即可。
 
->>> import socket
->>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
->>> sock.connect(('localhost', 8888))
->>> host, port = sock.getsockname()[:2]
->>> host, port
-('127.0.0.1', 60589)
-In the case above the kernel assigned the ephemeral port 60589 to the socket.
+你可能已经注意到，客户端不会调用`bind`和`accept`方法。不需要调用`bind`方法，是因为客户端不关心本地IP地址和本地端口号。客户端调用`connect`方法时，系统内核中的TCP/IP栈会自动指定本地IP地址和本地端口。本地端口也被称为临时端口（ephemeral port）。
 
-There are some other important concepts that I need to cover quickly before I get to answer the question from Part 2. You will see shortly why this is important. The two concepts are that of a process and a file descriptor.
+![本地端口——临时端口号](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_ephemeral_port.png)
 
-What is a process? A process is just an instance of an executing program. When the server code is executed, for example, it’s loaded into memory and an instance of that executing program is called a process. The kernel records a bunch of information about the process - its process ID would be one example - to keep track of it. When you run your iterative server webserver3a.py or webserver3b.py you run just one process.
+服务器端有部分端口用于连接熟知的服务，这种端口被叫做“熟知端口”（well-known port），例如，80用于HTTP传输服务，22用于SSH协议传输。接下来，我们打开Python shell，向在本地运行的服务器发起一个客户端连接，然后查看系统内核为你创建的客户端套接字指定了哪个临时端口（在进行下面的操作之前，请先运行`webserver3a.py`或`webserver3b.py`文件，启动服务器）：
 
+    :::python
+    >>> import socket
+    >>> sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    >>> sock.connect(('localhost', 8888))
+    >>> host, port = sock.getsockname()[:2]
+    >>> host, port
+    ('127.0.0.1', 60589)
 
+在上面的示例中，我们看到内核为套接字指定的临时端口是60589。
 
-Start the server webserver3b.py in a terminal window:
+在开始回答第二部分最后提的问题之前，我需要快速介绍一些其他的重要概念。稍后你就会明白我为什么要这样做。我要介绍的重要概念就是进程（process）和文件描述符（file descriptor）。
 
-$ python webserver3b.py
-And in a different terminal window use the ps command to get the information about that process:
+什么是进程？进程就是正在执行的程序的一个实例。举个例子，当服务器代码执行的时候，这些代码就被加载至内存中，而这个正在被执行的服务器的实例就叫做进程。系统内核会记录下有关进程的信息——包括进程ID，以便进行管理。所以，当你运行迭代式服务器`webserver3a.py`或`webserver3b.py`时，你也就开启了一个进程。
 
-$ ps | grep webserver3b | grep -v grep
-7182 ttys003    0:00.04 python webserver3b.py
+![服务器进程](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_it_server_process.png)
+
+我们在终端启动`webserver3a.py`服务器：
+
+    $ python webserver3b.py
+
+然后，我们在另一个终端窗口中，使用`ps`命令来获取上面那个服务器进程的信息：
+
+    $ ps | grep webserver3b | grep -v grep
+    7182 ttys003    0:00.04 python webserver3b.py
+
 The ps command shows you that you have indeed run just one Python process webserver3b. When a process gets created the kernel assigns a process ID to it, PID. In UNIX, every user process also has a parent that, in turn, has its own process ID called parent process ID, or PPID for short. I assume that you run a BASH shell by default and when you start the server, a new process gets created with a PID and its parent PID is set to the PID of the BASH shell.
 
 
