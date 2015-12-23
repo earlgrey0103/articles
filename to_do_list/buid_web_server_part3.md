@@ -453,12 +453,12 @@
 
 ![服务器不再睡眠，其子进程积极处理客户端请求](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_child_is_active.png)
 
+那么为什么`curl`命令会没有结束运行呢？原因在于文件描述符副本（duplicate file descriptor）。当子进程关闭客户端连接时，系统内核会减少客户端套接字的计数，变成了1。服务器子进程结束了，但是客户端套接字并没有关闭，因为那个套接字的描述符计数并没有变成0，导致系统没有向客户端发送终止包（termination packet，用TCP/IP的术语来说叫做FIN），也就是说客户端仍然在线。但是还有另一个问题。如果你一直运行的服务器不去关闭文件描述符副本，服务器最终就会耗光可用的文件服务器：
 
-So why does the curl not terminate? The reason is the duplicate file descriptors. When the child process closed the client connection, the kernel decremented the reference count of that client socket and the count became 1. The server child process exited, but the client socket was not closed by the kernel because the reference count for that socket descriptor was not 0, and, as a result, the termination packet (called FIN in TCP/IP parlance) was not sent to the client and the client stayed on the line, so to speak. There is also another problem. If your long-running server doesn’t close duplicate file descriptors, it will eventually run out of available file descriptors:
+![文件描述符](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_out_of_descriptors.png)
 
+按下`Control-C`，关闭`webserver3d.py`服务器，然后通过shell自带的`ulimit`命令查看服务器进程可以使用的默认资源：
 
-
-Stop your server webserver3d.py with Control-C and check out the default resources available to your server process set up by your shell with the shell built-in command ulimit:
 
     $ ulimit -a
     core file size          (blocks, -c) 0
@@ -478,16 +478,17 @@ Stop your server webserver3d.py with Control-C and check out the default resourc
     virtual memory          (kbytes, -v) unlimited
     file locks                      (-x) unlimited
 
+从上面的结果中，我们可以看到：在我这台Ubuntu电脑上，服务器进程可以使用的文件描述符（打开的文件）最大数量为1024。
 
-As you can see above, the maximum number of open file descriptors (open files) available to the server process on my Ubuntu box is 1024.
+现在，我们来看看如果服务器不关闭文件描述符副本，服务器会不会耗尽可用的文件描述符。我们在现有的或新开的终端窗口里，将服务器可以使用的最大文件描述符数量设置为256：
 
-Now let’s see how your server can run out of available file descriptors if it doesn’t close duplicate descriptors. In an existing or new terminal window, set the maximum number of open file descriptors for your server to be 256:
+    $ ulimit -n 256
 
-$ ulimit -n 256
-Start the server webserver3d.py in the same terminal where you’ve just run the $ ulimit -n 256 command:
+在刚刚运行了`$ ulimit -n 256`命令的终端里，我们开启`webserver3d.py`服务器：
 
-$ python webserver3d.py
-and use the following client client3.py to test the server.
+    $ python webserver3d.py
+
+然后通过下面的`client3.py`客户端来测试服务器。
 
     :::python
     #####################################################################
