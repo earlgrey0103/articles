@@ -1138,7 +1138,7 @@ Start mastering the basics. Question what you already know. And always dig deepe
 
 ![fork()系统函数调用](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_fork.png)
 
-下面就是崭新的`webserver3c.py`并发服务器，能够同时处理多个客户端请求：
+下面就是崭新的`webserver3c.py`并发服务器，支持同时处理多个客户端请求：
 
     :::python
     ###########################################################################
