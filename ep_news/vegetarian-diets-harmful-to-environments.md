@@ -1,15 +1,19 @@
 > 原文链接：http://www.cmu.edu/news/stories/archives/2015/december/diet-and-environment.html
 
+吃生菜比吃培根对环境的影响更大
 
-VEGETARIAN AND “HEALTHY” DIETS COULD BE MORE HARMFUL TO THE ENVIRONMENT
-Carnegie Mellon Study Finds Eating Lettuce Is More Than Three Times Worse in Greenhouse Gas Emissions Than Eating Bacon
+卡内基·梅隆大学的研究发现，在温室气体排放方面，吃剩菜比吃培根要有严重3倍。
 
-Contrary to recent headlines — and a talk by actor Arnold Schwarzenegger at the United Nations Paris Climate Change Conference — eating a vegetarian diet could contribute to climate change.
-In fact, according to new research from Carnegie Mellon University, following the USDA recommendations to consume more fruits, vegetables, dairy and seafood is more harmful to the environment because those foods have relatively high resource uses and greenhouse gas (GHG) emissions per calorie. Published in Environment Systems and Decisions, the study measured the changes in energy use, blue water footprint and GHG emissions associated with U.S. food consumption patterns.
-Bacon and Lettuce
-Eating lettuce is more harmful to the environment than eating bacon.
-“Eating lettuce is over three times worse in greenhouse gas emissions than eating bacon,” said Paul Fischbeck, professor of social and decisions sciences and engineering and public policy. “Lots of common vegetables require more resources per calorie than you would think. Eggplant, celery and cucumbers look particularly bad when compared to pork or chicken.”
-Fischbeck, Michelle Tom, a Ph.D. student in civil and environmental engineering, and Chris Hendrickson, the Hamerschlag University Professor of Civil and Environmental Engineering, studied the food supply chain to determine how the obesity epidemic in the U.S. is affecting the environment. Specifically, they examined how growing, processing and transporting food, food sales and service, and household storage and use take a toll on resources in the form of energy use, water use and GHG emissions.
-On one hand, the results showed that getting our weight under control and eating fewer calories, has a positive effect on the environment and reduces energy use, water use and GHG emissions from the food supply chain by approximately 9 percent.
-However, eating the recommended “healthier” foods — a mix of fruits, vegetables, dairy and seafood — increased the environmental impact in all three categories: Energy use went up by 38 percent, water use by 10 percent and GHG emissions by 6 percent.
-“There’s a complex relationship between diet and the environment,” Tom said. “What is good for us health-wise isn’t always what’s best for the environment. That’s important for public officials to know and for them to be cognizant of these tradeoffs as they develop or continue to develop dietary guidelines in the future.”
+施瓦辛格最近在联合国巴黎气候大会上的研究成为了近期的头条，但与他在演讲中的观点相反，素食确实会加剧气候变化。
+
+事实上，根据卡内基·梅隆大学的新研究，按照USDA的建议食用更多的水果、蔬菜、奶制品和海鲜食品对环境更加有害，因为生产这些食品所需要食用的资源相对较高，每卡路里导致的温室气体排放更多。这份研究已经发表在Environment Systems and Decisions杂志上。研究根据美国国内的食品消费规律，测量了各自在能源消耗、水足迹和温室气体排放方面的数据。
+
+“吃生菜排放的温室气体是吃培根的三倍以上，”Paul Fischbeck告诉我们。他是一位社会决策和公共政策方面的教授。“大部分的常见蔬菜每卡路里所需要的资源比你想象的要多。如果根据这个标准将茄子（Eggplant）、芹菜（celery）和黄瓜（cucumber）与猪肉或鸡肉进行对比，那三种蔬菜显得尤为糟糕。”
+
+Fischbeck带领多名团队成员对食品供应链进行了深入研究，试图确定肥胖症对环境的影响。具体来说，他们调查了食品生产、处理和运输，食品销售和服务，家庭存储和食用对资源的消耗情况，当然这里的资源消耗指的是耗电量、用水量和温室气体排放量。
+
+一方面，研究结果显示控制自身的体重并减少卡路里摄入，对环境有着积极影响，能够将食品供应链中产生的资源消耗降低大约9个百分点。
+
+但是，食用政府推荐的“更健康”的食物的话——包括水果、蔬菜、奶制品和海鲜——会提高三个方面的环境影响：耗电量上升38%，用水量上升10%，温室气体排放量增加6%。
+
+“饮食习惯与环境之间存在一种复杂的关系”，一名研究人员告诉我们。“对我们人类来说健康的饮食，并不一定就有利于环境。让政府官员明白这一点非常重要，这样他们才能在未来指定饮食指南时做到更加的科学、全面。”
