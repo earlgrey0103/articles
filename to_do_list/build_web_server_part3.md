@@ -367,7 +367,7 @@
 
     listen_socket.close()  # close child copy
 
-稍后，我会给大家介绍如果不关闭描述符副本的后果。
+稍后，我会给大家介绍如果不关闭重复的描述符的后果。
 
 从上面并行服务器的源代码可以看出，服务器父进程现在唯一的作用，就是接受客户端连接，`fork`一个新的子进程来处理该客户端连接，然后回到循环的起点，准备接受其他的客户端连接，仅此而已。服务器父进程并不会处理客户端请求，而是由它的子进程来处理。
 
@@ -389,7 +389,7 @@
 > - 系统内核通过描述符计数来决定是否关闭文件/套接字
 > - 服务器父进程的角色：它现在所做的只是接收来自客户端的新连接，`fork`一个子进程来处理该客户端的请求，然后回到循环的起点，准备接受新的客户端连接
 
-接下来，我们看看如果不关闭父进程和子进程中的套接字描述符副本，会发生什么情况。下面的并行服务器（webserver3d.py）作了一些修改，确保服务器不关闭描述符副本：
+接下来，我们看看如果不关闭父进程和子进程中的重复套接字描述符，会发生什么情况。下面的并行服务器（webserver3d.py）作了一些修改，确保服务器不关闭重复的：
 
     :::python
     ###########################################################################
@@ -453,7 +453,7 @@
 
 ![服务器不再睡眠，其子进程积极处理客户端请求](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_child_is_active.png)
 
-那么为什么`curl`命令会没有结束运行呢？原因在于文件描述符副本（duplicate file descriptor）。当子进程关闭客户端连接时，系统内核会减少客户端套接字的计数，变成了1。服务器子进程结束了，但是客户端套接字并没有关闭，因为那个套接字的描述符计数并没有变成0，导致系统没有向客户端发送终止包（termination packet，用TCP/IP的术语来说叫做FIN），也就是说客户端仍然在线。但是还有另一个问题。如果你一直运行的服务器不去关闭文件描述符副本，服务器最终就会耗光可用的文件服务器：
+那么为什么`curl`命令会没有结束运行呢？原因在于重复的文件描述符（duplicate file descriptor）。当子进程关闭客户端连接时，系统内核会减少客户端套接字的计数，变成了1。服务器子进程结束了，但是客户端套接字并没有关闭，因为那个套接字的描述符计数并没有变成0，导致系统没有向客户端发送终止包（termination packet，用TCP/IP的术语来说叫做FIN），也就是说客户端仍然在线。但是还有另一个问题。如果你一直运行的服务器不去关闭重复的文件描述符，服务器最终就会耗光可用的文件服务器：
 
 ![文件描述符](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_out_of_descriptors.png)
 
@@ -480,7 +480,7 @@
 
 从上面的结果中，我们可以看到：在我这台Ubuntu电脑上，服务器进程可以使用的文件描述符（打开的文件）最大数量为1024。
 
-现在，我们来看看如果服务器不关闭文件描述符副本，服务器会不会耗尽可用的文件描述符。我们在现有的或新开的终端窗口里，将服务器可以使用的最大文件描述符数量设置为256：
+现在，我们来看看如果服务器不关闭重复的文件描述符，服务器会不会耗尽可用的文件描述符。我们在现有的或新开的终端窗口里，将服务器可以使用的最大文件描述符数量设置为256：
 
     $ ulimit -n 256
 
@@ -544,72 +544,78 @@
         args = parser.parse_args()
         main(args.max_clients, args.max_conns)
 
+打开一个新终端窗口，运行`client3.py`，并让客户端创建300个与服务器的并行连接：
 
-In a new terminal window, start the client3.py and tell it to create 300 simultaneous connections to the server:
+    $ python client3.py --max-clients=300
 
-$ python client3.py --max-clients=300
-Soon enough your server will explode. Here is a screenshot of the exception on my box:
+很快你的服务器就会崩溃。下面是我的虚拟机上抛出的异常情况：
 
+![服务器连接过多](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_too_many_fds_exc.png)
 
+问题很明显——服务器应该关闭重复的描述符。但即使你关闭了这些重复的描述符，你还没有彻底解决问题，因为你的服务器还存在另一个问题，那就是僵尸进程！
 
-The lesson is clear - your server should close duplicate descriptors. But even if you close duplicate descriptors, you are not out of the woods yet because there is another problem with your server, and that problem is zombies!
+![僵尸进程](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_zombies.png)
 
+没错，你的服务器代码确实会产生僵尸进程。我们来看看这是怎么回事。再次运行服务器：
 
+    $ python webserver3d.py
 
-Yes, your server code actually creates zombies. Let’s see how. Start up your server again:
+在另一个终端窗口中运行下面的`curl`命令：
 
-$ python webserver3d.py
-Run the following curl command in another terminal window:
+    $ curl http://localhost:8888/hello
 
-$ curl http://localhost:8888/hello
-And now run the ps command to show running Python processes. This the example of ps output on my Ubuntu box:
+现在，我们运行`ps`命令，看看都有哪些正在运行的Python进程。下面是我的Ubuntu虚拟机中的结果：
 
-$ ps auxw | grep -i python | grep -v grep
-vagrant   9099  0.0  1.2  31804  6256 pts/0    S+   16:33   0:00 python webserver3d.py
-vagrant   9102  0.0  0.0      0     0 pts/0    Z+   16:33   0:00 [python] <defunct>
-Do you see the second line above where it says the status of the process with PID 9102 is Z+ and the name of the process is <defunct>? That’s our zombie there. The problem with zombies is that you can’t kill them.
+    $ ps auxw | grep -i python | grep -v grep
+    vagrant   9099  0.0  1.2  31804  6256 pts/0    S+   16:33   0:00 python webserver3d.py
+    vagrant   9102  0.0  0.0      0     0 pts/0    Z+   16:33   0:00 [python] <defunct>
 
+我们发现，第二行中显示的这个进程的PID为9102，状态是Z+，而进程的名称叫做`<defunct>`。这就是我们要找的僵尸进程。僵尸进程的问题在于你无法杀死它们。
 
+![僵尸进程无法被杀死](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_kill_zombie.png)
 
-Even if you try to kill zombies with $ kill -9 , they will survive. Try it and see for yourself.
+即使你试图通过`$ kill -9`命令杀死僵尸进程，它们还是会存活下来。你可以试试看。
 
-What is a zombie anyway and why does our server create them? A zombie is a process that has terminated, but its parent has not waited for it and has not received its termination status yet. When a child process exits before its parent, the kernel turns the child process into a zombie and stores some information about the process for its parent process to retrieve later. The information stored is usually the process ID, the process termination status, and the resource usage by the process. Okay, so zombies serve a purpose, but if your server doesn’t take care of these zombies your system will get clogged up. Let’s see how that happens. First stop your running server and, in a new terminal window, use the ulimit command to set the max user processess to 400(make sure to set open files to a high number, let’s say 500 too):
+到底什么是僵尸进程，服务器又为什么会创建这些进程？僵尸进程其实是已经结束了的进程，但是它的父进程并没有等待进程结束，所以没有接收到进程结束的状态信息。当子进程在父进程之前退出，系统就会将子进程变成一个僵尸进程，保留原子进程的部分信息，方便父进程之后获取。系统所保留的信息通常包括进程ID、进程结束状态和进程的资源使用情况。好吧，这样说僵尸进程也有自己存在的理由，但是如果服务器不处理好这些僵尸进程，系统就会堵塞。我们来看看是否如此。首先，停止正在运行的服务器，然后在新终端窗口中，使用`ulimit`命令将最大用户进程设置为400（还要确保将打开文件数量限制设置到一个较高的值，这里我们设置为500）。
 
-$ ulimit -u 400
-$ ulimit -n 500
-Start the server webserver3d.py in the same terminal where you’ve just run the $ ulimit -u 400 command:
+    $ ulimit -u 400
+    $ ulimit -n 500
 
-$ python webserver3d.py
-In a new terminal window, start the client3.py and tell it to create 500 simultaneous connections to the server:
+然后在同一个窗口中启动`webserver3d.py`服务器：
 
-$ python client3.py --max-clients=500
-And, again, soon enough your server will blow up with an OSError: Resource temporarily unavailable exception when it tries to create a new child process, but it can’t because it has reached the limit for the maximum number of child processes it’s allowed to create. Here is a screenshot of the exception on my box:
+    $ ulimit -u 400 command:
 
+    $ python webserver3d.py
 
+在新终端窗口中，启动客户端`client3.py`，让客户端创建500个服务器并行连接：
 
-As you can see, zombies create problems for your long-running server if it doesn’t take care of them. I will discuss shortly how the server should deal with that zombie problem.
+    $ python client3.py --max-clients=500
 
-Let’s recap the main points you’ve covered so far:
+结果，我们发现很快服务器就因为OSError而崩溃：这个异常指的是暂时没有足够的资源。服务器试图创建新的子进程时，由于已经达到了系统所允许的最大可创建子进程数，所以抛出这个异常。下面是我的虚拟机上的报错截图。
 
+![OSError异常](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc3_resource_unavailable.png)
 
+你也看到了，如果长期运行的服务器不处理好僵尸进程，将会出现重大问题。稍后我会介绍如何处理僵尸进程。
 
-If you don’t close duplicate descriptors, the clients won’t terminate because the client connections won’t get closed.
-If you don’t close duplicate descriptors, your long-running server will eventually run out of available file descriptors (max open files).
-When you fork a child process and it exits and the parent process doesn’t wait for it and doesn’t collect its termination status, it becomes a zombie.
-Zombies need to eat something and, in our case, it’s memory. Your server will eventually run out of available processes (max user processes) if it doesn’t take care of zombies.
-You can’t kill a zombie, you need to wait for it.
+我们先回顾一下目前已经学习的知识点：
 
-So what do you need to do to take care of zombies? You need to modify your server code to wait for zombies to get their termination status. You can do that by modifying your server to call a wait system call. Unfortunately, that’s far from ideal because if you call wait and there is no terminated child process the call to wait will block your server, effectively preventing your server from handling new client connection requests. Are there any other options? Yes, there are, and one of them is the combination of a signal handler with the wait system call.
+> - 如果你不关闭重复的文件描述符，由于客户端连接没有中断，客户端程序就不会结束。
+> - 如果你不关闭重复的文件描述符，你的服务器最终会消耗完可用的文件描述符（最大打开文件数）
+> - 当你`fork`一个子进程后，如果子进程在父进程之前退出，而父进程又没有等待进程，并获取它的结束状态，那么子进程就会变成僵尸进程。
+> - 僵尸进程也需要消耗资源，也就是内存。如果不处理好僵尸进程，你的服务器最终会消耗完可用的进程数（最大用户进程数）。
+> - 你无法杀死僵尸进程，你需要等待子进程结束。
 
+那么，你要怎么做才能处理掉僵尸进程呢？你需要修改服务器代码，等待僵尸进程返回其结束状态（termination status）。要实现这点，你只需要在代码中调用`wait`系统函数即可。不过，这种方法并不是最理想的方案，因为如果你调用`wait`后，却没有结束了的子进程，那么`wait`调用将会阻塞服务器，相当于阻止了服务器处理新的客户端请求。那么还有其他的办法吗？答案是肯定的，其中一种办法就是将`wait`函数调用与信号处理函数（signal handler）结合使用。
 
+![信号处理函数](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc4_signaling.png)
 
-Here is how it works. When a child process exits, the kernel sends a SIGCHLD signal. The parent process can set up a signal handler to be asynchronously notified of that SIGCHLD event and then it can wait for the child to collect its termination status, thus preventing the zombie process from being left around.
+这种方法的具体原理如下。当子进程退出时，系统内核会发送一个`SIGCHLD`信号。父进程可以设置一个信号处理函数，用于异步监测`SIGCHLD`事件，然后再调用`wait`，等待子进程结束并获取其结束状态，这样就可以避免产生僵尸进程。
 
+![SIGCHLD信号与wait函数结合使用](http://ruslanspivak.com/lsbaws-part3/lsbaws_part_conc4_sigchld_async.png)
 
+顺便说明一下，异步事件意味着父进程实现并不知道该事件是否会发生。
 
-By the way, an asynchronous event means that the parent process doesn’t know ahead of time that the event is going to happen.
-
-Modify your server code to set up a SIGCHLD event handler and wait for a terminated child in the event handler. The code is available in webserver3e.py file:
+接下来我们修改服务器代码，添加一个`SIGCHLD`事件处理函数，并在该函数中等待子进程结束。具体的代码见`webserver3e.py`文件：
 
     :::python
     ###########################################################################
@@ -671,25 +677,27 @@ Modify your server code to set up a SIGCHLD event handler and wait for a termina
         serve_forever()
 
 
-Start the server:
+启动服务器：
 
-$ python webserver3e.py
-Use your old friend curl to send a request to the modified concurrent server:
+    $ python webserver3e.py
 
-$ curl http://localhost:8888/hello
-Look at the server:
+再次使用`curl`命令，向修改后的并发服务器发送一个请求：
 
+    $ curl http://localhost:8888/hello
 
+我们来看服务器的反应：
 
-What just happened? The call to accept failed with the error EINTR.
+![修改后的并发服务器处理请求](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc4_eintr.png)
 
+发生了什么事？`accept`函数调用报错了。
 
+![accept函数调用失败](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc4_eintr.png)
 
-The parent process was blocked in accept call when the child process exited which caused SIGCHLD event, which in turn activated the signal handler and when the signal handler finished the accept system call got interrupted:
+子进程退出时，父进程被阻塞在`accept`函数调用的地方，但是子进程的退出导致了`SIGCHLD`事件，这也激活了信号处理函数。信号函数执行完毕之后，就导致了`accept`系统函数调用被中断：
 
+![accept调用被中断](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc4_eintr_accept.png)
 
-
-Don’t worry, it’s a pretty simple problem to solve, though. All you need to do is to re-start the accept system call. Here is the modified version of the server webserver3f.py that handles that problem:
+别担心，这是个非常容易解决的问题。你只需要重新调用`accept`即可。下面我们再修改一下服务器代码（webserver3f.py），就可以解决这个问题：
 
     :::python
     ###########################################################################
@@ -754,36 +762,39 @@ Don’t worry, it’s a pretty simple problem to solve, though. All you need to 
     if __name__ == '__main__':
         serve_forever()
 
+启动修改后的服务器：
 
-Start the updated server webserver3f.py:
+    $ python webserver3f.py
 
-$ python webserver3f.py
-Use curl to send a request to the modified concurrent server:
+通过`curl`命令向服务器发送一个请求：
 
-$ curl http://localhost:8888/hello
-See? No EINTR exceptions any more. Now, verify that there are no more zombies either and that your SIGCHLD event handler with wait call took care of terminated children. To do that, just run the ps command and see for yourself that there are no more Python processes with Z+ status (no more <defunct> processes). Great! It feels safe without zombies running around.
+    $ curl http://localhost:8888/hello
 
+看到了吗？没有再报错了。现在，我们来确认下服务器没有再产生僵尸进程。只需要运行`ps`命令，你就会发现没有Python进程的状态是Z+了。太棒了！没有僵尸进程捣乱真是太好了。
 
+![checkpoint](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_checkpoint.png)
 
-If you fork a child and don’t wait for it, it becomes a zombie.
-Use the SIGCHLD event handler to asynchronously wait for a terminated child to get its termination status
-When using an event handler you need to keep in mind that system calls might get interrupted and you need to be prepared for that scenario
+> - 如果你fork一个子进程，却不等待进程结束，该进程就会变成僵尸进程。
+> - 使用`SIGCHLD`时间处理函数来异步等待进程结束，获取其结束状态。
+> - 使用事件处理函数时，你需要牢记系统函数调用可能会被中断，要做好这类情况发生得准备。
 
-Okay, so far so good. No problems, right? Well, almost. Try your webserver3f.py again, but instead of making one request with curl use client3.py to create 128 simultaneous connections:
+好了，目前一切正常。没有其他问题了，对吗？呃，基本上是了。再次运行`webserver3f.py`，然后通过`client3.py`创建128个并行连接：
 
-$ python client3.py --max-clients 128
-Now run the ps command again
+    $ python client3.py --max-clients 128
 
-$ ps auxw | grep -i python | grep -v grep
-and see that, oh boy, zombies are back again!
+现在再次运行`ps`命令：
 
+    $ ps auxw | grep -i python | grep -v grep
 
+噢，糟糕！僵尸进程又出现了！
 
-What went wrong this time? When you ran 128 simultaneous clients and established 128 connections, the child processes on the server handled the requests and exited almost at the same time causing a flood of SIGCHLD signals being sent to the parent process. The problem is that the signals are not queued and your server process missed several signals, which left several zombies running around unattended:
+![僵尸进程又出现了](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc5_zombies_again.png)
 
+这次又是哪里出了问题？当你运行128个并行客户端，建立128个连接时，服务器的子进程处理完请求，几乎是同一时间退出的，这就触发了一大波的`SIGCHLD`信号发送至父进程。但问题是这些信号并没有进入队列，所以有几个信号漏网，没有被服务器处理，这就导致出现了几个僵尸进程。
 
+![部分信号没有被处理，导致出现僵尸进程](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc5_signals_not_queued.png)
 
-The solution to the problem is to set up a SIGCHLD event handler but instead of wait use a waitpid system call with a WNOHANG option in a loop to make sure that all terminated child processes are taken care of. Here is the modified server code, webserver3g.py:
+这个问题的解决方法，就是在`SIGCHLD`事件处理函数使用`waitpid`，而不是`wait`，再调用`waitpid`时增加`WNOHANG`选项，确保所有退出的子进程都会被处理。下面就是修改后的代码，webserver3g.py：
 
     :::python
     ###########################################################################
@@ -857,24 +868,25 @@ The solution to the problem is to set up a SIGCHLD event handler but instead of 
     if __name__ == '__main__':
         serve_forever()
 
+启动服务器：
 
-Start the server:
+    $ python webserver3g.py
 
-$ python webserver3g.py
-Use the test client client3.py:
+使用客户端`client3.py`进行测试：
 
-$ python client3.py --max-clients 128
-And now verify that there are no more zombies. Yay! Life is good without zombies :)
+    $ python client3.py --max-clients 128
 
+现在请确认不会再出现僵尸进程了。
 
+![不会再出现僵尸进程了](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc5_no_zombies.png)
 
-Congratulations! It’s been a pretty long journey but I hope you liked it. Now you have your own simple concurrent server and the code can serve as a foundation for your further work towards a production grade Web server.
+恭喜大家！现在已经自己开发了一个简易的并发服务器，这个代码可以作为你以后开发生产级别的网络服务器的基础。
 
-I’ll leave it as an exercise for you to update the WSGI server from Part 2 and make it concurrent. You can find the modified version here. But look at my code only after you’ve implemented your own version. You have all the necessary information to do that. So go and just do it :)
+最后给大家留一个练习题，把第二部分中的WSGI修改为并发服务器。最终的代码可以在这里查看。不过请你在自己实现了之后再查看。
 
-What’s next? As Josh Billings said,
+接下来该怎么办？借用乔希·比林斯（19世纪著名幽默大师）的一句话：
 
-“Be like a postage stamp — stick to one thing until you get there.”
-Start mastering the basics. Question what you already know. And always dig deeper.
+> 要像一张邮票，坚持一件事情直到你到达目的地。
 
+![坚持就是胜利](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_dig_deeper.png)
 
