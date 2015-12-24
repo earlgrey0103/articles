@@ -1,9 +1,6 @@
 > 原文链接：[http://ruslanspivak.com/lsbaws-part3/](http://ruslanspivak.com/lsbaws-part3/)
 > 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-three/](http://codingpy.com/article/build-a-simple-web-server-part-three/)
 
-
-“We learn most when we have to invent” —Piaget
-
 在第二部分中，你开发了一个能够处理HTTPGET请求的简易WSGI服务器。在上一篇的最后，我问了你一个问题：“怎样让服务器一次处理多个请求？”读完本文，你就能够完美地回答这个问题。接下来，请你做好准备，因为本文的内容非常多，节奏也很快。文中的所有代码都可以在[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part3/)下载。
 
 首先，我们简单回忆一下简易网络服务器是如何实现的，服务器要处理客户端的请求需要哪些条件。你在前面两部分文章中开发的服务器，是一个迭代式服务器（iterative server），还只能一次处理一个客户端请求。只有在处理完当前客户端请求之后，它才能接收新的客户端连接。这样，有些客户端就必须要等待自己的请求被处理了，而对于流量大的服务器来说，等待的时间就会特别长。
