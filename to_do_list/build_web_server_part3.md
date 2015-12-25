@@ -1,7 +1,9 @@
-> 原文链接：[http://ruslanspivak.com/lsbaws-part3/](http://ruslanspivak.com/lsbaws-part3/)
-> 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-three/](http://codingpy.com/article/build-a-simple-web-server-part-three/)
+本系列共分三部分，前两部分链接如下：
 
-在第二部分中，你开发了一个能够处理HTTPGET请求的简易WSGI服务器。在上一篇的最后，我问了你一个问题：“怎样让服务器一次处理多个请求？”读完本文，你就能够完美地回答这个问题。接下来，请你做好准备，因为本文的内容非常多，节奏也很快。文中的所有代码都可以在[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part3/)下载。
+- [《自己动手开发网络服务器（一）](http://codingpy.com/article/build-a-simple-web-server-part-one/)
+- [《自己动手开发网络服务器（二）](http://codingpy.com/article/build-a-simple-web-server-part-two/)
+
+在[第二部分](http://codingpy.com/article/build-a-simple-web-server-part-two/)中，你开发了一个能够处理HTTPGET请求的简易WSGI服务器。在上一篇的最后，我问了你一个问题：“怎样让服务器一次处理多个请求？”读完本文，你就能够完美地回答这个问题。接下来，请你做好准备，因为本文的内容非常多，节奏也很快。文中的所有代码都可以在[Github仓库](https://github.com/rspivak/lsbaws/blob/master/part3/)下载。
 
 首先，我们简单回忆一下简易网络服务器是如何实现的，服务器要处理客户端的请求需要哪些条件。你在前面两部分文章中开发的服务器，是一个迭代式服务器（iterative server），还只能一次处理一个客户端请求。只有在处理完当前客户端请求之后，它才能接收新的客户端连接。这样，有些客户端就必须要等待自己的请求被处理了，而对于流量大的服务器来说，等待的时间就会特别长。
 
@@ -195,7 +197,7 @@
 
 在上面的示例中，我们看到内核为套接字指定的临时端口是60589。
 
-在开始回答第二部分最后提的问题之前，我需要快速介绍一些其他的重要概念。稍后你就会明白我为什么要这样做。我要介绍的重要概念就是进程（process）和文件描述符（file descriptor）。
+在开始回答[第二部分](http://codingpy.com/article/build-a-simple-web-server-part-two/)最后提的问题之前，我需要快速介绍一些其他的重要概念。稍后你就会明白我为什么要这样做。我要介绍的重要概念就是进程（process）和文件描述符（file descriptor）。
 
 什么是进程？进程就是正在执行的程序的一个实例。举个例子，当服务器代码执行的时候，这些代码就被加载至内存中，而这个正在被执行的服务器的实例就叫做进程。系统内核会记录下有关进程的信息——包括进程ID，以便进行管理。所以，当你运行迭代式服务器`webserver3a.py`或`webserver3b.py`时，你也就开启了一个进程。
 
@@ -271,7 +273,7 @@
 > - 文件描述符（File descriptors）
 > - 套接字对象的`listen`方法中`BACKLOG`参数的意义
 
-现在，我可以开始回答第二部分留下的问题了：如何让服务器一次处理多个请求？换句话说，如何开发一个并发服务器？
+现在，我可以开始回答[第二部分](http://codingpy.com/article/build-a-simple-web-server-part-two/)留下的问题了：如何让服务器一次处理多个请求？换句话说，如何开发一个并发服务器？
 
 ![并发服务器手绘演示](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_conc2_service_clients.png)
 
@@ -879,7 +881,7 @@
 
 恭喜大家！现在已经自己开发了一个简易的并发服务器，这个代码可以作为你以后开发生产级别的网络服务器的基础。
 
-最后给大家留一个练习题，把第二部分中的WSGI修改为并发服务器。最终的代码可以在这里查看。不过请你在自己实现了之后再查看。
+最后给大家留一个练习题，把[第二部分](http://codingpy.com/article/build-a-simple-web-server-part-two/)中的WSGI修改为并发服务器。最终的代码可以在这里查看。不过请你在自己实现了之后再查看。
 
 接下来该怎么办？借用乔希·比林斯（19世纪著名幽默大师）的一句话：
 
@@ -887,3 +889,7 @@
 
 ![坚持就是胜利](http://ruslanspivak.com/lsbaws-part3/lsbaws_part3_dig_deeper.png)
 
+
+
+> 原文链接：[http://ruslanspivak.com/lsbaws-part3/](http://ruslanspivak.com/lsbaws-part3/)
+> 译文链接：[http://codingpy.com/article/build-a-simple-web-server-part-three/](http://codingpy.com/article/build-a-simple-web-server-part-three/)
