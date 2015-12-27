@@ -1,6 +1,7 @@
 # 程序员Printf的故事：我们为什么编程？
 
-> 原文：http://ferd.ca/the-little-printf.html
+> 全系列的简介
+> - 原文：http://ferd.ca/the-little-printf.html
 ![程序员Printf的故事，封面](http://ferd.ca/static/img/printf/printf.png)
 
 > [下一章](http://codingpy.com/article/story-of-little-printf-chapter2/)
@@ -33,7 +34,7 @@
 
 我必须要学习“真正的编程”。从GUI工具集中的JScript，转型到更好的语言，比如说PHP。所以，我学习了PHP，还有JavaScript。然后，又有人告诉我怎样才算是真正的编程；PHP糟透了。有人说，我或许可以尝试下Python，我后来也学了。
 
-但是，真正的程序员懂得更加高深的东西，Python的lambdas还够不上，面向对象编程也不是你想走的方向。别人跟我说，接下来你最好读一读SICP（计算机程序的构造和解释），因为这本书就像是计算机科学领域的圣经。
+但是，真正的程序员懂得更加高深的东西，Python的lambdas还够不上，面向对象编程也不是你想走的方向。别人跟我说，接下来你最好读一读SICP（计算机程序的构造和解释），因为这本书就是计算机科学领域的圣经。
 
 ![计算机程序的构造和解释这本书的封面](http://ferd.ca/static/img/printf/sicp.png)
 

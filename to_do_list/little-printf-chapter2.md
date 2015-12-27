@@ -3,42 +3,44 @@
 > -[上一章](http://codingpy.com/article/story-of-little-printf-chapter1/)
 > -[下一章](http://codingpy.com/article/story-of-little-printf-chapter3/)
 
-So I lived my life flying around the world, telling people how to do things I had sometimes never done myself, while everyone suddenly seemed to believe I was a real programmer because of things I did that were mostly not related to programming in the first place.
-One day, I was stuck in an airport coming back from a conference, furiously typing at a terminal, when an odd, gentle voice asked me:
-If you please, design me a system!
-What?!
-Design me a system!
-I looked up from my screen, surprised by the request. I looked around and saw this kid who aspired to be a developer and wanted me to call him "printf", which I felt was very stupid and gimmicky. He looked a bit like this:
+就这样，我开始满世界地演讲，叫人怎么去做一些有时候我自己都没有做过的事情，不过大家似乎都相信了我是一名真正的程序员，而理由正是我做的那些与编程没有太大关系的事。
 
-![](http://ferd.ca/static/img/printf/printf-nocover.png)
+有一天，我参加完一个会议准备回家，但却被困在了机场。我愤怒地在终端上打字，突然有一个奇怪、柔和的声音问我：
 
-little printf, with a red and yellow tuque, similarly colored scarf, green coat, red mittens, and beige-yellow pants, standing in snow with a broken laptop at his sides
+你能不能，为我设计一个系统？！
 
-I don't know computers much yet, but it seems you do. I want to write programs and blog about them and have people use and read them. Please, design me a system!
+什么？！
 
-Now that was a surprising request, and I had been awake for 20 hours by then, not too sure I fully understood or felt like it. I told him systems were hard. I didn't know what he wanted to do, how he wanted it to fail, how many readers it should support, where he'd want to host it, and I could therefore not design a proper system with so little information.
+为我设计一个系统！
 
-That doesn't matter. Design me a system.
+这样的请求让我吃惊，抬起头想看看是谁提的。我看了看四周，发现有一个小孩站在不远处。他渴望成为一名开发者，还让我叫他“printf”。我觉得这个名字有点愚蠢、花哨。他的样子大概是这样的：
 
-So I made the following architecture diagram:
+![Printf的长相和穿着](http://ferd.ca/static/img/printf/printf-nocover.png)
+
+我还不太懂计算机，但是你看上去是个行家。我想编写程序，通过博客让大家都知道，用上我写的程序。求求你，为我设计一个系统！
+
+这真的是一个令人惊讶的请求，那个时候我已经有20个小时没有睡觉了，有点不确定自己听清楚了他的话。我跟他说，开发系统很困难。我不清楚他希望系统实现哪些功能，如何处理异常，应该支持多少个读者，在哪里部署，所以在这种情况下，我没办法给他设计一个良好的系统。
+
+那个没关系。只要给我设计一个系统就行。
+
+没办法，我给他画了下面这个架构图：
 
 ![somewhat complex architecture diagram](http://ferd.ca/static/img/printf/arch1.png)
 
-
-He looked at it and said No, this system is not good enough. Make me another.
-So I did:
-
+他看了看图，摇头说到，这个系统还不够好。再设计一个吧。我照做了：
 
 ![a rather complex architecture diagram](http://ferd.ca/static/img/printf/arch2.png)
 
-and I gave him a rundown of how it would work.
-My new friend smiled politely. That is not what I want, it's way too complex and does a lot of stuff I don't need
-I felt a bit insulted, having considered redundancy, monitoring, backups, caches and other mechanisms to reduce load, external payment processor for legal protection, failovers, easy deployment, and so on. I could have charged decent money as a consulting fee for that! Out of patience, I just drew this:
+并给他逐一介绍了背后的原理。
+
+我这个新朋友礼貌地笑了笑，说到：这并不是我想要的，它太复杂了，很多功能都不是我需要的。
+
+我有点不高兴，我可是考虑了冗余、监控、备份、缓存与减少负载的其他机制、外部支付、故障切换备份、快速部署等诸多因素。光是这份系统设计，我就能收一笔不少的咨询费！终于没了耐心，我就随便给他画了张图：
 
 ![a black box with the text 'enjoy!' written under.](http://ferd.ca/static/img/printf/blackbox.png)
 
-And I added: this is your design. The system you want is inside the black box, hoping this shitty answer would have him leave me alone. But I was surprised to hear back:
+然后补充道，这就是你要的设计。你所要的系统就在那个黑盒子里，心想这个乱七八糟的答案会让他离我远点。但是他的回答再次让我感到惊讶：
 
-That is exactly the way I wanted it!
+这就是我想要的设计！
 
-And that is how I made the acquaintance of the little printf.
+就这样，我认识了小Printf。

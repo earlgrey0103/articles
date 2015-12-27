@@ -3,15 +3,20 @@
 > -[上一章](http://codingpy.com/article/story-of-little-printf-chapter2/)
 > -[下一章](http://codingpy.com/article/story-of-little-printf-chapter4/)
 
-Chapter 3
+我很快就弄清楚了这个小家伙目前的成果。他的仓库里面只有一些小程序，带有表格的简单网页以及一些命令行脚本。它们都没有什么出彩的地方，创建之后，也会很快被删除。
 
-I soon learned of this little guy's portfolio. In his repositories were only small programs, simple web pages with forms, trivial command line utils. They would be unspectacular, would come into being, and no sooner disappear.
-Then at some point, he started working on a bigger program, that used multiple modules. It needed sockets, accessed the disk, talked to an actual database. When it first built and ran properly, little printf was amazed. But the program was not enough yet.
-It needed refactorings, better tests, documentation, linting and analysis. The program would run for a while, and one morning, it crashed.
-And it crashed again, and again.
-The configurations were wrong, the logs would not rotate, the disk had unpredictable speed, the network would get the hiccups, bugs would show up, the encodings would be confused, the database needed vacuuming, transactions would hang, certificates would expire, CVEs would keep coming, and the metrics would remain silent.
-a plate of meatball spaghetti
-It kept turning to Spaghetti.
-He told me: the fact is I didn't know anything! I ought to have judged by my needs. I got the hubris of writing a fancy system, and I spent so much time fixing it, it felt like it cancelled the time it saved me. Still, I should have known what a wonderful thing it was.
-One morning, he decided to leave his office. Goodbye, he said to a blinkenlight that seemed to have burnt out. He left to see what the world of software had to offer aside from his messy little server.
-The logs would keep accumulating, until the hard drive would fill no more.
+后来，他开始编写一个更大的程序，这个程序用到了多个模块。它需要使用套接字，访问磁盘，并与真正的数据库进行交互。当程序第一次构建完，正常运行的时候，小Printf高兴地跳了起来。但是这个程序还不够好。
+
+它需要进行重构，编写更好的测试脚本、文档、lint检查和分析。程序运行一段时候，一天早上突然就崩溃了。
+
+然后，又不断出现崩溃的情况。
+
+程序的设置是错误的，日志文件没有轮转（rotate），磁盘读写速度不稳定，网络也会时不时中断，总是会出现各种故障，程序编码也被弄混了，数据库没有定期vacuum，导致数据库交易挂死；证书最终过期，不断出现通用漏洞（CVE）。
+
+总之，程序总是会变得一团糟。
+
+他告诉我说：看来我还什么都不懂！我本应该满足完自己的需求就好了。但是我慢慢地因为编写了一个不错的系统而自大，我花了那么多时间去打补丁，甚至是已经抵消掉了程序为我节省的时间。
+
+一天早上，他决定离开自己的办公室。再见了，他对着那个似乎已经油尽灯枯的blinkenlight说道。他要走出去，看看软件世界除了自己乱糟糟的服务器之外，都有着什么精彩之处。
+
+他离开之后，原来那个程序的日志会越积越大，直到硬盘空间被耗尽。

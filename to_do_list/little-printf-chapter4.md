@@ -3,26 +3,44 @@
 > -[上一章](http://codingpy.com/article/story-of-little-printf-chapter3/)
 > -[下一章](http://codingpy.com/article/story-of-little-printf-chapter5/)
 
-Chapter 4
-a building
-He went to a workspace, looking for experienced developers from whom to get tips and help.
-The first one he met was a very proud senior engineer who seemed to feel rather superior.
-a balding man in a suit, with thick glasses
-Ah, here comes a learner! Welcome to my domain, of which I am the expert he said.
-An expert? Little printf asked. Does this mean you can program anything and everything?
-Yes! the expert answered. He added Well almost; I only program programs that are worth programming. I don't lose my time on trivialities. Many programs I have never written but could write with all the ease in the world.
-Ah, so could you help me with my system? As soon as the little printf started explaining his business, the domain expert interrupted him:
-I'm sorry, but I don't really see the point of doing that.
-Why not?
-Experience. I am good at programming the things I program, and I program things I am good at. By getting better at this fairly restricted set of things I'm already good at, I make sure I'm more valuable than ever at it. Call it job security, call it survival of the fittest, but that's how I roll.
-And why can't you help me?
-Well you see, taking my time away to help you means I divert important self-investment into furthering the progress of others — that's a losing strategy for me. The best way to learn for you is the way I took myself: struggle very hard and figure it out yourself. It helps forge character.
-That doesn't seem very efficient...
-Well you can go to school and learn, or you can learn on your own. Really what it does is weed out the lazy people who just want it easy, and forces everyone who stays here to be those who really deserve it. The moment we let moochers in, the very value of the work I produce goes down with it.
-Do you not think cooperation or colleagues could help you?
-Not really. I work best when left alone and not being distracted. Every time I end up forced working with others, it's nigh impossible to get our stuff working together. Out of exasperation, I grab their work and rewrite most of it in a sane way; then it works right.
-Little printf was surprised to meet an expert who seemed so disinterested in helping others, yet so annoyed by their perceived lack of skill. It was a bit sad that this man narrowed his vision of himself to just the one area he knew, to the point where he didn't do anything else than create problems for himself to fix!
-I see... well I guess I'm happy you won't give me your help, said my little friend
-What do you mean? asked the meritocratic man, whose value seemed suddenly downgraded. Don't you think the work I do is interesting?
-Oh that I do. It just seems like you would see me as a hindrance and annoyance more than anything else, and what I am looking for is help, not affliction.
-And little printf left swiftly, leaving the expert to realize he had made himself untouchable in more ways than just his job security.
+![a building]()
+
+他来到了软件公司，希望能从经验丰富的开发者那里得到建议和帮助。
+
+他碰到的第一个人是一位非常自傲的资深工程师，自我感觉非常良好。
+
+![a balding man in a suit]()
+
+啊哈，来了个学徒！欢迎来到我的领域，我就是这里的专家，他说道。
+
+专家？小Printf问到。那是不是说你能够编写出任何程序？
+
+没错！这位专家答道。又补充了一句，差不多吧；我只编写那些值得编写的程序。我不会在小玩意上浪费时间。有很多程序我都没去开发，但是只要我去做，就能够不费吹灰之力完成。
+
+那你能不能帮我改进下系统？小Printf刚开始解释没多久，这位专家就打断了他：
+
+抱歉，但我不明白这样做有什么意义。
+
+为什么没意义？
+
+经验。我擅长编写我开发的东西，我只编写我擅长的领域。通过在这个小领域内不断地提升，我确保了自己的价值会越来越高。你可以称之为职业保障，或是适者生存，但这就是我选择的方式。
+
+那为什么你不能帮我？
+
+你看啊，我花时间去帮你，就意味着我将自我投资的重要时间，转移到了便利他人上面 ——这在我看来是吃力不讨好的。你最好的学习之路就是按照我的方式来：努力尝试，自己弄懂。这样还可以锻炼你的心性。
+
+那样似乎效率不太高...
+
+那你可以上学嘛，或者自己自学。事实上这种方法还可以剔除那些想要不劳而获的懒人，确保每个人都是有真才实学的。我们一旦让招摇撞骗的人进了这行，那我自己工作的价值就会被贬低。
+
+你不觉得与人合作或同事也能帮助你吗？
+
+不觉得。没人打扰我的时候，工作效率最高。每次我不得不和别人合作，几乎都没办法输出成果。只能气急败坏之下，把他们的代码拿过来，重写；这样，程序才正常。
+
+小Printf没想到自己居然碰到了一个对帮助他人毫无兴趣的专家，不仅如此，他还觉得别人技术不行。可悲的是，这个人将自己限制在了自己所知的这一个领域，甚至是除了给自己制造问题之外，就不再做别的事了！
+
+我明白了...我觉得自己有点庆幸你没有帮我，我的小伙伴说。
+
+你这是什么意思？自视甚高的这个工程师问到，似乎自己的价值一下就被贬低了很多。你难道不认为我所做的工作十分有趣吗？
+
+这个我同意。只是觉得你会把我看作一个阻碍，和别人一样让你讨厌。而我需要的别人的帮助，不是伤害。小Printf很快地离开了，因为他知道这位专家已经将自己变得无法接近。
