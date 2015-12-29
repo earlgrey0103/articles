@@ -2,7 +2,7 @@
 
 > 原作者Fred Hebert，是一名加拿大程序员，写过一本Erlang入门书籍。这个故事的英文名叫The Little Printf，是他在今年10月份芝加哥的CityCode大会上所做的一次分享的内容，模仿了法国经典名著《小王子》，其中夹杂着他自己学习编程的一些经历。这个短篇故事一共有11章，其中的插画按照作者的介绍，应该是他自己画的。想看原作者分享的朋友可以前往[YouTube](https://youtu.be/EWdqtMdcNkE)。译文如有不妥之处，请大家指正！
 
-> - [下一章](http://codingpy.com/article/story-of-little-printf-chapter2/)
+> - [下一章](http://codingpy.com/article/the-little-printf-chapter02/)
 
 ![小Printf的编程故事，封面](http://ferd.ca/static/img/printf/printf.png)
 
