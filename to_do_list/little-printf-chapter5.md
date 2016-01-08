@@ -1,7 +1,9 @@
+-[第一章](http://codingpy.com/article/the-little-printf-chapter01/)
+-[第二章](http://codingpy.com/article/the-little-printf-chapter02/)
+-[第三章](http://codingpy.com/article/the-little-printf-chapter03/)
+
 ## 第五章
 
-> -[上一章](http://codingpy.com/article/story-of-little-printf-chapter4/)
-> -[下一章](http://codingpy.com/article/story-of-little-printf-chapter6/)
 
 Chapter 5
 a man sitting at his desk in front of multiple filled bookcases
