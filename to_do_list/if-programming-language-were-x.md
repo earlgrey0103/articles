@@ -41,6 +41,7 @@ https://www.topcoder.com/blog/if-programming-languages-were-beer/
 ## 哈利波特中的角色
 http://heeris.id.au/2014/if-programming-languages-were-harry-potter-characters/
 http://www.codeceo.com/article/if-programming-languages-were-harry-potter-characters.html
+
 ## 一起吃饭
 http://pythonforengineers.com/programming-languages-come-dinner/
 
