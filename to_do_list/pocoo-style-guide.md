@@ -1,4 +1,8 @@
-# Flask开发团队Pocoo的编码风格指南
+# Flask开发团队Pocoo的内部编码风格指南
+
+- 关键词：Flask开发团队, Python编码风格, 良好的编码风格, 如何编写规范的Python代码, PEP8, 怎么编写Python文档
+
+> 如何编写规范的Python代码？Python开发文档又该怎样写？Python官方提供的编码风格指南——PEP 8中，明确回答了上述两个问题。PEP 8内容虽然广泛， 但是大部分开发团队并没有止步于PEP 8中的要求。像Flask框架的开发团队Pocoo，就是在此基础上，编写了自己内部的编码规范，对PEP 8中的规定作了细微的调整，并进行了扩展延伸。我们一起来看看Pocoo团队会给出怎样的答案呢。（另外，也可以参考本站编译的[Python开发指南：最佳实践精选](http://codingpy.com/article/bobp-guide-for-python-development/)一文，学习一些Python开发中的最佳实践。）
 
 ## Pocoo Team简介
 
@@ -8,13 +12,13 @@ Pocoo团队的成员来自Python社区，统一以Pocoo的名义参与多个Pyth
 
 Pocoo团队开发了许多广受欢迎的项目，其中包括：
 
-- Flask微网络开发框架
-- Jinja2模板引擎
-- Pygements语法高亮包
-- Sphinx文档处理器
-- Werzeug WSGI工具集
+- [Flask](http://www.pocoo.org/projects/flask/#flask)微网络开发框架
+- [Jinja2](http://www.pocoo.org/projects/jinja2/#jinja2)模板引擎
+- [Pygments](http://www.pocoo.org/projects/pygments/#pygments)语法高亮包
+- [Sphinx](http://www.pocoo.org/projects/sphinx/#sphinx)文档处理器
+- [Werzeug](http://www.pocoo.org/projects/werkzeug/#werkzeug) WSGI工具集
 
-Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Pocoo编码风格指南严格遵循了PEP8的要求，但略有一些不同之处，并进行了一定的扩展延伸。
+Pocoo团队编码风格指南适用于所有Pocoo团队的项目。总体来说，Pocoo团队编码风格指南严格遵循了[PEP8](http://www.python.org/dev/peps/pep-0008)的要求，但略有一些不同之处，并进行了一定的扩展延伸。
 
 ## 代码布局（General Layout）
 
@@ -28,7 +32,7 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
 
 ### 长语句换行
 
-编写长语句时，可以使用续行符（\）换行。在这种情况下，下一行应该与上一行的最后一个“.”句点或“=”对齐，或者是缩进4个空格符：
+编写长语句时，可以使用换行符（\）换行。在这种情况下，下一行应该与上一行的最后一个“.”句点或“=”对齐，或者是缩进4个空格符：
 
     :::python
     this_is_a_very_long(function_call, 'with many parameters') \
@@ -53,7 +57,7 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
 
 ### 空行
 
-顶层的函数与类之间空两行，此外都只空一行。不要再代码中使用太多的空行来区分不同的逻辑模块。
+顶层函数与类之间空两行，此外都只空一行。不要在代码中使用太多的空行来区分不同的逻辑模块。
 
 示例：
 
@@ -83,6 +87,7 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
 
 好风格：
 
+    :::python
     exp = -1.05
     value = (item_value / item_count) * offset / exp
     value = my_list[index]
@@ -90,6 +95,7 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
 
 坏风格：
 
+    :::python
     exp = - 1.05
     value = ( item_value / item_count ) * offset / exp
     value = (item_value/item_count)*offset/exp
@@ -97,59 +103,57 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
     value = my_list[ index ]
     value = my_dict ['key']
 
-不能编写尤达语句（Yoda Statements，指的是类似星战中尤达大师那样调到句子的正常顺序）：
+### 不能编写尤达语句（Yoda Statements，指的是类似星战中尤达大师那样颠倒句子的正常顺序）：
 
-不要拿常量与变量进行对比，应该拿变量与常量进行对比：
+不要拿常量与变量进行对比，应该拿变量与常量进行对比。
 
 好风格：
 
+    :::python
     if method == 'md5':
         pass
 
 坏风格：
 
+    :::python
     if 'md5' == method:
         pass
 
-比较：
+### 比较：
 
-- 任意类型之间的比较，使用“==”和“！=”。
-- 单例（singletons）之间的比较，使用`is`和`is not`。
-- 永远不要与`True`或`False`进行对比（例如，不要这样写：`foo == False`，而应该这样写：`not foo`）。
+- 任意类型之间的比较，使用“==”和“!=”。
+- 与单例（singletons）进行比较时，使用`is`和`is not`。
+- 永远不要与`True`或`False`进行比较（例如，不要这样写：`foo == False`，而应该这样写：`not foo`）。
 
-否定成员关系检查：
+### 否定成员关系检查：
 
 使用`foo not in bar`，而不是`not foo in bar`。
 
-实例检查：
+### 实例检查：
 
 使用`isinstance(a, C)，而不是`type(a) is C`。但是一般要避免做实例检查。建议检查实例的特性。
 
 ## 命名规范
 
-类名称：采用骆驼拼写法（CamelCase），首字母缩略词保持大写不变（`HTTPWriter`，而不是`HttpWriter`）。
-
-变量名：小写_以及_下划线（lowercase_with_underscores）。
-
-方法与函数名：小写_以及_下划线（lowercase_with_underscores）。
-
-常量：大写_以及_下划线（UPPERCASE_WITH_UNDERSCORES）。
-
-预编译的正则表达式：name_re。
+- 类名称：采用骆驼拼写法（CamelCase），首字母缩略词保持大写不变（`HTTPWriter`，而不是`HttpWriter`）。
+- 变量名：小写_以及_下划线（lowercase_with_underscores）。
+- 方法与函数名：小写_以及_下划线（lowercase_with_underscores）。
+- 常量：大写_以及_下划线（UPPERCASE_WITH_UNDERSCORES）。
+- 预编译的正则表达式：name_re。
 
 受保护的元素以一个下划线为前缀。双下划线前缀只有定义混入类（mixin classes）时才使用。
 
-如果使用关键词（keywords）作为类名称，应在名称后添加后置下划线（trailing underscore）。允许与内建变量重名，不要在变量名后添加下划线进行区分。如果函数需要访问重名的内建变量，请将内建变量重新绑定为其他名称。
+如果使用关键词（keywords）作为类名称，应在名称后添加后置下划线（trailing underscore）。允许与内建变量重名，**不要**在变量名后添加下划线进行区分。如果函数需要访问重名的内建变量，请将内建变量重新绑定为其他名称。
 
 函数和方法的参数：
 
 - 类方法：`cls`为第一个参数。
 - 实例方法：`self`为第一个参数。
-- property函数中使用匿名函数（lambdas）时，第一个参数可以用`x`替代，例如：`display_name = property(lambda x: x.real_name or x.username)`。
+- property函数中使用匿名函数（lambdas）时，匿名函数的第一个参数可以用`x`替代，例如：`display_name = property(lambda x: x.real_name or x.username)`。
 
 ## 文档字符串
 
-文档字符串规范：
+### 文档字符串规范：
 
 所有文档字符串均以reStructuredText格式编写，方便Sphinx处理。文档字符串的行数不同，布局也不一样。如果只有一行，代表字符串结束的三个引号与代表字符串开始的三个引号在同一行。如果为多行，文档字符串中的文本紧接着代表字符串开始的三个引号编写，代表字符串结束的三个引号则自己独立成一行。
 
@@ -165,7 +169,7 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
 
 一般来说，文档字符串应分成简短摘要（尽量一行）和详细介绍。如果必要的话，摘要与详细介绍之间空一行。
 
-模块头部：
+### 模块头部：
 
 模块文件的头部包含有utf-8编码声明（如果模块中使用了非ASCII编码的字符，建议进行声明），以及标准的文档字符串。
 
@@ -192,4 +196,11 @@ Pocoo编码风格指南适用于所有Pocoo团队的项目。总体来说，Poco
         #: the sha1 hash of the password + inline salt
         pw_hash = Column(String)
 
-http://www.pocoo.org/internal/styleguide/
+- 原文链接：http://www.pocoo.org/internal/styleguide/
+- 译者：EarlGrey@[编程派](http://codingpy.com)
+
+**欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
+
+<p style="text-align:center">
+    <img src="http://codingpy.com/static/images/wechat-of-codingpy.jpg" alt="编程派的微信公众号二维码" style="width:215px;height:215px">
+</p>
