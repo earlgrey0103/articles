@@ -1,12 +1,13 @@
 -[第一章](http://codingpy.com/article/the-little-printf-chapter01/)
 -[第二章](http://codingpy.com/article/the-little-printf-chapter02/)
 -[第三章](http://codingpy.com/article/the-little-printf-chapter03/)
+-[第四章](http://codingpy.com/article/the-little-printf-chapter04/)
 
 ## 第五章
 
-
 Chapter 5
-a man sitting at his desk in front of multiple filled bookcases
+![a man sitting at his desk in front of multiple filled bookcases]()
+
 On his way, little printf went in front of the door to an office occupied by a man surrounded by thick hardcover books, with fancy images on them like wizards and dragons and fractals and mathematical patterns.
 Nice books, sir, said printf
 Thanks. I think they're essential material for programmers. If you don't have them, you're not really a pro
