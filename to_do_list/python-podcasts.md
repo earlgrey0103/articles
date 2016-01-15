@@ -1,38 +1,58 @@
-# 值得关注的三个国外Python播客
+# 听技术播客：一边学Python编程一边学英语
+
+关键词：Python播客, talk python to me, podcastinit, 播客应用, 技术播客推荐, 播客订阅工具, overcast, pocket casts中文
+
+学技术的朋友一般都会关注不少技术博客（blog），但是关注技术播客（podcast）的人估计不会太多。这里一方面也是由于相关的播客数量，尤其是中文播客数量较少导致的。但这并不代表播客对于学习技术没有好处。
+
+编程派认为，好的播客节目能加深自己对一门技术及其相关生态系统的认识，同时也能了解一些技术圈内大牛。因此，写这篇文章的目的，就是想为Python编程学习者推荐几个优质的Python播客。不过，这几个播客节目都是国外的，对于英文不好的朋友，可能有一定的难度。但是只要是真正感兴趣的话，倒是可以做到一边学习Python编程，一边学习英语的目的。
+
+Python播客节目数量本来就不多，有几个也已经有些年头没有更新了。本文挑选了3个目前正常更新、质量也不错的播客，，推荐给大家订阅关注。
 
 ## Talk Python to Me
 
-http://talkpython.fm
+![技术播客：Talk Python to Me的logo图](http://ww2.sinaimg.cn/large/006faQNTjw1f009qv6i9cj30cf07idfz.jpg)
+
+[Talk Python to Me](http://talkpython.fm/)是2015年3月份才开播的播客节目，播主是Michael Kennedy。这个播客节目是笔者目前最喜欢Python播客。主持人每期都会请一些知名的Python开发者做嘉宾，像Flask的开发者Armin Ronacher、《Effective Python》一书的作者等都已经上过这个节目了，而且作者在开始讨论正题之前，都会让嘉宾介绍一下自己是怎样接触Python语言的。另外，这个节目开场的音乐挺有意思的，名字叫“Developer Developer Developer”，是一位关注技术开发的嘻哈艺人创作的。
+
+这个播客虽然开播比较晚，但是一般每周都会更新，目前已经录了41期节目。 五星推荐。
 
 ## Podcast__init__
 
-http://podcastinit.com/
+![技术播客Podcast__init__的logo图](http://ww1.sinaimg.cn/large/006faQNTjw1f009qr2flxj30go0aydgo.jpg)
 
-## Python Testing
+[Podcast__init__](http://podcastinit.com/)也是在去年3月份左右开播的，第一期节目于2015年3月21日推出。这个节目有两名主持人，分别叫Tobias Macey和Chris Patti。和Talk Python to Me类似，Podcast__init__也是专注于Python语言的，每期节目也会邀请不同的嘉宾，探讨与Python有关的工具和产品，另外也时常探讨技术领域多样性和包容性等更加宽泛、更具社会性的话题。
 
-http://pythontesting.net/test-podcast/
+这个播客最新一期是1月9日更新的，是第39期。相比较而言，更新的频率略低于Talk Python to Me。四星推荐。
 
-## 订阅工具
+## Python Test Podcast
+
+![技术播客：Python Testing](http://ww3.sinaimg.cn/large/006faQNTjw1f009qix4vzj30go090gm1.jpg)
+
+[Python Test Podcast](http://pythontesting.net/test-podcast/)是这三个技术播客中开播最晚的，去年8月份才发布第一期。播客的主持人是Brian Okken。与其他两个播客不同，这个播客从名字来看，聚焦的主题是测试，目前已经发布了8期节目，大部分都是与测试有关的。另外，主持人正在写一本测试方面的书，名字叫[《Python Testing with unittest, nose, pytest》](https://leanpub.com/pythontesting)，目前应该还未出版。从网站的内容来看，主持人开这个播客，应该和书中的内容是配套的。
+
+更新频率较慢，三星推荐。
+
+## 播客订阅工具
+
+上面提供了三个播客的网址，大家虽然可以直接访问网站收听播客的内容，但是最好还是使用专门的播客应用订阅，第一时间获得最新的节目内容。这里向大家推荐iOS平台和Android平台上最好的播客应用：Overcast和Pocket Casts。
 
 ### Overcast（iOS）
 
-http://www.theverge.com/2015/6/4/8724949/best-podcast-app-iphone-outcast-pocket-casts-castro
+![播客订阅工具Overcast](http://ww1.sinaimg.cn/large/006faQNTjw1f00a9nqtbkj30hs0ab0tq.jpg)
 
-If you’ve got an iPhone, the best podcast app is Overcast. It’s got a clean, straightforward, and tasteful design that’s easy to use and never gets in the way of what’s most important: the listening experience. Even better, it has some really nice features which substantially improve that experience.
+Overcast是一款podcast app，出自大名鼎鼎的Instapaper创始人Marco Arment之手。目前，Overcast已经免费了之前需要内购的功能。它被[The Verge](
+http://www.theverge.com/2015/6/4/8724949/best-podcast-app-iphone-outcast-pocket-casts-castro)评为iOS上最好的播客应用。
 
-Smart Speed gets rid of silent moments and dead air wherever they exist in your podcasts, and this can significantly cut down the overall playing time. It saves you precious minutes and eventually hours; when you check Overcast’s settings menu to see exactly how much time; you’ll definitely be surprised. Another feature, Voice Boost, normalizes the volume on both ends of a conversation so no one is too loud or too quiet. Podcasts aren’t always created equal when it comes to production values, so this can be a big help in sparing your ears. If you’re the type who prefers listening to your shows sped up, Overcast’s audio engine delivers the most natural-sounding results we’ve heard. Whereas some other players can make it all too obvious that you’re manipulating speed, Overcast manages to play shows faster without sacrificing quality.
-
-Power users can build playlists with custom smart filters, configure preferences on a show-by-show basis, or set a sleep timer if you’re listening to a podcast before dozing off at night. And when it comes to discovering new shows, Overcast will pull in recommendations from Twitter, and it also groups new podcasts and established hits into helpful “starter kits” that you can subscribe to with a single tap.
-
-The only real limitation of Overcast is that you can’t stream podcasts on the fly; the entire episode must be downloaded before you hit the play button. This can be frustrating at times, but also guarantees you won’t be bothered with unexpected pauses or buffering. The app is available on iPhone and iPad, and there’s also a barebones web player available for your laptop. Overcast also features one of the best Apple Watch apps we’ve seen yet. With it, you can quickly start playing a new show from your wrist, recommend an episode, and access settings for Smart Speed and Voice Boost. Paired with Apple’s Now Playing glance, it’s a pretty convenient setup.
+详细介绍：[系出名门，Overcast用声音把你的耳朵叫醒](http://www.cocoachina.com/market/20140729/9270.html)
 
 ### Pocket Casts（Android）
 
-http://www.theverge.com/2015/6/4/8725311/best-podcast-app-android-pocket-casts-doggcatcher-stitcher
+![播客订阅工具Pocket Casts](http://ww2.sinaimg.cn/large/006faQNTjw1f00a9lnifsj30hs08pwfd.jpg)
 
-It’s a feature-rich, powerful app that makes subscribing to shows and setting up automatic downloads a snap. It also syncs across platforms with the iOS version of Pocket Casts, making it ideal if you move between an Android phone and an iPad.
+Pocket Casts被[The Verge](http://www.theverge.com/2015/6/4/8725311/best-podcast-app-android-pocket-casts-doggcatcher-stitcher)评为安卓平台上最好的播客应用。它功能全面并且界面美观简洁、推送及时，能与朋友比较方便地分享，能在不同设备之间保持同步，尤其 Android 和 iOS 之间。
 
-Above just being a vehicle for your podcasts, the standout aspect of Pocket Casts is definitely its design. It’s a tremendous showcase for Google’s Material Design, with fluid animations and color schemes that shift colors based on a podcast’s artwork. Your subscriptions are arranged in a tiled screen with big, beautiful artwork for every show, and Pocket Casts has a seemingly endless array of preferences, playlist filters, and auto-download settings, so you can tailor it fully to your liking. It also has functions for smart speed and volume normalization, but Pocket Casts doesn’t pull them off quite as well as some other apps.
+详细介绍：[于喧嚣中聆听播客之美：Pocket Casts深度评测](http://sspai.com/25191/)
 
-Pocket Casts will work with video podcasts in addition to audio, offers full AirPlay / Chromecast support, and makes discoverability easy with trending podcasts, curated recommendations, and more. The entire package blows away every other option on Android — and that’s not to say those podcast apps are bad; it just speaks of Pocket Cast’s meticulous focus on design and user experience. There’s no free version here, though; the app will cost you $3.99. You shouldn’t hesitate in paying so little for such a powerful player.
+
+
 
