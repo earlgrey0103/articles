@@ -5,8 +5,6 @@
 
 ![程序员的日常：新框架](http://ww1.sinaimg.cn/large/006faQNTjw1ezyyx8hjhnj30i20wgn19.jp)
 
-
-
 **欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
 
 <p style="text-align:center">

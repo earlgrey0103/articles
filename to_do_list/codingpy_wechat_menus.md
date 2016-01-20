@@ -1,6 +1,6 @@
 # 如何设置个人公众号菜单
 
-2. 国外教程
+2. 教程
    - Core Python
    - Web
    - Data Science
@@ -8,11 +8,8 @@
    - GUIs
    - Game
 
-3. 编程练习
-   - Codewars
-   - Leetcode
-   - SPOJ
+3. 漫画
    
-4. 资讯下载
+4. 资源
    - 技术书籍
    - 视频教程
