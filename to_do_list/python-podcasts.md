@@ -6,7 +6,7 @@
 
 编程派认为，好的播客节目能加深自己对一门技术及其相关生态系统的认识，同时也能了解一些技术圈内大牛。因此，写这篇文章的目的，就是想为Python编程学习者推荐几个优质的Python播客。不过，这几个播客节目都是国外的，对于英文不好的朋友，可能有一定的难度。但是只要是真正感兴趣的话，倒是可以做到一边学习Python编程，一边学习英语的目的。
 
-Python播客节目数量本来就不多，有几个也已经有些年头没有更新了。本文挑选了3个目前正常更新、质量也不错的播客，，推荐给大家订阅关注。
+Python播客节目数量本来就不多，有几个也已经有些年头没有更新了。本文挑选了3个目前正常更新、质量也不错的播客，推荐给大家订阅关注。
 
 ## Talk Python to Me
 
@@ -54,5 +54,10 @@ Pocket Casts被[The Verge](http://www.theverge.com/2015/6/4/8725311/best-podcast
 详细介绍：[于喧嚣中聆听播客之美：Pocket Casts深度评测](http://sspai.com/25191/)
 
 
+**欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
+
+<p style="text-align:center">
+    <img src="http://codingpy.com/static/images/wechat-of-codingpy.jpg" alt="编程派的微信公众号二维码" style="width:215px;height:215px">
+</p>
 
 
