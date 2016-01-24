@@ -1,6 +1,5 @@
 # 假如编程语言是X
 
-
 http://lambda-the-ultimate.org/node/3133
 
 ## 假如编程语言是武器
