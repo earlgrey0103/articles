@@ -1,56 +1,62 @@
-As with just about any open source software package, there are quite a few ways to install Python on Mac OSX. I figured it would be helpful to detail a few of the easiest ways to install Python, including the following:
+# Mac OS X系统中如何安装Python？
 
-Homebrew
-Packaged binaries
-From Source
+与其他开源软件一样，在Mac OS X平台上安装Python有多种方法。笔者觉得有必要将一些最简单的方式记录下来，其中包括：
 
-These are the most commons you'll encounter, and each method has its own purpose, all of which I'll detail in the sections below.
+- Homebrew
+- 安装文件（packaged binaries）
+- 源代码安装
 
-Instructions for installing Python 2 and 3 are different in most cases (but not by much), so make sure you're paying attention to which version you need installed.
+上面是一般安装Python时最常见得几种方法，每一种都有各自的优势，下面我会详细介绍。
 
-Now, keep in mind that Mac OSX (10.8) already comes with Python 2.7 pre-installed, so these instructions will only really be helpful if you need to upgrade versions or need a better way to manage installations (like with Homebrew).
+大部分情况下，安装Python 2和Python 3的过程还是略有不同，虽然大致差不多。因此，在安装时要注意自己需要的是哪个版本。
 
-Install Python with Homebrew
-First of all, if you don't know what Homebrew is and you use Mac OSX, you should. According to their website, Homebrew is "the missing package manager for OS X". I'd say this is pretty accurate.
+还要提醒大家注意的是，Mac OS X(10.8+)系统中已经预先安装了Python 2.7，所以下面的操作提示只有在你需要更新版本或者寻找更好地软件管理方式时才有用（比如说Homebrew）。
 
-Homebrew
+## 通过Homebrew安装
 
-Homebrew lets you install, update, and uninstall packages from the command line, just like apt-get does for Ubuntu. It makes it much easier to install all the various tools you might need. For example, here are just a few things I've installed with it: android-sdk, go, mongodb, sqlite, git, imagemagick, lua, python3.
+首先，如果你还不知道什么是Homebrew，而你用的又是Mac OS X系统，那么建议你先了解一下Homebrew。据其官网介绍，Homebrew是“OS X平台所欠缺的包管理器”。笔者认为，这个介绍一点都不为过。
 
-To install Homebrew, just follow the instructions on their website (which I linked to at the beginning of this section).
+### Homebrew
 
-Now that you know what Homebrew is and have it installed, we can get on to installing Python. You can install a few different versions of Python, including 2.7.x and 3.5.x.
+Homebrew可以让你通过命令行快速安装、更新、删除软件包，有点类似Ubuntu系统下的`apt-get`。这样，你安装各种软件时就会容易得多。例如，笔者就是通过homebrew安装了下面这些软件：android-sdk、go、mongodb、sqlite、git、imagemagick、lua和python3。
 
-To install Python 2.7.x, just type:
+要安装Homebrew，只需跟着其网站的介绍操作即可。
 
-$ brew install python
-If you'd rather have Python 3, just replace python with python3. To see all the versions available, search Homebrew with this:
+既然你已经了解并安装了Homebrew，我们接下来就可以开始安装Python了。你可以通过Homebrew安装不同版本的Python，包括2.7.x和3.5.x。
 
-$ brew search python
-This will show you a list of Python-related packages that can be installed.
+安装Python 2.7的话，请输入：
 
-Install Python Binaries
-If you want to upgrade to the latest 2.7.x version or upgrade to Python 3, you can get a binary directly from the Python website.
+	$ brew install python
 
-To install, just click the link above, then click on the version you want. The latest version 2 and 3 links are at the top. Once you've clicked on the version you want, you should see a list of downloads for different operating systems and package types (like source code tarballs, installers, etc).
+如果你选择使用Python 3，只需要将`python`替换成`python3`即可。想查看可以安装哪些Python版本的话，可以通过下面的命令在Homebrew上搜索：
 
-Python downloads
+	$ brew search python
 
-I'd recommend using the installer since it'll handle everything for you. Just make sure you download the installer that matches your CPU architecture type (32 or 64-bit). In my case I'd be downloading Mac OS X 64-bit/32-bit installer.
+这个命令会列出可以安装的全部Python版本。
 
-Once you've opened the installer, follow the instructions and Python will be installed for you.
+## 通过安装包安装
 
-Install Python from Source
-The last, and most uncommon, method is to install Python from its source code. Most people don't do this since the binaries are alreay built for them. This is really only ever preferred when you want to really customize the binary by setting certain options/flags during the build process.
+如果你想更新至最新的2.7.x或3.x版本，你可以直接从Python官网下载二进制安装文件。
 
-Here are the commands to download, unpack, and install Python from source:
+点击上面的链接，然后选择需要的版本。Python 2和3的最新版本就在页面的顶部。选择好Python版本之后，你就能看到针对不同操作系统的安装包下载链接了。
 
-curl -OL http://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz  
-tar xzvf Python-2.7.11.tgz  
-cd Python-2.7.11  
-./configure --prefix=/usr/local --enable-shared
-make  
-make install  
-Just make sure you change the version numbers to whichever version you want to install.
+我建议你下载相应系统的安装器，因为它会处理好所有的安装事宜，只需要确保下载了自己电脑CPU架构（32位或64位）对应的文件即可。笔者下载的则是Mac OS X 64位/32位安装器。
 
-Note that the same exact commands can be used for Python 3 source compiling, as long as you replace the approprate version numbers.
+双击安装器之后，只要按照提示操作，就可以顺利安装Python。
+
+## 从源码安装Python
+
+最后一种，也是最少见的安装方式，就是从源码安装Python。大部分人都不会这样做，因为已经有现成的安装文件了。这种方法也只有在你真的需要自定义一些Python设置时，才会选择的安装方式。因为你在编译Python安装程序之前，可以进行部分设置。
+
+下面就是从源码安装Python的相应步骤：
+
+	curl -OL http://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz  
+	tar xzvf Python-2.7.11.tgz  
+	cd Python-2.7.11  
+	./configure --prefix=/usr/local --enable-shared
+	make  
+	make install  
+
+安装时，请确保版本号与你希望使用的版本保持一致。
+
+上面的操作同样也适用于从源码安装Python 3，只需要替换版本号即可。

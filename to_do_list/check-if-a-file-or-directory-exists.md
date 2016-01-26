@@ -1,3 +1,6 @@
+# Python：检查某个文件或文件夹是否存在
+
+
 There are quite a few ways to solve a problem in programming, and this holds true especially in Python. Many times you'll find that multiple built-in or standard modules serve essentially the same purpose, but with slightly varying functionality. Checking if a file or directory exists using Python is definitely one of those cases.
 
 Here are a few ways to check for existing files/directories and their nuances. Throughout these examples we'll assume our current working directory has these files and directories in it:
