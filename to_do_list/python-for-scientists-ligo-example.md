@@ -1,12 +1,14 @@
 # LIGO的科学家们是如何使用Python语言的？
 
+关键词：引力波 Python, LIGO引力波, 引力波数据分析, GWPY, LIGO-CBC, Python数据分析, 引力波发现, AMA问答互动, Python 科学家, 科学家如何使用Python
+
 几天前，编程派介绍了一个[可以分析引力波数据的Python包——GWPY](http://codingpy.com/article/gwpy-ligo-analyze-gravitational-waves-data/)，这个包整理自发现引力波的科研机构LIGO。但是有的读者觉得我很能扯，居然能把引力波发现与Python联系在一起。但事实是，我说的一点也没错：**Python在这次引力波大发现的过程中起到了非常重要的作用**。
 
 在公布了引力波大发现之后，LIGO在国外知名网站Reddit发起了一个[AMA（Ask Me Anything）问答互动活动](https://www.reddit.com/r/IAmA/comments/45g8qu/we_are_the_ligo_scientific_collaboration_and_we/czxnlux)。来自LIGO各地分支机构的科学家们在线回答网友的问题，其中就有网友问到了Python在科学界的作用和地位。LIGO科学家的回答充分支持了我上面的观点。
 
 ## LIGO Reddit Ask Me Anything
 
-LIGO在Reddit上发起的这个问答活动是周六（2月13日）开始的，按介绍会持续两天。由于LIGO其实是一个类似合作联盟的机构，它的团队成员来自全球各地。Reddit上共有5个来自LIGO的账号回答问题，分别是：
+LIGO在Reddit上发起的这个问答活动是周六（2月13日）开始的，按介绍活动会持续两天。由于LIGO其实是一个类似合作联盟的机构，它的团队成员来自全球各地，因此Reddit上共有5个来自LIGO的账号回答问题，分别是：
 
 - LIGO_WA：华盛顿州Hanford观测站的科学家
 - LIGO_LA：路易斯安那州Livingston观测站的科学家
@@ -14,7 +16,7 @@ LIGO在Reddit上发起的这个问答活动是周六（2月13日）开始的，�
 - LIGO_Instrumentation：负责建造、管理引力波监测设备的科学家
 - LIGO_Astrophysics：负责对监测数据进行天体物理学解释和分析的科学家
 
-有关Python的回答就来自最后两个账号，即来自负责管理监测设备和分析监测数据的科学家们。
+有关Python问题的回答就来自最后两个账号，即负责管理监测设备和分析监测数据的科学家们。
 
 ## LIGO Instrumentation
 
@@ -48,7 +50,7 @@ LIGO介绍这次发现的论文中，几乎所有的图表都是用Python绘制�
 - [LSCSOFT](https://github.com/lscsoft)
 - 等等
 
-另外，[LIGO已经在网站上公开了这次发现的相关数据](https://losc.ligo.org/events/GW150914/)，并且提供了详细地数据分析教程，供其他科学家研究分析。
+另外，[LIGO已经在网站上公开了这次发现的相关数据](https://losc.ligo.org/events/GW150914/)，供其他科学家研究分析，并且提供了[详细的数据分析教程](https://losc.ligo.org/s/events/GW150914/GW150914_tutorial.html)。
 
 **欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！祝大家新春快乐，猴年大吉！**
 
