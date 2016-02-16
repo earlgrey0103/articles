@@ -1,6 +1,6 @@
 # 深入解读Python解析XML的几种方式
 
-关键词：Python XML, Python XML解析, Pyton编程, ElementTree解析XML, pull解析器, ElementTree教程
+关键词：Python XML, Python XML解析, Pyton编程, ElementTree解析XML, pull解析器, ElementTree教程, SAX解析XML, minidom, pulldom介绍
 
 在XML解析方面，Python贯彻了自己“开箱即用”（batteries included）的原则。在自带的标准库中，Python提供了大量可以用于处理XML语言的包和工具，数量之多，甚至让Python编程新手无从选择。
 
@@ -9,6 +9,8 @@
 ## 什么是XML?
 
 XML是可扩展标记语言（Extensible Markup Language）的缩写，其中的 标记（markup）是关键部分。您可以创建内容，然后使用限定标记标记它，从而使每个单词、短语或块成为可识别、可分类的信息。
+
+![XML语言Logo](http://ww4.sinaimg.cn/mw690/006faQNTgw1f10csi7kcyj30go07qjvv.jpg)
 
 标记语言从早期的私有公司和政府制定形式逐渐演变成标准通用标记语言（Standard Generalized Markup Language，SGML）、超文本标记语言（Hypertext Markup Language，HTML），并且最终演变成 XML。XML有以下几个特点。
 
@@ -20,6 +22,8 @@ XML是可扩展标记语言（Extensible Markup Language）的缩写，其中的
 目前，XML在Web中起到的作用不会亚于一直作为Web基石的HTML。
 XML无所不在。XML是各种应用程序之间进行数据传输的最常用的工具，并且在信息存储和描述领域变得越来越流行。因此，学会如何解析XML文件，对于Web开发来说是十分重要的。
 
+![XML网络应用：数据传输](http://ww4.sinaimg.cn/mw690/006faQNTgw1f10csj0lmqj30g50903yn.jpg)
+
 ## 有哪些可以解析XML的Python包？
 
 Python的标准库中，提供了6种可以用于处理XML的包。
@@ -27,6 +31,8 @@ Python的标准库中，提供了6种可以用于处理XML的包。
 ### xml.dom
 
 `xml.dom`实现的是W3C制定的DOM API。如果你习惯于使用DOM API或者有人要求这这样做，可以使用这个包。不过要注意，在这个包中，还提供了几个不同的模块，各自的性能有所区别。
+
+![HTML DOM结构](http://ww1.sinaimg.cn/mw690/006faQNTgw1f10c7n3u6ij30pw0h8gn4.jpg)
 
 DOM解析器在任何处理开始之前，必须把基于XML文件生成的树状数据放在内存，所以DOM解析器的内存使用量完全根据输入资料的大小。
 
@@ -42,6 +48,8 @@ DOM解析器在任何处理开始之前，必须把基于XML文件生成的树�
 
 ### xml.sax
 
+![SAX logo](http://ww3.sinaimg.cn/mw690/006faQNTgw1f10c7o0zbnj30cs073jru.jpg)
+
 `xml.sax`模块实现的是SAX API，这个模块牺牲了便捷性来换取速度和内存占用。SAX是Simple API for XML的缩写，它并不是由W3C官方所提出的标准。它是事件驱动的，并不需要一次性读入整个文档，而文档的读入过程也就是SAX的解析过程。所谓事件驱动，是指一种基于回调（callback）机制的程序运行方法。
 
 ### xml.parser.expat
@@ -51,6 +59,8 @@ DOM解析器在任何处理开始之前，必须把基于XML文件生成的树�
 expat是一个面向流的解析器。您注册的解析器回调（或handler）功能，然后开始搜索它的文档。当解析器识别该文件的指定的位置，它会调用该部分相应的处理程序（如果您已经注册的一个）。该文件被输送到解析器，会被分割成多个片断，并分段装到内存中。因此expat可以解析那些巨大的文件。
 
 ### xml.etree.ElementTree（以下简称ET）
+
+![ElemenTree元素树](http://ww2.sinaimg.cn/mw690/006faQNTgw1f10c7nm02yg308z06ydg2.gif)
 
 `xml.etree.ElementTree`模块提供了一个轻量级、Pythonic的API，同时还有一个高效的C语言实现，即`xml.etree.cElementTree`。与DOM相比，ET的速度更快，API使用更直接、方便。与SAX相比，`ET.iterparse`函数同样提供了按需解析的功能，不会一次性在内存中读入整个文档。ET的性能与SAX模块大致相仿，但是它的API更加高层次，用户使用起来更加便捷。
 
