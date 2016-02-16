@@ -35,3 +35,12 @@ printf01
 printf02
 printf03
 printf04
+
+domain names:
+pydisco
+pycrates
+cratespy
+pyhackers
+propydev
+icodepython
+needpython

@@ -2,60 +2,61 @@
 
 ## 第五章
 
+（黑体部分是小Printf的回答）
+
 ![a man sitting at his desk in front of multiple filled bookcases](http://ferd.ca/static/img/printf/books.png)
 
+在离开的路上，小Printf经过一间办公室，里面有个人被包围在厚厚的精装书堆里。小Printf好奇地走进了房间，发现书上有很多有意思的图片，有巫师、恶龙、几何图形和数学公式。
 
-On his way, little printf went in front of the door to an office occupied by a man surrounded by thick hardcover books, with fancy images on them like wizards and dragons and fractals and mathematical patterns.
+**“这些书很漂亮啊，先生”，小Printf说。**
 
-Nice books, sir, said printf
+“谢谢。我认为这些都是程序员必读的书籍。如果你没有这些书，你就算不上一名专业程序员。”
 
-Thanks. I think they're essential material for programmers. If you don't have them, you're not really a pro
+**“那我猜自己肯定不算了，”小Printf说道。“你最喜欢那本书呢？”**
 
-I guess I'm not a pro then, said little printf. Which one is your favorite?
+“噢，我还一本都没读过。”
 
-Oh, well I haven't read most of them.
+**“那你也不是一名优秀的程序员咯？”**
 
-Are you not a good programmer then?
+“是的，我不是。”这位开发者自豪地补充道：“事实上，我是名很差的程序员。”
 
-No, I am not. The developer proudly added: In fact, I'm a terrible programmer.
+**“太可惜了，”小Printf说，“我在不断提高自己的能力。”**
 
-That's a shame, said little printf, who continued: I'm getting better myself.
+“你听说过达克效应（Dunning-Kruger effect）吗？”，这个人问道。
 
-Have you heard of the Dunning-Kruger effect?, asked the man.
+**“没有，那是什么？”**
 
-No, what is it?
+“它指的是一种认知障碍。说的是能力不强的人通常会过高估计自己的水平，而那些有能力的人则一般会低估自己。”
 
-It's a cognitive bias thing. It basically says that people who are less competent tend to overestimate their qualifications, and people who are competent tend to systemically underestimate theirs.
+**“这就是说，如果我觉得自己在变强，可实际上自己并没有想象地那么好。”**
 
-So if I think I'm getting better, I'm probably not great
+“对，完全正确。你很可能水平还一般。相反，我公开承认自己是一名很差的程序员。但是根据达克效应，我很可能低估了自己，那就是说我其实是优秀的开发者，你明白了吗？”
 
-Yeah, exactly. You're probably bad. On the other hand, I openly say I'm a terrible programmer. But according to Dunning-Kruger, I'm probably underestimating myself, and that makes me a good developer, don't you see?
+**“可能吧？”**
 
-I guess?
+“那是因为自我贬低（self-deprecation）是开发者的核心工具之一哦。你一旦觉得自己已经很优秀了，就会放松自己，停止进步了。”
 
-That's because self-deprecation is a vital tool of the developer. The moment you feel you're good, you relax and stop improving.
+**“那不就是说，你一旦对自己满意，就走上了失败的道路，然后就应该贬低自己咯？”**
 
-Doesn't this mean that the moment you feel good about yourself, you're on your way to failure and then you should feel bad?
+“是的。但是正确地应对方法，就是说一切都很糟糕，即使你没有解决方法。那样的话，大家会觉得你很聪明，但却没有很多可以贡献的。”
 
-yes. But the way to go about this is to say that everything is terrible, even if you have no solutions to offer. That way you look smart, but don't have much to contribute.
+**“能说详细点吗？”**
 
-What do you mean?
+“举个例子吧，我在网上看到一个不喜欢的项目。这时候，我们要做的就是指出这个项目一无是处，但却不详细说明。你还可以隐晦地指出这个项目的作者其实就是个笨蛋，而且不会有人来管你。”
 
-Say I go online and see a project I dislike. The trick is to point out everything that is wrong, give no more information than that. You can probably subtly point ways in which the person who did the thing is an idiot and get away with it.
+**“可这对他有好处吗？”**
 
-And how is anyone better for this?
+“我是这么认为的：他们的好处是知道了自己走错了路，我的好处是给他们指出这点。这其实有点像障眼法。没人知道他们在干什么，但是我却让别人觉得自己一清二楚。”
 
-Well I like to think they are better for knowing they're on the wrong track, and I'm better off for showing them that. It's a bit of smoke and mirrors. Nobody knows what they're doing but that way it looks like I do.
+**“但是如果别人求你帮忙，你却不知道从何入手呢？”**
 
-And what happens when you are asked for help and can't do anything about it?
+“这个时候，你就接着说这个项目一团糟；你要处理的事情太多了，还要完善其他项目。最后，他们还是不得不靠自己了。”
 
-That's when you go back to saying everything is terrible; you have too much yak shaving to do, improving other things, and being overly pessimistic. They're on their own.
+**“那这些都是装腔作势？你就是这样对待别人的？对你了解的东西，你假装不懂，这会让那些真的对此一无所知的人感觉更糟；对你不了解的东西，你却不懂装懂，这会让那些想要提升自己的人也看低自己。”**
 
-So this is all posturing? You're gaming your way through? You're the person who pretends to be incompetent at things they know, which makes people who actually know nothing there feel even worse, and you're the person who pretends to be competent at things you don't know, so that people trying to improve there also feel bad.
+“不管如何，这些和能力没有半点关系。相反，名声才十分重要。雇主会留下自己的朋友，那些不讨喜、无关紧要的人是第一个被开除的；你如果想改变这个体制，别人就会讨厌你。说到底，这是一个非常将关系的行业。这个行业就是这么运作的，很可能学术界也一样。不当然，我并不知道具体情况。做这行的，你认识谁，学会推销自己，建立自己的品牌很重要。这样，你才能得到企业里的岗位。”
 
-In any case, competence has very little to do with it. Reputation is pretty important though. People hire friends, and people who aren't liked and non-essential get fired first; try to change the system and you become disliked. It's all a very social game. It's how it works in the industry, and probably in academia too, though I wouldn't know, now would I? It's all about who you know, selling yourself, your own personal brand you know? That's how you get jobs in the business.
-
-If this is how things are and that you must feel bad and make others feel bad to do well, maybe I don't want a job in the business, said little printf, before walking out.
+**“如果这个行业是这样的，从事这个职业就必须自我贬低，让别人也看低自己的话，我根本不想要这样的一份工作，”小Printf说道，激动地走出了这个办公室。**
 
 -[第一章](http://codingpy.com/article/the-little-printf-chapter01/)
 -[第二章](http://codingpy.com/article/the-little-printf-chapter02/)

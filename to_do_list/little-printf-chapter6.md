@@ -4,9 +4,13 @@
 > -[下一章](http://codingpy.com/article/story-of-little-printf-chapter7/)
 
 nondescript programmer sitting back to the viewer in the dark, with a sandwich on their desk
+
 During the time that would have been lunch break, Printf interrupted a person who had seemingly forgotten to eat their lunch, a sandwich growing cold by the minute, while sitting at their desk and looking at their screen.
+
 That seemed like quite a busy person who might have known what they were doing. Printf asked:
+
 If a primary database can fail, can the follower fail too?
+
 Everything you run, the person said, can and will sooner or later fail.
 Even the things telling you things have failed?
 Yes, even these ones. All large systems are in some state of partial failure at any given time.
@@ -28,3 +32,14 @@ Actually of consequence? You talk just like a 'real programmer'.
 He added:
 You mix everything up, confuse everything. There's been millions of programs, and for years they've been running and failing just the same. And people have used them and needed them. And I know of some programs that run nowhere but on a single laptop, and in a single mistake could destroy entire communities, without even noticing. And you think that this is not important?
 The person remained silent.
+
+-[第一章](http://codingpy.com/article/the-little-printf-chapter01/)
+-[第二章](http://codingpy.com/article/the-little-printf-chapter02/)
+-[第三章](http://codingpy.com/article/the-little-printf-chapter03/)
+-[第四章](http://codingpy.com/article/the-little-printf-chapter04/)
+
+**欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
+
+<p style="text-align:center">
+    <img src="http://codingpy.com/static/images/wechat-of-codingpy.jpg" alt="编程派的微信公众号二维码" style="width:215px;height:215px">
+</p>
