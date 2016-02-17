@@ -1,10 +1,12 @@
 # 为什么print在Python 3中变成了函数？
 
-- 原作者：Bret Cannon
+- 原作者：Brett Cannon
 - 原文链接：http://www.snarky.ca/why-print-became-a-function-in-python-3
 - 译者：EarlGrey@编程派
 
-在Python 2中，print是一个语句（statement）；而在Python 3中变成了函数（function）。很多Python用户都会问，为什么Python 3将print变成了函数呢？本文就是Python核心开发者Bret Cannon对此的解释。
+在Python 2中，print是一个语句（statement）；而在Python 3中变成了函数（function）。很多Python用户都会问，为什么Python 3将print变成了函数呢？本文就是Python核心开发者Brett Cannon对此的解释。
+
+> 今年初Python决定迁移到Github，就是由Brett Cannon征求Python社区的意见后作出的。[他对此也作出了解释](http://codingpy.com/article/why-move-python-to-github/)。
 
 ## print语句与print函数的区别
 
@@ -73,3 +75,9 @@
 对于Python开发团队来说，他们不必再从语法层面来实现`print`的相关功能了。例如，如果你想让`print`语句也一样可以灵活地支持指定分隔符，你要怎样去实现呢？这会是一个相当难解决的设计难题。但是如果print变成了函数，只需要新增一个参数就解决了。在Python中，函数可以接受任意数量的参数，这比从底层实现语法带来的灵活性要大的多。
 
 我们还要注意，语法实现应该仅限于那些非这样做不可的功能，或者是以语法形式实现后，大幅提高了可读性的功能。在`print`这个案例中，`print A`与`print(A)`之间的区别可以忽略不计，因此并没有影响可读性。而且，由于我们能够完全将`print`语句替换为函数，对于Python语言的功能性也没有损失。这就是为什么将`print`变成函数的原因。
+
+**欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！祝大家新春快乐，猴年大吉！**
+
+<p style="text-align:center">
+    <img src="http://codingpy.com/static/images/wechat-of-codingpy.jpg" alt="编程派的微信公众号二维码" style="width:215px;height:215px">
+</p>
