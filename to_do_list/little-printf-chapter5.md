@@ -1,12 +1,23 @@
 # 小Printf的编程故事：第一章
 
+关键词：小王子学编程, Printf编程故事, 模仿小王子的故事, 如何学习编程, 程序员小王子
+
+> 小王子的故事可能很多人都很熟悉，但是如果把小王子的职业设定为程序员，他又会经历怎样的一种故事？编程派为您独家编译的这个系列文章，模仿《小王子》的情节，为你讲述软件业的那些事。
+
+**前情回顾**：
+
+- [第一章](http://codingpy.com/article/the-little-printf-chapter01/)
+- [第二章](http://codingpy.com/article/the-little-printf-chapter02/)
+- [第三章](http://codingpy.com/article/the-little-printf-chapter03/)
+- [第四章](http://codingpy.com/article/the-little-printf-chapter04/)
+
 ## 第五章
 
 （黑体部分是小Printf的回答）
 
 ![a man sitting at his desk in front of multiple filled bookcases](http://ferd.ca/static/img/printf/books.png)
 
-在离开的路上，小Printf经过一间办公室，里面有个人被包围在厚厚的精装书堆里。小Printf好奇地走进了房间，发现书上有很多有意思的图片，有巫师、恶龙、几何图形和数学公式。
+在离开的路上，小Printf经过一位开发者的办公室，里面摆满了厚厚精装书。小Printf好奇地走进了房间，发现书上有很多有意思的图片，有巫师、恶龙、几何图形和数学公式。
 
 **“这些书很漂亮啊，先生”，小Printf说。**
 
@@ -54,14 +65,9 @@
 
 **“那这些都是装腔作势？你就是这样对待别人的？对你了解的东西，你假装不懂，这会让那些真的对此一无所知的人感觉更糟；对你不了解的东西，你却不懂装懂，这会让那些想要提升自己的人也看低自己。”**
 
-“不管如何，这些和能力没有半点关系。相反，名声才十分重要。雇主会留下自己的朋友，那些不讨喜、无关紧要的人是第一个被开除的；你如果想改变这个体制，别人就会讨厌你。说到底，这是一个非常将关系的行业。这个行业就是这么运作的，很可能学术界也一样。不当然，我并不知道具体情况。做这行的，你认识谁，学会推销自己，建立自己的品牌很重要。这样，你才能得到企业里的岗位。”
+“不管如何，这些和能力没有半点关系。相反，名声才十分重要。雇主会留下自己的朋友，那些不讨喜、无关紧要的人是第一个被开除的；你如果想改变这个体制，别人就会讨厌你。说到底，这是一个非常讲关系的行业。这个行业就是这么运作的，很可能学术界也一样。不当然，我并不知道具体情况。做这行的，你认识谁，学会推销自己，建立自己的品牌很重要。这样，你才能得到企业里的岗位。”
 
 **“如果这个行业是这样的，从事这个职业就必须自我贬低，让别人也看低自己的话，我根本不想要这样的一份工作，”小Printf说道，激动地走出了这个办公室。**
-
--[第一章](http://codingpy.com/article/the-little-printf-chapter01/)
--[第二章](http://codingpy.com/article/the-little-printf-chapter02/)
--[第三章](http://codingpy.com/article/the-little-printf-chapter03/)
--[第四章](http://codingpy.com/article/the-little-printf-chapter04/)
 
 **欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
 

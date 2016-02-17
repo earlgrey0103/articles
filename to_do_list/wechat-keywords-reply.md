@@ -44,3 +44,5 @@ pyhackers
 propydev
 icodepython
 needpython
+pyleague
+truepython

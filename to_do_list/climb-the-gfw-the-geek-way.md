@@ -1,13 +1,31 @@
+# 极客翻越长城的正确姿势
+
+
+GoAgent、红杏
+
+Astrill
 
 ## 购买VPS
 
 
-### 免费的
+### 免费的服务器
 
 Koding
 
 Heroku
 
-## 一键脚本
+## 服务器端搭建
 
-## 自己动手
+### 一键脚本
+
+### 自己动手
+
+部署Shadowsocks
+
+## 客户端设置
+
+### PC/Mac/Linux
+
+### Android
+
+### iOS
