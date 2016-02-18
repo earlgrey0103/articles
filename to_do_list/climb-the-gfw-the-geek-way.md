@@ -7,6 +7,7 @@ Astrill
 
 ## 购买VPS
 
+Vultr
 
 ### 免费的服务器
 
@@ -15,10 +16,6 @@ Koding
 Heroku
 
 ## 服务器端搭建
-
-### 一键脚本
-
-### 自己动手
 
 部署Shadowsocks
 

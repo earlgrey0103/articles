@@ -1,5 +1,7 @@
 # 为什么print在Python 3中变成了函数？
 
+关键词：print语句, print函数, Python 2与3的区别, Python核心开发者, Brett Cannon, Print函数的好处
+
 - 原作者：Brett Cannon
 - 原文链接：http://www.snarky.ca/why-print-became-a-function-in-python-3
 - 译者：EarlGrey@编程派
