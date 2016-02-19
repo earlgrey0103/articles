@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # 本·拉登的书架：Python文本分析告诉你拉登最常提到什么
 
-URL: http://codingpy.com/article/analyze-bin-ladens-letters-with-python-and-alchemyapi/
+关键词：Python文本分析, AlchemyAPI, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件, 拉登最常念叨什么
+
+> **本文首发于编程派的微信公众号，搜索“codingpy”关注编程吧。**
+>>>>>>> dd8e9d65ca612ddcb77f1feaf38d36fb0233c4b7
 
 关键词：Python文本分析, AlchemyAPI, 实体抽取, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件, 本·拉登最关心的人
 
@@ -8,11 +12,12 @@ URL: http://codingpy.com/article/analyze-bin-ladens-letters-with-python-and-alch
 
 在本文中，我们将学习如何分析PDF文档，并且利用AlchemyAPI来进行实体抽取分析，看看本·拉登在这些信件中最常提到的10个实体是什么。
 
+<<<<<<< HEAD
 ![本·拉登的书架](http://ww1.sinaimg.cn/mw690/006faQNTgw1f13uqwr6tcj30mx0bvdhy.jpg)
 
 ## 什么是AlchemyAPI？
 
-![AlchemyAPI公司的logo](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13tvh1wflj30m609dwfl.jpg)
+![AlchemyAPI logo](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13tvh1wflj30m609dwfl.jpg)
 
 AlchemyAPI是IBM旗下的一家公司，具有深度学习的自然语言处理和图片识别技术，可利用人工智能分析理解网页、文档、电子邮件、微博等形式的内容。它还将同Google 一样的神经网络分析技术应用其中。
 
@@ -26,11 +31,11 @@ AlchemyAPI目前共提供了12个文本分析功能：实体抽取（entitiy ext
 
 由于美国ODNI公开的本·拉登信件都是PDF格式的，因此我们首先必须要安装能够处理PDF文档的Python包。这里，我使用的是PyPDF2。我们通过`pip`包管理器进行安装：
 
-`pip install pypdf2`
+	pip install pypdf2
 
 另外，你肯定不想一封一封地手动103封书信吧？！省时省力的办法就是写个脚本把这些文档都爬取下来。由于要访问网页和解析网页，我们选择使用两个常用的第三方库：requests和BeautifulSoup 4：
 
-`pip install requests beautifulsoup4`
+	pip install requests beautifulsoup4
 
 ## 获取免费AlchemyAPI Key
 
@@ -44,6 +49,7 @@ AlchemyAPI有一个免费的基础服务包，每天的事务处理上限为1000
 
 ## 安装Alchemy Python SDK
 
+<<<<<<< HEAD
 获得API Key之后，我们可以通过AlchemyAPI提供的Python SDK和[HTTP REST接口](http://alchemyapi.com/api/calling.html)调用其提供的文本分析服务。在本文中，我们选择安装SDK的方式。
 
 PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不能使用pip来安装，只能通过Git克隆Python SDK的代码库或是[直接下载代码库](https://github.com/AlchemyAPI/alchemyapi_python/archive/master.zip):
@@ -56,12 +62,25 @@ PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不
 	python alchemyapi.py YOUR_API_KEY # 将YOUR_API_KEY替换成你收到的Key
 
 为确保SDK正常安装，可以按照提示运行`example.py`查看演示程序：
+=======
+获得API Key之后，我们可以通过AlchemyAPI提供的Python SDK和HTTP REST接口调用其提供的文本分析服务。在本文中，我们选择安装SDK的方式。
+
+PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不能使用pip来安装，只能通过Git克隆Python SDK的代码库或是直接下载代码库:
+
+	git clone https://github.com/AlchemyAPI/alchemyapi_python.git
+
+接下来，我们要把申请到的API Key与SDK关联起来。打开终端，进入SDK文件夹，然后按下面的示例执行alchemyapi.py文件：
+
+	cd alchemyapi_python
+	python alchemyapi.py YOUR_API_KEY # 将YOUR_API_KEY替换成你收到的Key
+
+为确保SDK正常安装，可以按照提示运行example.py查看演示程序：
 
 	python example.py
 
 如果最后出现了下图的文字，就证明SDK安装正确，API Key也可以使用。
 
-![AlchemyAPI exmaple](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13telx4vvj30w00oyah8.jpg)
+![AlchemyAPI安装正常](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13telx4vvj30w00oyah8.jpg)
 
 ## 下载文档
 
@@ -115,8 +134,6 @@ PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不
 	        time.sleep(1)
 
 由于文件数量比较多，因此在最终执行脚本时，耗费在文件下载的时间可能会比较长。如果你从ODNI网站下载的速度非常慢，那么可以[前往我的百度网盘下载](http://pan.baidu.com/s/1i4bggIx)，但是在最终执行时要对脚本做修改。只需要执行下文中的函数即可。
-
-> 在微信号中，回复**“laden”**即可获得分享链接及提取码。
 
 ## 处理文档
 
