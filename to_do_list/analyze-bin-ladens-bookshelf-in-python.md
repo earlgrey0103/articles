@@ -1,12 +1,26 @@
-# 本·拉登的书架
+# 本·拉登的书架：Python文本分析告诉你拉登最常提到什么
 
-关键词：Python文本分析, AlchemyAPI, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件
+URL: http://codingpy.com/article/analyze-bin-ladens-letters-with-python-and-alchemyapi/
 
-2015年，美国官方解密了一系列有关本·拉登的文件，其中最引人瞩目的，是美国国家情报总监办公室（The Office of the Director of National Intelligence）在其官网上列出的“本·拉登的书架”。
+关键词：Python文本分析, AlchemyAPI, 实体抽取, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件, 本·拉登最关心的人
 
-曝光的这份阅读清单涉及书籍和其他材料400余种。其中包含了已解密的书信等文档103份、公开发表的美国政府文件75份、英文书籍39册、恐怖组织发表的材料35份、与法国有关的材料19份、媒体文章33篇、其他宗教文档11份、智库或其他研究40种、软件或技术手册30份，及一些零散资料。
+2015年，美国官方解密了一系列有关本·拉登的文件，其中最引人瞩目的，是美国国家情报总监办公室（The Office of the Director of National Intelligence）在其官网上列出的“本·拉登的书架”。曝光的这份阅读清单涉及书籍和其他材料400余种。其中包含了已解密的书信等文档103份、公开发表的美国政府文件75份等。本文关注的重点，是已经解密的103份书信等文档。
 
-This blog post will teach you how to analyze PDF’s (pretty useful all around really), and how to use the Alchemy API which is an extremely powerful data processing API that can do entity extraction, sentiment analysis, keyword extraction and a whole bunch of other stuff. All of this should be some solid additions to your OSINT toolkit. Let’s get started!
+在本文中，我们将学习如何分析PDF文档，并且利用AlchemyAPI来进行实体抽取分析，看看本·拉登在这些信件中最常提到的10个实体是什么。
+
+![本·拉登的书架](http://ww1.sinaimg.cn/mw690/006faQNTgw1f13uqwr6tcj30mx0bvdhy.jpg)
+
+## 什么是AlchemyAPI？
+
+![AlchemyAPI公司的logo](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13tvh1wflj30m609dwfl.jpg)
+
+AlchemyAPI是IBM旗下的一家公司，具有深度学习的自然语言处理和图片识别技术，可利用人工智能分析理解网页、文档、电子邮件、微博等形式的内容。它还将同Google 一样的神经网络分析技术应用其中。
+
+AlchemyAPI目前共提供了12个文本分析功能：实体抽取（entitiy extraction），情感分析，关键字抓取，概念标识，关系提取，分类识别，作者提取，语言识别，文本提取，微格式分析，订阅内容识别，数据连接等。
+
+接下来，我们开始进行准备工作。
+
+> **本文中的代码大部分来自[automatingosint](http://www.automatingosint.com/blog/2015/05/osint-python-analyze-bin-ladins-bookshelf/)，我对源代码进行更新。目前的脚本支持Python 3。**
 
 ## 安装依赖包
 
@@ -20,79 +34,196 @@ This blog post will teach you how to analyze PDF’s (pretty useful all around r
 
 ## 获取免费AlchemyAPI Key
 
-AlchemyAPI是IBM旗下的一家公司，具有深度学习的自然语言处理和图片识别技术，可利用人工智能分析理解网页、文档、电子邮件、微博等形式的内容。它还将同Google 一样的神经网络分析技术应用其中。AlchemyAPI目前共提供了12个文本分析功能：实体抽取（entitiy extraction），情感分析，关键字抓取，概念标识，关系提取，分类识别，作者提取，语言识别，文本提取，微格式分析，订阅内容识别，数据连接等。
-
 AlchemyAPI有一个免费的基础服务包，每天的事务处理上限为1000次。在本文中，我们将使用他们的实体抽取服务来执行文本分析。
 
 获取免费AlchemyAPI Key非常简单，只需要[填写一个表单](http://www.alchemyapi.com/api/register.html)即可，输入自己的邮箱地址。
-  
-![AlchemyAPI Key申请表单]()
 
 申请处理完成之后，你就可以在邮箱中看到发送给你的API Key了。
 
-![AlchemyAPI Key申请邮件回复]()
+![AlchemyAPI Key申请邮件回复](http://ww1.sinaimg.cn/mw690/006faQNTgw1f13tgh8r7zj310m03eaay.jpg)
 
 ## 安装Alchemy Python SDK
 
-http://www.alchemyapi.com/developers/getting-started-guide/using-alchemyapi-with-python#run-the-example
+获得API Key之后，我们可以通过AlchemyAPI提供的Python SDK和[HTTP REST接口](http://alchemyapi.com/api/calling.html)调用其提供的文本分析服务。在本文中，我们选择安装SDK的方式。
 
-Alright, done! Now let’s grab the Alchemy API prerequisites. The first step is to sign up for an API key. This will take 2 minutes and while you wait for it to arrive in your inbox let’s get the code downloaded. You can use their Git instructions or you can download from Github directly. All you have to do is unzip the folder and by now you should have your API key in your inbox, so drop into a terminal or command prompt and run:
+PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不能使用pip来安装，只能通过Git克隆Python SDK的代码库或是[直接下载代码库](https://github.com/AlchemyAPI/alchemyapi_python/archive/master.zip):
 
-Cool we are all setup now. I encourage you to run their example.py script to make sure everything is setup and running properly. You should see a pile of output from their script.
+	git clone https://github.com/AlchemyAPI/alchemyapi_python.git
+
+接下来，我们要把申请到的API Key与SDK关联起来。打开终端，进入SDK文件夹，然后按下面的示例执行`alchemyapi.py`文件：
+
+	cd alchemyapi_python
+	python alchemyapi.py YOUR_API_KEY # 将YOUR_API_KEY替换成你收到的Key
+
+为确保SDK正常安装，可以按照提示运行`example.py`查看演示程序：
+
+	python example.py
+
+如果最后出现了下图的文字，就证明SDK安装正确，API Key也可以使用。
+
+![AlchemyAPI exmaple](http://ww4.sinaimg.cn/mw690/006faQNTgw1f13telx4vvj30w00oyah8.jpg)
 
 ## 下载文档
 
-Downloading the Documents
-Ok so confession time. I wrote the ugliest Python script ever to retrieve all of the documents that I was interested in. In the “Now Declassified Documents” section of the ODNI page, there are 103 documents. These were the primary documents I was interested in, but I encourage you to look at the other documents available on the site to see if you can expand your dataset. I did not want to manually download each PDF, this would bring shame and dishonour to our OSINT dojo for sure. So I created an ugly Python script to do it for me. Don’t tell anyone please, and very quietly enter the following code in a file called ugly_pdf_retriever.py and save it in your alchemy_python directory. You can download the file from here.
+然后就到了怎么自动将103份PDF文档下载到本地了。
 
+我们可以写一个简单的Python脚本来完成这项工作，但是我选择把它封装在`download_bld_documents`这个函数里，因为我想把所有的代码都放在一个脚本里，这样大家就可以直接运行这个脚本，等待一段时间，就可以看到最后的结果了。
 
-If you haven’t read my previous posts, shame on you, but mainly because you will need the requests and Beautiful Soup libraries to make this script work.
+这个函数写的比较简单，但是已经能够满足我们的需求了。
 
-Line 8: create a new folder called “pdfs” so we can store them all and process them later.
-Lines 13 – 17: retrieve the ODNI page and send it to Beautiful Soup so that we can parse the HTML.
-Lines 22 – 24: it’s starting to get real ugly now. We walk through all links on the page starting at the 54th link and only pulling the PDF’s that are non-Arabic. We just build a list of links called: link_list.
-Lines 26 – 33: now we walk through the list, pull the PDF filename from the original link, and pull the document down from the ODNI site. From there we just write the PDF out to our pdfs directory and then carry on to the next file download.
-Ok, I know it’s ugly but it works. Once you run it you should have a pdfs folder inside your alchemy_python folder, that is full of PDFs ready for us to analyze. In your career you, like myself, will write these quick and dirty scripts to automate tasks such as this. If you find yourself writing ugly ones like this, then congratulate yourself, your 15 minutes of coding saved you an hour or more of clicking on each document.
+	def download_bld_documents():
+	    """Download Bin Laden's Declassified documents from ODNI."""
+	    import os
+	    import time
+
+	    import requests
+	    from bs4 import BeautifulSoup
+		
+		# 创建一个名为“pdfs”的文件夹，用于保存所有下载的PDF文档。
+
+	    try:
+	        os.mkdir("pdfs")
+	    except:
+	        pass
+
+		# 获取ODNI网站上有关本·拉登书架的网页，将其交给Beautiful Soup，以进行HTML解析。
+
+	    response = requests.get(
+	        "http://www.dni.gov/index.php/resources/bin-laden-bookshelf?start=1")
+
+	    if response.status_code == 200:
+
+	        html = BeautifulSoup(response.content)
+
+	    link_list = []
+
+		# 从网页中第54个超链接开始，我们遍历所有的文档链接，仅保留那些我们所需要的链接：即含有“pdf”但不包含“Arabic”字样的链接。我们将满足要求的链接保存到列表`link_list`中。
+
+	    for i in html.findAll("a")[54:]:
+	        if "pdf" in i['href'] and "Arabic" not in i.text:
+	            link_list.append("http://www.odni.gov%s" % i['href'])
+
+		# 接下来，我们遍历列表中所有的元素，从原链接中获取PDF的文件名，然后从ODNI网站下载相应的文档。
+
+	    for i in link_list:
+	        response = requests.get(i)
+	        file_name = i.split("/")[::-1][0]
+	        fd = open("pdfs/%s" % file_name, "wb")
+	        fd.write(response.content)
+	        fd.close()
+
+	        time.sleep(1)
+
+由于文件数量比较多，因此在最终执行脚本时，耗费在文件下载的时间可能会比较长。如果你从ODNI网站下载的速度非常慢，那么可以[前往我的百度网盘下载](http://pan.baidu.com/s/1i4bggIx)，但是在最终执行时要对脚本做修改。只需要执行下文中的函数即可。
+
+> 在微信号中，回复**“laden”**即可获得分享链接及提取码。
 
 ## 处理文档
 
-Processing the Documents
-We are now ready to start messing with the PDFs we have downloaded. We are going to utilize Alchemy API’s ability to do entity extraction to see what the most common person, place or thing that Bin Ladin discussed in his letters. So effectively we need to open each PDF, extract all of the text from the document and then submit it to Alchemy to allow them to process it. For each document we process we will combine the results and then output some overall counts to tell us what the most common entities were. Let’s get started by creating a new Python script called ubl_bookshelf.py in your alchemy_python directory and punch in the following code (download from here if you prefer):
+下面，我们就可以正式对下载的PDF文档进行分析了。我们将要利用Alchemy API提供的强大工具，对这些PDF文档进行实体抽取（entitiy extraction）分析。通过实体分析，我们可以了解本·拉登在这些信件和文件中，谈到最多的人、地方或东西是什么。
 
-Lines 1-8: we are just importing all of our required modules including the PDF processing module and Alchemy API.
-Line 10: initialize the Alchemy API so that we can use it.
-Line 11: the glob module allows us to retrieve a list of files from a directory that match a particular pattern. Here we are asking it to give us every file in the pdfs directory that has the .pdf file extension. Very useful little module that glob is.
-Line 12: we are going to use the entities dictionary to compile up all of our results from each PDF.
+所以，我们要一一打开这些PDF文件，从文档中提取所有的文本，然后将其提交至Alchemy进行分析处理。在处理每一个文档时，我们可以得到其中的实体数据，最后将所有文档的分析数据结合在一起，就可以得到出现频率最高的实体了。
 
-Now let’s add in our PDF reading and extraction code after the code we just wrote:
+我们将这部分代码封装在`process_documents`函数中：
 
-Line 15: this is the loop were we walk through the list of PDF files that our glob call retrieved.
-Line 20: we initialize a new pyPdf object by passing in the file path and opening the file.
-Line 22: we create a blank string variable that will hold all of the extracted text so that we can hand it to Alchemy.
-Lines 25-27: here we walk through each page in the PDF and use the extractText function to pull out the text. We add the extracted text to our full_text variable.
-Ok now let’s get our extracted text up to the Alchemy API! Keep adding to the ubl_bookshelf.py script, and make sure the next block of code is indented properly or it won’t work, refer to the source (here) if you need to verify.
+	def process_documents():
+	    """Process downloaded documents using AlchemyAPI."""
 
-Line 33: here is where we are making our Alchemy API call. We are letting it know that we are submitting text (the first parameter), we pass in our PDF text we just extracted (the second parameter) and we also disable sentiment analysis (I’ll cover in a future post).
-Lines 39-45: we loop through each entity returned by the API. Alchemy has a count member for each entity returned, so we make sure to tally all of the counts up in our entities dictionary.
-Line 53: we just want our script to take a 1 second breather. This is always something to be mindful of for any API you are running scripts against. Alchemy did not appear to have rate limiting, but I like to be on the safe side nonetheless.
+	    # 导入所需要的模块，包括我们安装的PyPDF2和AlchemyAPI。
+	    import PyPDF2
+	    import glob
+	    import time
 
-Ok we are nearly done! Let’s add the following code to the bottom of the script:
+	    from collections import Counter
+	    from alchemyapi import AlchemyAPI
 
-Lines 55-58: we use the Counter class to load up our entities dictionary and then tell us what the most common term was.
-Lines 61-64: now we walk through the top 10 most common entities that we compiled. Of course you could change this to be the top 25 or whatever you please.
-Now take it for a spin! We have included lots of useful output in the script to let you know that it’s working away. I won’t fully spoil the results but I can tell you that based on my run, the number 3 entity was “America”. Let me know what the top 2 were in the comments section below.
+	    alchemyapi = AlchemyAPI() # 初始化AlchemyAPI。
+	    file_list = glob.glob("pdfs/*.pdf") # 通过`glob`模块获取我们下载的所有PDF文件的文件名。
+	    entities = {} # 我们要使用`entities`字典来保存每个PDF文档的分析结果。
 
+		# 下面的for循环将遍历所有的PDF文件
+	    for pdf_file in file_list:
+
+	        # read in the PDF
+	        print("[*] Parsing %s" % pdf_file)
+
+			# 初始化一个PyPDF2对象，用于保存从PDF文档中提取的文本数据
+
+	        pdf_obj = PyPDF2.PdfFileReader(open(pdf_file, "rb"))
+
+			# 创建一个空字符串，用于后续构建这个PDF的全部文本数据
+
+	        full_text = ""
+
+	        # 从每页中提取文本数据
+
+	        for page in pdf_obj.pages:
+
+	            full_text += page.extractText()
+
+			# 接下来我们使用Alchemy API进行实体抽取
+
+	        print("[*] Sending %d bytes to the Alchemy API" % len(full_text))
+
+	        # 调用AlchemyAPI，并明确我们提交的是文本数据（第一个参数），然后传入需要分析的文本，第三个参数代表禁用情感分析功能，因为本文中我们只关注频率最高的实体。
+
+	        response = alchemyapi.entities('text', full_text, {'sentiment': 0})
+
+	        if response['status'] == 'OK':
+
+	            # 遍历返回的全部实体数据。Alchemy返回的每个实体中，都包含有`count`数据，我们要确保在`entities`字典中，将所有相同实体的count相加。
+
+	            for entity in response['entities']:
+
+	                # add each entity to our master list
+	                if entity['text'] in entities:
+	                    entities[entity['text']] += int(entity['count'])
+	                else:
+	                    entities[entity['text']] = int(entity['count'])
+
+	            print("[*] Retrieved %d entities from %s" %
+	                  (len(entities), pdf_file))
+
+	        else:
+	            print("[!] Error receiving Alchemy response: %s" %
+	                  response['statusInfo'])
+
+	        time.sleep(1)
+
+	    # 上面的循环执行结束，我们可以统计最常见的实体，并把相关的结果打印出来了！
+	    entity_counter = Counter(entities)
+
+	    top_entities = entity_counter.most_common()
+
+	    # 接下来就开始打印本·拉登提到次数最多的实体吧！
+	    for top_entity in top_entities[0:10]:
+
+	        # most_common returns a tuple (entity,count)
+	        print("%s => %d" % (top_entity[0], top_entity[1]))
+
+上面函数的最后，我们使用了Counter类来加载`entities`字典，并且很容易地就得出了最常见的实体。
+
+## 快速执行数据分析
+
+最后执行脚本时，一定要注意：**要把`bld.py`脚本放在`alchemyapi_python`这个文件夹里**。这是因为AlchemyAPI SDK并没有在Python的PATH上。
+
+为了让大家少复制粘贴，我已经把相关的操作写在[一个bash脚本](https://raw.githubusercontent.com/bingjin/funscripts/master/laden/bld.sh)里。大家下载脚本后修改API KEY即可。
+
+	curl https://raw.githubusercontent.com/bingjin/funscripts/master/laden/bld.sh --output bld.sh
+	sh bld.sh
+	
+![将文本数据上传到AlchemyAPI进行分析](http://ww3.sinaimg.cn/mw690/006faQNTgw1f13ts8u4f3j30w80oqh1v.jpg)
+
+上图就是正在执行的脚本。想不想看看最终的分析结果？我直接告诉你们就太没趣了，大家可以运行脚本自己看。当然，剧透也是有的：你知道吗？伊斯兰教先知穆罕默德居然才排第七！
+
+**你分析的结果是怎样的，留言告诉大家本·拉登提到次数最多的三个实体吧！**
 
 ## 结语
 
-Wrapping Up
+本文中仅使用了AlchemyAPI的实体提取功能，其他诸如关键词分析、情感分析、图像分析等功能都没有涉及。大家可以在本文的基础上，进一步发挥自己的想象力，看看还能从本·拉登的书架中得到什么信息。
 
-There were some key concepts here that are going to be useful in the future. One of the big ones is being able to process large numbers of PDF documents. Keep in mind these must be well formed (not scans) PDFs and at times this may pose a challenge. The other key concept was being able to use an API to perform entity extraction on these documents. You can use the results of this to build word clouds (want me to show you how? let me know in the comments or email me) or to build graphs or just to tell you some interesting statistics about a collection of documents.
+**欢迎大家扫描下方二维码关注我的公众号“编程派”，谢谢支持！**
 
-## Github执行
-
-本·拉登的书架完整清单地址：[http://www.dni.gov/index.php/resources/bin-laden-bookshelf](http://www.dni.gov/index.php/resources/bin-laden-bookshelf)
-
-> 本·拉登的400余种文档里一半左右是以英文写就。在75本英文书籍中，揭露美国弊端的著作占了很大比例，作者多为美国左翼。左派学者乔姆斯基的《必要的幻象：民主社会的思想控制》、《美国的战略失误》、《扼杀希望》、《无赖之国》等。本·拉登还偏爱阴谋论，《光明会的血统》、《美联储的秘密》、《美国的攫取》等阴谋论经典书目在他的书单中也占据了一席之地。除此之外，严肃的学术著作、历史和国际关系读物、指南性读物也榜上有名，如水门事件当事记者鲍勃·伍德沃德的《奥巴马的战争》、英国历史学家保罗·肯尼迪的《大国的兴衰》，以及《牛津现代战争史》、《国际关系理论和亚太地区》、《国际法手册》等。
-
-http://automatingosint.com/blog/2015/05/osint-python-analyze-bin-ladins-bookshelf/
+<p style="text-align:center">
+    <img src="http://codingpy.com/static/images/wechat-of-codingpy.jpg" alt="编程派的微信公众号二维码" style="width:215px;height:215px">
+</p>

@@ -1,5 +1,7 @@
-"""Using AlchemyAPI to analyze Bin Laden's Latters."""
+#!usr/bin/env python
+# -*- coding: utf-8 -*-
 
+"""Process downloaded documents."""
 import PyPDF2
 import glob
 import time
@@ -10,7 +12,6 @@ from alchemyapi import AlchemyAPI
 alchemyapi = AlchemyAPI()
 file_list = glob.glob("pdfs/*.pdf")
 entities = {}
-
 
 for pdf_file in file_list:
 
@@ -42,7 +43,8 @@ for pdf_file in file_list:
             else:
                 entities[entity['text']] = int(entity['count'])
 
-        print("[*] Retrieved %d entities from %s" % (len(entities), pdf_file))
+        print("[*] Retrieved %d entities from %s" %
+              (len(entities), pdf_file))
 
     else:
         print("[!] Error receiving Alchemy response: %s" %
