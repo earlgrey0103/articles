@@ -3,8 +3,6 @@ Google's Python Class
 - Overview: https://developers.google.com/edu/python/
 - Set Up:https://developers.google.com/edu/python/set-up
 
-> 为什么翻这个？没人做；经典
-
 ## 概述
 
 欢迎来到谷歌的Python公开课。这是一门免费课程，目标受众是希望学习Python语言、有一定编程经验的人。这门课程包括了书面学习材料、课程视频和大量的代码练习。谷歌公司内部培训使用的就是这些材料。一开始的练习只涉及基础的Python概念，例如字符串（string）和列表（list），随着课程逐渐深入，后面的练习则需要编写处理文本文件、处理进程和http连接的完整程序。虽然本门课程在设计时，针对的是那些具备一些其他编程语言经验的人，但是你只需要知道什么是“变量”或“if语句”即可。你不一定要成为专家程序员才能学习这门课。

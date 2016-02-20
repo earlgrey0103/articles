@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 # 本·拉登的书架：Python文本分析告诉你拉登最常提到什么
 
 关键词：Python文本分析, AlchemyAPI, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件, 拉登最常念叨什么
 
 > **本文首发于编程派的微信公众号，搜索“codingpy”关注编程吧。**
->>>>>>> dd8e9d65ca612ddcb77f1feaf38d36fb0233c4b7
 
 关键词：Python文本分析, AlchemyAPI, 实体抽取, 本·拉登的书架, 本·拉登的书信, Python PDF处理, Python教程, Python自动下载文件, 本·拉登最关心的人
 
@@ -12,7 +10,6 @@
 
 在本文中，我们将学习如何分析PDF文档，并且利用AlchemyAPI来进行实体抽取分析，看看本·拉登在这些信件中最常提到的10个实体是什么。
 
-<<<<<<< HEAD
 ![本·拉登的书架](http://ww1.sinaimg.cn/mw690/006faQNTgw1f13uqwr6tcj30mx0bvdhy.jpg)
 
 ## 什么是AlchemyAPI？
@@ -49,7 +46,6 @@ AlchemyAPI有一个免费的基础服务包，每天的事务处理上限为1000
 
 ## 安装Alchemy Python SDK
 
-<<<<<<< HEAD
 获得API Key之后，我们可以通过AlchemyAPI提供的Python SDK和[HTTP REST接口](http://alchemyapi.com/api/calling.html)调用其提供的文本分析服务。在本文中，我们选择安装SDK的方式。
 
 PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不能使用pip来安装，只能通过Git克隆Python SDK的代码库或是[直接下载代码库](https://github.com/AlchemyAPI/alchemyapi_python/archive/master.zip):
@@ -62,7 +58,7 @@ PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不
 	python alchemyapi.py YOUR_API_KEY # 将YOUR_API_KEY替换成你收到的Key
 
 为确保SDK正常安装，可以按照提示运行`example.py`查看演示程序：
-=======
+
 获得API Key之后，我们可以通过AlchemyAPI提供的Python SDK和HTTP REST接口调用其提供的文本分析服务。在本文中，我们选择安装SDK的方式。
 
 PyPI上之前有AlchemyAPI包，但是后来移除了下载包，因此我们不能使用pip来安装，只能通过Git克隆Python SDK的代码库或是直接下载代码库:
