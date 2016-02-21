@@ -1,18 +1,21 @@
 http://jugad2.blogspot.com/2016/02/examples-of-method-chaining-in-python.html
 
-Method chaining is a technique (in object-oriented languages) for making multiple method calls on the same object, without using the object reference more than once. Example:
+方法链（method chaining）是面向对象的编程语言中的一种常见语法，可以让开发者在只引用对象一次的情况下，对同一个对象进行多次方法调用。举个例子：
 
-Let's say we have a class Foo that contains two methods, bar and baz.
-We create an instance of the class Foo:
-foo = Foo()
-Without method chaining, to call both bar and baz in turn, on the object foo, we would do this:
-# Fragment 1
-foo.bar() # Call method bar() on object foo.
-foo.baz() # Call method baz() on object foo.
-# With method chaining, we can this:
-# Fragment 2
-Chain calls to methods bar() and baz() on object foo.
-foo.bar().baz()
+假设我们有一个Foo类，其中包含有两个方法——`bar`和`baz`。
+
+我们创建一个Foo类的实例：
+
+    foo = Foo()
+
+如果不使用方法链，要想连续调用对象`foo`的`bar`和`baz`方法的话，我们得这样做：
+
+    foo.bar() # Call method bar() on object foo.
+    foo.baz() # Call method baz() on object foo.
+
+如果使用方法链的话，我们就能这样实现：
+    foo.bar().baz()
+
 So you can loosely think of method chaining as the object-oriented version of nested function calls in procedural programming, where, instead of this:
 # Fragment 3
 temp1 = foo(args)
@@ -29,6 +32,23 @@ One advantage of method chaining is that it reduces the number of times you have
 Note: One limitation of method chaining is that it can only be used on methods which do not need to return any other meaningful value, such as a count of lines modified, words found, records deleted, etc. (which some methods need to do), because you need to return the self object. Even the fact that Python (and some other languages) support returning multiple values from a return statement, may not solve this. (There could be some workaround for this, but it might look awkward, is my guess.)
 
 Simple method chaining can be implemented easily in Python.
+
+class Person:
+    def name(self, value):
+        self.name = value
+        return self
+ 
+    def age(self, value):
+        self.age = value
+        return self
+ 
+    def introduce(self):
+        print "Hello, my name is", self.name, "and I am", self.age, "years old."
+ 
+person = Person()
+person.name("Peter").age(21).introduce()
+# => Hello, my name is Peter and I am 21 years old.
+
 Here is one way of doing it:
 # foo_bar_baz.py
 # Demonstrates method chaining.
@@ -155,3 +175,7 @@ After lowercase: the      quick   brown         fox
 After uppercase then capitalize: The      quick   brown         fox
 After delspace: TheQUIckbrOWnfOx
 So, to sum up, we can see that method chaining has its uses, though overdoing it is probably not a good idea.
+
+Method chaining, also known as named parameter idiom, is a common syntax for invoking multiple method calls in object-oriented programming languages. Each method returns an object, allowing the calls to be chained together in a single statement without requiring variables to store the intermediate results.[1] Local variable declarations are syntactic sugar because of the difficulty humans have with deeply nested method calls.[2][3] A method chain is also known as a train wreck due to the increase in the number of methods that come one after another in the same line that occurs as more methods are chained together[4] even though line breaks are often added between methods.
+
+A similar syntax is method cascading, where after the method call the expression evaluates to the current object, not the return value of the method. Cascading can be implemented using method chaining by having the method return the current object itself. Cascading is a key technique in fluent interfaces, and since chaining is widely implemented in object-oriented languages while cascading isn't, this form of "cascading-by-chaining by returning this" is often referred to simply as "chaining". Both chaining and cascading come from the Smalltalk language.
