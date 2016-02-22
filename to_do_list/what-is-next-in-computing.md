@@ -1,84 +1,70 @@
 # 计算的未来是什么？
 
-计算行业（computing industry）的发展呈周期性，存在金融与产品两个周期，二者绝大程度上是相互独立的。近来，很多人对金融周期当前所处的阶段感到绝望。金融市场为众人所瞩目，总是发生出乎意料的、有时甚至是剧烈的波动。相比之下，产品周期获得的关注较少，尽管它才是驱动计算行业发展的动力。通过研究历史并推测未来，我们可以更好地理解和预测产品周期。
+> 本文首发于微信公众号“编程派”，转载请联系公众号获得授权。
 
-The computing industry progresses in two mostly independent cycles: financial and product cycles. There has been a lot of handwringing lately about where we are in the financial cycle. Financial markets get a lot of attention. They tend to fluctuate unpredictably and sometimes wildly. The product cycle by comparison gets relatively little attention, even though it is what actually drives the computing industry forward. We can try to understand and predict the product cycle by studying the past and extrapolating into the future.
+计算行业（computing industry）的发展呈周期性，存在金融与产品两个周期，二者绝大程度上是相互独立的。近来，很多人对金融周期当前所处的阶段感到绝望。金融市场为众人所瞩目，总是发生出乎意料的、有时甚至是剧烈的波动。相比之下，产品周期获得的关注较少，尽管它才是驱动计算行业发展的动力。通过研究历史并推测未来，我们可以更好地理解和预测产品周期。
 
 ![每隔10-15年出现新的计算时代](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185v22pmaj30d204pmyr.jpg)
 
 技术产品周期产生于平台与应用之间的相辅相成（mutually reinforcing）的互动。新平台催生新应用，后者反过来提升新平台的价值，形成了正反馈循环。小规模、分枝型技术周期无时不刻不在发生，但是每隔一段时间——从历史上来看大约每10到15年——就会出现颠覆计算行业格局的重大周期。
 
-Tech product cycles are mutually reinforcing interactions between platforms and applications. New platforms enable new applications, which in turn make the new platforms more valuable, creating a positive feedback loop. Smaller, offshoot tech cycles happen all the time, but every once in a while — historically, about every 10 to 15 years — major new cycles begin that completely reshape the computing landscape.
-
 ![金融周期和产品周期绝大程度上是相互独立的](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185vsarkwj30jt0b8my7.jpg)
 
 个人计算机（PC）刺激创业者开发出了文本处理程序、表格处理程序以及许多其他桌面应用。互联网滋生出搜索引擎、电子商务、电子邮件、社交网络、SaaS商业应用以及许多其他网络服务。智能手机使得移动通讯、移动社交网络以及拼车等服务成为可能。如今，我们已经进入移动时代。未来很可能还会出现更多的移动创新。
 
-The PC enabled entrepreneurs to create word processors, spreadsheets, and many other desktop applications. The internet enabled search engines, e-commerce, e-mail and messaging, social networking, SaaS business applications, and many other services. Smartphones enabled mobile messaging, mobile social networking, and on-demand services like ride sharing. Today, we are in the middle of the mobile era. It is likely that many more mobile innovations are still to come.
-
 每个产品时代都可以划分为两个阶段：1）酝酿期，即新平台首次推出，但是价格昂贵，功能不全面，而且/或者使用困难；2）成长期，即出现了一个解决这些问题的新产品，开启了几何式增长时期。
 
-Each product era can be divided into two phases: 1) the gestation phase, when the new platform is first introduced but is expensive, incomplete, and/or difficult to use, 2) the growth phase, when a new product comes along that solves those problems, kicking off a period of exponential growth.
-
 Apple II早在1977年就已推出（MITS Altair 8800更早两年面世），但是却是由1981年发布的IBM PC开启了个人电脑的成长期。
-
-The Apple II was released in 1977 (and the Altair in 1975), but it was the release of the IBM PC in 1981 that kicked off the PC growth phase.
 
 ![每年的PC销量（单位：千）](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185vuck7kj30c005umyp.jpg)
 
 互联网的酝酿期是上世纪80年代及90年代早期，当时互联网很大程度上还只是学术界和政府使用的一个基于文本的工具。1993年，Mosaic网络浏览器的出现开启了它的成长期，一直持续至今。
 
-The internet’s gestation phase took place in the 80s and early 90s when it was mostly a text-based tool used by academia and government. The release of the Mosaic web browser in 1993 started the growth phase, which has continued ever since.
-
 ![全球互联网用户的增长情况](http://ww2.sinaimg.cn/mw690/006faQNTgw1f185u6fn1lj30a004haan.jpg)
 
 上世纪90年代就出现了功能机（feature phones），本世纪初出现了Sidekick和Blackberry等早期智能手机，但是智能手机的成长阶段真正开始于2007至2008年之间，这期间iPhone和Android先后发布。此后，智能手机的使用率暴涨：目前约有20亿人拥有智能手机。到2020年时，[全球每十个人中，就会有8个人使用智能手机](http://ben-evans.com/benedictevans/2014/10/28/presentation-mobile-is-eating-the-world)。
-
-There were feature phones in the 90s and early smartphones like the Sidekick and Blackberry in the early 2000s, but the smartphone growth phase really started in 2007–8 with the release of the iPhone and then Android. Smartphone adoption has since exploded: about 2B people have smartphones today. By 2020, 80% of the global population will have one.
 
 ![全球每年的智能手机销售数据（单位：百万）](http://ww3.sinaimg.cn/mw690/006faQNTgw1f185ucp8hsj30c005mdgs.jpg)
 
 假如10到15年的间隔是规律性的，下一个计算时代应该会在接下来几年中进入成长期。如果真是这样的话，我们现在应该已经处于其酝酿期了。目前，硬件业和软件业中显示出了一些重要趋势，可以让我们一窥下一个计算时代。在本文中，我将逐一说明这些趋势，并预测未来将会如何发展。
 
-
-If the 10–15 year pattern repeats itself, the next computing era should enter its growth phase in the next few years. In that scenario, we should already be in the gestation phase. There are a number of important trends in both hardware and software that give us a glimpse into what the next era of computing might be. Here I talk about those trends and then make some suggestions about what the future might look like.
-
-
+## 硬件：更小，更廉价，无处不在
 
 在主机时代（mainframe era），只有大型机构才用得起计算机。后来，小型机构用上了小型机，普通家庭配备了个人电脑（PC），个人用起了智能手机。
 
-In the mainframe era, only large organizations could afford a computer. Minicomputers were affordable by smaller organization, PCs by homes and offices, and smartphones by individuals.
-
-![硬件：更小，更廉价，无处不在](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185v2iwquj30c008zdhl.jpg)
-
-We are now entering an era in which processors and sensors are getting so small and cheap that there will be many more computers than there are people.
+![电脑变得越来越小](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185v2iwquj30c008zdhl.jpg)
 
 当前这个时代，处理器和传感器越变越小，越来越便宜，未来电脑的数量肯定会超过人类总人口。
 
-There are two reasons for this. One is the steady progress of the semiconductor industry over the past 50 years (Moore’s law). The second is what Chris Anderson calls “the peace dividend of the smartphone war”: the runaway success of smartphones led to massive investments in processors and sensors. If you disassemble a modern drone, VR headset, or IoT devices, you’ll find mostly smartphone components.
-In the modern semiconductor era, the focus has shifted from standalone CPUs to bundles of specialized chips known as systems-on-a-chip.
+原因有二。一是过去50年来半导体行业的稳步发展（摩尔定律）。二是克里斯·安德森（Chris Anderson）所说的“智能手机战争的和平红利”：智能手机的巨大成功导致对处理器和传感器的大量投资。如果你拆开一架现代无人机、虚拟头盔或者物联网设备，你会发现其中大部分是智能手机组件。
 
-Computer prices have been steadily dropping
-Typical systems-on-a-chip bundle energy-efficient ARM CPUs plus specialized chips for graphics processing, communications, power management, video processing, and more.
+在现代半导体时代，人们的焦点已经从独立CPU，转变到被称之为系统芯片（systems-on-a-chip）的特殊芯片上。
 
-Raspberry Pi Zero: 1 GHz Linux computer for $5
-This new architecture has dropped the price of basic computing systems from about $100 to about $10. The Raspberry Pi Zero is a 1 GHz Linux computer that you can buy for $5. For a similar price you can buy a wifi-enabled microcontroller that runs a version of Python. Soon these chips will cost less than a dollar. It will be cost-effective to embed a computer in almost anything.
-Meanwhile, there are still impressive performance improvements happening in high-end processors. Of particular importance are GPUs (graphics processors), the best of which are made by Nvidia. GPUs are useful not only for traditional graphics processing, but also for machine learning algorithms and virtual/augmented reality devices. Nvidia’s roadmap promises significant performance improvements in the coming years.
+![电脑的价格在不断降低](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185vtr4nvj30c0086dgy.jpg)
 
-Google’s quantum computer
+系统芯片一般会将能耗低的ARM CPU，与专门用于图像处理、通信、电源管理及视频处理等功能的芯片捆绑一起。
 
-A wildcard technology is quantum computing, which today exists mostly in laboratories but if made commercially viable could lead to orders-of-magnitude performance improvements for certain classes of algorithms in fields like biology and artificial intelligence.
+![Raspberry Pi Zero: 1 GHz Linux computer for $5](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185w0m1pdj307505gwej.jpg)
 
-Software: the golden age of AI
+这种新架构使得基本计算系统的价格，从大概100美元降低到了约10美元。Raspberry Pi Zero是一台功率1 GHz的Linux电脑，花5美元就可以买到。你还可以以类似的价格，买到一个支持wifi、能运行Python的微控制器（microcontroller）。很快，这些芯片的价格会低至不到1美元。那是，我们可以在任何东西里嵌入一台电脑，而且不用担心成本控制问题。
 
-There are many exciting things happening in software today. Distributed systems is one good example. As the number of devices has grown exponentially, it has become increasingly important to 1) parallelize tasks across multiple machines 2) communicate and coordinate among devices. Interesting distributed systems technologies include systems like Hadoop and Spark for parallelizing big data problems, and Bitcoin/blockchain for securing data and assets.
+与此同时，高端处理器的性能也得到了极大的提升。尤其重要的是GPU（图形处理器），其中最好的处理器是由Nvidia公司生产的。GPU不仅对传统的图像处理有用，还可以用于机器学习算法和虚拟现实设备（或增强现实设备）。Nvidia的产品路线图昭示了未来几年GPU的性能还将大大提升。
 
-But perhaps the most exciting software breakthroughs are happening in artificial intelligence (AI). AI has a long history of hype and disappointment. Alan Turing himself predicted that machines would be able to successfully imitate humans by the year 2000. However, there are good reasons to think that AI might now finally be entering a golden age.
+![谷歌的量子计算机](http://ww3.sinaimg.cn/mw690/006faQNTgw1f185v32tslj307y03yjrx.jpg)
 
-“Machine learning is a core, transformative way by which we’re rethinking everything we’re doing.” — Google CEO, Sundar Pichai
-A lot of the excitement in AI has focused on deep learning, a machine learning technique that was popularized by a now famous 2012 Google project that used a giant cluster of computers to learn to identify cats in YouTube videos. Deep learning is a descendent of neural networks, a technology that dates back to the 1940s. It was brought back to life by a combination of factors, including new algorithms, cheap parallel computation, and the widespread availability of large data sets.
+另一项普适性技术是量子计算。这项技术目前仍主要存在于实验室中，但是如果成功商业化后，可以极大地提高生物学和人工智能等领域中许多算法的性能。
 
-ImageNet challenge error rates (red line = human performance)
+## 软件：人工智能的黄金时代
+
+软件业如今正在发生许多令人兴奋的事情。分布式系统就是一个很好的例子。随着设备数量几何级增长，这两点变得越来越重要：1）多台机器并行执行任务；2）设备之间进行通信和配合。有意思的分布式系统技术包括：用于并行处理大数据问题的Hadoop和Spark，以及保障数据和资产安全性的Bitcoin/blockchain。
+
+但是或许软件领域最振奋人心的突破来自人工智能（AI）。对AI的热捧及失望由来已久。阿兰·图灵曾预言到2000年时，机器能够成功模仿人类。但是，我们有充分的理由相信，现在AI或许将终于进入一个黄金时代。
+
+> 机器学习是我们反思人类生活一切的一种核心、革命性方式。—— Google CEO，桑达尔·皮查伊（Sundar Pichai）
+
+人工智能领域很多好消息都来自深度学习。这是一种机器学习技术，因2012年一项著名的谷歌项目而流行起来：谷歌使用一个大规模计算机集群学习如何在YouTube视频中识别猫。深度学习源自可以追溯至20世纪40年代的神经网络技术。由于多种因素，包括新的算法、廉价并行计算和大规模数据集的普遍，神经网络技术才得以起死回生。
+
+![ImageNet挑战的错误率（红线为人类水平）](https://cdn-images-1.medium.com/max/600/1*P4BXse9pJYAUbasCEkQanA.png)
 
 It’s tempting to dismiss deep learning as another Silicon Valley buzzword. The excitement, however, is supported by impressive theoretical and real-world results. For example, the error rates for the winners of the ImageNet challenge — a popular machine vision contest — were in the 20–30% range prior to the use of deep learning. Using deep learning, the accuracy of the winning algorithms has steadily improved, and in 2015 surpassed human performance.
 
@@ -99,7 +85,9 @@ User searches photos (w/o metadata) for “big ben”
 We’ll soon see significant upgrades to the intelligence of all sorts of products, including: voice assistants, search engines, chat bots, 3D scanners, language translators, automobiles, drones, medical imaging systems, and much more.
 “The business plans of the next 10,000 startups are easy to forecast: Take X and add AI. This is a big deal, and now it’s here.” — Kevin Kelly
 Startups building AI products will need to stay laser focused on specific applications to compete against the big tech companies who have made AI a top priority. AI systems get better as more data is collected, which means it’s possible to create a virtuous flywheel of data network effects (more users → more data → better products → more users). The mapping startup Waze used data network effects to produce better maps than its vastly better capitalized competitors. Successful AI startups will follow a similar strategy.
-Software + hardware: the new computers
+
+## 软件 + 硬件：新型电脑
+
 There are a variety of new computing platforms currently in the gestation phase that will soon get much better — and possibly enter the growth phase — as they incorporate recent advances in hardware and software. Although they are designed and packaged very differently, they share a common theme: they give us new and augmented abilities by embedding a smart virtualization layer on top of the world. Here is a brief overview of some of the new platforms:
 Cars. Big tech companies like Google, Apple, Uber, and Tesla are investing significant resources in autonomous cars. Semi-autonomous cars like the Tesla Model S are already publicly available and will improve quickly. Full autonomy will take longer but is probably not more than 5 years away. There already exist fully autonomous cars that are almost as good as human drivers. However, for cultural and regulatory reasons, fully autonomous cars will likely need to be significantly better than human drivers before they are widely permitted.
 
@@ -135,7 +123,7 @@ That said, AR is probably coming sooner than you think. This demo video was shot
 
 Magic Leap demo: real environment, virtual character
 
-What’s next?
+## 接下来是什么？
 
 It is possible that the pattern of 10–15 year computing cycles has ended and mobile is the final era. It is also possible the next era won’t arrive for a while, or that only a subset of the new computing categories discussed above will end up being important.
 I tend to think we are on the cusp of not one but multiple new eras. The “peace dividend of the smartphone war” created a Cambrian explosion of new devices, and developments in software, especially AI, will make those devices smart and useful. Many of the futuristic technologies discussed above exist today, and will be broadly accessible in the near future.
