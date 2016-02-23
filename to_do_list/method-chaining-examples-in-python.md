@@ -2,6 +2,8 @@
 
 关键词：方法链, 面向对象编程, method chaining example, Python实现方法链, Python基础教程, Python国外教程
 
+> 本文首发于[微信公众号“编程派”](http://mp.weixin.qq.com/s?__biz=MzAwNDc0MTUxMw==&mid=401649456&idx=1&sn=b5dde57ffaf5036f50d2da9b644f2aa8#rd)。微信搜索“编程派”，关注我们吧。
+
 方法链（method chaining）是面向对象的编程语言中的一种常见语法，可以让开发者在只引用对象一次的情况下，对同一个对象进行多次方法调用。举个例子：
 
 假设我们有一个Foo类，其中包含有两个方法——`bar`和`baz`。

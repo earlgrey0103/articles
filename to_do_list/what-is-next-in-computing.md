@@ -1,5 +1,7 @@
 # 计算的未来是什么？
 
+关键词：
+
 > 本文首发于微信公众号“编程派”，转载请联系公众号获得授权。
 
 计算行业（computing industry）的发展呈周期性，存在金融与产品两个周期，二者绝大程度上是相互独立的。近来，很多人对金融周期当前所处的阶段感到绝望。金融市场为众人所瞩目，总是发生出乎意料的、有时甚至是剧烈的波动。相比之下，产品周期获得的关注较少，尽管它才是驱动计算行业发展的动力。通过研究历史并推测未来，我们可以更好地理解和预测产品周期。
@@ -60,73 +62,90 @@ Apple II早在1977年就已推出（MITS Altair 8800更早两年面世），但�
 
 但是或许软件领域最振奋人心的突破来自人工智能（AI）。对AI的热捧及失望由来已久。阿兰·图灵曾预言到2000年时，机器能够成功模仿人类。但是，我们有充分的理由相信，现在AI或许将终于进入一个黄金时代。
 
-> 机器学习是我们反思人类生活一切的一种核心、革命性方式。—— Google CEO，桑达尔·皮查伊（Sundar Pichai）
+> “机器学习是我们反思人类生活一切的一种核心、革命性方式。” —— Google CEO，桑达尔·皮查伊（Sundar Pichai）
 
 人工智能领域很多好消息都来自深度学习。这是一种机器学习技术，因2012年一项著名的谷歌项目而流行起来：谷歌使用一个大规模计算机集群学习如何在YouTube视频中识别猫。深度学习源自可以追溯至20世纪40年代的神经网络技术。由于多种因素，包括新的算法、廉价并行计算和大规模数据集的普遍，神经网络技术才得以起死回生。
 
 ![ImageNet挑战的错误率（红线为人类水平）](https://cdn-images-1.medium.com/max/600/1*P4BXse9pJYAUbasCEkQanA.png)
 
-It’s tempting to dismiss deep learning as another Silicon Valley buzzword. The excitement, however, is supported by impressive theoretical and real-world results. For example, the error rates for the winners of the ImageNet challenge — a popular machine vision contest — were in the 20–30% range prior to the use of deep learning. Using deep learning, the accuracy of the winning algorithms has steadily improved, and in 2015 surpassed human performance.
+你或许很想把深度学习看作是硅谷的又一个时髦词汇。但是，深度学习流行的背后，有着坚实的理论和现实依据。举个例子，在使用深度学习技术之前，ImageNet挑战——一个知名机器视觉竞赛——优胜算法的错误率在20%-30%之间。使用深度学习技术之后，优胜算法的准确度稳步提升，2015年时已经超越了人类水平。
 
-Many of the papers, data sets, and software tools related to deep learning have been open sourced. This has had a democratizing effect, allowing individuals and small organizations to build powerful applications. WhatsApp was able to build a global messaging system that served 900M users with just 50 engineers, compared to the thousands of engineers that were needed for prior generations of messaging systems. This “WhatsApp effect” is now happening in AI. Software tools like Theano and TensorFlow, combined with cloud data centers for training, and inexpensive GPUs for deployment, allow small teams of engineers to build state-of-the-art AI systems.
+许多关于深度学习的论文、数据集合软件工具都已经开源。这在社会上产生了重大影响，使得个人和小公司能够开发出强大的应用。WhatsApp仅靠50名工程师，就开发出了能够服务9亿用户的全球通讯系统；而之前的通讯系统则需要成千上万名工程师。这种“WhatsApp效应”现在也出现在人工智能领域。Theono和TensorFlow等软件工具的出现，加上可用于AI训练的云数据中心以及可廉价部署的GPU，让小型工程师团队也能开发出顶尖的AI系统。
 
-For example, here a solo programmer working on a side project used TensorFlow to colorize black-and-white photos:
+例如，一位独立开发者在自己的业余项目重，使用TensorFlow给黑白照片上色：
 
-Left: black and white. Middle: automatically colorized. Right: true color. (Source)
-And here a small startup created a real-time object classifier:
+![左：黑白照。中：自动上色后。右：真实颜色](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185v3mhqaj30m807bwlx.jpg)
 
-Teradeep real-time object classifier
-Which of course is reminiscent of a famous scene from a sci-fi movie:
+还有一家小型创业企业推出了实时物体分类工具：
 
-The Terminator (1984)
-One of the first applications of deep learning released by a big tech company is the search function in Google Photos, which is shockingly smart.
+![Teradeep的实时物体分类工具](http://ww2.sinaimg.cn/mw690/006faQNTgw1f185umi3a0g308w09ib2c.gif)
 
-User searches photos (w/o metadata) for “big ben”
-We’ll soon see significant upgrades to the intelligence of all sorts of products, including: voice assistants, search engines, chat bots, 3D scanners, language translators, automobiles, drones, medical imaging systems, and much more.
-“The business plans of the next 10,000 startups are easy to forecast: Take X and add AI. This is a big deal, and now it’s here.” — Kevin Kelly
-Startups building AI products will need to stay laser focused on specific applications to compete against the big tech companies who have made AI a top priority. AI systems get better as more data is collected, which means it’s possible to create a virtuous flywheel of data network effects (more users → more data → better products → more users). The mapping startup Waze used data network effects to produce better maps than its vastly better capitalized competitors. Successful AI startups will follow a similar strategy.
+这很容易让人想起某部科幻电影中的知名片段。
+
+![终结者（1984）](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185vzvu5hg30dc0624qt.gif)
+
+科技巨头发布的首批深度学习应用之一，是Google Photos中的搜索功能，智能到令人发指。
+
+![用户搜索“大本钟”的照片](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185v7eqhqg30dc07ib2c.gif)
+
+很快，我们就会看到各种产品的智能度都将大幅提升，包括语音助手、搜索引擎、聊天机器人、3D扫描仪、翻译工具、汽车、无人机、医学成像系统，等等。
+
+> “接下来一万家创业公司的商业计划很容易预测：AI + X。兹事体大，近在眼前” —— 凯文·凯利
+
+开发AI产品的创业公司需要精确聚焦特定的应用领域，才能与那些已把AI作为首要任务的科技巨头竞争。随着搜集的数据增加，AI系统会逐步改善，这意味着可能出现数据网络效应的良性循环（更多的用户 → 更大的数据 → 更好的产品 → 更多的用户）。因为数据网络效应，制图创业公司Waze生产的地图，远胜过资本丰厚的竞争对手的产品。成功的AI创业公司将会采用类似的策略。
 
 ## 软件 + 硬件：新型电脑
 
-There are a variety of new computing platforms currently in the gestation phase that will soon get much better — and possibly enter the growth phase — as they incorporate recent advances in hardware and software. Although they are designed and packaged very differently, they share a common theme: they give us new and augmented abilities by embedding a smart virtualization layer on top of the world. Here is a brief overview of some of the new platforms:
-Cars. Big tech companies like Google, Apple, Uber, and Tesla are investing significant resources in autonomous cars. Semi-autonomous cars like the Tesla Model S are already publicly available and will improve quickly. Full autonomy will take longer but is probably not more than 5 years away. There already exist fully autonomous cars that are almost as good as human drivers. However, for cultural and regulatory reasons, fully autonomous cars will likely need to be significantly better than human drivers before they are widely permitted.
+当前有许多不同类别的新兴计算平台正处于酝酿期，随着这些平台逐步融合硬件与软件领域的技术进步，它们很快就会变得更加完善——而且很可能进入成长期。尽管各自的设计与架构迥异，它们都有着一个共同的主题：通过在现实世界之上增添一个智能化虚拟层，为我们带来了新的、更强的能力。下面我简要介绍其中一些新兴平台：
 
-Autonomous car mapping its environment
-Expect to see a lot more investment in autonomous cars. In addition to the big tech companies, the big auto makers are starting to take autonomy very seriously. You’ll even see some interesting products made by startups. Deep learning software tools have gotten so good that a solo programmer was able to make a semi-autonomous car:
+**汽车**。谷歌、苹果、优步和特斯拉等科技巨头在不断向自动驾驶汽车投入大量资源。类似Tesla Model S这样的半自动驾驶汽车已经公开发售，也将快速改进。全自动驾驶汽车的到来还需要些时日，但是可能不会超过5年。目前已经有几乎可与人类驾驶员媲美的全自动驾驶汽车。不过，出于文化和监管原因，全自动汽车需要做到大幅度超越人类驾驶员，才能得以大范围使用。
 
-Homebrew self-driving car
-Drones. Today’s consumer drones contain modern hardware (mostly smartphone components plus mechanical parts), but relatively simple software. In the near future, we’ll see drones that incorporate advanced computer vision and other AI to make them safer, easier to pilot, and more useful. Recreational videography will continue to be popular, but there will also be important commercial use cases. There are tens of millions of dangerous jobs that involve climbing buildings, towers, and other structures that can be performed much more safely and effectively using drones.
+![自动汽车正在映射周围环境](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185vrn5n6g30dc07ikjn.gif)
 
-Fully autonomous drone flight
-Internet of Things. The obvious use cases for IoT devices are energy savings, security, and convenience. Nest and Dropcam are popular examples of the first two categories. One of the most interesting products in the convenience category is Amazon’s Echo.
+预计自动驾驶汽车领域将获得更大的投资。除了科技巨头之外，大型汽车厂商也开始重视自动驾驶。你甚至会发现一些创业公司生产的有趣产品。深度学习软件工具着实优秀，甚至可以让个人开发者制造出半自动汽车。
 
-Three main uses cases for IoT
-Most people think Echo is a gimmick until they try it and then they are surprised at how useful it is. It’s a great demo of how effective always-on voice can be as a user interface. It will be a while before we have bots with generalized intelligence that can carry on full conversations. But, as Echo shows, voice can succeed today in constrained contexts. Language understanding should improve quickly as recent breakthroughs in deep learning make their way into production devices.
-IoT will also be adopted in business contexts. For example, devices with sensors and network connections are extremely useful for monitoring industrial equipment.
-Wearables. Today’s wearable computers are constrained along multiple dimensions, including battery, communications, and processing. The ones that have succeeded have focused on narrow applications like fitness monitoring. As hardware components continue to improve, wearables will support rich applications the way smartphones do, unlocking a wide range of new applications. As with IoT, voice will probably be the main user interface.
+![个人打造的自动驾驶汽车](http://ww2.sinaimg.cn/mw690/006faQNTgw1f185w79f7tg30dc07i4qt.gif)
 
-Wearable, super intelligent AI earpiece in the movie “Her”
+**无人机**。今天的消费级无人机使用的是现代化硬件（大部分是智能手机部件，加上机械部件），但是使用的软件却相对简单。不远的将来，我们会见证更加先进无人机的出现，它们集成了先进的电脑视觉和其他AI系统，更加安全，更容易操作，用途更广。无人机会继续广泛用于娱乐视频拍摄，不过也会逐渐用于更加重要的商业场合。现在还存在着上百万个需要盘盘建筑物、高塔和其他危险建筑的工作，如果使用无人机来完成这些工作，将大大提高工作的安全性和效率。
 
-Virtual Reality. 2016 is an exciting year for VR: the launch of the Oculus Rift and HTC/Valve Vive (and, possibly, the Sony Playstation VR), means that comfortable and immersive VR systems will finally be publicly available. VR systems need to be really good to avoid the “uncanny valley” trap. Proper VR requires special screens (high resolution, high refresh rate, low persistence), powerful graphics cards, and the ability to track the precise position of the user (previously released VR systems could only track the rotation of the user’s head). This year, the public will for the first time get to experience what is known as “presence” — when your senses are sufficiently tricked that you feel fully transported into the virtual world.
+![全自动的无人机飞行](http://ww3.sinaimg.cn/mw690/006faQNTgw1f185vn697bg30dc07ihe0.gif)
 
-Oculus Rift Toybox demo
+**物联网**。很明显，使用物联网设备可以节能，提高安全性和便捷性。Nest和Dropcam是前两个好处的绝佳例证。最后一个好处的示例中，最有趣的一个产品就是亚马逊的Echo。
 
-VR headsets will continue to improve and get more affordable. Major areas of research will include: 1) new tools for creating rendered and/or filmed VR content, 2) machine vision for tracking and scanning directly from phones and headsets, and 3) distributed back-end systems for hosting large virtual environments.
+![IoT设备的三大好处](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185uho7nuj309o05e0ss.jpg)
 
-3D world creation in room-scale VR
+大部分人觉得Echo不过就是个噱头，直到亲自使用之后，才惊讶地发现它是那么地好用。这个产品很好地证明了随时运行的语音助手也能够成为有效的用户界面（user interface）。过不了多久，或许我们就可以和具备一般智能的机器人正常对话了。但是，Echo告诉了我们：语音今天一样可以在受限制的语境下取得成功。随着深度学习领域近期的突破应用到商业设备，对语言的理解能力应该会快速提升。
 
-Augmented Reality. AR will likely arrive after VR because AR requires most of what VR requires plus additional new technologies. For example, AR requires advanced, low-latency machine vision in order to convincingly combine real and virtual objects in the same interactive scene.
+物联网也会应用于商业领域。例如，具备传感器和网络连接能力的设备，对监控工业设备极其有用。
 
-Real and virtual combined (from The Kingsmen)
+**可穿戴设备**。今天的可穿戴电脑受到了多个维度的限制，包括电池、通信和处理能力。那些已经取得成功的可穿戴设备，聚焦在较狭窄的领域，例如健康监测。随着硬件组件不断改进，可穿戴设备将能够像智能手机一样，支持丰富多样的应用，这将催生一系列新兴应用。和物联网设备一样，语言很可能会成为主要的用户界面。
 
-That said, AR is probably coming sooner than you think. This demo video was shot directly through Magic Leap’s AR device:
+![电影《Her》中的可穿戴、超级智能的AI耳机](http://ww1.sinaimg.cn/mw690/006faQNTgw1f185u5xm0vg30dc07i7wi.gif)
 
-Magic Leap demo: real environment, virtual character
+**虚拟现实**。对虚拟现实来说，2016年是令人振奋的一年：Oculus Rift和HTC/Valve Vive（或许还包括索尼的Playstation VR）等设备的发布，意味着舒适型、沉浸式虚拟现实系统最终走进普罗大众。虚拟现实系统必须要做到特别优秀，才能都避免“恐怖谷”（uncanny valley）陷阱。真正的虚拟现实，需要特制的屏幕（高清晰、高刷新率，低余辉）、强大的图形显卡以及追踪用户精确位置的能力（之前发布的VR设备只能追踪用户头部的转动）。今年，大众将首次体验到所谓的“代入感”（presence）—— 即迷惑你的感知，让你相信自己完全进入了虚拟世界。
+
+![Oculus Rift Toybox演示](http://ww2.sinaimg.cn/mw690/006faQNTgw1f185uh0ljxg30dc07i4qs.gif)
+
+虚拟头盔将继续得到改进，其价格也会逐渐降低。这方面的主要研究领域将包括：1）用于渲染或拍摄虚拟现实内容的新工具，2）用于追踪并直接从手机和头盔进行扫描的机器视觉，以及3）用于托管大型虚拟环境的分布式后端系统。
+
+![在房间大小的3D虚拟世界中进行创造](http://ww2.sinaimg.cn/mw690/006faQNTgw1f185v166u2g30dc07ib2j.gif)
+
+**增强现实**。增强现实可能会在虚拟现实之后，才会真正实现，因为增强现实所要求的技术，除了大部分也是虚拟现实也需要的之外，还包括一些新技术。例如，增强现实要求先进的、低延迟机器视觉，才将同一个互动场景中的虚拟物体和真实物体融为一体，而不为人所察觉。
+
+![电影《Kingsmen》中真实与虚拟之间的结合](http://ww4.sinaimg.cn/mw690/006faQNTgw1f185v2qkjij30go09edgr.jpg)
+
+尽管这样说，增强现实到来的脚本可能会比你想象的要快一些。下面这个演示视频是直接通过Magic Leap公司的增强现实设备拍摄的：
+
+![Magic Leap演示视频：真实环境，虚拟角色](http://ww3.sinaimg.cn/mw690/006faQNTgw1f185uc2vbrg30dc07ikjo.gif)
 
 ## 接下来是什么？
 
-It is possible that the pattern of 10–15 year computing cycles has ended and mobile is the final era. It is also possible the next era won’t arrive for a while, or that only a subset of the new computing categories discussed above will end up being important.
-I tend to think we are on the cusp of not one but multiple new eras. The “peace dividend of the smartphone war” created a Cambrian explosion of new devices, and developments in software, especially AI, will make those devices smart and useful. Many of the futuristic technologies discussed above exist today, and will be broadly accessible in the near future.
-Observers have noted that many of these new devices are in their “awkward adolescence.” That is because they are in their gestation phase. Like PCs in the 70s, the internet in the 80s, and smartphones in the early 2000s, we are seeing pieces of a future that isn’t quite here. But the future is coming: markets go up and down, and excitement ebbs and flows, but computing technology marches steadily forward.
+可能10-15年的计算周期已经结束，移动时代就是最后一个时代。也可能下一个时代不会这么快到来，或者上面介绍的新兴计算领域中，只有小部分才能最终颠覆世界。
+
+我更愿意相信，我们不是只处在一个时代的风口，而是多个新时代的风口。“智能手机战争的和平红利”引发了一场新设备的寒武纪式大爆发，而软件领域，尤其是人工智能的发展，将让这些设备更加智能、有用。上面谈到的许多未来科技其实今天已经存在，不久的将来会为更多人所使用。
+
+观察人士已经注意到，上面许多新兴设备仍处于“尴尬的幼年期”（awkward adolescence）。那是因为它们还处在各自的酝酿期。就像上世纪70年代的个人电脑、上世纪80年代的因特网和21世纪早期的智能手机，我们现在看到的还只是未来的一部分。但是确定的是，未来将至：金融市场时涨时跌，投资热点潮起潮落，计算技术总是稳步向前。
 
 原文链接：[Chris Dixon@Medium](https://medium.com/@cdixon/what-s-next-in-computing-e54b870b80cc#.6qc10uowx)
+
+> 原作者简介：Chris Dixon是硅谷知名的科技创业者和投资人，曾经创办的Hunch被eBay以大约8000万美元的价格收购；作为投资人，他曾投过Foursquare/Kickstarter/Pinterest/Dropbox/Skype等诸多明星公司，现就职于硅谷顶尖风投公司Andreessen Horowitz。
