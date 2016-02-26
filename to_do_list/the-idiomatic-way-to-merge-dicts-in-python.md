@@ -1,8 +1,8 @@
-# 怎样以符合Python习惯的方式合并字典？
+# 怎样合并字典最符合Python语言习惯？
 
 关键词：idiomatic python, 字典合并, 字典合并方法比较, Python教程, Python国外教程
 
-> 这篇教程这两天在Hacker News和Reddit比较热门，探讨了哪种合并字典的方式才是最符合Python语言习惯的（idiomatic）。笔者第一时间翻译出来，与大家一起分享学习。另外，在文末做一个小调查，大家喜欢早上还是晚上阅读Python教程？
+> 这篇教程探讨了哪种合并字典的方式才是最符合Python语言习惯的（idiomatic）。笔者第一时间翻译出来，与大家一起分享学习。
 
 你有没有想过在Python中合并两个或以上字典？
 
@@ -28,11 +28,11 @@
 
 基本上，我们希望实现下面的操作：
 
->>> user = {'name': "Trey", 'website': "http://treyhunner.com"}
->>> defaults = {'name': "Anonymous User", 'page_name': "Profile Page"}
->>> context = merge_dicts(defaults, user)  # magical merge function
->>> context
-{'website': 'http://treyhunner.com', 'name': 'Trey', 'page_name': 'Profile Page'}
+	>>> user = {'name': "Trey", 'website': "http://treyhunner.com"}
+	>>> defaults = {'name': "Anonymous User", 'page_name': "Profile Page"}
+	>>> context = merge_dicts(defaults, user)  # magical merge function
+	>>> context
+	{'website': 'http://treyhunner.com', 'name': 'Trey', 'page_name': 'Profile Page'}
 
 我们还要考虑解决方法是否Pythonic。但是这又是非常主观的。下面是我们使用的一些评判标准：
 
@@ -45,7 +45,7 @@
 
 既然定义完了需要解决的问题，接下来我们探讨下都有哪些解决方法，并分析其中哪个最准确，哪个最符合Python语言习惯。
 
-### 多次更新
+### 多次更新（multiple_update）
 
 下面是一种最简单的合并字典的方式：
 
@@ -62,175 +62,209 @@
 - 准确：是。
 - 符合语言习惯：比较符合，如果能够内联执行的话就更好了
 
-### 复制，然后更新
+### 复制，然后更新（copy and update）
 
-Alternatively, we could copy defaults and update the copy with user.
+另外，我们可以复制`defaults`字典，然后使用`user`来更新复制的字典。
 
-context = defaults.copy()
-context.update(user)
-This solution is only slightly different from the previous one.
+	context = defaults.copy()
+	context.update(user)
 
-For this particular problem, I prefer this solution of copying the defaults dictionary to make it clear that defaults represents default values.
+这种方法与前一种区别不大。
 
-Score:
+对于本文所探讨的问题，我更喜欢这种复制`defaults`字典的方法，可以很明显地看出`defaults`字典代表了默认值。
 
-Accurate: yes
-Idiomatic: yes
-Dictionary constructor
+得分：
 
-We could also pass our dictionary to the dict constructor which will also copy the dictionary for us:
+- 准确：是。
+- 符合语言习惯：是。
 
-context = dict(defaults)
-context.update(user)
-This solution is very similar to the previous one, but it’s a little bit less explicit.
+### 字典构造器
 
-Score:
+我们还可以将需要处理的字典传入字典构造器（`dict()`），这样也能复制字典。
 
-Accurate: yes
-Idiomatic: somewhat, though I’d prefer the first two solutions over this
-Keyword arguments hack
+	context = dict(defaults)
+	context.update(user)
 
-You may have seen this clever answer before, possibly on StackOverflow:
+此法与前一种非常相似， 但是没有前一种直接明了（less explicit）。
 
-context = dict(defaults, **user)
-This is just one line of code. That’s kind of cool. However, this solution is a little hard to understand.
+得分：
 
-Beyond readability, there’s an even bigger problem: this solution is wrong.
+- 准确：是。
+- 符合语言习惯：一定程度上符合，不过我更喜欢前两种方案。
 
-The keys must be strings. In Python 2 (with the CPython interpreter) we can get away with non-strings as keys, but don’t be fooled: this is a hack that only works by accident in Python 2 using the standard CPython runtime.
+### 关键词参数hack（keywords hack）
 
-Score:
+你以前可能见过下面这个巧妙的解决方法：
 
-Accurate: no. Requirement 2 is not met (keys may be any valid key)
-Idiomatic: no. This is a hack.
-Dictionary comprehension
+	context = dict(defaults, **user)
 
-Just because we can, let’s try doing this with a dictionary comprehension:
+只有一行代码，看上去很酷嘛。不过，这种解决方法有点难理解。
 
-context = {k: v for d in [defaults, user] for k, v in d.items()}
-This works, but this is a little hard to read.
+除了可读性之外，还有一个更严重的问题：这种方案是错的。
 
-If we have an unknown number of dictionaries this might be a good idea, but we’d probably want to break our comprehension over multiple lines to make it more readable. In our case of two dictionaries, this doubly-nested comprehension is a little much.
+字典的键必须是字符串。在Python 2（解释器是CPython）中，我们可以使用非字符串作为键，但别被蒙骗了：这种hack只是凑巧在使用标准CPython运行环境的Python 2中才有效。
 
-Score:
+得分：
 
-Accurate: yes
-Idiomatic: arguably not
-Concatenate items
+- 准确：否。没有满足第二点要求（键必须有效）
+- 符合语言习惯：否。这是一个hack。
 
-What if we get a list of items from each dictionary, concatenate them, and then create a new dictionary from that?
+### 字典解析（Dictionary comprehension）
 
-context = dict(list(defaults.items()) + list(user.items()))
-This actually works. We know that the user keys will win out over defaults because those keys come at the end of our concatenated list.
+我们尝试下使用字典解析式来解决这个问题：
 
-In Python 2 we actually don’t need the list conversions, but we’re working in Python 3 here (you are on Python 3, right?).
+	context = {k: v for d in [defaults, user] for k, v in d.items()}
 
-Score:
+成功了，但是可读性有点差。
 
-Accurate: yes
-Idiomatic: not particularly, there’s a bit of repetition
-Union items
+如果我们要处理未知数量的字典，这可能是种好方法，但是我们应该会想把字典解析式拆成多行，提高可读性。在只处理两个字典的情况下，这个双嵌套（double nested）的解析式有点大材小用了。
 
-In Python 3, items is a dict_items object, which is a quirky object that supports union operations.
+得分：
 
-context = dict(defaults.items() | user.items())
-That’s kind of interesting. But this is not accurate.
+- 准确：是。
+- 符合语言习惯：可以认为不符合。
 
-Requirement 1 (user should “win” over defaults) fails because the union of two dict_items objects is a set of key-value pairs and sets are unordered so duplicate keys may resolve in an unpredictable way.
+### 元素拼接（concatenate items）
 
-Requirement 3 (the values can be anything) fails because sets require their items to be hashable so both the keys and values in our key-value tuples must be hashable.
+假如我们从每个字典中获取一个元素列表，将列表拼接起来，然后再利用拼接的列表在构建新字典？
 
-Side note: I’m not sure why the union operation is even allowed on dict_items objects. What is this good for?
+	context = dict(list(defaults.items()) + list(user.items()))
 
-Score:
+结果真的成功了。我们可以确定`user`字典中的键值会覆盖掉`defaults`字典中的值，因为`user`字典的元素位于拼接列表的尾部。
 
-Accurate: no, requirements 1 and 3 fail
-Idiomatic: no
-Chain items
+在Python 2下，我们不需要先将字典转换成列表，但是本文中我们使用的是Python 3（你也用的是Python 3，对吧？）。
 
-So far the most idiomatic way we’ve seen to perform this merge in a single line of code involves creating two lists of items, concatenating them, and forming a dictionary.
+得分：
 
-We can join our items together more succinctly with itertools.chain:
+- 准确：是。
+- 符合语言习惯：不特别符合，代码有些重复。
 
-from itertools import chain
-context = dict(chain(defaults.items(), user.items()))
-This works well and may be more efficient than creating two unnecessary lists.
+### 元素并集（union items）
 
-Score:
+在Python 3中，字典的items方法会返回一个dict_items对象，这是一个奇怪对象，居然支持并集操作。
 
-Accurate: yes
-Idiomatic: fairly, but those items calls seem slightly redundant
-ChainMap
+	context = dict(defaults.items() | user.items())
 
-A ChainMap allows us to create a new dictionary without even looping over our initial dictionaries (well sort of, we’ll discuss this):
+这种方案挺有意思。可惜并不准确。
 
-from collections import ChainMap
-context = ChainMap({}, user, defaults)
-A ChainMap groups dictionaries together into a proxy object (a “view”); lookups query each provided dictionary until a match is found.
+首先，没有满足第一点要求（`user`字典应该覆盖`defaults`）。因为两个dict_items对象的并集是一个键值对（key-value pairs）的集合，而集合是无序的，所以重复键的处理方法无法预测。
 
-This code raises a few questions.
+另外，没有满足第三点要求（可以是任意的值），因为集合要求其中元素必须可哈希的，所以键-值元组中的键和值都必须是可哈希的才行。
 
-Why did we put user before defaults?
+得分：
 
-We ordered our arguments this way to ensure requirement 1 was met. The dictionaries are searched in order, so user returns matches before defaults.
+- 准确：否。没有满足第一点和第三点要求。
+- 符合语言习惯：否。
 
-Why is there an empty dictionary before user?
+### Chain items
 
-This is for requirement 5. Changes to ChainMap objects affect the first dictionary provided and we don’t want user to change so we provided an empty dictionary first.
+目前为止，我们讨论的解决方案中，最符合Python语言习惯而且又只有一行代码的实现，是创建两个items的列表，然后拼接并组成新字典。
 
-Does this actually give us a dictionary?
+我们可以使用`itertools.chain`来简化items拼接的过程：
 
-A ChainMap object is not a dictionary but it is a dictionary-like mapping. We may be okay with this if our code practices duck typing, but we’ll need to inspect the features of ChainMap to be sure. Among other features, ChainMap objects are coupled to their underlying dictionaries and they handle removing items in an interesting way.
+	from itertools import chain
+	context = dict(chain(defaults.items(), user.items()))
 
-Score:
+这种方案效果不错，可能比另外创建两个不必要的列表更加高效。
 
-Accurate: possibly, we’ll need to consider our use cases
-Idiomatic: yes if we decide this suits our use case
-Dictionary from ChainMap
+得分：
 
-If we really want a dictionary, we could convert our ChainMap to a dictionary:
+准确：是。
+符合语言习惯：比较符合，但是有点重复调用items方法。
+
+### ChainMap
+
+ChainMap可以让我们不用遍历初始字典，就创建一个新字典：
+
+	from collections import ChainMap
+	context = ChainMap({}, user, defaults)
+
+ChainMap将多个字典打包成一个proxy对象（一个“视图”）；ChainMap查找命令（译者注：如context['name']）会检索其中的字典，直到找到匹配的对象。
+
+这里有几个问题需要回答。
+
+1. 我们为什么把`user`放在`defaults`前面？
+
+将参数按这样的顺序排列的目的，是为了确保满足第一个点要求。ChainMap是按照顺序检索字典的，所以`user`会在`defaults`之前返回匹配的值。
+
+2. 为什么`user`之前有一个空字典？
+
+这是为了满足第五点要求。如果我们修改ChainMap对象，会影响到里面提供的第一个字典。我们不希望`user`发生变化，所以在前面放了一个空字典。
+
+3. 这样真的会返回一个字典吗？
+
+ChainMap对象不是字典，而是类似字典的映射。如果我们的代码中使用鸭子类型（duck typing），使用ChainMap是没问题的，但是需要具体查看ChainMap的特性才能确定。此外，ChainMap对象与其底层的字典是相互勾连的，而且其删除元素的方式也很有趣。
+
+得分：
+
+- 准确：可能准确，需要考虑具体的用例。
+- 符合语言习惯：如果我们认为这种实现符合用例，那就是符合习惯的。
+
+## ChainMap转换成字典（dict from ChainMap）
+
+如果我们特别想要字典，可以将ChainMap转换成字典：
 
 context = dict(ChainMap(user, defaults))
-It’s a little odd that user must come before defaults in this code whereas this order was flipped in most of our other solutions. Outside of that oddity, this code is fairly simple and should be clear enough for our purposes.
 
-Score:
+需要注意的是，在其他解决方案中，`user`一般出现在`defaults`之后；但是在这里却相反。除了这点外，上面的代码还是比较简单，也明显符合我们的要求。
 
-Accurate: yes
-Idiomatic: yes
-Dictionary concatenation
+得分：
 
-What if we simply concatenate our dictionaries?
+- 准确：是。
+- 符合语言习惯：是。
+
+## 字典拼接（Dictionary concatenation）
+
+我们能不能把两个字典拼接起来呢？
 
 context = defaults + user
-This is cool, but it isn’t valid. This was discussed in a python-ideas thread last year.
 
-Some of the concerns brought up in this thread include:
+这个想法很好，但可惜却是不合法的。
 
-Maybe | makes more sense than + because dictionaries are like sets
-For duplicate keys, should the left-hand side or right-hand side win?
-Should there be an updated built-in instead (kind of like sorted)?
-Score:
+得分：
 
-Accurate: no. This doesn’t work.
-Idiomatic: no. This doesn’t work.
-Dictionary unpacking
+- 准确：否。无法执行。
+- 符合语言习惯：否。
 
-If you’re using Python 3.5, thanks to PEP 448, there’s a new way to merge dictionaries:
+### 字典拆分（Dictionary unpacking）
 
-context = {**defaults, **user}
-This is simple and Pythonic. There are quite a few symbols, but it’s fairly clear that the output is a dictionary at least.
+如果你在用Python 3.5，你可以使用一种全新的合并字典的方式（对亏了PEP 448）：
 
-This is functionally equivalent to our very first solution where we made an empty dictionary and populated it with all items from defaults and user in turn. All of our requirements are met and this is likely the simplest solution we’ll ever get.
+	context = {**defaults, **user}
 
-Score:
+这行代码很简洁，很Pythonic。里面有一些特殊符号，但是很明显最后的结果至少是一个字典。
 
-Accurate: yes
-Idiomatic: yes
-Summary
+这段代码在功能上与本文介绍的第一个方案是等价的：在第一个方案中，我们新建了一个空字典，然后依次往里面填充了来自`defaults`和`user`的元素。它满足我们所有的要求，而且很可能是最简单的一个解决方案。
 
-There are a number of ways to combine multiple dictionaries, but there are few elegant ways to do this with just one line of code.
+得分：
 
-If you’re using Python 3.5, this is the one obvious way to solve this problem:
+- 准确：是。
+- 符合语言习惯：是。
 
-context = {**defaults, **user}
-If you are not yet using Python 3.5, you’ll need to review the solutions above to determine which is the most appropriate for your needs.
+## 小结
+
+在Python中有许多种合并字典的方法，但是能用一行代码优雅地实现的方法并不多。
+
+如果你使用Python 3.5，那么你应该这样解决合并字典的问题：
+
+	context = {**defaults, **user}
+
+如果你还没有使用Python 3.5，建议你一一查看上面介绍的那些方法，确定哪一种最符合你的需求。
+
+
+作者：[Trey Hunner](https://treyhunner.com/2016/02/how-to-merge-dictionaries-in-python/)
+译者：[EarlGrey](https://codingpy.com)
+
+各种方案的性能比较如下：
+
+multiple_update: 57 ms
+copy_and_update: 46 ms
+dict_constructor: 56 ms
+kwargs_hack: 45 ms
+dict_comprehension: 45 ms
+concatenate_items: 166 ms
+union_items: 163 ms
+chain_items: 122 ms
+chainmap: 86 ms
+dict_from_chainmap: 445 ms
+dict_unpacking: 27 ms
