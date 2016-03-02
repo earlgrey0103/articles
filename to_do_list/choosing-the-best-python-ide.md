@@ -1,6 +1,9 @@
-Choosing the Best Python IDE
+# 选择最好的Python集成开发环境（IDE）
 
-http://pedrokroger.net/choosing-best-python-ide/
+关键词：Python开发环境, Python编程开发工具, Python教程, PyCharm特点, WingIDE, Komodo IED, Eric IDE, eclipise pdev, python iep ide
+
+- 原文：[http://pedrokroger.net/choosing-best-python-ide/](http://pedrokroger.net/choosing-best-python-ide/)
+- 本文由[EarlGrey@编程派](http://codingpy.com)原创编译，首发于微信公众号“编程派”。微信搜索“编程派”，跟我一起学Python。
 
 In this article I’ll review six Python IDEs. I’m mainly interested in IDEs that are cross-platform and have strong web development support (Django, HTML templates, JavaScript, etc). Because of this, well-regarded IDEs like PyScripter and Python Tools for Visual Studio are out since they are Windows-only. The Python website maintains a full list of Python IDEs.
 
