@@ -113,7 +113,7 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 
 ### 启动服务端
 
-安装配置就完成了，然后就是在服务器上运行 Shadowsocks，命令如下：
+安装配置完成之后，就是在服务器上运行 Shadowsocks，命令如下：
 
 	ssserver -c /etc/shadowsocks.json
 
@@ -156,17 +156,21 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 	
 	node local.js -s appname.herokuapp.com -l 1080 -m rc4 -k PASSWORD
 
-这样就可以通过设置Firefox或Chrome浏览器的插件翻墙了，速度还可以。
+这样就可以通过设置Firefox或Chrome浏览器的插件翻墙了。将浏览器的代理设置为 SOCKS v5，地址为127.0.0.1，端口为1080。Chrome 浏览器建议使用 SwitchySharp 插件
 
 ## 客户端设置
 
 ### Windows
 
-1.下载一个Shadowsocks的客户端程序下载地址：http://t.cn/RLcp1EX。不需要安装，解压就可以用。
+1.下载一个Shadowsocks的客户端程序。下载地址：http://t.cn/RLcp1EX。不需要安装，解压后即可使用。
 2.运行解压后文件夹中的“shadowsocks.exe”
 3.右下角找到程序图标，右键图标，“服务器”--“编辑服务器”，如下图，设置好shadowsocks的账号信息，点确定；
 
+![编辑shadowsocks服务器](http://ww3.sinaimg.cn/mw690/006faQNTgw1f1ix5d823gj30d608o0tt.jpg)
+
 4.再次右键程序图标，勾选“启用系统代理“。
+
+![再次右键程序图标，勾选“启用系统代理“](http://ww3.sinaimg.cn/mw690/006faQNTgw1f1ix5ddet9j306h06xt96.jpg)
 
 5.接下来，可以在Chrome中直接打开Youtube测试下效果。
 
@@ -176,15 +180,19 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 
 ### iOS
 
-直接在Appstore搜索下载Shadowsocks，app打开后就是一个浏览器，内置了公共服务器，可以直接输入网址打开youtube了。一般情况下，公共服务器是没啥用的，这时你就可以设置自己的服务器了。设置方法和Windows版一样。相比Android版，iOS版只支持浏览器。
+直接在Appstore搜索下载Shadowsocks，app打开后就是一个浏览器，内置了公共服务器，但是一般情况下，公共服务器不稳定，基本没啥用的。这时你就可以设置自己的服务器了。设置方法和Windows版一样。相比Android版，iOS版只支持浏览器。
+
+当然，你可以搭建 Strongswan，实现在 iOS 上连接 VPN。具体流程请参考：[http://www.jianshu.com/p/2f51144c35c9](http://www.jianshu.com/p/2f51144c35c9)。
 
 ### Android
 
-Android平台安卓下的软件名称为“影梭”（ 百度网盘），下载后无需root，设置好服务器和帐号信息后即可直接使用。与iOS版本不同，android版是以VPN的方式运行的，也就是说不仅支持浏览器，而且支持其他App，简直好用到没朋友。
+安卓下的Shadowsocks软件名称为“影梭”（ 百度网盘），下载后无需root，设置好服务器和帐号信息后即可直接使用。与iOS版本不同，android版是以VPN的方式运行的，也就是说不仅支持浏览器，而且支持其他App，简直好用到没人性。
+
+![Android系统下影梭设置方法](http://ww1.sinaimg.cn/mw690/006faQNTgw1f1ix5e9gaoj30f00qoabo.jpg)
 
 ## 下一步
 
-有了海外VPS之后，仅仅用于翻墙可能有点太浪费了。你还可以用它做下载站，下载YouTube的视频；或是直接在上面搭建自己的网站，就像我一样。O(∩_∩)O~
+有了海外VPS之后，仅仅用于翻墙可能有点太浪费了。你还可以用它做下载站，中转YouTube的视频；或是直接在上面搭建自己的网站，就像我一样。O(∩_∩)O~
 
 ## 参考资料：
 
