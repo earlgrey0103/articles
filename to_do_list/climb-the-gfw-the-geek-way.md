@@ -1,12 +1,24 @@
-# 瞭望墙外世界的各种姿势
+# 极客眺望墙外风景的正确姿势
 
-> 本文由[EarlGrey@编程派](http://codingpy.com)独家整理，首发于微信公众号“编程派”。微信搜索“编程派”，跟我一起学Python。
+关键词：翻墙教程, shadowsocks搭建方法, ios翻墙, android翻墙, 跨平台代理服务, Windows翻墙, Shadowsocks mac
 
-编程派的网站部署在[DigitalOcean](https://m.do.co/c/70fd6733d655)的纽约节点，与国内有些地区的网络相性较差，因此不时有朋友反映网站打不开的问题。当初选择节点时，并没有仔细测试各个节点对国内的访问速度，现在考虑是不是要切换到新加坡节点。成功切换后情况应该会好一些吧。
+<p style="text-align: center;">题图：38人爬上柏林墙。希望GFW最终的命运，与柏林墙一样。</p>
 
-在切换节点之前，和大家分享一个曲线救国的方案，即使用Shadowsocks搭建代理服务。本文除了推荐购买付费VPS搭建服务之外，还会分享如何在Koding、Heroku等免费平台搭建服务，让大家可以不用花一分钱就轻松飞跃长城。
+> 本文由[EarlGrey@编程派](http://codingpy.com)独家整理，同步首发于微信公众号“编程派”。微信搜索“编程派”，跟我一起学Python。
+
+编程派的网站部署在[DigitalOcean](https://m.do.co/c/70fd6733d655)的纽约节点，与国内有些地区的网络相性较差，因此不时有朋友反映网站打不开的问题。当初选择节点时，并没有仔细测试各个节点对国内的访问速度，现在考虑是不是要切换到新加坡节点。
+
+在切换节点之前，和大家分享一个曲线救国的方案，即自己手动一步一步搭建Shadowsocks代理服务。这也是我认为极客翻墙的正确方式，因为这种方法赋予了作为极客的你极大的自由，不用看代理商的脸色，还可以在此基础上捣鼓其他有意思的事情。
+
+本文除了推荐购买付费VPS搭建服务之外，还会分享如何在Koding、Heroku等免费平台搭建服务，让大家可以不用花一分钱就轻松飞跃长城。当然，免费的蛋糕都是有期限的。
 
 有了这个梯子之后，你不仅可以毫无障碍地浏览编程派网站，还可以惬意地在Twitter上勾搭知名Python开发者。
+
+![三名少年想看看柏林墙那边的世界](http://ww1.sinaimg.cn/mw690/006faQNTgw1f1je0ge0luj30go0cu0v5.jpg)
+
+- - -
+
+我们首先介绍一下Shadowsocks是什么，以及其背后的工作原理。
 
 ## 什么是Shadowsocks？
 
@@ -18,7 +30,7 @@ Shadowsocks是一个轻量级的代理服务，可以说就是一把瑞士军刀
 
 不过这丝毫没有影响shadowsocks的继续传播，目前已经衍生出了无数版本的代理服务。
 
-## Shadowsocks背后的原理
+## 为什么它能帮我们翻墙？
 
 Shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。这部分介绍其背后实现的原理，引用了[一位网友对此的解释](http://vc2tea.com/whats-shadowsocks/)，适合帮助非专业人士理解。（不感兴趣的朋友，可以直接跳过此节）
 
@@ -33,6 +45,10 @@ Shadowsocks实质上也是一种socks5代理服务，类似于ssh代理。这部
 3. ss-server 将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务，获取响应原路返回。
 
 了解背后的原理后，说不定你也可以自己实现Shadowsocks哦！O(∩_∩)O~
+
+- - -
+
+接下来，我们开始配置服务端和客户端。
 
 ## 搞定服务器
 
@@ -91,21 +107,21 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 
 ### 多用户多端口配置
 
-{
-    "server":"0.0.0.0",
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "port_password":{
-         "8989":"password0",
-         "9001":"password1",
-         "9002":"password2",
-         "9003":"password3",
-         "9004":"password4"
-    },
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open": false
-}
+	{
+	    "server":"0.0.0.0",
+	    "local_address":"127.0.0.1",
+	    "local_port":1080,
+	    "port_password":{
+	         "8989":"password0",
+	         "9001":"password1",
+	         "9002":"password2",
+	         "9003":"password3",
+	         "9004":"password4"
+	    },
+	    "timeout":300,
+	    "method":"aes-256-cfb",
+	    "fast_open": false
+	}
 
 ### Koding平台注意事项
 
@@ -162,7 +178,7 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 
 ### Windows
 
-1.下载一个Shadowsocks的客户端程序。下载地址：http://t.cn/RLcp1EX。不需要安装，解压后即可使用。
+1.下载一个Shadowsocks的客户端程序。下载地址：[http://pan.baidu.com/s/1dDTmj65](http://pan.baidu.com/s/1dDTmj65)。不需要安装，解压后即可使用。
 2.运行解压后文件夹中的“shadowsocks.exe”
 3.右下角找到程序图标，右键图标，“服务器”--“编辑服务器”，如下图，设置好shadowsocks的账号信息，点确定；
 
@@ -176,19 +192,21 @@ method: 加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”,
 
 ### Mac
 
-下载完Mac客户端后，具体设置与Windows平台下的操作类似。
+Mac下的客户端推荐[ShadowsocksX](http://pan.baidu.com/s/1kUueye7)，这是Shadowsocks的作者自己开发的。下载完Mac客户端后，具体设置与Windows平台下的操作类似。
 
 ### iOS
 
 直接在Appstore搜索下载Shadowsocks，app打开后就是一个浏览器，内置了公共服务器，但是一般情况下，公共服务器不稳定，基本没啥用的。这时你就可以设置自己的服务器了。设置方法和Windows版一样。相比Android版，iOS版只支持浏览器。
 
-当然，你可以搭建 Strongswan，实现在 iOS 上连接 VPN。具体流程请参考：[http://www.jianshu.com/p/2f51144c35c9](http://www.jianshu.com/p/2f51144c35c9)。
+当然，你也可以搭建 Strongswan，实现在 iOS 上连接 VPN。具体流程请参考：[http://www.jianshu.com/p/2f51144c35c9](http://www.jianshu.com/p/2f51144c35c9)。
 
 ### Android
 
-安卓下的Shadowsocks软件名称为“影梭”（ 百度网盘），下载后无需root，设置好服务器和帐号信息后即可直接使用。与iOS版本不同，android版是以VPN的方式运行的，也就是说不仅支持浏览器，而且支持其他App，简直好用到没人性。
+安卓下的Shadowsocks软件名称为“影梭”（[百度网盘](http://pan.baidu.com/s/1dEcF2It)），下载后无需root，设置好服务器和帐号信息后即可直接使用。与iOS版本不同，android版是以VPN的方式运行的，也就是说不仅支持浏览器，而且支持其他App，简直好用到没人性。
 
 ![Android系统下影梭设置方法](http://ww1.sinaimg.cn/mw690/006faQNTgw1f1ix5e9gaoj30f00qoabo.jpg)
+
+- - -
 
 ## 下一步
 
