@@ -10,6 +10,7 @@ Local imports
 import Pitfalls
 
 Regular imports
+
 A regular import, and quite possibly the most popular goes like this:
 
 import sys
