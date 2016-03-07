@@ -1,41 +1,54 @@
 # 福利 | Codeschool全部课程免费 周末狂欢赚学分
 
-提前声明，编程派和Codeschool的网站没有任何关系，我只是看过他们的几套视频课程，觉得做得都挺有意思(每个课程都有片头曲配动画)，课程难度也不高。因此，最近看到了他们将在周末免费开放全部课程的消息，想要推荐给大家。
+关键词：codeschool免费课程, codeschool 视频教程, 从零开始学编程, 编程视频教程, 免费编程课程, Python 视频教程
 
-如果你认为自己的英语听力水平还不错，可以接着看下去。如果你认为听英文有困难，我还是建议尝试一下一边学编程一边学英语，当然这可能会比较痛苦。如果你受不了这个痛苦，那就让转给需要的人吧。
+> 本文同步首发于[微信公众号“编程派”](http://weixin.sogou.com/gzh?openid=oIWsFt2u16IDzwsoqVHZJccN4jLM&ext=p8lVKENENbkPOAt5sFWaMsMvjAhGqGlR8lZSKoIimse9PvxhvWoCn_wjlgNxkHIX)。学习交流Python编程，可通过公众号与我互动！
 
-https://www.codeschool.com/free-weekend
+提前声明，编程派和Codeschool的网站没有任何关系，我只是看过他们的几套视频课程，觉得做得都挺有意思(每个课程都有片头曲，配动画)，课程难度也不高。因此，最近看到了他们将免费开放全部课程的消息，想要推荐给大家。
 
-Learning to code can be a daunting task when you’re starting out — and a bit pricey. To help out, Code School — who have classes on all the major languages and disciplines — is free this weekend.
+如果你过了英语六级，建议这个周末跟着他们家的课程学习。如果你过了英语四级，我还是建议尝试一下，一边学编程一边学英语，当然这可能会比较痛苦。如果你受不了这个痛苦，那就让转给需要的人吧。
 
-From March 4 through March 6, Code School is dropping its paywall. For a full 48 hours, you’ll be able to learn as much as you possibly can.
+## 免费的时间段是？
 
-Currently, Code School has classes on the following subjects:
+对于从零开始的人来说，学习编程是一件十分艰难的事，尤其是刚开始的时候。有人会选择参加培训班，但是国内这种课程价格都不低。Codeschool也是一家做线上编程培训课程的公司，去年被老牌公司Pluralsight收购。
 
-Ruby
+本周，Codeschool宣布在他们家学习编程的注册用户达到了2百万！为了庆祝这个里程碑，他们决定从3月4日至6日免费开放网站上的所有学习课程。
 
-JavaScript
+具体时间是：美国东部时间3月4日下午5点开始，美国东部时间3月6日晚上11点59分结束（即北京时间3月5日早上6点开始，北京时间3月7日中午12点59分结束），总共持续55个小时！
 
-Python
+你还有机会免费享受未来一年内Codeschool的课程哦！
 
-Database (SQL)
+## 可以学哪些课程？
 
-Git
+他们家的课程可不少，从前端三剑客，到iOS开发都有，覆盖面还是挺广的。学完了下面所有的课程，从搭建网站到开发APP，你都可以上手了。
 
-iOS Development
+- Ruby
+- JavaScript
+- Python
+- Database (SQL)
+- Git
+- iOS Development
+- HTML/CSS
 
-HTML/CSS
+![Codeschool全部课程免费](http://ww4.sinaimg.cn/mw690/006faQNTgw1f1k0o78aqxj31au0om7c2.jpg)
 
-![](http://ww4.sinaimg.cn/mw690/006faQNTgw1f1k0o78aqxj31au0om7c2.jpg)
+![Codeschool全部课程免费](http://ww4.sinaimg.cn/mw690/006faQNTgw1f1k0o7xxdkj30xg0d8di8.jpg)
 
-![](http://ww4.sinaimg.cn/mw690/006faQNTgw1f1k0o7xxdkj30xg0d8di8.jpg)
 
-We’ve reached 2 million students now learning at Code School, so to celebrate, we’re making all our content free this weekend! Create a free account now to participate or sign in to get a reminder when Free Weekend begins.
+## 怎样免费享受一年课程？
 
-Win a Free Year of Code School
+刚才提到有机会免费享受一年的课程，具体该达到怎样的条件呢？
 
-We’ll have a public leaderboard tracking course points earned by every student during Free Weekend — the top 10 point-earners of the weekend will receive a free year of Code School! 
+据Codeschool介绍，这次免费期间会推出一个公开积分榜，追踪每位学院在此期间获得的学分，积分榜前十名的用户将可以免费一年享受网站的课程。
 
-If you like what you see this weekend, Code School’s normal pricing is $29 per month. There’s also a free tier, but it limits your access to the first level on the courses.
+要想获得积分，就必须完成每个课程中的挑战练习题。
 
-These courses won’t give you all the skills you need to land a job, but they’re a good way to dig into learning how to code.
+## 值不值得参加这个活动？
+
+我个人认为还是值得的，即使最终没有机会享受免费一年的福利。因为他们家每月的会员费一般是29美元。虽然也有通过给非付费用户的免费课程，但是你只能接触课程中最初级的那几节课。
+
+虽然学完这些课程，你不一定能找到工作。但至少是从零开始学习编程的一个不错选择。
+
+动心了的话，[就点击这里](https://www.codeschool.com/free-weekend)，报名参加活动吧。
+
+预告：明天十点微信更新《Think Python 2ed》最新版中文翻译：第二章。也可以在网站右边栏的经典书籍处，直接点击查看。
