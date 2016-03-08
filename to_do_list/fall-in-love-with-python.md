@@ -4,7 +4,7 @@
 
 > 本文首发于[微信公众号号“编程派”]()。微信搜索“编程派”，获取更多Python编程一手教程及优质资源吧。
 
-今天（3月8日）是一个特殊的日子，因为编程语言都变成了女人（我们姑且这么假设）。[一位名叫Vaibhav Mallya的用户在Quora上用深情的笔触写下了他对Python女神的爱](https://www.quora.com/Have-I-have-fallen-in-love-with-Python-because-she-is-beautiful/answer/Vaibhav-Mallya)，他的话感动了我，不知道你看完了之后，会不会也爱上Python呢？
+今天（3月8日）是一个特殊的日子，因为编程语言都变成了女人（我们姑且这么假设）。[一位名叫Vaibhav Mallya的用户在Quora上用深情的笔触写下了他对Python女神的爱](https://www.quora.com/Have-I-have-fallen-in-love-with-Python-because-she-is-beautiful/answer/Vaibhav-Mallya)，他的话感动了我。不知道你看完了之后，会不会也爱上Python呢？
 
 ***
 
