@@ -28,7 +28,7 @@ def word_frequency(text):
 
     for word_freq in c.most_common(10):
         word, freq = word_freq
-        print(word, freq)
+        print(word.decode('utf-8'), freq)
 
 
 def extract_keywords(text, top_num=10):
