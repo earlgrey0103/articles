@@ -2,7 +2,7 @@
 import jieba
 import requests
 from bs4 import BeautifulSoup
-from bosonnlp import BosonNLP
+# from bosonnlp import BosonNLP
 
 
 def extract_text(url):
@@ -28,7 +28,7 @@ def word_frequency(text):
 
     for word_freq in c.most_common(10):
         word, freq = word_freq
-        print(word.decode('utf-8'), freq)
+        print word, freq
 
 
 def extract_keywords(text, top_num=10):
