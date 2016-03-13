@@ -1,35 +1,46 @@
-http://www.blog.pythonlibrary.org/2016/03/01/python-101-all-about-imports/
+# 关于import你应该知道的一切（一）
 
-One of the first items you learn as a beginner Python programmer is how to import other modules or packages. However, I’ve noticed that even people who have used Python casually for multiple years don’t always know how flexible Python’s importing infrastructure is. In this article, we will be looking at the following topics:
+> 本文首发于微信公众号“编程派”。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
-Regular imports
-Using from
-Relative imports
-Optional imports
-Local imports
-import Pitfalls
+原文：[Python 101 - All about imports](http://www.blog.pythonlibrary.org/2016/03/01/python-101-all-about-imports/)
 
-Regular imports
+作为一名新手Python程序员，你首先学习的内容之一就是如何导入其他模块或包。但是，我注意到甚至那些许多年来不时使用Python的人，也不是都知道Python的导入机制是多么的灵活。在本文中，我们将探讨以下话题：
 
-A regular import, and quite possibly the most popular goes like this:
+- 常规导入（regular imports）
+- 使用from语句
+- 相对导入（relative imports）
+- 可选导入（optional imports）
+- 本地导入（local imports）
+- 导入注意事项
 
-import sys
-All you need to do is use the word “import” and then specify what module or package you want to actually import. The nice thing about import though is that it can also import multiple package at once:
+## 常规导入
 
-import os, sys, time
-While this is a space-saver, it’s goes against the Python Style Guide’s recommendations of putting each import on its own line.
+常规导入应该是最常使用的导入方式，大概是这样的：
 
-Sometimes when you import a module, you want to rename it. Python supports this quite easily:
+    import sys
 
-import sys as system
+你只需要使用`import`一词，然后指定你希望导入的模块或包即可。通过这种方式导入的好处是可以一次性导入多个包或模块：
+
+    import os, sys, time
+
+虽然这节省了空间，但是这违背了Python风格指南。Python风格指南建议将每个导入语句单独成行。
+
+有时在导入模块时，你想要重命名这个模块。这个功能很容易实现：
+
+    import sys as system
  
-print(system.platform)
-This piece of code simply renames our import to “system”. We can call all of the modules methods the same way before, but with the new name. There are also certain submodules that have to be imported using dot notation:
+    print(system.platform)
 
-import urllib.error
-You won’t see these very often, but they’re good to know about.
+上面的代码将我们导入的`sys`模块重命名为`system`。我们可以按照和以前一样的方式调用模块的方法，但是可以用一个新的模块名。也有某些子模块必须要使用点标记法才能导入。
 
-Using from module import something
+    import urllib.error
+
+这个情况不常见，但是知道总比不知道好。
+
+## 使用from语句
+
+
+
 There are many times when you just want to import part of a module or library. Let’s see how Python accomplishes this:
 
 from functools import lru_cache
