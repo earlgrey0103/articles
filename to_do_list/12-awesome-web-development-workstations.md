@@ -2,7 +2,7 @@
 
 关键词：超棒的Web开发工作站, Web开发工作站, Teleport键鼠控制, Synergy多屏同步, Griffin Mate神奇鼠标, 开发工作效率, Web开发效率, 打造自己的工作站
 
-> 本文首发于微信公众号“编程派”。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
+> 本文首发于[微信公众号“编程派”](http://mp.weixin.qq.com/s?__biz=MzAwNDc0MTUxMw==&mid=401936422&idx=1&sn=17971e339f9965fea6c89e062f34db30#rd)。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
 工作中除了能力之外，工作效率也是决定你绩效的一个重要因素。而作为一名程序员，你的开发工作站如何设置，对于你的工作效率有着很大的影响。下面是raygun.io网站整理的12个超棒（屌炸天）Web开发工作站，我增加了一些分享者的介绍，或许对你如何打造自己的工作站有一定的启示。
 
@@ -167,3 +167,7 @@ Teleport是一个Mac上的工具软件，可以用一套键鼠，控制两台Mac
 - Griffin Powermate这款“鼠标”似乎会很给力
 
 最后说一句，多屏开发似乎是王道啊！
+
+***
+
+点击查看英文原文：[12 Amazing Web Development Workstations](https://raygun.io/blog/2014/06/developer-workstations/)
