@@ -1,10 +1,14 @@
 # PyBooks：Python函数式编程
 
+关键词：Python编程书籍, 免费编程书籍, Python函数式编程, 函数式编程书籍, 函数式编程库, O'Reilly编程书籍, pybooks, Python books
+
 从今天开始，编程派将定期为大家推荐优秀的Python编程书籍。这个系列的标题将以PyBooks开头，希望大家喜欢。如果精力许可的话，或许还可以组织一些篇幅不是太长书籍的翻译。
 
 ## Python函数式编程
 
 这个系列的第一篇，与大家分享一本来自O'Reilly的免费编程书籍，名字叫《Python函数式编程》（Functional Programming in Python）。这本书于去年6月出版，篇幅并不长，只有49页。
+
+![Python函数式编程](http://ww4.sinaimg.cn/mw690/006faQNTgw1f24agsyeufg305007i0t1.gif)
 
 对Python有一定了解的人应该知道，Python并不是一门函数式编程语言，而是一门支持多种范式的语言。这也使得在Python中也能实现函数式编程，Python也提供了诸如`map()`、`filter()`和`reduce()`等函数，而且可以很轻松地将函数式编程与其他编程范式结合在一起。
 
@@ -15,6 +19,8 @@
 ## 本书作者
 
 最后来介绍本书的作者：David Mertz。
+
+![Python函数式编程一书的作者：David Mertz](http://ww4.sinaimg.cn/mw690/006faQNTgw1f24ah7s642j3069069t8n.jpg)
 
 他是Python软件基金会（Python Software Foundation）的董事之一。除了这本书之外，David Mertz还为IBM DeveloperWorks撰写过两个专栏：Charming Python和XML Matters。但是这两个专栏的时间都比较早了，目前已经没有继续更新。你可以在[作者的网站](http://gnosis.cx/dW/)找到所有专栏文章的归档链接。
 
