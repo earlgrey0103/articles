@@ -1,48 +1,50 @@
-# PyDevs：Python开发者Ben Rousch
+# PyDevs：Kivy核心开发者Ben Rousch
 
-http://www.blog.pythonlibrary.org/2014/10/13/pydev-of-the-week-ben-rousch/
+关键词：Python开发者, Kivy核心开发者, Mike Driscoll, 国内Python开发者, 自然用户界面, 
 
-The PyDev of the Week this week is Ben Rousch (@brousch). He is a contributor to the Kivy project. You should check out his blog here. You can also see Mr. Rousch give a talk about Kivy on Youtube. Let’s find out more about him!
+> 本文首发于[微信公众号“编程派”]()。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
-Can you tell us a little about yourself (hobbies, education, etc):
+这是一篇试水的文章。标题以PyDevs开头，代表我计划专门介绍一些Python开发者的故事。第一篇主要看看大家的反应如何。
 
-## 你能简单介绍下自己吗？（爱好，教育背景等）
+这个系列一开始会基于Mike Driscoll博客中的类似文章，所以初期可能以有关国外Python开发者的介绍为主。以后如果有机会的话，也希望能够采访到国内的Python开发者，分享他们是如何学习和使用Python的。
 
-过去15年中，我一个人充当了Van Dam Iron Works公司的整体IT部。这是一商用和工业用钢制楼梯制造商。我是密歇根大学人类学学士。我的编程和IT技巧大部分是自学的，从互联网和编程书中获益不少。我业余时间大部分花在参加和组织用户组见面会，以及探索当天我最感兴趣的技术上。
+本来第一期以Guido van Rossum这尊大神开始是最好的，但是可以预见文章会很长，需要整理的资料也会很多，所以等准备好了再下手吧。所以这篇文章的主人公就成了Ben Rousch，也是Mike Driscoll博客系列介绍的第一位Python开发者。
 
-For the past 15 years I’ve been the entire IT department for Van Dam Iron Works, a manufacturer of commercial and industrial steel stairs and railings in Grand Rapids, MI. I have a BS in Anthropology from the University of Michigan. My programming and IT skills are largely self taught, with a lot of help from the Internet and books. Much of my free time is spent attending and organizing user group meetings and playing with whatever technology catches my interest that day.
+![Kivy核心开发者Ben Rousch](http://ww3.sinaimg.cn/mw690/006faQNTgw1f25exqnpd1j30bo0bogmh.jpg)
 
-## 你为什么开始使用Python？
+Ben Rousch是[开源跨平台Python NUI框架Kivy](https://kivy.org/)的核心开发者。这里的NUI指的是自然用户界面，与GUI（图形用户界面）相对，最明显的特征是利用触控技术使人机交互变得更加自然直观，更为人性化。
 
-Why did you start using Python?
+> 更多有关自然用户界面的介绍，可以参考[微软亚洲研究院：自然用户界面自然在哪儿？](http://blog.sina.com.cn/s/blog_4caedc7a0102dzpk.html)
 
-大概在2000年的时候，我还在使用Visual Basic和PHP做很多事，但是随着我写的程序越来越大，对它们感到越来越失望，所以我就开始寻找一门更好的编程语言。我首先试了Python，但错误地通过Zope和Plone来学习——这两个都是大型框架，让我对Python望而却步。我后来使用了几年的Java和C#，用过很短时间的Ruby。之后我又回到了Python，主要是写一些比较小的脚本和尝试像CherryPy这样的框架。后来我就一直坚持使用Python，因为我可以用它来编写任何我需要开发的程序。
+具体来说，作为Kivy的核心开发者之一，Ben主要负责开发Plyer (Platform Abstraction Layer)、Python for Android和Buildozer这几个组件。
 
-In the early 2000s I was using Visual Basic and PHP for a lot of things, but became frustrated with it as my programs got larger, so I went in search of a better programming language. I tried Python first, but made the mistake of trying to learn it via Zope and Plone – giant frameworks that really turned me off from it. I had multi-year bouts with Java and C# with Mono, and a very brief stint with Ruby, before coming back around to Python via smaller scripts and frameworks like CherryPy. I’ve stuck with Python because I can use it for nearly any program I need to create.
+接下来我们来具体地了解一下Ben的情况，以及他是如何开始学习、使用Python的。
 
-## 你还知道哪些编程语言，你最喜欢哪一个？
+## 工作背景
 
-What other programming languages do you know and which is your favorite?
+Ben居住在美国密歇根州的第二大城市大溪城（Great Rapids），毕业于密歇根大学，是人类学学士。没错，不是计算机科学。
 
-我以前非常熟悉PHP，但是很久没有用过了。我会一点JavaScript——任何Web开发者都必须会一点，还懂一点用Java做安卓开发。Python是唯一一门我能说精通的语言。
+1999年毕业后，他在当地某个郡做IT支持工作，主要是帮别人安装、维护电脑。第二年就进入了一家名叫Van Dam Iron Works的制造企业，而且独自一人承担起了公司整个IT部的工作，因为这个部门就他一个人。在这家公司一呆就是15年，至15年底终于结束IT支持工作，进入了Modustri这家软件公司，开始从事与开发相关的工作。
 
-I used to know PHP pretty well, but haven’t used it in a long time. I do a little bit with Javascript – as any web developer must, and a little with Java for Android development. Python is the only language I would say that I know well.
+## 自学编程和Python
 
-## 你现在在做什么项目？
+据Ben介绍，他掌握的编程语言和IT技术都是自学的，主要靠自己阅读编程书籍和上网查阅资料。Stack Overflow 2016年开发者调查报告也指出，3名开发者中就有2名是自学的。
 
-What projects are you working on now?
+2000年时，他还主要在使用Visual Basic和PHP，但是随着程序越写越大，他对这两种语言感到越来越失望，所以就开始寻找一门更好的编程语言。
 
-在公司，我在尝试用Django来取代老掉牙的微软Access程序。在家里，我通常会用Kivy写一些安卓程序。我的最终目标是发布一款用于安卓开发的Kivy IDE，让你利用Kivy安卓机器上开发安卓程序。最近，我也开始对树莓派和Arduino等嵌入式平平台感兴趣。我现在有一些大型项目的想法，但目前还在做一些小型的试验，验证一些概念，逐步熟悉这门技术。
+尝试新语言的过程中，首先试用的就是Python，但却错误地通过Zope和Plone来学习——这两个都是大型框架，让其对Python望而却步。他后来使用了几年的Java和C#，用过很短时间的Ruby。最后回到了Python，主要通过学着写一些比较小的脚本和尝试像CherryPy这样的框架。后来就一直坚持使用Python，因为Ben认为**可以用它来编写任何自己需要开发的程序**。
 
-At work, I’m replacing an old line of business MS Access program mostly with Django. At home I’m often playing with small Kivy apps on Android. Ultimately I hope to release a Kivy IDE on Android, so you can make Android apps on Android using Kivy, dawg. Recently I’ve gotten interested in embedded platforms like Raspberry Pi and Arduino. I have some big projects in mind, but right now I’m mostly doing small proof-of-concepts to familiarize myself with the technology.
+## 最喜欢的编程语言
 
-Which Python libraries are your favorite (core or 3rd party)?
+Ben在接受Mike Driscoll的采访时说，他以前非常熟悉PHP，但是很久没有用过了；也会一点JavaScript——任何Web开发者都必须会一点，还懂一点用Java做安卓开发。但是，Python是唯一一门算得上精通的语言。
 
-## 你最喜欢哪些Python库（自带库或第三方库）？
+## 最喜欢的Python库
 
-Kivy或Django是我最近几乎每个Python项目中都会用的库。如果是开发移动或桌面图像应用的话，我使用Kivy。如果是开发Web应用，我会用Django。
+Kivy或Django是他最近几乎每个Python项目中都会用的库。如果是开发移动或桌面图像应用的话，他选择使用Kivy。如果是开发Web应用，他会用Django。
 
-Kivy or Django are what I end up using on nearly every Python project these days. If it’s a mobile or desktop GUI app, I use Kivy. If it’s a web app, I use Django.
+## 参考资料
 
-Is there anything else you’d like to say?
-
+- [pydev-of-the-week-ben-rousch](http://www.blog.pythonlibrary.org/2014/10/13/pydev-of-the-week-ben-rousch/)
+- [Linkedin](https://www.linkedin.com/in/brousch)
+- [Ben Rousch的博客](http://clusterbleep.net/blog/)
+- [Ben Rousch的Github主页](https://github.com/brousch)
