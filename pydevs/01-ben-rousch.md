@@ -2,7 +2,7 @@
 
 关键词：Python开发者, Kivy核心开发者, Mike Driscoll, 国内Python开发者, 自然用户界面, 
 
-> 本文首发于[微信公众号“编程派”]()。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
+> 本文首发于[微信公众号“编程派”](http://mp.weixin.qq.com/s?__biz=MzAwNDc0MTUxMw==&mid=401990224&idx=1&sn=9387e9ac9cc5dedc784b0fbebe3317af#rd)。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
 这是一篇试水的文章。标题以PyDevs开头，代表我计划专门介绍一些Python开发者的故事。第一篇主要看看大家的反应如何。
 
