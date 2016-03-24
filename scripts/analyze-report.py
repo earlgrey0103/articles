@@ -1,8 +1,16 @@
-# encoding=utf-8
+#!usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Author: EarlGrey@codingpy.com
+# Copyright: Public Domain
+#
+
+"""Simple script to analyze government report word frequency."""
+
 import jieba
 import requests
 from bs4 import BeautifulSoup
-# from bosonnlp import BosonNLP
+from bosonnlp import BosonNLP
 
 
 def extract_text(url):
@@ -21,6 +29,7 @@ def extract_text(url):
 
 
 def word_frequency(text):
+    """word_freq."""
     from collections import Counter
 
     words = [word for word in jieba.cut(text, cut_all=True) if len(word) >= 2]
