@@ -3,7 +3,7 @@
 .. |==>| unicode:: U+02794 .. thick rightwards arrow
 
 ==========================================
- Code Like a Pythonista: Idiomatic Python
+ 如何成为Python编程高手
 ==========================================
 
 .. sidebar:: Contents
@@ -13,9 +13,10 @@
 
 .. class:: center big
 
-   | *David Goodger*
+   | 作者：*David Goodger*
    | goodger@python.org
-   | http://python.net/~goodger
+   | 译者：*EarlGrey*
+   | http://codingpy.com 
 
 In this interactive tutorial, we'll cover many essential Python idioms
 and techniques in depth, adding immediately useful tools to your belt.
@@ -60,7 +61,7 @@ There are 3 versions of this presentation:
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
 
 
-The Zen of Python (1)
+Python之禅 (1)
 =====================
 
 .. container:: handout
