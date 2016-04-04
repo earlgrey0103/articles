@@ -39,14 +39,15 @@
 
 ## 使用from语句
 
+很多时候你只想要导入一个模块或库中的某个部分。我们来看看在Python中如何实现这点：
 
-
-There are many times when you just want to import part of a module or library. Let’s see how Python accomplishes this:
 
 from functools import lru_cache
-What the code above does is allow you to call lru_cache directly. If you had imported just functools the normal way, then you would have to call lru_cache using something like this:
+
+上面这行代码可以让你直接调用`lru_cache`。如果你按照正常的方式导入`functools`，那么你就必须像这样调用`lru_cache`：
 
 functools.lru_cache(*args)
+
 Depending on what you’re doing, the above might actually be a good thing. In complex code bases, it’s quite nice to know where something has been imported from. However, if your code is well maintained and modularized properly, importing just a portion from the module can be quite handy and more succinct.
 
 Of course you can also use the from method to import everything, like so:
