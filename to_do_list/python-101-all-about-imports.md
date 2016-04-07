@@ -42,75 +42,87 @@
 很多时候你只想要导入一个模块或库中的某个部分。我们来看看在Python中如何实现这点：
 
 
-from functools import lru_cache
+    from functools import lru_cache
 
 上面这行代码可以让你直接调用`lru_cache`。如果你按照正常的方式导入`functools`，那么你就必须像这样调用`lru_cache`：
 
-functools.lru_cache(*args)
+    functools.lru_cache(*args)
 
-Depending on what you’re doing, the above might actually be a good thing. In complex code bases, it’s quite nice to know where something has been imported from. However, if your code is well maintained and modularized properly, importing just a portion from the module can be quite handy and more succinct.
+根据你实际的使用场景，上面的做法可能是更好的。在复杂的代码库中，能够看出某个函数是从哪里导入的这点很有用的。不过，如果你的代码维护的很好，模块化程度高，那么只从某个模块中导入一部分内容也是非常方便和简洁的。
 
-Of course you can also use the from method to import everything, like so:
+当然，你还可以使用from方法导入模块的全部内容，就像这样：
 
-from os import *
-This is handy in rare circumstances, but it can also really mess up your namespace. The problem is that you might define your own function or a top level variable that has the same name as one of the items you imported and if you try to use the one from the os module, it will use yours instead. So you end up with a rather confusing logic error. The Tkinter module is really the only one in the standard library that I’ve seen recommended to be imported in total.
+    from os import *
 
-If you happen to write your own module or package, some people recommend importing everything in your __init__.py to make your module or package easier to use. Personally I prefer explicit to implicit, but to each their own.
+这种做法在少数情况下是挺方便的，但是这样也会打乱你的命名空间。问题在于，你可能定义了一个与导入模块中名称相同的变量或函数，这时如果你试图使用`os`模块中的同名变量或函数，实际使用的将是你自己定义的内容。因此，你最后会碰到一个相当让人困惑的逻辑错误。标准库中我唯一推荐全盘导入的模块只有Tkinter。
 
-You can also meet somewhere in the middle by importing multiple items from a package:
+如果你正好要写自己的模块或包，有人会建议你在`__init__.py`文件中导入所有内容，让模块或者包使用起来更方便。我个人更喜欢显示地导入，而非隐式地导入。
 
-from os import path, walk, unlink
-from os import uname, remove
-In the code above, we import five functions from the os module. You will also note that we can do so by importing from the same module multiple times. If you would rather, you can also use parentheses to import lots of items:
+你也可以采取折中方案，从一个包中导入多个项：
 
-from os import (path, walk, unlink, uname, 
-                remove, rename)
-This is useful technique, but you can do it another way too:
+    from os import path, walk, unlink
+    from os import uname, remove
 
-from os import path, walk, unlink, uname, \
-                remove, rename
-The backslash you see above is Python’s line continuation character, which tells Python that this line of code continues on the following line.
+在上述代码中，我们从`os`模块中导入了5个函数。你可能注意到了，我们是通过多次从同一个模块中导入实现的。当然，如果你愿意的话，你也可以使用圆括号一次性导入多个项：
 
-Relative imports
-PEP 328 describes how relative imports came about and what specific syntax was chosen. The idea behind it was to use periods to determine how to relatively import other packages / modules. The reason was to prevent the accidental shadowing of standard library modules. Let’s use the example folder structure that PEP 328 suggests and see if we can get it to work:
+    from os import (path, walk, unlink, uname, 
+                    remove, rename)
 
-my_package/
-    __init__.py
-    subpackage1/
+这是一个有用的技巧，不过你也可以换一种方式：
+
+    from os import path, walk, unlink, uname, \
+                    remove, rename
+
+上面的反斜杠是Python中的续行符，告诉解释器这行代码延续至下一行。
+
+## 相对导入
+
+PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具体来说，是使用句点来决定如何相对导入其他包或模块。这么做的原因是为了避免偶然情况下导入标准库中的模块产生冲突。这里我们以PEP 328中给出的文件夹结构为例，看看相对导入是如何工作的：
+
+    my_package/
         __init__.py
-        module_x.py
-        module_y.py
-    subpackage2/
-        __init__.py
-        module_z.py
-    module_a.py
-Create the files and folders above somewhere on your hard drive. In the top-level __init__.py, put the following code in place:
+        subpackage1/
+            __init__.py
+            module_x.py
+            module_y.py
+        subpackage2/
+            __init__.py
+            module_z.py
+        module_a.py
 
-from . import subpackage1
-from . import subpackage2
-Next navigate down in subpackage1 and edit its __init__.py to have the following contents:
+在本地磁盘上找个地方创建上述文件和文件夹。在顶层的`__init__.py`文件中，键入下面的代码：
 
-from . import module_x
-from . import module_y
-Now edit module_x.py such that is has the following code:
+    from . import subpackage1
+    from . import subpackage2
 
-from .module_y import spam as ham
- 
-def main():
-    ham()
-Finally edit module_y.py to match this:
+接下来进入`subpackage1`文件夹，编辑其中的`__init__.py`文件，键入下面的内容：
 
-def spam():
-    print('spam ' * 3)
-Open a terminal and cd to the folder that has my_package, but not into my_package. Run the Python interpreter in this folder. I’m using iPython below mainly because its auto-completion is so handy:
+    from . import module_x
+    from . import module_y
 
-In [1]: import my_package
- 
-In [2]: my_package.subpackage1.module_x
-Out[2]: <module 'my_package.subpackage1.module_x' from 'my_package/subpackage1/module_x.py'>
- 
-In [3]: my_package.subpackage1.module_x.main()
-spam spam spam
+现在编辑`module_x.py`文件，键入下面的代码：
+
+    from .module_y import spam as ham
+     
+    def main():
+        ham()
+
+最后编辑`module_y.py`文件，输入以下代码：
+
+    def spam():
+        print('spam ' * 3)
+
+打开终端，然后`cd`至`my_package`包所在的文件夹，但不要进入`mu_package`。在这个文件夹下运行Python解释器。我使用的是IPython，因为它的自动补全功能非常方便：
+
+    In [1]: import my_package
+     
+    In [2]: my_package.subpackage1.module_x
+    Out[2]: <module 'my_package.subpackage1.module_x' from 'my_package/subpackage1/module_x.py'>
+     
+    In [3]: my_package.subpackage1.module_x.main()
+    spam spam spam
+
+
 Relative imports are great for creating code that you turn into packages. If you have created a lot of code that is related, then this is probably the way to go. You will find that relative imports are used in many popular packages on the Python Packages Index (PyPI). Also note that if you need to go more than one level, you can just use additional periods. However, according to PEP 328, you really shouldn’t go above two.
 
 Also note that if you were to add an “if __name__ == ‘__main__’” portion to the module_x.py and tried to run it, you would end up with a rather confusing error. Let’s edit the file and give it a try!
@@ -149,7 +161,9 @@ sys.path.append('/path/to/folder/containing/my_package')
 import my_package
 Note that you want the path to the folder right above my_package, not my_package itself. The reason is that my_package is THE package, so if you append that, you’ll have issues using the package. Let’s move on to optional imports!
 
-Optional imports
+
+## 可选导入
+
 Optional imports are used when you have a preferred module or package that you want to use, but you also want a fallback in case it doesn’t exist. You might use optional imports to support multiple versions of software or for speed ups, for example. Here’s an example from the package github2 that demonstrates how you might use optional imports to support different versions of Python:
 
 try:
