@@ -123,7 +123,7 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
     spam spam spam
 
 
-Relative imports are great for creating code that you turn into packages. If you have created a lot of code that is related, then this is probably the way to go. You will find that relative imports are used in many popular packages on the Python Packages Index (PyPI). Also note that if you need to go more than one level, you can just use additional periods. However, according to PEP 328, you really shouldn’t go above two.
+相对导入适用于你最终要放入包中的代码。如果你编写了很多相关性强的代码，那么应该采用这种导入方式。你会发现PyPI上有很多流行的包也是采用了相对导入。还要注意一点，如果你想要跨越多个文件层级进行导入，只需要使用多个句点即可。不过，PEP 328建议相对导入的层级不要超过两层。
 
 Also note that if you were to add an “if __name__ == ‘__main__’” portion to the module_x.py and tried to run it, you would end up with a rather confusing error. Let’s edit the file and give it a try!
 
