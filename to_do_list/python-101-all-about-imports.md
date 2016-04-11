@@ -1,4 +1,4 @@
-# 关于import你应该知道的一切（一）
+# 关于import你应该知道的一切
 
 > 本文首发于微信公众号“编程派”。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
@@ -125,143 +125,158 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
 
 相对导入适用于你最终要放入包中的代码。如果你编写了很多相关性强的代码，那么应该采用这种导入方式。你会发现PyPI上有很多流行的包也是采用了相对导入。还要注意一点，如果你想要跨越多个文件层级进行导入，只需要使用多个句点即可。不过，PEP 328建议相对导入的层级不要超过两层。
 
-Also note that if you were to add an “if __name__ == ‘__main__’” portion to the module_x.py and tried to run it, you would end up with a rather confusing error. Let’s edit the file and give it a try!
+还要注意一点，如果你往`module_x.py`文件中添加了`if __name__ == ‘__main__’`，然后试图运行这个文件，你会碰到一个很难理解的错误。编辑一下文件，试试看吧！
 
-from . module_y import spam as ham
- 
-def main():
-    ham()
- 
-if __name__ == '__main__':
-    # This won't work!
-    main()
-Now navigate into the subpackage1 folder in your terminal and run the following command:
-
-
-python module_x.py
-
-You should see the following error on your screen for Python 2:
-
-Traceback (most recent call last):
-  File "module_x.py", line 1, in <module>
     from . module_y import spam as ham
-ValueError: Attempted relative import in non-package
-And if you tried to run it with Python 3, you’d get this:
+     
+    def main():
+        ham()
+     
+    if __name__ == '__main__':
+        # This won't work!
+        main()
 
-Traceback (most recent call last):
-  File "module_x.py", line 1, in <module>
-    from . module_y import spam as ham
-SystemError: Parent module '' not loaded, cannot perform relative import
-What this means is that module_x.py is a module inside of a package and you’re trying to run it as a script, which is incompatible with relative imports.
+现在从终端进入`subpackage1`文件夹，执行以下命令：
 
-If you’d like to use this module in your code, you will have to add it to Python’s import search path. The easiest way to do that is as follows:
+    python module_x.py
 
-import sys
-sys.path.append('/path/to/folder/containing/my_package')
-import my_package
-Note that you want the path to the folder right above my_package, not my_package itself. The reason is that my_package is THE package, so if you append that, you’ll have issues using the package. Let’s move on to optional imports!
+如果你使用的是Python 2，你应该会看到下面的错误信息：
 
+    Traceback (most recent call last):
+      File "module_x.py", line 1, in <module>
+        from . module_y import spam as ham
+    ValueError: Attempted relative import in non-package
+
+如果你使用的是Python 3，错误信息大概是这样的：
+
+    Traceback (most recent call last):
+      File "module_x.py", line 1, in <module>
+        from . module_y import spam as ham
+    SystemError: Parent module '' not loaded, cannot perform relative import
+
+这指的是，`module_x.py`是某个包中的一个模块，而你试图以脚本模式执行，但是这种模式不支持相对导入。
+
+如果你想在自己的代码中使用这个模块，那么你必须得将其添加至Python的导入检索路径。最简单的做法如下：
+
+    import sys
+    sys.path.append('/path/to/folder/containing/my_package')
+    import my_package
+
+注意，你需要添加的是`my_package`的上一层文件夹路径，而不是`my_package`本身。原因是`my_package`就是我们想要使用的包，所以如果你添加它的路径，那么将无法使用这个包。我们接下来谈谈可选导入。
 
 ## 可选导入
 
-Optional imports are used when you have a preferred module or package that you want to use, but you also want a fallback in case it doesn’t exist. You might use optional imports to support multiple versions of software or for speed ups, for example. Here’s an example from the package github2 that demonstrates how you might use optional imports to support different versions of Python:
+如果你希望优先使用某个模块或包，但是同时也想在没有这个模块或包的情况下有备选，你就可以使用可选导入这种方式。你可以通过可选导入，来支持某个软件的多种版本或者实现性能提升。以github2包为例：
 
-try:
-    # For Python 3
-    from http.client import responses
-except ImportError:  # For Python 2.5-2.7
     try:
-        from httplib import responses  # NOQA
-    except ImportError:  # For Python 2.4
-        from BaseHTTPServer import BaseHTTPRequestHandler as _BHRH
-        responses = dict([(k, v[0]) for k, v in _BHRH.responses.items()])
-The lxml package also makes use of optional imports:
+        # For Python 3
+        from http.client import responses
+    except ImportError:  # For Python 2.5-2.7
+        try:
+            from httplib import responses  # NOQA
+        except ImportError:  # For Python 2.4
+            from BaseHTTPServer import BaseHTTPRequestHandler as _BHRH
+            responses = dict([(k, v[0]) for k, v in _BHRH.responses.items()])
 
-try:
-    from urlparse import urljoin
-    from urllib2 import urlopen
-except ImportError:
-    # Python 3
-    from urllib.parse import urljoin
-    from urllib.request import urlopen
-As you can see, it’s used all the time to great effect and is a handy tool to add to your repertoire.
+`lxml`包也有使用可选导入方式：
 
-Local imports
-A local import is when you import a module into local scope. When you do your imports at the top of your Python script file, that is importing the module into your global scope, which means that any functions or methods that follow will be able to use it. Let’s look at how importing into a local scope works:
+    try:
+        from urlparse import urljoin
+        from urllib2 import urlopen
+    except ImportError:
+        # Python 3
+        from urllib.parse import urljoin
+        from urllib.request import urlopen
 
-import sys  # global scope
- 
-def square_root(a):
-    # This import is into the square_root functions local scope
+正如以上示例所示，可选导入的使用很常见，是一个值得掌握的技巧。
+
+## 局部导入
+
+当你在局部作用域中导入模块时，你执行的就是局部导入。如果你在Python脚本文件的顶部导入一个模块，那么你就是在将该模块导入至全局作用域，这意味着之后的任何函数或方法都可能访问该模块。例如：
+
+    import sys  # global scope
+     
+    def square_root(a):
+        # This import is into the square_root functions local scope
+        import math
+        return math.sqrt(a)
+     
+    def my_pow(base_num, power):
+        return math.pow(base_num, power)
+     
+    if __name__ == '__main__':
+        print(square_root(49))
+        print(my_pow(2, 3))
+
+这里，我们将`sys`模块导入至全局作用域，但我们并没有使用这个模块。然后，在`square_root`函数中，我们将`math`模块导入值该函数的局部作用域，这意味着`math`模块智能在`square_root`函数内部使用。如果我们试图在`my_pow`函数中使用`math`，会碰到`NameError`。试着执行这个脚本，看看会发生什么。
+
+使用局部作用域的好处之一，是你使用的模块可能需要很长时间才能导入，如果是这样的话，将其放在某个不经常调用的函数中或许更加合理，而不是直接在全局作用域中导入。老实说，我几乎从没有使用过局部导入，主要是因为如果模块内部到处都有导入语句，我会很难分辨出这样做的原因和用途。根据约定，所有的导入语句都应该位于模块的顶部。
+
+## 导入注意事项
+
+在导入模块方面，有几个程序员常犯的错误。这里我们介绍两个。
+
+- 循环导入（circular imports）
+- Shadowed imports
+
+先来看看循环导入。
+
+### 循环导入
+
+如果你创建两个模块，二者相互导入对方，那么就会出现循环导入。例如：
+
+    # a.py
+    import b
+     
+    def a_test():
+        print("in a_test")
+        b.b_test()
+     
+    a_test()
+
+然后在同个文件夹中创建另一个模块，将其命名为`b.py`。
+
+    import a
+     
+    def b_test():
+        print('In test_b"')
+        a.a_test()
+     
+    b_test()
+
+如果你运行任意一个模块，你会碰到`AttributeError`。这是因为这两个模块都在试图导入对方。简单来说，模块`a`想要导入模块`b`，但是因为模块`b`也在试图导入模块`a`（这时正在执行），模块`a`将无法完成模块`b`的导入。我看过别人提供的解决这个问题的破解方法，但是一般来说，你应该做的是重构代码，避免发生这种情况。
+
+### Shadowed imports
+
+当你创建的模块与标准库中的模块同名时，如果你导入这个模块，就会出现shadowed import。举个例子，创建一个名叫`math.py`的文件，在其中写入如下代码：
+
     import math
-    return math.sqrt(a)
- 
-def my_pow(base_num, power):
-    return math.pow(base_num, power)
- 
-if __name__ == '__main__':
-    print(square_root(49))
-    print(my_pow(2, 3))
-Here we import the sys module into the global scope, but we don’t actually use it. Then in the square_root function we import Python’s math module into the function’s local scope, which means that the math module can only be used inside of the square_root function. IF we try to use it in the my_pow function, we will receive a NameError. Go ahead and try running the code to see this in action!
-
-One of the benefits of using local scope is that you might be using a module that takes a long time to load. If so, it might make sense to put it into a function that is called rarely rather than your module’s global scope. It really depends on what you want to do. Frankly, I’ve almost never used imports into the local scope, mostly because it can be hard to tell what’s going on if the imports are scattered all over the module. Conventionally, all imports should be at the top of the module after all.
-
-Import Pitfalls
-There are some very common import pitfalls that programmers fall into. We’ll go over the two most common here:
-
-Circular imports
-Shadowed imports
-Let’s start by looking at circular imports
-
-Circular imports
-
-Circular imports happen when you create two modules that import each other. Let’s look at an example as that will make it quite clear what I’m referring to. Put the following code into a module called a.py
-
-# a.py
-import b
- 
-def a_test():
-    print("in a_test")
-    b.b_test()
- 
-a_test()
-Then create another module in the same folder as the one above and name it b.py
-
-import a
- 
-def b_test():
-    print('In test_b"')
-    a.a_test()
- 
-b_test()
-If you run either of these modules, you should receive an AttributeError. This happens because both modules are attempting to import each other. Basically what’s happening here is that module a is trying to import module b, but it can’t do that because module b is attempting to import module a which is already being executed. I’ve read about some hacky workarounds but in general you should just refactor your code to prevent this kind of thing from happening
-
-Shadowed imports
-
-Shadow imports (AKA name masking) happen when the programmer creates a module with the same name as a Python module. Let’s create a contrived example! In this case, create a file named math.py and put the following code inside it:
-
-import math
- 
-def square_root(number):
-    return math.sqrt(number)
- 
-square_root(72)
-Now open a terminal and try running this code. When I tried this, I got the following traceback:
-
-Traceback (most recent call last):
-  File "math.py", line 1, in <module>
-    import math
-  File "/Users/michael/Desktop/math.py", line 6, in <module>
+     
+    def square_root(number):
+        return math.sqrt(number)
+     
     square_root(72)
-  File "/Users/michael/Desktop/math.py", line 4, in square_root
-    return math.sqrt(number)
-AttributeError: module 'math' has no attribute 'sqrt'
-What happened here? Well when you run this code, the first place Python looks for a module called “math” is in the currently running script’s folder. In this case, it finds the module we’re running and tries to use that. But our module doesn’t have a function or attribute called sqrt, so an AttributeError is raised.
 
-Wrapping Up
+现在打开终端，试着运行这个文件，你会得到以下回溯信息（traceback）：
+
+    Traceback (most recent call last):
+      File "math.py", line 1, in <module>
+        import math
+      File "/Users/michael/Desktop/math.py", line 6, in <module>
+        square_root(72)
+      File "/Users/michael/Desktop/math.py", line 4, in square_root
+        return math.sqrt(number)
+    AttributeError: module 'math' has no attribute 'sqrt'
+
+这到底是怎么回事？其实，你运行这个文件的时候，Python解释器首先在当前运行脚本所处的的文件夹中查找名叫`math`的模块。在这个例子中，解释器找到了我们正在执行的模块，试图导入它。但是我们的模块中并没有叫`sqrt`的函数或属性，所以就抛出了`AttributeError`。
+
+## 总结
+
+在本文中，我们讲了很多有关导入的内容，但是有关导入机制我们还有很多需要学习的。
 We’ve covered a lot of ground in this article and there’s still a lot more to learn about Python’s importing system. There’s PEP 302 which covers import hooks and allows you to do some really cool things, like import directly from github. There’s also Python’s importlib which is well worth taking a look at. Get out there and start digging in the source code to learn about even more neat tricks. Happy coding!
 
-Related Reading
+## 相关阅读
+
 Import traps
 Circular imports in Python 2 and Python 3
 Stackoverflow – Python relative imports for the billionth time
