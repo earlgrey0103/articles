@@ -1,13 +1,11 @@
-# 关于import你应该知道的一切
-
-> 本文首发于微信公众号“编程派”。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
+> 本文为原创编译，首发于微信公众号“编程派”。微信搜索“编程派”，获取更多Python编程教程和精彩资源吧！
 
 原文：[Python 101 - All about imports](http://www.blog.pythonlibrary.org/2016/03/01/python-101-all-about-imports/)
 
-作为一名新手Python程序员，你首先学习的内容之一就是如何导入其他模块或包。但是，我注意到甚至那些许多年来不时使用Python的人，也不是都知道Python的导入机制是多么的灵活。在本文中，我们将探讨以下话题：
+作为一名新手Python程序员，你首先需要学习的内容之一就是如何导入模块或包。但是我注意到，那些许多年来不时使用Python的人并不是都知道Python的导入机制其实非常灵活。在本文中，我们将探讨以下话题：
 
 - 常规导入（regular imports）
-- 使用from语句
+- 使用from语句导入
 - 相对导入（relative imports）
 - 可选导入（optional imports）
 - 本地导入（local imports）
@@ -23,7 +21,7 @@
 
     import os, sys, time
 
-虽然这节省了空间，但是这违背了Python风格指南。Python风格指南建议将每个导入语句单独成行。
+虽然这节省了空间，但是却违背了Python风格指南。**Python风格指南建议将每个导入语句单独成行**。
 
 有时在导入模块时，你想要重命名这个模块。这个功能很容易实现：
 
@@ -35,16 +33,16 @@
 
     import urllib.error
 
-这个情况不常见，但是知道总比不知道好。
+这个情况不常见，但是对此有所了解总是没有坏处的。
 
-## 使用from语句
+## 使用from语句导入
 
 很多时候你只想要导入一个模块或库中的某个部分。我们来看看在Python中如何实现这点：
 
 
     from functools import lru_cache
 
-上面这行代码可以让你直接调用`lru_cache`。如果你按照正常的方式导入`functools`，那么你就必须像这样调用`lru_cache`：
+上面这行代码可以让你直接调用`lru_cache`。如果你按常规方式导入`functools`，那么你就必须像这样调用`lru_cache`：
 
     functools.lru_cache(*args)
 
@@ -54,7 +52,7 @@
 
     from os import *
 
-这种做法在少数情况下是挺方便的，但是这样也会打乱你的命名空间。问题在于，你可能定义了一个与导入模块中名称相同的变量或函数，这时如果你试图使用`os`模块中的同名变量或函数，实际使用的将是你自己定义的内容。因此，你最后会碰到一个相当让人困惑的逻辑错误。标准库中我唯一推荐全盘导入的模块只有Tkinter。
+这种做法在少数情况下是挺方便的，但是这样也会打乱你的命名空间。问题在于，你可能定义了一个与导入模块中名称相同的变量或函数，这时如果你试图使用`os`模块中的同名变量或函数，实际使用的将是你自己定义的内容。因此，你最后可能会碰到一个相当让人困惑的逻辑错误。**标准库中我唯一推荐全盘导入的模块只有Tkinter**。
 
 如果你正好要写自己的模块或包，有人会建议你在`__init__.py`文件中导入所有内容，让模块或者包使用起来更方便。我个人更喜欢显示地导入，而非隐式地导入。
 
@@ -77,7 +75,7 @@
 
 ## 相对导入
 
-PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具体来说，是使用句点来决定如何相对导入其他包或模块。这么做的原因是为了避免偶然情况下导入标准库中的模块产生冲突。这里我们以PEP 328中给出的文件夹结构为例，看看相对导入是如何工作的：
+[PEP 328](https://www.python.org/dev/peps/pep-0328/)介绍了引入相对导入的原因，以及选择了哪种语法。具体来说，是使用句点来决定如何相对导入其他包或模块。这么做的原因是为了避免偶然情况下导入标准库中的模块产生冲突。这里我们以PEP 328中给出的文件夹结构为例，看看相对导入是如何工作的：
 
     my_package/
         __init__.py
@@ -90,17 +88,17 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
             module_z.py
         module_a.py
 
-在本地磁盘上找个地方创建上述文件和文件夹。在顶层的`__init__.py`文件中，键入下面的代码：
+在本地磁盘上找个地方创建上述文件和文件夹。在顶层的`__init__.py`文件中，输入以下代码：
 
     from . import subpackage1
     from . import subpackage2
 
-接下来进入`subpackage1`文件夹，编辑其中的`__init__.py`文件，键入下面的内容：
+接下来进入`subpackage1`文件夹，编辑其中的`__init__.py`文件，输入以下代码：
 
     from . import module_x
     from . import module_y
 
-现在编辑`module_x.py`文件，键入下面的代码：
+现在编辑`module_x.py`文件，输入以下代码：
 
     from .module_y import spam as ham
      
@@ -112,7 +110,7 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
     def spam():
         print('spam ' * 3)
 
-打开终端，然后`cd`至`my_package`包所在的文件夹，但不要进入`mu_package`。在这个文件夹下运行Python解释器。我使用的是IPython，因为它的自动补全功能非常方便：
+打开终端，`cd`至`my_package`包所在的文件夹，但不要进入`my_package`。在这个文件夹下运行Python解释器。我使用的是IPython，因为它的自动补全功能非常方便：
 
     In [1]: import my_package
      
@@ -123,7 +121,7 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
     spam spam spam
 
 
-相对导入适用于你最终要放入包中的代码。如果你编写了很多相关性强的代码，那么应该采用这种导入方式。你会发现PyPI上有很多流行的包也是采用了相对导入。还要注意一点，如果你想要跨越多个文件层级进行导入，只需要使用多个句点即可。不过，PEP 328建议相对导入的层级不要超过两层。
+相对导入适用于你最终要放入包中的代码。如果你编写了很多相关性强的代码，那么应该采用这种导入方式。**你会发现PyPI上有很多流行的包也是采用了相对导入**。还要注意一点，如果你想要跨越多个文件层级进行导入，只需要使用多个句点即可。不过，**PEP 328建议相对导入的层级不要超过两层**。
 
 还要注意一点，如果你往`module_x.py`文件中添加了`if __name__ == ‘__main__’`，然后试图运行这个文件，你会碰到一个很难理解的错误。编辑一下文件，试试看吧！
 
@@ -154,19 +152,21 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
         from . module_y import spam as ham
     SystemError: Parent module '' not loaded, cannot perform relative import
 
-这指的是，`module_x.py`是某个包中的一个模块，而你试图以脚本模式执行，但是这种模式不支持相对导入。
+这指的是，`module_x.py`是某个包中的一个模块，而你试图以脚本模式执行，但是**这种模式不支持相对导入**。
 
-如果你想在自己的代码中使用这个模块，那么你必须得将其添加至Python的导入检索路径。最简单的做法如下：
+如果你想在自己的代码中使用这个模块，那么你必须将其添加至Python的导入检索路径（import search path）。最简单的做法如下：
 
     import sys
     sys.path.append('/path/to/folder/containing/my_package')
     import my_package
 
-注意，你需要添加的是`my_package`的上一层文件夹路径，而不是`my_package`本身。原因是`my_package`就是我们想要使用的包，所以如果你添加它的路径，那么将无法使用这个包。我们接下来谈谈可选导入。
+注意，你需要添加的是`my_package`的上一层文件夹路径，而不是`my_package`本身。原因是`my_package`就是我们想要使用的包，所以如果你添加它的路径，那么将无法使用这个包。
 
-## 可选导入
+我们接下来谈谈可选导入。
 
-如果你希望优先使用某个模块或包，但是同时也想在没有这个模块或包的情况下有备选，你就可以使用可选导入这种方式。你可以通过可选导入，来支持某个软件的多种版本或者实现性能提升。以github2包为例：
+## 可选导入（Optional imports）
+
+如果你希望优先使用某个模块或包，但是同时也想在没有这个模块或包的情况下有备选，你就可以使用可选导入这种方式。这样做可以导入支持某个软件的多种版本或者实现性能提升。以[github2包](http://pythonhosted.org/github2/_modules/github2/request.html)中的代码为例：
 
     try:
         # For Python 3
@@ -188,7 +188,7 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
         from urllib.parse import urljoin
         from urllib.request import urlopen
 
-正如以上示例所示，可选导入的使用很常见，是一个值得掌握的技巧。
+正如以上示例所示，**可选导入的使用很常见，是一个值得掌握的技巧**。
 
 ## 局部导入
 
@@ -208,16 +208,16 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
         print(square_root(49))
         print(my_pow(2, 3))
 
-这里，我们将`sys`模块导入至全局作用域，但我们并没有使用这个模块。然后，在`square_root`函数中，我们将`math`模块导入值该函数的局部作用域，这意味着`math`模块智能在`square_root`函数内部使用。如果我们试图在`my_pow`函数中使用`math`，会碰到`NameError`。试着执行这个脚本，看看会发生什么。
+这里，我们将`sys`模块导入至全局作用域，但我们并没有使用这个模块。然后，在`square_root`函数中，我们将`math`模块导入至该函数的局部作用域，这意味着`math`模块只能在`square_root`函数内部使用。如果我们试图在`my_pow`函数中使用`math`，会引发`NameError`。试着执行这个脚本，看看会发生什么。
 
-使用局部作用域的好处之一，是你使用的模块可能需要很长时间才能导入，如果是这样的话，将其放在某个不经常调用的函数中或许更加合理，而不是直接在全局作用域中导入。老实说，我几乎从没有使用过局部导入，主要是因为如果模块内部到处都有导入语句，我会很难分辨出这样做的原因和用途。根据约定，所有的导入语句都应该位于模块的顶部。
+使用局部作用域的好处之一，是你使用的模块可能需要很长时间才能导入，如果是这样的话，将其放在某个不经常调用的函数中或许更加合理，而不是直接在全局作用域中导入。老实说，我几乎从没有使用过局部导入，主要是因为如果模块内部到处都有导入语句，会很难分辨出这样做的原因和用途。**根据约定，所有的导入语句都应该位于模块的顶部**。
 
 ## 导入注意事项
 
 在导入模块方面，有几个程序员常犯的错误。这里我们介绍两个。
 
 - 循环导入（circular imports）
-- Shadowed imports
+- 覆盖导入（Shadowed imports，暂时翻译为覆盖导入）
 
 先来看看循环导入。
 
@@ -244,11 +244,11 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
      
     b_test()
 
-如果你运行任意一个模块，你会碰到`AttributeError`。这是因为这两个模块都在试图导入对方。简单来说，模块`a`想要导入模块`b`，但是因为模块`b`也在试图导入模块`a`（这时正在执行），模块`a`将无法完成模块`b`的导入。我看过别人提供的解决这个问题的破解方法，但是一般来说，你应该做的是重构代码，避免发生这种情况。
+如果你运行任意一个模块，都会引发`AttributeError`。这是因为这两个模块都在试图导入对方。简单来说，模块`a`想要导入模块`b`，但是因为模块`b`也在试图导入模块`a`（这时正在执行），模块`a`将无法完成模块`b`的导入。我看过一些解决这个问题的破解方法（hack），但是**一般来说，你应该做的是重构代码，避免发生这种情况**。
 
-### Shadowed imports
+### 覆盖导入
 
-当你创建的模块与标准库中的模块同名时，如果你导入这个模块，就会出现shadowed import。举个例子，创建一个名叫`math.py`的文件，在其中写入如下代码：
+当你创建的模块与标准库中的模块同名时，如果你导入这个模块，就会出现覆盖导入。举个例子，创建一个名叫`math.py`的文件，在其中写入如下代码：
 
     import math
      
@@ -272,11 +272,10 @@ PEP 328介绍了引入相对导入的原因，以及选择了哪种语法。具�
 
 ## 总结
 
-在本文中，我们讲了很多有关导入的内容，但是有关导入机制我们还有很多需要学习的。
-We’ve covered a lot of ground in this article and there’s still a lot more to learn about Python’s importing system. There’s PEP 302 which covers import hooks and allows you to do some really cool things, like import directly from github. There’s also Python’s importlib which is well worth taking a look at. Get out there and start digging in the source code to learn about even more neat tricks. Happy coding!
+在本文中，我们讲了很多有关导入的内容，但是还有部分内容没有涉及。[PEP 302](https://www.python.org/dev/peps/pep-0302/)中介绍了导入钩子（import hooks），支持实现一些非常酷的功能，比如说直接从github导入。Python标准库中还有一个[importlib](https://docs.python.org/3/library/importlib.html)模块，值得查看学习。当然，你还可以多看看别人写的代码，不断挖掘更多好用的妙招。
 
 ## 相关阅读
 
-Import traps
-Circular imports in Python 2 and Python 3
-Stackoverflow – Python relative imports for the billionth time
+- Import [traps](http://python-notes.curiousefficiency.org/en/latest/python_concepts/import_traps.html)
+- [Circular imports](https://gist.github.com/datagrok/40bf84d5870c41a77dc6) in Python 2 and Python 3
+- Stackoverflow – [Python relative imports for the billionth time](http://stackoverflow.com/questions/14132789/python-relative-imports-for-the-billionth-time)
