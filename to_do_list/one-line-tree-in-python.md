@@ -24,6 +24,7 @@ users['handler']['username'] = 'matthandlersux'
 We can print this as json with print(json.dumps(users)) and we get the expected:
 
 {"harold": {"username": "hrldcpr"}, "handler": {"username": "matthandlersux"}}
+
 Without assignment
 
 We can even create structure with no assignment at all, since merely referencing an entry creates it:
