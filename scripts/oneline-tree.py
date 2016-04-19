@@ -3,8 +3,7 @@ import json
 import pprint
 
 
-def tree():
-    return defaultdict(tree)
+def tree(): return defaultdict(tree)
 
 
 def dicts(t):
@@ -17,25 +16,17 @@ def add(t, path):
 
 
 users = tree()
-users['harold']['username'] = 'hrldcpr'
-users['handler']['username'] = 'matthandlersux'
+users['codingpy']['username'] = 'earlgrey'
+users['python']['username'] = 'Guido van Rossum'
 
 print(json.dumps(users))
 
-taxonomy = tree()
-taxonomy['Animalia']['Chordata']['Mammalia'][
-    'Carnivora']['Felidae']['Felis']['cat']
-taxonomy['Animalia']['Chordata']['Mammalia'][
-    'Carnivora']['Felidae']['Panthera']['lion']
-taxonomy['Animalia']['Chordata']['Mammalia'][
-    'Carnivora']['Canidae']['Canis']['dog']
-taxonomy['Animalia']['Chordata']['Mammalia'][
-    'Carnivora']['Canidae']['Canis']['coyote']
-taxonomy['Plantae']['Solanales']['Solanaceae']['Solanum']['tomato']
-taxonomy['Plantae']['Solanales']['Solanaceae']['Solanum']['potato']
-taxonomy['Plantae']['Solanales']['Convolvulaceae']['Ipomoea']['sweet potato']
+categories = tree()
 
-add(taxonomy,
-    'Animalia>Chordata>Mammalia>Cetacea>Balaenopteridae>Balaenoptera>blue whale'.split('>'))
+categories['Programming Languages']['Python']
+categories['Python']['Standard Library']['sys']
+categories['Python']['Standard Library']['os']
 
-pprint.pprint(dicts(taxonomy))
+print(json.dumps(categories))
+
+pprint.pprint(dicts(categories))
