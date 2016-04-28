@@ -1,0 +1,1 @@
+http://neopythonic.blogspot.com/2011/07/before-python.html

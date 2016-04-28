@@ -1,0 +1,1 @@
+http://python-history.blogspot.com/2009/01/pythons-design-philosophy.html

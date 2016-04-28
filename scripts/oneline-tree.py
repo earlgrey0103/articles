@@ -29,4 +29,3 @@ categories['Python']['Standard Library']['os']
 
 print(json.dumps(categories))
 
-pprint.pprint(dicts(categories))

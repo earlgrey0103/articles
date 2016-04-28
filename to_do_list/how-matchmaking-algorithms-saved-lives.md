@@ -1,104 +1,100 @@
-How a matchmaking algorithm saved lives
+# 相亲算法是怎样变成救命算法的？
 
-原文：[Medium](https://medium.com/@UofCalifornia/how-a-matchmaking-algorithm-saved-lives-2a65ac448698#.kp1ktcs5b)
+很久很久以前，在还没有出现相亲网站的时候，有两位经济学家就开始研究相亲的问题，并且发现了一个应用范围远超爱情的公式。
 
-Long before dating sites, a pair of economists delved into the question of matchmaking, and hit upon a formula with applications far beyond romance.
+你会让一名经济学家给你介绍相亲对象吗？
 
-Would you let an economist set you up on a date?
+经济学常常与金钱的概念联系在一起，但是这个领域可延展至可货币化的对象以外。
 
-Economics is often associated with the idea of money. But the field extends beyond what can be (or should be) monetized.
+上世纪60年代时，研究员David Gale和Lloyd Shapley开始了一项研究，而研究的主题就是很少有人会涉及的相亲（matchmaking）。
 
-In the 1960s, researchers David Gale and Lloyd Shapley embarked upon research to take up an unlikely subject: matchmaking.
+这项研究得到了海军研究所的部分资助。这两位研究院感兴趣的是将相亲的人与有好感反馈的人相配对的数学算法。
 
-Funded in part by the Office of Naval Research, they were interested in the math behind pairing people up with partners who returned their affections.
+假设有一组男性和一组女性，他们都想要结婚。Gale和Shapely想看看自己能否计算出一个公式，让大家都能够找到最幸福的伴侣。
 
+下面是根据简·奥斯丁的小说《傲慢与偏见》中的人物假想的[一个示例](http://wordplay.blogs.nytimes.com/2013/01/21/stabl/?_r=0)：
 
-Suppose you had a group of men and a group of women who wanted to get married. Gale and Shapely wanted to see if they could develop a formula to pair everyone off as happily as possible.
-
-Here’s an example inspired by Jane Austen’s “Pride and Prejudice”:
-
-
-The goal is to find stable matches between two sets of people who have different preferences and opinions on who is their best match.
-
-The central concept is that the matches should be stable: There should be no two people who prefer each other to the partners they actually got.
+![]()
 
 
-Gale and Shapely developed the deferred acceptance algorithm (also known as the Gale-Shapley algorithm).
+研究的目的是为两组人找到稳定的匹配对象，两组人对于谁是自己的最佳伴侣的倾向和看法并不相同。
 
-It establishes a system by which everyone is able to find the person they most prefer from among those who prefer them.
+核心概念是匹配对象的关系应该保持温蒂：不应该出现有两个人不中意实际匹配的对象，而是更喜欢对方。
 
-The men and women each rank their preferences.
+Gale和Shapely开发出了“延迟接受算法”（deferred acceptance algorithm），也被称为Gale-Shapley算法。
 
+在这个算法的帮助下，每个人都能在喜欢自己的人当中，找到自己最喜欢的对象。
 
-And then they are sorted using the algorithm:
+男人和女人各自按高低程度列出自己喜欢的对象。
 
+![]()
 
-For any number of partners, no matter how they rank each other, it is possible to use the Gale-Shapley algorithm to find at least one stable partnership for each person.
+然后根据该算法进行重新排列：
 
+![]()
 
-But life isn’t a Jane Austen novel
-You may have noticed that out in the real world, this isn’t exactly how dating or marriage works. For example, the model doesn’t take into account gay couples, bisexuality, or people who prefer to be single.
+不管有多少人需要匹配，不管他们怎么相互排列对方，都可以通过Gale-Shapley算法寻找到每个人的稳定伴侣。
 
+## 但现实生活并不是简·奥斯丁的小说
 
-So what’s the value of this kind of research? A lot, as it turns out.
+你会发现，在现实世界中，相亲或婚姻实际上并不是怎样运作的。例如，这个模型没有考虑到同性恋夫妇、双性恋或者单身人士。
 
-Gale and Shapely weren’t really trying to crack the code on romance. What they were seeking was an approach to so-called matching markets — where there is supply and demand, but no money changes hands. Marriage was simply a way to illustrate the problem.
+那么，这类研究还有价值吧？事实上，价值很大。
 
-When they began, their work was purely theoretical. But as is often the case with basic research, it ended up having applications in practical and important ways.
+Gale和Shapely并不是真的想要破解婚姻的密码。他们想要探索的，是如何运作所谓的匹配市场（matching markets）—— 这个市场上有供给，但不存在货币。婚姻就是一个非常简单的例子。
 
-Assigning new doctors to hospitals
+刚开始的时候，他们的研究还纯粹是理论上的。但是基础研究最终通常都会出现现实且重大的应用。
 
-In the 1980s, a Harvard economist named Alvin Roth (now at Stanford) was interested in approaching economics like an engineering discipline — using theoretical ideas to improve real-world systems.
+## 往医院指派医生
 
-He wanted to diagnose matching markets that weren’t working and adapt the Gale-Shapely algorithm to help them work more efficiently.
+20世纪80年代时，一位叫Alvin Roth的哈佛经济学家（现在在斯坦福任教）开始利用工程学科的方法研究经济学 —— 利用理论概念来改进现实世界。
 
-Roth, with backing from the National Science Foundation, began looking at the National Residency Match Program (NRMP), a system that assigns new doctors to hospitals around the country.
+他想剖析没有正常运转的匹配市场，对Gale-Shapley算法进行了改进，提高了算法的效率。
 
-In the 1990s, the NRMP was struggling because new doctors and hospitals were often both unsatisfied with its assignments.
+Roth得到了全美科学基金会的支持，开始研究全美住院医师匹配计划，该计划负责向全美范围内的医院指派一医生。
 
-Roth used Gale and Shapely’s work to reshape the NRMP matching algorithm so that it produced matches that were more stable.
+90年代时，NRMP遇到了问题，因为新医生和医院经常都不满意对方。
 
-Pairing students to public schools
-The Gale-Shapley algorithm also proved useful in helping large urban school districts assign students to schools.
+Roth利用Gale和Shapley的研究成果，重新调整了NRMP的匹配算法，最终让算法产生出最稳当的匹配。
 
-New York, like many cities, enables students to select a high school by ranking their preferred choices from among all its schools.
+## 学生与公立学校之间的匹配
 
-Before Roth and his colleagues redesigned it, the public high school assignment process was a mess. About 30,000 students a year were left unmatched and ended up at schools they hadn’t even listed.
+在大城市学区的学生安排入学学校的问题上，Gale-Shapley算法也证明是有效的。
 
+和许多城市一样，纽约市支持学习自主选择高中，只需对学校按喜欢程度排序即可。
 
-The process of matching doctors or students is a little more complex than matching romantic partners since hospitals and schools — unlike most couples — accept many proposals.
+在Roth及其同事对入学分配计划进行重新设计之前，这个过程简单一团糟。每年有大约3万名学习没有得到匹配，最终去了自己根本没有列出的学校。
 
-But the underlying principle of deferred acceptance that Gale and Shapley defined is the same.
+匹配医生和学生的过程比匹配男女相亲对象要更复杂一些，因为医院和学习与夫妻不同，能够接受多人申请。
 
-Helping transplant patients find a match
-The real breakthrough came in 2004. That is when Roth developed the matchmaking principle to help transplant patients find donors.
+但是Gale和Shapley定义的延迟接受的根本原则是一致的。
 
-At the time, less than 20 people each year received kidneys from living donors, even though transplants from living donors produce much better patient outcomes.
+## 帮助需要器官移植的病人找到匹配对象
 
-The frequency of these life-saving procedures was limited by a simple, heartbreaking problem: Many people are willing to donate a kidney to a loved one but they cannot because blood type and other factors make them incompatible.
+真正的突破出现在2004年。也就是Roth研究出能够帮助需要器官移植的病人匹配捐献者的匹配算法。
 
+当时，每年只有不到20人从在世的捐献者那里获得肾，尽管在世的捐献者提供的器官对于病人来说效果更好。
 
-Roth devised an exchange system to help incompatible donor-recipient pairs find others in the same situation. Through complex chains of exchange, all participants had the promise of finding a suitable match.
+这种能够救人性命的事情发生次数少，是受到了一个简单的、令人心碎问题的限制。许多人都愿意为爱人捐献肾脏，但是因为血型和其他因素让他们不匹配。
 
+Roth设计了一个交换机制，让不匹配的捐献者-受赠者能够找到遇到同样情况的其他人。通过复杂的交换链条，所有的参与者都有希望找到合适的匹配捐献者。
 
-The result: thousands of people have been able to receive kidneys who otherwise might not have been able to get them.
+结果是，成千上万人得到了肾脏移植，而在之前是根本不可能的。
 
-It was a leap that earned Shapley and Roth the Nobel Prize in 2012. (David Gale passed away in 2008.)
+这个突破让Shapley和Roth获得了2012年的诺贝尔奖。（David Gale于2008年去世。）
 
+这个公式现在也用于其他用途，如帮助孤儿院的孩子找到合适的养父母。
 
-The formula is now being employed for other uses, such as helping kids in foster care find adoptive parents.
+该算法甚至运用到了新世纪的爱情，影响着网上约会和速配等恋爱方式。
 
-It has even found 21st century applications in romance, influencing approaches to online dating and speed dating.
+## 发现的过程
 
-The journey of discovery
-Take any invention or modern innovation and in its history you’ll find decades — or even centuries — of odd and obscure research that led to its creation.
+纵观历史上的任何发明，你会发现之前已经有先驱进行了长时间默默无闻的研究，才使得这项发明成为可能。科学发展的一大特征，就是知识通常都是简洁的。除了依靠严密的调查之外，科学发现大多来自人类的好奇心和坚持。
 
-One of the hallmarks of science is that the path to knowledge is often indirect. In addition to rigorous investigation, discovery is often shaped by serendipity and human curiosity.
+在Gale和Shapley刚开始研究时，他们关注的纯粹是抽象的理论问题。看上去，他们的研究似乎毫无意义，但得出的洞见却为拯救无数人生命的大发现奠定了基础。
 
-When Gale and Shapley began, their work was theoretical and abstract. Their research may have seemed obscure or even pointless, but the insights they gleaned built the foundation for breakthroughs that have improved countless people’s lives.
+今天，全美大约每年有5500名患者接受肾脏捐赠移植。如果没有Roth、Gale和Shapely的研究，这一切是不可能会发生。
 
-Today, roughly 5,500 transplant patients in the U.S. receive kidneys each year from living donors.
+和爱情一样，科学研究的原理也十分神秘。其结果和影响有时候是不可预测的，而这，正是科学研究如此重要的一大原因。
 
-These happy matches wouldn’t be possible without the work of Roth, Gale and Shapely.
-
-Like love, research works in mysterious ways. The results and impacts are sometimes unpredictable and unexpected — and that’s a big part of what makes it so important.
+阅读英文原文：[Medium](https://medium.com/@UofCalifornia/how-a-matchmaking-algorithm-saved-lives-2a65ac448698#.kp1ktcs5b)

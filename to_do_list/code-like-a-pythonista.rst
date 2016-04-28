@@ -2324,7 +2324,7 @@ References
   http://dirtsimple.org/2004/12/python-is-not-java.html
 
 * "What is Pythonic?", Martijn Faassen,
-  http://faassen.n--tree.net/blog/view/weblog/2005/08/06/0
+  http://blog.startifact.com/posts/older/what-is-pythonic.html
 
 * "Sorting Mini-HOWTO", Andrew Dalke,
   http://wiki.python.org/moin/HowTo/Sorting

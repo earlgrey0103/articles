@@ -1,0 +1,1 @@
+http://python-history.blogspot.com/2009/01/personal-history-part-1-cwi.html
