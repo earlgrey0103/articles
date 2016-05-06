@@ -1,6 +1,6 @@
 # 一图解读Python设计哲学：Python之禅
 
-关键词：Python设计哲学, Python之禅, Python之父Guido van Rossum, 最伟大的程序员, 优美的程序语言, 漫画程序哲学, Tim Peters, 
+关键词：Python设计哲学, Python之禅, Python之父Guido van Rossum, 最伟大的程序员, 优美的程序语言, 漫画程序哲学, Tim Peters,
 URL：zen-of-python-illustrated
 
 
