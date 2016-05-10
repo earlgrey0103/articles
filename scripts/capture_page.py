@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-# author: oldj <oldj.wu@gmail.com>
-# blog: http://oldj.net
-#
 
 from selenium import webdriver
 import time
 
 
-def capture(url, save_fn="capture.png"):
+def take_screenshot(url, save_fn="capture.png"):
     browser = webdriver.Firefox() # Get local session of firefox
     browser.set_window_size(1200, 900)
     browser.get(url) # Load page
@@ -44,13 +41,24 @@ def capture(url, save_fn="capture.png"):
 
 if __name__ == "__main__":
 
-    # capture("http://codingpy.com")
+    take_screenshot("http://codingpy.com")
     browser = webdriver.Firefox()
     url = "http://codingpy.com"
-    browser.set_window_size(1200, 900)
+    browser.set_window_size(220, 234)
     browser.get(url)
 
-    time.sleep(20)
+    js = """
+        $('#main').siblings().remove();
+        $('#related__wrapper').siblings().remove();
+        $('.ui.sticky').siblings().remove();
+        $('.follow-me').siblings().remove();
+        $('img.ui.image').siblings().remove();
+    """
 
-    browser.save_screenshot("codingpy.png")
-    browser.close()
+    time.sleep(10)
+    browser.execute_script(js)
+    try:
+        browser.save_screenshot("qrcode.png")
+    finally:
+
+        browser.close()
