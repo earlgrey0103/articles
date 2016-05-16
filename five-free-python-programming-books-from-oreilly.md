@@ -1,5 +1,9 @@
 # PyBooks：五本O'Reilly家分享的免费Python编程书籍
 
+关键词：Python books, Python编程书籍, O'Reilly免费编程书籍, Python 下载, 经典编程书籍, 免费Python编程书籍, Hadoop Python, Python Version, Python Web frameworks
+
+URL：free-python-books-from-oreilly
+
 O'Reilly是一家专注计算机和软件行业的出版社，不仅给我们带来了许多经典编程书籍，而且也没忘记给大伙提供一些福利。没错，O'Reilly家会定期分享一些免费的编程书籍，篇幅不长，大多是短篇，但那也是诚意十足。
 
 本文就收集汇总了他们家分享的五本免费Python编程书籍，加上编程派之前分享的[《Functional Programming in Python》](http://codingpy.com/article/pybooks-functional-programming-in-python/)，总共算是有六本了。
