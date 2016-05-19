@@ -1,10 +1,16 @@
 # Reaper：Python脚本加速音乐制作过程
 
-> 这是编程派发布的第二篇投稿，作者是amt。文章讲述的是Python在音乐制作软件Reaper中的应用。内容虽然不长，对于大多数人来说用处也不大，但是算是开拓一些眼界。下次在知乎碰到Python能干什么有趣的事这样的问题，就可以加上这个例子了。
+关键词：Python自动化脚本, Reaper 音乐制作软件, 自动查找关键词, ReaScript, reaper python, python 音乐制作
 
-众所周知，音乐创作是一个创意密集型的工作，但是许多音乐工作者每天很大一部分的工作都是重复性的。幸运的是，软件开发商制作了各种省时省力的软件，如[Reaper](http://www.reaper.fm/)。但是这远远不够。
+URL：simple-demo-of-using-python-in-reaper
 
-音乐软件开发商在不断努力，音乐工作者的需求也在不断刷新，于是有一些持开放态度的开发商开放了接口，让使用者也可以DIY软件的功能。以下是我在Reaper这一款音乐制作软件重，使用Python自己写脚本实现功能的例子。
+> 这是编程派发布的第二篇投稿，作者amt是一名音乐工作者。文章讲述的是Python在音乐制作软件Reaper中的应用。内容虽然不长，对于大多数人来说用处也不大，但是算是开拓一些眼界。下次在知乎碰到Python能干什么有趣的事这样的问题，就可以加上这个例子了。
+
+众所周知，音乐创作是创意密集型的，但是许多音乐工作者每天很大一部分的工作都是重复性的。幸运的是，软件开发商制作了各种省时省力的软件，如[Reaper](http://www.reaper.fm/)。但是这远远不够。
+
+![音乐制作软件Reaper](http://ww4.sinaimg.cn/mw690/006faQNTgw1f3y3jtreivj30s30ig454.jpg)
+
+音乐软件开发商在不断努力，音乐工作者的需求也在不断刷新，于是有一些持开放态度的开发商开放了接口，让使用者也可以DIY软件的功能。以下是我在Reaper这一款音乐制作软件中，使用Python自己写脚本实现功能的例子。
 
 这次要实现的功能是根据关键字查询轨道并选中目标轨道，听起来就像是在txt文件里找关键字那么简单，但在大部分的音乐制作软件里，竟没有这个功能。
 
@@ -12,9 +18,11 @@
 
 ## 设置Reaper使用Python
 
-在菜单栏Preference -> Plugins中选择使用Python作为脚本语言，具体设置方式如下：
+在[官网](http://www.reaper.fm/)下载并安装好Reaper软件之后，我们需要在菜单栏Preferences -> Plugins中选择使用Python作为脚本语言，具体设置方式如下：
 
-![]()
+![设置Reaper使用Python](http://ww4.sinaimg.cn/mw690/006faQNTgw1f3y3juj4v0j30m90g0jvf.jpg)
+
+这里需要注意一点。根据Reaper的文档介绍，Reaper的位版本应该与Python的位版本一致，即你如果安装了64位的Reaper，那么就需要安装64位的Python。
 
 ## 导入模块，定义撤销范围
 
@@ -46,7 +54,7 @@ maxreturnlen = 10
 
 nitems = len(dvalues.split(','))
 
-res = RPR_GetUserInputs('Search Tracks', nitems, 
+res = RPR_GetUserInputs('Search Tracks', nitems,
 		names, dvalues, maxreturnlen)
 
 searchName = res[4].split(',')
@@ -60,7 +68,7 @@ if res[0]:
 
 ## 遍历所有轨道名，并选中对应轨道
 
-我们要用到一下函数：
+我们要用到以下函数：
 
 - RPR_CountTracks计算轨道数量；
 - RPR_GetTrack获取轨道id；
@@ -85,10 +93,18 @@ for x in range(trackCount):
 
 我们只需要在菜单Actions -> Load，选择编写好的Python脚本加载。
 
+![Actions -> Load，选择编写好的Python脚本加载](http://ww2.sinaimg.cn/mw690/006faQNTgw1f3y3jvi662j30jt0fggp7.jpg)
+
+> 这里EarlGrey提示一个可能会出现的异常，即点击New或Load，程序就自动退出。目前我在测试的过程中碰到了这个问题。
+
 具体演示效果如下：
 
-![]()
+![Reaper自动搜索关键词演示](http://codingpy.com/static/thumbnails/reaper-demo.gif)
 
 ## 结语
 
 这是初学Python的我做出的第一个成功的尝试。我后面在这个尝试的基础上做出了根据midi旋律长度，自动选择轨道使用硬件音源录制的功能。大家也可以来玩一玩，有国外用户还做出了根据歌词文本自动滚动歌词的功能（卡拉ok），非常有趣。
+
+## 延伸阅读
+
+[图文解说 REAPER 安装之后的基本设置](http://reaper.loscomet.com/post/basic-configuration/)
