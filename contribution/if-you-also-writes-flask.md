@@ -4,9 +4,9 @@
 
 URL：if-you-are-writing-flask
 
-> 
+> EarlGrey：继两篇Django教程之后，今天开始发Flask教程。大家可以对比一下两个框架。本文来自MIllyn的投稿，可能会分三部分发布。
 
-上次我在编程派发表了[一篇关于如何备份文件至七牛的文章]()，不说好坏，文章发表出去之后我思考了很多，最重要的一点是：如果我是读者，我会愿意阅读完整这篇文章吗？
+上次我在编程派发表了[一篇关于如何备份文件至七牛的文章](http://codingpy.com/article/how-to-backup-server-data-using-python-and-qiniu/)，不说好坏，文章发表出去之后我思考了很多，最重要的一点是：如果我是读者，我会愿意阅读完整这篇文章吗？
 
 如果自己是读者该怎样去文章，我是为了什么去读文章，读文章之后我能获得什么？解决现有的问题？还是照搬一些代码到自己的程序上？我们到底为什么要写代码和阅读？我最近一直在思考这些问题。
 
@@ -19,17 +19,17 @@ URL：if-you-are-writing-flask
 - 扩展性到底在哪里
 - 从0到1该如何学习
 
-> 作者注: 本文借鉴了[Flask Web Development][4]中的大量例子和说明，如果你发现雷同那就证明我就是在照搬。
-
 ## Flask是什么
 
 Flask是由Python语言编写开发而成的`轻量级`Web服务框架，Flask是由Armin Ronacher制造的一个愚人节玩笑而发展至今。关于Flask更多权威的介绍请访问Wiki浏览-[点击访问][1]。
 
-> EarlGrey：我在这篇文章 >>> [这可能是开发者社区最成功的愚人节玩笑]() 中较为详细地介绍了Flask背后的由来。
+> EarlGrey：我在这篇文章 >>> [这可能是开发者社区最成功的愚人节玩笑](http://codingpy.com/article/april-fools-joke-became-flask/) 中较为详细地介绍了Flask背后的由来。
 
 ### 我心中的Flask是什么
 
-Flask的快捷轻便可扩展性高的优点，可供于我想到什么去开发什么的想法，我不用考虑太多。只用想现在我可能想要做一个什么了，那么Flask就可以做到。Flask拥有太多扩展包，你只需要了解这些扩展包的使用方法就可以做到很多你意想不到的功能。Flask是基于Python所编写的快捷Web框架，那出现一个疑问了，Flask和Python到底有多大的关联？这是一个很深入的问题，而我的理解是Flask即Python，Python非Flask，而我也不会去解释为什么。因为这是每个人的看法，我不想每位看文章的朋友因为阅读了我的文章就给思维上了个锁，我发现太多文章都时读者在阅读的过程中把思维给锁住了，这非常影响阅读者的思考。
+Flask的快捷轻便可扩展性高的优点，可供于我想到什么去开发什么的想法，我不用考虑太多。只用想现在我可能想要做一个什么了，那么Flask就可以做到。Flask拥有太多扩展包，你只需要了解这些扩展包的使用方法就可以做到很多你意想不到的功能。
+
+Flask是基于Python所编写的快捷Web框架，那出现一个疑问了，Flask和Python到底有多大的关联？这是一个很深入的问题，而我的理解是Flask即Python，Python非Flask，而我也不会去解释为什么。因为这是每个人的看法，我不想每位看文章的朋友因为阅读了我的文章就给思维上了个锁，我发现太多文章都时读者在阅读的过程中把思维给锁住了，这非常影响阅读者的思考。
 
 当然，我并不是说Flask不可以构建大型项目，而大型项目的构建准备工作需要的更多，这些并不在本文的讨论范围之内。以后如果有时间可以跟大家再来探讨“该怎样去思考构建大型项目”。
 
@@ -100,25 +100,29 @@ Mac、Linux在项目目录下输入
 终端会进入virtualenv环境,并在提示符最前面加入(venv)
 ```
 
-Windows
+Windows系统下，同样在项目文件夹内打开Git Bash
 
-```
-同样在项目文件夹内打开Git Bash
+```bash
 . venv/Script/activate #注意 . 和空格
 ```
 
-
 现在我们已经成功的部署并使用到了virtualenv环境，至于virtualenv到底有什么用呢？它其实就是一个便捷的Python虚拟环境，因为Flask的特性，每个项目里都会有不同扩展包来扩展项目本身。为了洁癖精神，不把每一个使用的扩展包都安装到**根Python环境**里。所以我们进行了一个小型的虚拟Python环境，让这些**针对于**当前项目的Flask扩展包得以应用安装。
+
 提示：**virtualenv**不仅仅不适用于Flask，还可以是任何Python的开发环境，只要你有需求。你可以针对你不同的项目设定不同的virtualenv环境。
 
 #### 你需要一个数据库
-在本文中，我选择使用Mysql作为数据库，虽然sqlite更简单，可随意创建文件，有了问题直接删除。但为了我们在本地开发和实际部署在生产保持数据库的一致，所以在本地和服务器上都使用Mysql，而基于Mysql的GUI管理软件也有很多，大家自行搜索一下就可以在自己的系统环境中安装好Mysql，本次我使用的是Mysql 5.6版本。并创建一个数据库编码格式为`utf8mb4`默认排序规则为`utf8mb4_bin`的数据库表。并建议创建一个新的账户来管理此数据库表。
 
-#### 运行Flask     
+在本文中，我选择使用Mysql作为数据库，虽然sqlite更简单，可随意创建文件，有了问题直接删除。但为了我们在本地开发和实际部署在生产保持数据库的一致，所以在本地和服务器上都使用Mysql，而基于Mysql的GUI管理软件也有很多，大家自行搜索一下就可以在自己的系统环境中安装好Mysql。
+
+本次我使用的是Mysql 5.6版本，并创建一个数据库编码格式为`utf8mb4`默认排序规则为`utf8mb4_bin`的数据库表。建议创建一个新的账户来管理此数据库表。
+
+#### 运行Flask
+
 部署好Flask环境后，我们需要怎样去运用它呢？
-首先我们需要安装Flask
-```
-#进入virtualenv环境后
+
+首先我们需要安装Flask。进入virtualenv环境后，运行如下命令：
+
+```bash
 pip install flask   #安装Flask
 pip install flask-script    #安装Flask-Script 来代替原生启动管理
 pip install flask-SQLAlchemy    #安装Flask-SQLAlchemy来管理数据库
@@ -222,9 +226,11 @@ def index():
 	return 'Hello World'
 ```
 
-现在，在项目根目录下执行`python manage.py runserver`即可成功运行Flask，并访问127.0.0.1:5000
+现在，在项目根目录下执行`python manage.py runserver`即可成功运行Flask，并访问127.0.0.1:5000。
+
 ![](http://i3.buimg.com/d079646404d6f729.png)
-好了，我们完成了第一步，在第一步中我们使用Flask的特性[蓝图][7]可以实现Flask中模块化应用，例如我们刚创建的蓝图**main**就作为我们展示模块，当有访客浏览我们Blog的时候都是**main**在工作，而我们在后台编写文章时就不能使用该蓝图了，应该创建一个新的如**admin**来模块化运行。蓝图有很多特性，可以点击上方的链接浏览官方蓝图文档来让自己更了解蓝图的特性。
+
+好了，我们完成了第一步，在第一步中我们使用Flask的特性[蓝图][7]可以实现Flask中模块化应用，例如我们刚创建的蓝图``main``就作为我们展示模块，当有访客浏览我们Blog的时候都是``main``在工作，而我们在后台编写文章时就不能使用该蓝图了，应该创建一个新的如``admin``来模块化运行。蓝图有很多特性，可以点击上方的链接浏览官方蓝图文档来让自己更了解蓝图的特性。
 
 ***
 
@@ -437,9 +443,7 @@ class LoginForm(Form):
 
 
 class RegistrationForm(Form):
-    username = StringField(u'用户名', validators=[Required(), length(6, 18), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                                                                                 u'用户名只允许字母, '
-                                                                                 u'用户名不允许特殊符号')])
+    username = StringField(u'用户名', validators=[Required(), length(6, 18), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, u'用户名只允许字母',u'用户名不允许特殊符号')])
     password = PasswordField(
         u'密码', validators=[Required(), EqualTo('password2', message=u'密码错误提示1')])
     password2 = PasswordField(u'重复密码', validators=[Required()])
