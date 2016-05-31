@@ -4,7 +4,7 @@
 
 URL：if-you-also-want-to-write-flask
 
-> EarlGrey：继两篇Django教程之后，今天开始发Flask教程。大家可以对比一下两个框架。本文来自MIllyn的投稿，可能会分三部分发布。
+***
 
 上次我在编程派发表了[一篇关于如何备份文件至七牛的文章](http://codingpy.com/article/how-to-backup-server-data-using-python-and-qiniu/)，不说好坏，文章发表出去之后我思考了很多，最重要的一点是：如果我是读者，我会愿意阅读完整这篇文章吗？
 
@@ -161,7 +161,7 @@ class Config:
             'app.log', maxBytes=10000, backupCount=1)
         _handler.setLevel(logging.WARNING)
         app.logger.addHandler(_handler)
-    
+
 class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'mysql://flask:flask@127.0.0.1/flask_dev'
     #SQLALCHEMY链接数据库都是以URI方式格式为'mysql://账户名:密码@地址/数据库表名'
