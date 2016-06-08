@@ -1,16 +1,18 @@
 # Django博客开发实战：文章列表分页和代码语法高亮
 
+关键词：django博客开发实战, django学习教程, django列表分页, django语法高亮, web开发教程
+
 > **摘要：**前两期教程我们实现了博客的 Model 部分，以及 Blog 的首页视图 IndexView，详情页面 DetailView，以及分类页面 CategoryView，前两期教程链接请戳：
 >
-> [Django 学习小组：博客开发实战第一周教程 —— 编写博客的 Model 与首页面](http://www.jianshu.com/p/3bf9fb2a7e31)
+> [Django 学习小组：博客开发实战第一周教程 —— 编写博客的 Model 与首页面](http://codingpy.com/article/writing-your-own-blog-with-django/)
 >
-> [Django 学习小组：博客开发实战第二周教程 —— 博客详情页面和分类页面](http://www.jianshu.com/p/b74a6c5382c1)
+> [Django 学习小组：博客开发实战第二周教程 —— 博客详情页面和分类页面](http://codingpy.com/article/writing-your-own-blog-with-django-part-two/)
 
-**本周我们将继续完善我们的个人博客，来实现分页和代码高亮的功能。**
+本周我们将继续完善我们的个人博客，来实现分页和代码高亮的功能。
 
 ***
 
-## 实现文章展示列表的分页功能
+## 实现文章列表分页功能
 
 我们的数据库中会有越来越多的文章，把它们全部用一个列表显示在首页好像不太合适，如果显示一定数量的文章，比如8篇，这就需要用到分页功能。
 
@@ -49,7 +51,7 @@ polls/
 
 在 templatetags 目录下建立一个 paginate_tags .py 文件，准备工作做完，结合 Django 的模板系统，我们来看看该如何编写我们的程序。
 
-### 如何编写程序
+### 如何编写分页代码
 
 首先来回顾一下 Django 的模板系统是如何工作的，回想一下视图函数的工作流程，视图函数接收一个 Http 请求，经过一系列处理，通常情况下其会渲染某个模板文件，把模板文件中的一些用 {{ }} 包裹的变量替换成从该视图函数中相应变量的值。事实上在此过程中 Django 悄悄帮我们做了一些事情，它把视图函数中的变量的值封装在了一个 Context （一般翻译成上下文）对象中，只要模板文件中的变量在 Context 中有对应的值，它就会被相应的值替换。
 
@@ -65,11 +67,11 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 register = template.Library()
 # 这是定义模板标签要用到的
 
-@register.simple_tag(takes_context=True) 
+@register.simple_tag(takes_context=True)
 # 这个装饰器表明这个函数是一个模板标签，takes_context = True 表示接收上下文对象，就是前面所说的封装了各种变量的 Context 对象。
-def paginate(context, object_list, page_count): 
+def paginate(context, object_list, page_count):
     # context是Context 对象，object_list是你要分页的对象，page_count表示每页的数量
-    
+
     left = 3 # 当前页码左边显示几个页码号 -1，比如3就显示2个
     right = 3 # 当前页码右边显示几个页码号 -1
 
@@ -81,7 +83,7 @@ def paginate(context, object_list, page_count):
         context['current_page'] = int(page) # 把当前页封装进context（上下文）中
         pages = get_left(context['current_page'], left, paginator.num_pages) + get_right(context['current_page'], right, paginator.num_pages)
         # 调用了两个辅助函数，根据当前页得到了左右的页码号，比如设置成获取左右两边2个页码号，那么假如当前页是5，则 pages = [3,4,5,6,7],当然一些细节需要处理，比如如果当前页是2，那么获取的是pages = [1,2,3,4]
-      
+
     except PageNotAnInteger:
         # 异常处理，如果用户传递的page值不是整数，则把第一页的值返回给他
         object_list = paginator.page(1)
@@ -102,10 +104,10 @@ def paginate(context, object_list, page_count):
         context['pages_first'] = pages[0]
         context['pages_last'] = pages[-1] + 1
         # +1的原因是为了方便判断，在模板文件中将会体会到其作用。
-        
+
     except IndexError:
         context['pages_first'] = 1 # 发生异常说明只有1页
-        context['pages_last'] = 2 # 1 + 1 后的值 
+        context['pages_last'] = 2 # 1 + 1 后的值
 
     return ''  # 必须加这个，否则首页会显示个None
 
@@ -168,12 +170,12 @@ templates/blog/pagination.html
             <a href="?page={{ page }}">{{ page }}</a>
         {% endif %}
     {% endfor %}
-	
+
   	# pages最后一个值+1的值小于最大页码号，说明有页码号需要被省略号替换
     {% if pages_last < last_page %}
         <span>...</span>
     {% endif %}
-	
+
   	# 永远显示最后一页的页码号，如果只有一页则前面已经显示了1就不用再显示了
     {% if last_page != 1 %}
         {% if last_page == current_page %}
@@ -182,7 +184,7 @@ templates/blog/pagination.html
             <a href="?page={{ last_page }}">{{ last_page }}</a>
         {% endif %}
     {% endif %}
-	
+
     # 还有下一页，则显示一个下一页按钮
     {% if article_list.has_next %}
         <a class="next-page" href="?page={{ article_list.next_page_number }}">
@@ -218,7 +220,7 @@ templates/blog/index.html
 
 我们的博客文章是支持 markdown 语法标记的（使用的是 markdown2 第三方 app），markdown 比较常用的两个特性是 fetch code 和语法高亮。由于我们目前没有对博客文章的 markdown 标记做任何拓展，因此要标记一段代码，我们必须在每行代码前缩进 4 个空格，这很不方便。而 fetch code 可以让我们在写文章时只按照下面的输入就可以标记一段代码，相比每行缩进四个空格要方便很多：
 
-​```python
+```python
 def test_function():
     print('fectch code like this!')
 ```

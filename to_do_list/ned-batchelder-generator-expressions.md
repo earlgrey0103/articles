@@ -1,5 +1,9 @@
 # 有没有生成器推导式？
 
+关键词：生成器表达式, 列表推导式, python工程师, 字典推导式, 集合推导式
+
+URL：what-is-generator-comprehension
+
 > 本文作者为Ned Batchelder，是一名资深Python工程师，目前就职于在线教育网站Edx。
 
 Python中有一种紧凑的语法，可以通过一个循环和条件构建一个列表，这种语法叫做列表推导式（list comprehension）：
