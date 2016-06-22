@@ -13,8 +13,8 @@ PyModules
 PyDevs
 PyBooks （仅供交流学习之用）
 PyWeekly
-
-
+PyTools
+PyQAs
 
 Module of the week
 
