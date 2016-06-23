@@ -15,8 +15,6 @@
 
 本周我们将实现 blog 文章的评论功能。
 
-> 提示：在阅读教程的过程中，如有任何问题请访问我们项目的 [GithHub](https://github.com/djangoStudyTeam/DjangoBlog) 或评论留言以获取帮助，本教程的相关代码已全部上传在 Github。如果你对我们的教程或者项目有任何改进建议，请您随时告知我们。更多交流请加入我们的邮件列表 [django_study@groups.163.com](mailto:django_study@groups.163.com) 和关注我们在 [GithHub](https://github.com/djangoStudyTeam/DjangoBlog) 上的项目。
->
 > 本文首发于**编程派**微信公众号：编程派（微信号：codingpy）是一个专注Python编程的公众号，每天更新有关Python的国外教程和优质书籍等精选干货，欢迎关注。
 
 
