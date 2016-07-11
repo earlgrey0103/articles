@@ -4,11 +4,9 @@
 
 URL：scrapy-01-meizitu
 
+Scrapy 是一个非常流行的 Python 数据抓取框架，用于抓取web站点并从页面中提取结构化的数据。它的用途广泛，可以用于数据挖掘、监测和自动化测试。
 
-## Scrapy简介
-
-scrapy 是一个 python 下面功能丰富、使用快捷方便的爬虫框架。用 scrapy 可以快速的开发一个简单的爬虫。
-
+今天我们使用 Scrapy 来干一件程序猿喜闻乐见的事。
 
 ## 准备工作
 
@@ -16,7 +14,7 @@ scrapy 是一个 python 下面功能丰富、使用快捷方便的爬虫框架�
 
 ``pip install -U scrapy pillow``
 
-安装 pillow 是因为我们下载图片时需要使用，而在安装 scrapy 时默认是不安装 pillow 的。
+使用 Scrapy 下载图片时默认需要使用 PIL 库，但是并没有自动安装。我们这里使用更新的 pillow 库替代。
 
 ## 快速设置
 
@@ -27,11 +25,11 @@ scrapy startproject mzt
 cd mzt
 scrapy genspider meizitu meizitu.com
 ```
-     
+
 2. 修改 meizitu.py
 
 
-定义 scrapy.Item ，添加 image_urls 和 images ，为下载图片做准备。
+定义 PItem 类，添加需要使用的 image_urls 、images 和 name 等属性，为下载图片做准备。
 
 
 ```python
@@ -85,9 +83,12 @@ IMAGES_STORE = '.' # 设置图片保存目录
 scrapy crawl meizitu
 ```
 
-看，项目运行效果图。
+![妹子图项目运行效果1](http://ww1.sinaimg.cn/mw690/006faQNTgw1f5i7j5kqp1j31kw0n9gyk.jpg)
 
-这里的效果不是很理想，图片文件名被默认为图片 URL 的 SHA1 值，我们希望能够保存为比较有意义的名称，最好是按每期分文件夹存储。
+这里的效果不是很理想，图片文件名被默认为图片 URL 的 SHA1 值。我们浏览时无法知道图片的大致内容。
+
+我们希望能够保存为比较有意义的名称，最好是分为不同的文件夹存储。
+
 
 ## 重命名图片
 
@@ -117,12 +118,21 @@ class MztImagesPipeline(ImagesPipeline):
         filename = u'full/{0[name]}/{1}'.format(item, image_guid)
         return filename
 ```
+然后修改 settings.py：
 
-最终效果：
+```python
+ITEM_PIPELINES = {'mzt.pipelines.MztImagesPipeline': 1}
+```
 
-60 page / min
+之后重新运行项目，效果图如下：
 
+![妹子图项目运行效果2](http://ww4.sinaimg.cn/mw690/006faQNTgw1f5i7j5xrmyj31kw0n9qew.jpg)
 
+这个网站图片太多了，由于没有开启多个线程，导致整整爬了3个多小时，最终一共下载了12000多张图片：
+
+![妹子图项目运行效果3](http://ww3.sinaimg.cn/mw690/006faQNTgw1f5i7j4vyvhj31kw0wo7ec.jpg)
+
+如果你不想自己重新运行一遍爬虫，**可以考虑在微信公众号的后台回复“mzt”**，会有惊喜。
 
 ## 参考资料
 

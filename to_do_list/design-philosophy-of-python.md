@@ -1,3 +1,5 @@
+# Guido谈Python的设计哲学
+
 http://python-history.blogspot.com/2009/01/pythons-design-philosophy.html
 
 Later blog entries will dive into the gory details of Python's history. However, before I do that, I would like to elaborate on the philosophical guidelines that helped me make decisions while designing and implementing Python.
@@ -23,6 +25,7 @@ Finally, I had various ideas about good programming language design, which were 
 Although I will discuss more of ABC's influence on Python a little later, I’d like to mention one readability rule specifically: punctuation characters should be used conservatively, in line with their common use in written English or high-school algebra. Exceptions are made when a particular notation is a long-standing tradition in programming languages, such as “x*y” for multiplication, “a[i]” for array subscription, or “x.foo” for attribute selection, but Python does not use “$” to indicate variables, nor “!” to indicate operations with side effects.
 
 Tim Peters, a long time Python user who eventually became its most prolific and tenacious core developer, attempted to capture my unstated design principles in what he calls the “Zen of Python.” I quote it here in its entirety:
+
 Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex.
@@ -42,6 +45,7 @@ Although never is often better than right now.
 If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
+
 Although my experience with ABC greatly influenced Python, the ABC group had a few design principles that were radically different from Python’s. In many ways, Python is a conscious departure from these:
 
 The ABC group strived for perfection. For example, they used tree-based data structure algorithms that were proven to be optimal for asymptotically large collections (but were not so great for small collections).
@@ -49,7 +53,7 @@ The ABC group wanted to isolate the user, as completely as possible, from the �
 The ABC group assumed that the users had no prior computer experience (or were willing to forget it). Thus, alternative terminology was introduced that was considered more “newbie-friendly” than standard programming terms. For example, procedures were called “how-tos” and variables “locations”.
 The ABC group designed ABC without an evolutionary path in mind, and without expecting user participation in the design of the language. ABC was created as a closed system, as flawless as its designers could make it. Users were not encouraged to “look under the hood”. Although there was talk of opening up parts of the implementation to advanced users in later stages of the project, this was never realized.
 In many ways, the design philosophy I used when creating Python is probably one of the main reasons for its ultimate success. Rather than striving for perfection, early adopters found that Python worked "well enough" for their purposes. As the user-base grew, suggestions for improvement were gradually incorporated into the language. As we will seen in later sections, many of these improvements have involved substantial changes and reworking of core parts of the language. Even today, Python continues to evolve.
-Posted by Guido van Rossum at 9:29 AM 
+Posted by Guido van Rossum at 9:29 AM
 19 comments:
 
 
