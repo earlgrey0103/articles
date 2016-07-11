@@ -1,6 +1,6 @@
-# Scrapy下载妹子图
+# 程序猿都会爬的妹子图
 
-关键词：scrapy, 美女图片爬虫, 下载妹子图
+关键词：scrapy, 美女图片爬虫, 下载妹子图, 数据抓取框架, 妹子图爬虫
 
 URL：scrapy-01-meizitu
 
@@ -16,9 +16,9 @@ Scrapy 是一个非常流行的 Python 数据抓取框架，用于抓取web站�
 
 使用 Scrapy 下载图片时默认需要使用 PIL 库，但是并没有自动安装。我们这里使用更新的 pillow 库替代。
 
-## 快速设置
+## 快速开发
 
-1. 初始化项目
+### 1. 初始化项目
 
 ```
 scrapy startproject mzt
@@ -26,11 +26,10 @@ cd mzt
 scrapy genspider meizitu meizitu.com
 ```
 
-2. 修改 meizitu.py
+### 2. 修改 meizitu.py
 
 
 定义 PItem 类，添加需要使用的 image_urls 、images 和 name 等属性，为下载图片做准备。
-
 
 ```python
 import os
@@ -41,7 +40,8 @@ class PItem(scrapy.Item):
     images = scrapy.Field()
     name = scrapy.Field()
 ```
-修改 start_urls 为初始页面, 添加 parse 用于处理列表页， 添加 parse_item 处理项目页面。
+
+修改 start_urls 为网站的初始页面, 添加 parse 用于处理列表页， 添加 parse_item 处理项目页面。
 
 ```python
 
@@ -69,21 +69,23 @@ class MeizituSpider(scrapy.Spider):
         return item
 ```
 
-3. 修改 settings.py
+### 3. 修改 settings.py
 
 ```python
-DOWNLOAD_DELAY = 1 # 添加下载延迟配置
-ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1} # 添加图片下载 pipeline
-IMAGES_STORE = '.' # 设置图片保存目录
+DOWNLOAD_DELAY = 1
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+IMAGES_STORE = '.'
 ```
 
-4. 运行项目：
+### 4. 运行项目：
 
 ```
 scrapy crawl meizitu
 ```
 
-![妹子图项目运行效果1](http://ww1.sinaimg.cn/mw690/006faQNTgw1f5i7j5kqp1j31kw0n9gyk.jpg)
+实际运行效果如下：
+
+![Scrapy项目运行效果1](http://ww1.sinaimg.cn/mw690/006faQNTgw1f5i7j5kqp1j31kw0n9gyk.jpg)
 
 这里的效果不是很理想，图片文件名被默认为图片 URL 的 SHA1 值。我们浏览时无法知道图片的大致内容。
 
@@ -95,6 +97,7 @@ scrapy crawl meizitu
 如果想重命名保存文件的名称，我们需要重新定义自己的ImagePipeline。
 
 ```python
+# pipelines.py
 from scrapy.contrib.pipeline.images import ImagesPipeline
 from scrapy.http import Request
 from scrapy.exceptions import DropItem
@@ -126,11 +129,12 @@ ITEM_PIPELINES = {'mzt.pipelines.MztImagesPipeline': 1}
 
 之后重新运行项目，效果图如下：
 
-![妹子图项目运行效果2](http://ww4.sinaimg.cn/mw690/006faQNTgw1f5i7j5xrmyj31kw0n9qew.jpg)
+![Scrapy项目运行效果2](http://ww4.sinaimg.cn/mw690/006faQNTgw1f5i7j5xrmyj31kw0n9qew.jpg)
 
 这个网站图片太多了，由于没有开启多个线程，导致整整爬了3个多小时，最终一共下载了12000多张图片：
 
-![妹子图项目运行效果3](http://ww3.sinaimg.cn/mw690/006faQNTgw1f5i7j4vyvhj31kw0wo7ec.jpg)
+![Scrapy项目最终运行结果](http://ww3.sinaimg.cn/mw690/006faQNTgw1f5i7j4vyvhj31kw0wo7ec.jpg)
+
 
 如果你不想自己重新运行一遍爬虫，**可以考虑在微信公众号的后台回复“mzt”**，会有惊喜。
 
