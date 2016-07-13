@@ -53,7 +53,6 @@ The ABC group wanted to isolate the user, as completely as possible, from the �
 The ABC group assumed that the users had no prior computer experience (or were willing to forget it). Thus, alternative terminology was introduced that was considered more “newbie-friendly” than standard programming terms. For example, procedures were called “how-tos” and variables “locations”.
 The ABC group designed ABC without an evolutionary path in mind, and without expecting user participation in the design of the language. ABC was created as a closed system, as flawless as its designers could make it. Users were not encouraged to “look under the hood”. Although there was talk of opening up parts of the implementation to advanced users in later stages of the project, this was never realized.
 In many ways, the design philosophy I used when creating Python is probably one of the main reasons for its ultimate success. Rather than striving for perfection, early adopters found that Python worked "well enough" for their purposes. As the user-base grew, suggestions for improvement were gradually incorporated into the language. As we will seen in later sections, many of these improvements have involved substantial changes and reworking of core parts of the language. Even today, Python continues to evolve.
-Posted by Guido van Rossum at 9:29 AM
-19 comments:
+
 
 
