@@ -1,7 +1,8 @@
 # hasattr()：危险的函数，不推荐使用
 
-关键词：python最佳实践, python教程, hasattr用法, python3编程, getattr
+关键词：python教程, hasattr函数, python实践, python3代码, python属性, python特性
 
+URL：hasattr-a-dangerous-misnomer
 
 本文由编程派根据 [Hacker News 上曾经排名第一的文章](https://hynek.me/articles/hasattr/)编译而来，作者 Hynek Schlawack 是一名德国软件工程师。
 
@@ -86,6 +87,7 @@ ZeroDivisionError: division by zero
 因此，在编写兼容 Python 2 和 3 的混合代码时，要特别注意这个函数。另外，你应该想不到``hasattr()``会引发``ZeroDivisionError``吧？
 
 留心的读者可能会问，如果出现``AttributeError``呢？？的确，如果真出现，我们没有办法区分到底是因为真的缺失该属性，还是特性存在问题。**文首提到的写法可以将可能的错误减少为只有一种，避免出现 Python 2 和 3 之间让人困惑的行为差异。**
+
 
 ## 结语
 
