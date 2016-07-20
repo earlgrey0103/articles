@@ -11,6 +11,7 @@ visualstudio.com — Free unlimited private repos (Git and TFS) for up to 5 user
 fogcreek.com — Free unlimited public and private repos (hybrid of Git and Mercurial) for 2 users
 plasticscm.com — Free for individuals, OSS and nonprofits organizations
 cloud.google.com — Free private Git repositories hosted on Google Cloud Platform. Supports syncing with existing GitHub and Bitbucket repos. Free Beta for up to 500 MB of storage
+
 Tools for Teams and Collaboration
 
 scinote.net — scientific data management & team collaboration. One Team with Unlimited number of users, backup and 1GB storage space
