@@ -1,6 +1,13 @@
 # 好用！在 Notebook 中使用 Sublime Text 快捷键
 
+关键词：sublime text 快捷键, jupyter notebook, codemirror, 代码效率, custom.js
+
+URL：sublime-text-style-keymap-in-jupyter-notebook
+
 前几天，我在公众号上发布了两篇译文，对 Jupyter Notebook 做了一些基础性的介绍。虽然说比较基础，而且第二篇阅读量并不高，但是我认为对于其他对于 Notebook 不太了解的朋友来说，还是有作用的。
+
+> - [Jupyter Notebook 快速入门（上）](http://codingpy.com/article/getting-started-with-jupyter-notebook-part-1/)
+> - [Jupyter Notebook 快速入门（下）](http://codingpy.com/article/getting-started-with-jupyter-notebook-part-2/)
 
 今天，我想分享一个配置 Notebook 的技巧，可以支持在 Notebook 中使用 Sublime Text 的快捷键。因为平常用 ST3 比较多，所以已经习惯了一些它的快捷键，如果能在 Notebook 中也用上的话，那么编写 Notebook 的效率将有很大提升。
 
@@ -50,9 +57,9 @@ require(["codemirror/keymap/sublime", "notebook/js/cell", "base/js/namespace"],
         for(var cl=0; cl< cells.length ; cl++){
             cells[cl].code_mirror.setOption('keyMap', 'sublime');
         }
- 
-        // }, 1000)// uncomment  line to fake race condition 
-    } 
+
+        // }, 1000)// uncomment  line to fake race condition
+    }
 );
 ```
 
