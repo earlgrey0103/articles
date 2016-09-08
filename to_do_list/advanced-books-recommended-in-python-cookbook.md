@@ -1,4 +1,4 @@
-# PyBooks：Python高阶书籍推荐
+# PyBooks：Python 进阶书籍推荐
 
 ## 《Python编程》
 
@@ -10,9 +10,7 @@
 
 ## 《Python标准库示例》
 
-## 《Python 3面向对象编程》
-
-## 《迁移至Python 3》
+## 《Python 3 面向对象编程》
 
 ## 《Python Cookbook》
 
@@ -22,3 +20,4 @@
 
 ## 《Effective Python》
 
+## 《Writing Idiomatic Python》
