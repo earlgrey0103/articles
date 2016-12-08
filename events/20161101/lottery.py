@@ -45,7 +45,7 @@ def login(user, password):
     return driver
 
 
-def go_to_page(driver):
+def go_to_comment_page(driver):
     comments = driver.find_element_by_link_text('留言管理')
     comments.click()
     time.sleep(3)
@@ -63,11 +63,11 @@ def go_to_page(driver):
 
 
 def get_comments(driver, page):
-    driver = go_to_page(driver)
+    driver = go_to_comment_page(driver)
     time.sleep(3)
 
     res = []
-    while page > 1:
+    while page > 0:
         comments = driver.find_elements_by_css_selector(
             'div.discuss_area')
         for comment in comments:
@@ -85,6 +85,10 @@ def get_comments(driver, page):
 
         next_bt = driver.find_element_by_css_selector('a.btn.page_next')
         time.sleep(3)
+
+        if page == 1:  # 到了最后一页，不再向后翻页
+            return res[::-1]
+
         next_bt.click()
         page -= 1
 
@@ -100,32 +104,9 @@ def process_comments(data, target, num):
         if int(item[1]) == target:
             hit.append(item)
 
-    print(hit[:num+1])
+    print(hit[:num])
 
-    return hit[:num+1]
-
-
-# def preprocess_csv():
-#     res = []
-#     with open('comments.csv', 'r') as f:
-#         r = csv.reader(f)
-#         r.__next__()
-#         for row in r:
-#             user = row[0]
-#             number = row[1][:2]
-#             comment_time = row[2]
-#             print(comment_time)
-#             comment_time = datetime.strptime(comment_time, "%Y-%m-%d %H:%M:%S")
-#             user_tuple = (user, number, comment_time)
-#             res.append(user_tuple)
-
-#     res = sorted(res, key=lambda s: s[2])
-#     print(res[:10])
-
-#     with open('final_comments.csv', 'w') as f:
-#         w = csv.writer(f)
-#         for item in res:
-#             w.writerow(item)
+    return hit[:num]
 
 
 def remove_duplicate(data):
@@ -147,8 +128,11 @@ def remove_duplicate(data):
     return res
 
 
-
 if __name__ == '__main__':
     driver = login('username', 'pwd')
     page = 104
+    data = get_comments(driver, page)
 
+    target = 25 # 20161104 日上证指数收盘十位个位数为 25。
+    num = 4
+    process_comments(data, target, num)

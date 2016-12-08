@@ -1,1 +1,0 @@
-https://code.facebook.com/posts/1040181199381023/python-in-production-engineering/#
